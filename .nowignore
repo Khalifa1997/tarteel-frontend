@@ -1,0 +1,9 @@
+package-lock.json
+
+# dotenv
+.development.env
+!.prod.env
+
+# directories
+.idea
+/node_modules

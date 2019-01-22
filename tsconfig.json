@@ -1,0 +1,29 @@
+{
+  "compilerOptions": {
+    "typeRoots" : ["./node_modules/@types", "./src/types"],
+    "outDir": "./dist/",
+    "sourceMap": true,
+    "noImplicitAny": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "target": "es6",
+    "jsx": "react",
+    "allowJs": true,
+    "lib": ["es2015", "es2017", "dom"],
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "keyofStringsOnly": true,
+    "strictNullChecks": true
+  },
+  "include": [
+    "./src/**/*",
+    "./config/**/*",
+    "./src/client/**/*",
+    "./src/server/**/*"
+  ],
+  "exclude": [
+    "./tests/**/*",
+    "./src/**/_tests_/**/*",
+    "*.scss"
+  ]
+}

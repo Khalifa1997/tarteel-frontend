@@ -1,0 +1,72 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto:300,400,700');
+
+@import "arabic-text";
+
+@font-face {
+  font-family: "surah_names";
+  src: url("../../public/fonts/surah_names/surah_names.eot");
+  src: url("../../public/fonts/surah_names/surah_names.eot")
+  format("embedded-opentype"),
+  url("../../public/fonts/surah_names/surah_names.ttf") format("truetype"),
+  url("../../public/fonts/surah_names/surah_names.woff") format("woff"),
+  url("../../public/fonts/surah_names/surah_names.svg") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "UthmanicHafs";
+  src: url("../../public/fonts/UthmanicHafs.otf");
+  font-weight: normal;
+  font-style: normal;
+}
+
+
+* {
+  margin: 0;
+  padding: 0;
+  outline: 0 ;
+  border: 0;
+  font-family: Roboto;
+}
+
+html, body {
+  height: 100%;
+}
+
+/*
+*::-webkit-scrollbar {
+  width: 8px;
+}
+
+*::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  border-radius: 23px;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #5ec49e;
+  outline: 1px solid slategrey;
+  border-radius: 23px;
+}
+
+*/
+
+button {
+  cursor: pointer;
+}
+
+a {
+  text-decoration: none;
+}
+
+.rtl {
+  direction: rtl;
+}
+
+#mc_embed_signup{
+  background:#fff;
+  clear:left;
+  font:14px Helvetica,Arial,sans-serif;
+  width:100%;
+}
