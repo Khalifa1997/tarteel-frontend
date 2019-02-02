@@ -1,11 +1,12 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-  //padding: 1em 3em;
   display: flex;
   flex-flow: column;
-  justify-content: space-around;
   min-height: 100%;
+  justify-content: space-between;
+  padding: 1em;
+  box-sizing: border-box;
   
   .content {
     //padding: 15px;

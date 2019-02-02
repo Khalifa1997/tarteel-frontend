@@ -1,8 +1,8 @@
 import { ActionType, getType } from 'typesafe-actions';
 
-import initState from '../initState';
-import * as users from '../actions/users';
 import {IUser} from "../../types/GlobalState";
+import * as users from '../actions/users';
+import initState from '../initState';
 
 export type UsersAction = ActionType<typeof users>;
 

@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-import T from "./T";
 import KEYS from "../locale/keys";
+import T from "./T";
 
 interface IOption {
   text: KEYS;
@@ -15,19 +15,19 @@ interface IProps {
 }
 
 class RadioButton extends React.Component<IProps, never> {
-  ref = null;
-  handleChange = (e, option) => {
+  public ref = null;
+  public handleChange = (e, option) => {
     if (option.value !== this.props.currentValue) {
       this.props.onChange(option)
       this.handleAnimation(e.currentTarget)
     }
   }
-  handleAnimation = (el) => {
+  public handleAnimation = (el) => {
     this.ref.querySelector(".foreground").style.left = el.offsetLeft + "px";
     this.ref.querySelector(".foreground").style.width = el.offsetWidth + "px";
   }
 
-  componentDidMount() {
+  public componentDidMount() {
     const activeOne = this.ref.querySelector("li.active")
     try {
       this.ref.querySelector(".foreground").style.left = activeOne.offsetLeft + "px";
@@ -36,7 +36,7 @@ class RadioButton extends React.Component<IProps, never> {
       console.log(e.message);
     }
   }
-  render() {
+  public render() {
     const {currentValue} = this.props;
     return (
       <Container>

@@ -2,7 +2,7 @@ import range from 'lodash/range';
 
 import config from '../../config';
 
-const baseUrl = config('fontsURL');
+const baseUrl = __DEVELOPMENT__ ? config('fontsURL') : config('cdnURL');
 
 const makeFont = (pageNumber: string | number) => `
 @font-face {

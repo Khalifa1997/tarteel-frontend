@@ -1,16 +1,20 @@
-import { createAction } from 'typesafe-actions';
 import humps from "humps";
+import { createAction } from 'typesafe-actions';
 
-import AyahShape from "../../shapes/AyahShape";
-import ReduxState, {ISearchAyah} from "../../types/GlobalState";
-import {
-  nextAyahAction, prevAyahAction
-} from "../../types/actions";
 import {fetchSpecificAyah} from "../../api/ayahs";
 import {getNextAyah, getPrevAyah} from "../../helpers/ayahs";
+import {setCookie} from "../../helpers/cookie";
+import AyahShape from "../../shapes/AyahShape";
+import {
+  nextAyahAction, prevAyahAction,
+} from "../../types/actions";
+import ReduxState, {ISearchAyah} from "../../types/GlobalState";
 
 export const setAyah = createAction('ayahs/SET', resolve => {
-  return (ayah: AyahShape) => resolve(humps.camelizeKeys(ayah))
+  return (ayah: AyahShape) => {
+    setCookie("lastAyah", ayah, { path: '/' });
+    return resolve(humps.camelizeKeys(ayah))
+  }
 });
 
 export const unShiftNextAyah = createAction('ayahs/UNSHIFT_NEXT', resolve => {

@@ -1,12 +1,12 @@
 
 import React from 'react';
-import {Switch, Route, withRouter} from 'react-router-dom';
+import {Route, Switch, withRouter} from 'react-router-dom';
 
-import routes from '../routes';
-import NotFound from '../pages/NotFound';
 import {connect} from "react-redux";
-import ReduxState from "../types/GlobalState";
+import NotFound from '../pages/NotFound';
+import routes from '../routes';
 import {toggleIsFetching} from "../store/actions/status";
+import ReduxState from "../types/GlobalState";
 
 
 
@@ -27,11 +27,11 @@ type IProps = IOwnProps & IDispatchProps;
 
 class Routes extends React.Component<IProps, never> {
 
-  componentDidMount() {
+  public componentDidMount() {
     this.props.toggleIsFetching();
   }
 
-  render() {
+  public render() {
     return (
       <Switch>
         {routes.map(({ component: Component, setContext, ...route }: any) => (
@@ -59,7 +59,7 @@ const mapDispatchToProps = (dispatch): IDispatchProps => {
   return {
     toggleIsFetching: () => {
       dispatch(toggleIsFetching())
-    }
+    },
   }
 }
 

@@ -47,7 +47,10 @@ function resolveConfigForBrowserOrServer() {
 
   // To get here we are likely running in the browser.
 
-  if (typeof window !== 'undefined' && typeof window.__CLIENT_CONFIG__ === 'object') {
+  if (
+    typeof window !== 'undefined' &&
+    typeof window.__CLIENT_CONFIG__ === 'object'
+  ) {
     configCache = window.__CLIENT_CONFIG__;
   } else {
     // To get here we must be running in the browser.
@@ -101,16 +104,22 @@ export default function configGet(path) {
   let result = resolveConfigForBrowserOrServer();
   for (let i = 0; i < parts.length; i += 1) {
     if (result === undefined) {
-      const errorMessage = `Failed to resolve configuration value at "${parts.join('.')}".`;
+      const errorMessage = `Failed to resolve configuration value at "${parts.join(
+        '.'
+      )}".`;
       // This "if" block gets stripped away by webpack for production builds.
-      if (process.env.BUILD_FLAG_IS_DEV === 'true' && process.env.BUILD_FLAG_IS_CLIENT === 'true') {
+      if (
+        process.env.BUILD_FLAG_IS_DEV === 'true' &&
+        process.env.BUILD_FLAG_IS_CLIENT === 'true'
+      ) {
         throw new Error(
-          `${errorMessage} We have noticed that you are trying to access this configuration value from the client bundle (i.e. code that will be executed in a browser). For configuration values to be exposed to the client bundle you must ensure that the path is added to the client configuration filter in the project configuration values file.`,
+          `${errorMessage} We have noticed that you are trying to access this configuration value from the client bundle (i.e. code that will be executed in a browser). For configuration values to be exposed to the client bundle you must ensure that the path is added to the client configuration filter in the project configuration values file.`
         );
       }
       throw new Error(errorMessage);
     }
     result = result[parts[i]];
   }
+
   return result;
 }

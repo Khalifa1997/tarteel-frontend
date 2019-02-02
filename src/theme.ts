@@ -18,6 +18,7 @@ export const colors = {
   brandInfo: '#c4beb0',
   textMuted: '#d1d0d0',
   textColor: '#939598',
+  errorColor: '#ff0000',
 };
 
 const breakpoints = {

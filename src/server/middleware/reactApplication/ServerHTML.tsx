@@ -6,18 +6,18 @@
 /* eslint-disable react/no-danger */
 /* eslint-disable react/no-array-index-key */
 
-import React, { Children } from 'react';
 import PropTypes from 'prop-types';
+import React, { Children } from 'react';
 import serialize from 'serialize-javascript';
 
 import config from '../../../../config/index';
-import ifElse from '../../../shared/utils/logic/ifElse';
 import removeNil from '../../../shared/utils/arrays/removeNil';
+import ifElse from '../../../shared/utils/logic/ifElse';
 import getClientBundleEntryAssets from './getClientBundleEntryAssets';
 
 import ClientConfig from '../../../../config/components/ClientConfig';
-import HTML from '../../../shared/components/HTML/index';
 import fontsStyle from '../../../helpers/fontsStyle';
+import HTML from '../../../shared/components/HTML/index';
 
 // PRIVATES
 
@@ -92,7 +92,7 @@ const ServerHTML: React.SFC<any> = (props: IProps) => {
 
       ga('create', '${config('google.analytics.id')}', 'auto');
       ga('require', '${config('google.optimize.id')}');
-      `)
+      `),
     ),
 
     // ifElse(isProd)(() =>

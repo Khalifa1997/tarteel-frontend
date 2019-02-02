@@ -1,8 +1,8 @@
 import { ActionType, getType } from 'typesafe-actions';
 
-import initState from '../initState';
-import * as status from '../actions/status';
 import ReduxState from "../../types/GlobalState";
+import * as status from '../actions/status';
+import initState from '../initState';
 
 export type StatusAction = ActionType<typeof status>;
 
@@ -13,7 +13,7 @@ export default (state: ReduxState['status'] = INITIAL_STATE, action: StatusActio
     case getType(status.toggleIsRecording):
       return {
         ...state,
-        isRecording: !state.isRecording
+        isRecording: !state.isRecording,
       };
     case getType(status.toggleDoneRecording):
       return {
@@ -28,7 +28,7 @@ export default (state: ReduxState['status'] = INITIAL_STATE, action: StatusActio
     case getType(status.toggleIsFetching):
       return {
         ...state,
-        isFetching: !state.isFetching
+        isFetching: !state.isFetching,
       }
     default:
       return state;

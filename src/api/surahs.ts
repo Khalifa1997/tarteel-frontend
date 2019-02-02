@@ -5,7 +5,7 @@ const surahs: any = {
     "english": "The Opening",
     "location": 1,
     "sajda": 0,
-    "ayah": 7
+    "ayah": 7,
   },
   "2": {
     "arabic": "البقرة",
@@ -13,7 +13,7 @@ const surahs: any = {
     "english": "The Cow",
     "location": 2,
     "sajda": 0,
-    "ayah": 286
+    "ayah": 286,
   },
   "3": {
     "arabic": "آل عمران",
@@ -21,7 +21,7 @@ const surahs: any = {
     "english": "The Family of Imran",
     "location": 2,
     "sajda": 0,
-    "ayah": 200
+    "ayah": 200,
   },
   "4": {
     "arabic": "النساء",
@@ -29,7 +29,7 @@ const surahs: any = {
     "english": "The Women",
     "location": 2,
     "sajda": 0,
-    "ayah": 176
+    "ayah": 176,
   },
   "5": {
     "arabic": "المائدة",
@@ -37,7 +37,7 @@ const surahs: any = {
     "english": "The Table Spread",
     "location": 2,
     "sajda": 0,
-    "ayah": 120
+    "ayah": 120,
   },
   "6": {
     "arabic": "الأنعام",
@@ -45,7 +45,7 @@ const surahs: any = {
     "english": "The Cattle",
     "location": 1,
     "sajda": 0,
-    "ayah": 165
+    "ayah": 165,
   },
   "7": {
     "arabic": "الأعراف",
@@ -53,7 +53,7 @@ const surahs: any = {
     "english": "The heights",
     "location": 1,
     "sajda": 206,
-    "ayah": 206
+    "ayah": 206,
   },
   "8": {
     "arabic": "الأنفال",
@@ -61,7 +61,7 @@ const surahs: any = {
     "english": "Spoils of war",
     "location": "booty",
     "sajda": 2,
-    "ayah": 75
+    "ayah": 75,
   },
   "9": {
     "arabic": "التوبة",
@@ -69,7 +69,7 @@ const surahs: any = {
     "english": "Repentance",
     "location": 2,
     "sajda": 0,
-    "ayah": 129
+    "ayah": 129,
   },
   "10": {
     "arabic": "يونس",
@@ -77,7 +77,7 @@ const surahs: any = {
     "english": "Jonah",
     "location": 1,
     "sajda": 0,
-    "ayah": 109
+    "ayah": 109,
   },
   "11": {
     "arabic": "هود",
@@ -85,7 +85,7 @@ const surahs: any = {
     "english": "Hud",
     "location": 1,
     "sajda": 0,
-    "ayah": 123
+    "ayah": 123,
   },
   "12": {
     "arabic": "يوسف",
@@ -93,7 +93,7 @@ const surahs: any = {
     "english": "Joseph",
     "location": 1,
     "sajda": 0,
-    "ayah": 111
+    "ayah": 111,
   },
   "13": {
     "arabic": "الرعد",
@@ -101,7 +101,7 @@ const surahs: any = {
     "english": "The Thunder",
     "location": 1,
     "sajda": 15,
-    "ayah": 43
+    "ayah": 43,
   },
   "14": {
     "arabic": "إبراهيم",
@@ -109,7 +109,7 @@ const surahs: any = {
     "english": "Abraham",
     "location": 1,
     "sajda": 0,
-    "ayah": 52
+    "ayah": 52,
   },
   "15": {
     "arabic": "الحجر",
@@ -117,7 +117,7 @@ const surahs: any = {
     "english": "Stoneland",
     "location": "Rock city",
     "sajda": "Al-Hijr valley",
-    "ayah": 99
+    "ayah": 99,
   },
   "16": {
     "arabic": "النحل",
@@ -125,7 +125,7 @@ const surahs: any = {
     "english": "The Bee",
     "location": 1,
     "sajda": 50,
-    "ayah": 128
+    "ayah": 128,
   },
   "17": {
     "arabic": "الإسراء",
@@ -133,7 +133,7 @@ const surahs: any = {
     "english": "The Night Journey",
     "location": 1,
     "sajda": 100,
-    "ayah": 111
+    "ayah": 111,
   },
   "18": {
     "arabic": "الكهف",
@@ -141,7 +141,7 @@ const surahs: any = {
     "english": "The Cave",
     "location": 1,
     "sajda": 0,
-    "ayah": 110
+    "ayah": 110,
   },
   "19": {
     "arabic": "مريم",
@@ -149,7 +149,7 @@ const surahs: any = {
     "english": "Mary",
     "location": 1,
     "sajda": 58,
-    "ayah": 98
+    "ayah": 98,
   },
   "20": {
     "arabic": "طه",
@@ -157,7 +157,7 @@ const surahs: any = {
     "english": "Taha",
     "location": 1,
     "sajda": 0,
-    "ayah": 135
+    "ayah": 135,
   },
   "21": {
     "arabic": "الأنبياء",
@@ -165,7 +165,7 @@ const surahs: any = {
     "english": "The Prophets",
     "location": 1,
     "sajda": 0,
-    "ayah": 112
+    "ayah": 112,
   },
   "22": {
     "arabic": "الحج",
@@ -173,7 +173,7 @@ const surahs: any = {
     "english": "The Pilgrimage",
     "location": 1,
     "sajda": 18,
-    "ayah": 78
+    "ayah": 78,
   },
   "23": {
     "arabic": "المؤمنون",
@@ -181,7 +181,7 @@ const surahs: any = {
     "english": "The Believers",
     "location": 1,
     "sajda": 0,
-    "ayah": 118
+    "ayah": 118,
   },
   "24": {
     "arabic": "النور",
@@ -189,7 +189,7 @@ const surahs: any = {
     "english": "The Light",
     "location": 1,
     "sajda": 0,
-    "ayah": 64
+    "ayah": 64,
   },
   "25": {
     "arabic": "الفرقان",
@@ -197,7 +197,7 @@ const surahs: any = {
     "english": "The Standard",
     "location": 1,
     "sajda": 60,
-    "ayah": 77
+    "ayah": 77,
   },
   "26": {
     "arabic": "الشعراء",
@@ -205,7 +205,7 @@ const surahs: any = {
     "english": "The Poets",
     "location": 1,
     "sajda": 0,
-    "ayah": 227
+    "ayah": 227,
   },
   "27": {
     "arabic": "النمل",
@@ -213,7 +213,7 @@ const surahs: any = {
     "english": "The Ant",
     "location": 1,
     "sajda": 26,
-    "ayah": 93
+    "ayah": 93,
   },
   "28": {
     "arabic": "القصص",
@@ -221,7 +221,7 @@ const surahs: any = {
     "english": "The Story",
     "location": 1,
     "sajda": 0,
-    "ayah": 88
+    "ayah": 88,
   },
   "29": {
     "arabic": "العنكبوت",
@@ -229,7 +229,7 @@ const surahs: any = {
     "english": "The Spider",
     "location": 1,
     "sajda": 0,
-    "ayah": 69
+    "ayah": 69,
   },
   "30": {
     "arabic": "الروم",
@@ -237,7 +237,7 @@ const surahs: any = {
     "english": "The Romans",
     "location": 1,
     "sajda": 0,
-    "ayah": 60
+    "ayah": 60,
   },
   "31": {
     "arabic": "لقمان",
@@ -245,7 +245,7 @@ const surahs: any = {
     "english": "Luqman",
     "location": 1,
     "sajda": 0,
-    "ayah": 34
+    "ayah": 34,
   },
   "32": {
     "arabic": "السجدة",
@@ -253,7 +253,7 @@ const surahs: any = {
     "english": "The Prostration",
     "location": 1,
     "sajda": 15,
-    "ayah": 30
+    "ayah": 30,
   },
   "33": {
     "arabic": "الأحزاب",
@@ -261,7 +261,7 @@ const surahs: any = {
     "english": "The Coalition",
     "location": 1,
     "sajda": 0,
-    "ayah": 73
+    "ayah": 73,
   },
   "34": {
     "arabic": "سبأ",
@@ -269,7 +269,7 @@ const surahs: any = {
     "english": "Saba",
     "location": 1,
     "sajda": 0,
-    "ayah": 54
+    "ayah": 54,
   },
   "35": {
     "arabic": "فاطر",
@@ -277,7 +277,7 @@ const surahs: any = {
     "english": "Originator",
     "location": 1,
     "sajda": 0,
-    "ayah": 45
+    "ayah": 45,
   },
   "36": {
     "arabic": "يس",
@@ -285,7 +285,7 @@ const surahs: any = {
     "english": "Ya Seen",
     "location": 1,
     "sajda": 0,
-    "ayah": 83
+    "ayah": 83,
   },
   "37": {
     "arabic": "الصافات",
@@ -293,7 +293,7 @@ const surahs: any = {
     "english": "Those Who Set The Ranks",
     "location": 1,
     "sajda": 0,
-    "ayah": 182
+    "ayah": 182,
   },
   "38": {
     "arabic": "ص",
@@ -301,7 +301,7 @@ const surahs: any = {
     "english": "Sad",
     "location": 1,
     "sajda": 24,
-    "ayah": 88
+    "ayah": 88,
   },
   "39": {
     "arabic": "الزمر",
@@ -309,7 +309,7 @@ const surahs: any = {
     "english": "The Troops",
     "location": 1,
     "sajda": 0,
-    "ayah": 75
+    "ayah": 75,
   },
   "40": {
     "arabic": "غافر",
@@ -317,7 +317,7 @@ const surahs: any = {
     "english": "The Forgiver",
     "location": 1,
     "sajda": 0,
-    "ayah": 85
+    "ayah": 85,
   },
   "41": {
     "arabic": "فصلت",
@@ -325,7 +325,7 @@ const surahs: any = {
     "english": "Explained in detail",
     "location": 1,
     "sajda": 38,
-    "ayah": 54
+    "ayah": 54,
   },
   "42": {
     "arabic": "الشورى",
@@ -333,7 +333,7 @@ const surahs: any = {
     "english": "Council",
     "location": "Consultation",
     "sajda": 1,
-    "ayah": 53
+    "ayah": 53,
   },
   "43": {
     "arabic": "الزخرف",
@@ -341,7 +341,7 @@ const surahs: any = {
     "english": "Ornaments of Gold",
     "location": 1,
     "sajda": 0,
-    "ayah": 89
+    "ayah": 89,
   },
   "44": {
     "arabic": "الدخان",
@@ -349,7 +349,7 @@ const surahs: any = {
     "english": "The Smoke",
     "location": 1,
     "sajda": 0,
-    "ayah": 59
+    "ayah": 59,
   },
   "45": {
     "arabic": "الجاثية",
@@ -357,7 +357,7 @@ const surahs: any = {
     "english": "Crouching",
     "location": 1,
     "sajda": 0,
-    "ayah": 37
+    "ayah": 37,
   },
   "46": {
     "arabic": "الأحقاف",
@@ -365,7 +365,7 @@ const surahs: any = {
     "english": "The Wind-Curved Sandhills",
     "location": 1,
     "sajda": 0,
-    "ayah": 35
+    "ayah": 35,
   },
   "47": {
     "arabic": "محمد",
@@ -373,7 +373,7 @@ const surahs: any = {
     "english": "Muhammad",
     "location": 2,
     "sajda": 0,
-    "ayah": 38
+    "ayah": 38,
   },
   "48": {
     "arabic": "الفتح",
@@ -381,7 +381,7 @@ const surahs: any = {
     "english": "The Victory",
     "location": 2,
     "sajda": 0,
-    "ayah": 29
+    "ayah": 29,
   },
   "49": {
     "arabic": "الحجرات",
@@ -389,7 +389,7 @@ const surahs: any = {
     "english": "The Private Apartments",
     "location": 2,
     "sajda": 0,
-    "ayah": 18
+    "ayah": 18,
   },
   "50": {
     "arabic": "ق",
@@ -397,7 +397,7 @@ const surahs: any = {
     "english": "Qaf",
     "location": 1,
     "sajda": 0,
-    "ayah": 45
+    "ayah": 45,
   },
   "51": {
     "arabic": "الذاريات",
@@ -405,7 +405,7 @@ const surahs: any = {
     "english": "The Winnowing Winds",
     "location": 1,
     "sajda": 0,
-    "ayah": 60
+    "ayah": 60,
   },
   "52": {
     "arabic": "الطور",
@@ -413,7 +413,7 @@ const surahs: any = {
     "english": "Mount Sinai",
     "location": 1,
     "sajda": 0,
-    "ayah": 49
+    "ayah": 49,
   },
   "53": {
     "arabic": "النجم",
@@ -421,7 +421,7 @@ const surahs: any = {
     "english": "The Star",
     "location": 1,
     "sajda": 62,
-    "ayah": 62
+    "ayah": 62,
   },
   "54": {
     "arabic": "القمر",
@@ -429,7 +429,7 @@ const surahs: any = {
     "english": "The moon",
     "location": 1,
     "sajda": 0,
-    "ayah": 55
+    "ayah": 55,
   },
   "55": {
     "arabic": "الرحمن",
@@ -437,7 +437,7 @@ const surahs: any = {
     "english": "The Beneficient",
     "location": 1,
     "sajda": 0,
-    "ayah": 78
+    "ayah": 78,
   },
   "56": {
     "arabic": "الواقعة",
@@ -445,7 +445,7 @@ const surahs: any = {
     "english": "The Event",
     "location": "The Inevitable",
     "sajda": 1,
-    "ayah": 96
+    "ayah": 96,
   },
   "57": {
     "arabic": "الحديد",
@@ -453,7 +453,7 @@ const surahs: any = {
     "english": "The Iron",
     "location": 2,
     "sajda": 0,
-    "ayah": 29
+    "ayah": 29,
   },
   "58": {
     "arabic": "المجادلة",
@@ -461,7 +461,7 @@ const surahs: any = {
     "english": "She That Disputes",
     "location": 2,
     "sajda": 0,
-    "ayah": 22
+    "ayah": 22,
   },
   "59": {
     "arabic": "الحشر",
@@ -469,7 +469,7 @@ const surahs: any = {
     "english": "Exile",
     "location": 2,
     "sajda": 0,
-    "ayah": 24
+    "ayah": 24,
   },
   "60": {
     "arabic": "الممتحنة",
@@ -477,7 +477,7 @@ const surahs: any = {
     "english": "She That Is to Be Examined",
     "location": 2,
     "sajda": 0,
-    "ayah": 13
+    "ayah": 13,
   },
   "61": {
     "arabic": "الصف",
@@ -485,7 +485,7 @@ const surahs: any = {
     "english": "The Ranks",
     "location": 2,
     "sajda": 0,
-    "ayah": 14
+    "ayah": 14,
   },
   "62": {
     "arabic": "الجمعة",
@@ -493,7 +493,7 @@ const surahs: any = {
     "english": "The Congregation",
     "location": "Friday",
     "sajda": 2,
-    "ayah": 11
+    "ayah": 11,
   },
   "63": {
     "arabic": "المنافقون",
@@ -501,7 +501,7 @@ const surahs: any = {
     "english": "The Hypocrites",
     "location": 2,
     "sajda": 0,
-    "ayah": 11
+    "ayah": 11,
   },
   "64": {
     "arabic": "التغابن",
@@ -509,7 +509,7 @@ const surahs: any = {
     "english": "Mutual Disillusion",
     "location": 2,
     "sajda": 0,
-    "ayah": 18
+    "ayah": 18,
   },
   "65": {
     "arabic": "الطلاق",
@@ -517,7 +517,7 @@ const surahs: any = {
     "english": "Divorce",
     "location": 2,
     "sajda": 0,
-    "ayah": 12
+    "ayah": 12,
   },
   "66": {
     "arabic": "التحريم",
@@ -525,7 +525,7 @@ const surahs: any = {
     "english": "Banning",
     "location": 2,
     "sajda": 0,
-    "ayah": 12
+    "ayah": 12,
   },
   "67": {
     "arabic": "الملك",
@@ -533,7 +533,7 @@ const surahs: any = {
     "english": "The Sovereignty",
     "location": 1,
     "sajda": 0,
-    "ayah": 30
+    "ayah": 30,
   },
   "68": {
     "arabic": "القلم",
@@ -541,7 +541,7 @@ const surahs: any = {
     "english": "The Pen",
     "location": 1,
     "sajda": 0,
-    "ayah": 52
+    "ayah": 52,
   },
   "69": {
     "arabic": "الحاقة",
@@ -549,7 +549,7 @@ const surahs: any = {
     "english": "The Reality",
     "location": 1,
     "sajda": 0,
-    "ayah": 52
+    "ayah": 52,
   },
   "70": {
     "arabic": "المعارج",
@@ -557,7 +557,7 @@ const surahs: any = {
     "english": "The Ascending Stairways",
     "location": 1,
     "sajda": 0,
-    "ayah": 44
+    "ayah": 44,
   },
   "71": {
     "arabic": "نوح",
@@ -565,7 +565,7 @@ const surahs: any = {
     "english": "Nooh",
     "location": 1,
     "sajda": 0,
-    "ayah": 28
+    "ayah": 28,
   },
   "72": {
     "arabic": "الجن",
@@ -573,7 +573,7 @@ const surahs: any = {
     "english": "The Jinn",
     "location": 1,
     "sajda": 0,
-    "ayah": 28
+    "ayah": 28,
   },
   "73": {
     "arabic": "المزمل",
@@ -581,7 +581,7 @@ const surahs: any = {
     "english": "The Enshrouded One",
     "location": 1,
     "sajda": 0,
-    "ayah": 20
+    "ayah": 20,
   },
   "74": {
     "arabic": "المدثر",
@@ -589,7 +589,7 @@ const surahs: any = {
     "english": "The Cloaked One",
     "location": 1,
     "sajda": 0,
-    "ayah": 56
+    "ayah": 56,
   },
   "75": {
     "arabic": "القيامة",
@@ -597,7 +597,7 @@ const surahs: any = {
     "english": "The Rising of the Dead",
     "location": 1,
     "sajda": 0,
-    "ayah": 40
+    "ayah": 40,
   },
   "76": {
     "arabic": "الإنسان",
@@ -605,7 +605,7 @@ const surahs: any = {
     "english": "The Man",
     "location": 2,
     "sajda": 0,
-    "ayah": 31
+    "ayah": 31,
   },
   "77": {
     "arabic": "المرسلات",
@@ -613,7 +613,7 @@ const surahs: any = {
     "english": "The Emissaries",
     "location": 1,
     "sajda": 0,
-    "ayah": 50
+    "ayah": 50,
   },
   "78": {
     "arabic": "النبأ",
@@ -621,7 +621,7 @@ const surahs: any = {
     "english": "The Tidings",
     "location": 1,
     "sajda": 0,
-    "ayah": 40
+    "ayah": 40,
   },
   "79": {
     "arabic": "النازعات",
@@ -629,7 +629,7 @@ const surahs: any = {
     "english": "Those Who Drag Forth",
     "location": 1,
     "sajda": 0,
-    "ayah": 46
+    "ayah": 46,
   },
   "80": {
     "arabic": "عبس",
@@ -637,7 +637,7 @@ const surahs: any = {
     "english": "He Frowned",
     "location": 1,
     "sajda": 0,
-    "ayah": 42
+    "ayah": 42,
   },
   "81": {
     "arabic": "التكوير",
@@ -645,7 +645,7 @@ const surahs: any = {
     "english": "The Overthrowing",
     "location": 1,
     "sajda": 0,
-    "ayah": 29
+    "ayah": 29,
   },
   "82": {
     "arabic": "الإنفطار",
@@ -653,7 +653,7 @@ const surahs: any = {
     "english": "The Cleaving",
     "location": 1,
     "sajda": 0,
-    "ayah": 19
+    "ayah": 19,
   },
   "83": {
     "arabic": "المطففين",
@@ -661,7 +661,7 @@ const surahs: any = {
     "english": "Defrauding",
     "location": 1,
     "sajda": 0,
-    "ayah": 36
+    "ayah": 36,
   },
   "84": {
     "arabic": "الانشقاق",
@@ -669,7 +669,7 @@ const surahs: any = {
     "english": "The Sundering",
     "location": "Splitting Open",
     "sajda": 1,
-    "ayah": 21
+    "ayah": 21,
   },
   "85": {
     "arabic": "البروج",
@@ -677,7 +677,7 @@ const surahs: any = {
     "english": "The Mansions of the Stars",
     "location": 1,
     "sajda": 0,
-    "ayah": 22
+    "ayah": 22,
   },
   "86": {
     "arabic": "الطارق",
@@ -685,7 +685,7 @@ const surahs: any = {
     "english": "The Morning Star",
     "location": 1,
     "sajda": 0,
-    "ayah": 17
+    "ayah": 17,
   },
   "87": {
     "arabic": "الأعلى",
@@ -693,7 +693,7 @@ const surahs: any = {
     "english": "The Most High",
     "location": 1,
     "sajda": 0,
-    "ayah": 19
+    "ayah": 19,
   },
   "88": {
     "arabic": "الغاشية",
@@ -701,7 +701,7 @@ const surahs: any = {
     "english": "The Overwhelming",
     "location": 1,
     "sajda": 0,
-    "ayah": 26
+    "ayah": 26,
   },
   "89": {
     "arabic": "الفجر",
@@ -709,7 +709,7 @@ const surahs: any = {
     "english": "The Dawn",
     "location": 1,
     "sajda": 0,
-    "ayah": 30
+    "ayah": 30,
   },
   "90": {
     "arabic": "البلد",
@@ -717,7 +717,7 @@ const surahs: any = {
     "english": "The City",
     "location": 1,
     "sajda": 0,
-    "ayah": 20
+    "ayah": 20,
   },
   "91": {
     "arabic": "الشمس",
@@ -725,7 +725,7 @@ const surahs: any = {
     "english": "The Sun",
     "location": 1,
     "sajda": 0,
-    "ayah": 15
+    "ayah": 15,
   },
   "92": {
     "arabic": "الليل",
@@ -733,7 +733,7 @@ const surahs: any = {
     "english": "The Night",
     "location": 1,
     "sajda": 0,
-    "ayah": 21
+    "ayah": 21,
   },
   "93": {
     "arabic": "الضحى",
@@ -741,7 +741,7 @@ const surahs: any = {
     "english": "The Morning Hours",
     "location": 1,
     "sajda": 0,
-    "ayah": 11
+    "ayah": 11,
   },
   "94": {
     "arabic": "الشرح",
@@ -749,7 +749,7 @@ const surahs: any = {
     "english": "Solace",
     "location": 1,
     "sajda": 0,
-    "ayah": 8
+    "ayah": 8,
   },
   "95": {
     "arabic": "التين",
@@ -757,7 +757,7 @@ const surahs: any = {
     "english": "The Fig",
     "location": 1,
     "sajda": 0,
-    "ayah": 8
+    "ayah": 8,
   },
   "96": {
     "arabic": "العلق",
@@ -765,7 +765,7 @@ const surahs: any = {
     "english": "The Clot",
     "location": 1,
     "sajda": 19,
-    "ayah": 19
+    "ayah": 19,
   },
   "97": {
     "arabic": "القدر",
@@ -773,7 +773,7 @@ const surahs: any = {
     "english": "The Power",
     "location": 1,
     "sajda": 0,
-    "ayah": 5
+    "ayah": 5,
   },
   "98": {
     "arabic": "البينة",
@@ -781,7 +781,7 @@ const surahs: any = {
     "english": "The Clear proof",
     "location": 2,
     "sajda": 0,
-    "ayah": 8
+    "ayah": 8,
   },
   "99": {
     "arabic": "الزلزلة",
@@ -789,7 +789,7 @@ const surahs: any = {
     "english": "The Earthquake",
     "location": 2,
     "sajda": 0,
-    "ayah": 8
+    "ayah": 8,
   },
   "100": {
     "arabic": "العاديات",
@@ -797,7 +797,7 @@ const surahs: any = {
     "english": "The Chargers",
     "location": 1,
     "sajda": 0,
-    "ayah": 11
+    "ayah": 11,
   },
   "101": {
     "arabic": "القارعة",
@@ -805,7 +805,7 @@ const surahs: any = {
     "english": "The Calamity",
     "location": 1,
     "sajda": 0,
-    "ayah": 11
+    "ayah": 11,
   },
   "102": {
     "arabic": "التكاثر",
@@ -813,7 +813,7 @@ const surahs: any = {
     "english": "Competition",
     "location": 1,
     "sajda": 0,
-    "ayah": 8
+    "ayah": 8,
   },
   "103": {
     "arabic": "العصر",
@@ -821,7 +821,7 @@ const surahs: any = {
     "english": "The declining day",
     "location": 1,
     "sajda": 0,
-    "ayah": 3
+    "ayah": 3,
   },
   "104": {
     "arabic": "الهمزة",
@@ -829,7 +829,7 @@ const surahs: any = {
     "english": "The Traducer",
     "location": 1,
     "sajda": 0,
-    "ayah": 9
+    "ayah": 9,
   },
   "105": {
     "arabic": "الفيل",
@@ -837,7 +837,7 @@ const surahs: any = {
     "english": "The Elephant",
     "location": 1,
     "sajda": 0,
-    "ayah": 5
+    "ayah": 5,
   },
   "106": {
     "arabic": "قريش",
@@ -845,7 +845,7 @@ const surahs: any = {
     "english": "Quraish",
     "location": 1,
     "sajda": 0,
-    "ayah": 4
+    "ayah": 4,
   },
   "107": {
     "arabic": "الماعون",
@@ -853,7 +853,7 @@ const surahs: any = {
     "english": "Alms Giving",
     "location": 1,
     "sajda": 0,
-    "ayah": 7
+    "ayah": 7,
   },
   "108": {
     "arabic": "الكوثر",
@@ -861,7 +861,7 @@ const surahs: any = {
     "english": "Abundance",
     "location": 1,
     "sajda": 0,
-    "ayah": 3
+    "ayah": 3,
   },
   "109": {
     "arabic": "الكافرون",
@@ -869,7 +869,7 @@ const surahs: any = {
     "english": "The Disbelievers",
     "location": 1,
     "sajda": 0,
-    "ayah": 6
+    "ayah": 6,
   },
   "110": {
     "arabic": "النصر",
@@ -877,7 +877,7 @@ const surahs: any = {
     "english": "The Succour",
     "location": 2,
     "sajda": 0,
-    "ayah": 3
+    "ayah": 3,
   },
   "111": {
     "arabic": "المسد",
@@ -885,7 +885,7 @@ const surahs: any = {
     "english": "The Flame",
     "location": 1,
     "sajda": 0,
-    "ayah": 5
+    "ayah": 5,
   },
   "112": {
     "arabic": "الإخلاص",
@@ -893,7 +893,7 @@ const surahs: any = {
     "english": "Absoluteness",
     "location": 1,
     "sajda": 0,
-    "ayah": 4
+    "ayah": 4,
   },
   "113": {
     "arabic": "الفلق",
@@ -901,7 +901,7 @@ const surahs: any = {
     "english": "The Day Break",
     "location": 1,
     "sajda": 0,
-    "ayah": 5
+    "ayah": 5,
   },
   "114": {
     "arabic": "الناس",
@@ -909,8 +909,8 @@ const surahs: any = {
     "english": "The Mankind",
     "location": 1,
     "sajda": 0,
-    "ayah": 6
-  }
+    "ayah": 6,
+  },
 }
 
 

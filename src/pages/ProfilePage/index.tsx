@@ -1,14 +1,14 @@
-import React, {Component} from "react"
 import humps from "humps";
+import React, {Component} from "react"
 import {Helmet} from "react-helmet";
 
-import T from "../../components/T";
-import KEYS from "../../locale/keys";
-import {Container} from "./styles";
+import {connect} from "react-redux";
 import {fetchAboutData, fetchProfileData} from "../../api";
 import Navbar from "../../components/Navbar";
-import {connect} from "react-redux";
+import T from "../../components/T";
+import KEYS from "../../locale/keys";
 import ReduxState, {IProfile} from "../../types/GlobalState";
+import {Container} from "./styles";
 
 interface IDispatchProps {
 
@@ -29,13 +29,13 @@ interface IState {
 type IProps = IOwnProps & IDispatchProps & IStateProps;
 
 class ProfilePage extends Component<IProps, IState> {
-  state = {
+  public state = {
     data: {
       recentDict: {},
       oldDict: {},
-    }
+    },
   }
-  async componentDidMount() {
+  public async componentDidMount() {
     const sessionKey = this.props.match.params.sessionKey;
     const data = humps.camelizeKeys(await fetchProfileData(sessionKey));
     this.setState({data});
@@ -55,34 +55,34 @@ class ProfilePage extends Component<IProps, IState> {
             datasets: [{
               backgroundColor: '#5fc49e',
               data: this.state.data.weeklyCounts,
-            }]
+            }],
           },
 
           // Configuration options go here
           options: {
             legend:{
-              display:false
+              display:false,
             },
             title: {
               display: true,
-              text: 'Weekly Progress'
+              text: 'Weekly Progress',
             },
             scales: {
               yAxes: [{
                 ticks: {
-                  suggestedMax: 10
+                  suggestedMax: 10,
                 },
                 scaleLabel: {
                   display: true,
                   labelString: 'Number of Verses',
-                }
+                },
               }],
             },
           },
         });
       })
   }
-  render() {
+  public render() {
     const {recentDict, oldDict} = this.state.data;
     const {sessionKey, userRecitedAyahs} = this.props.profile
     return (

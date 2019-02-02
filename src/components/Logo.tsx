@@ -1,44 +1,50 @@
 import React from 'react';
 import {Link} from "react-router-dom";
-import styled from "styled-components";
 import { Tooltip } from 'react-tippy';
+import styled from "styled-components";
 
-import LogoImage from "../../public/logo-3x.png";
 import {connect} from "react-redux";
-import ReduxState from "../types/GlobalState";
+import LogoImage from "../../public/logo-3x.png";
 import {commaFormatter} from "../helpers/utils";
+import ReduxState, {IProfile} from "../types/GlobalState";
 
 interface IOwnProps {
   counterText: string;
 }
 
 interface IStateProps {
-  recordingCount: number;
+  profile: IProfile;
 }
 
 type IProps = IStateProps & IOwnProps
 
 class Logo extends React.Component<IProps, never> {
-  render() {
-    const {counterText} = this.props
+  public render() {
     return (
       <Container>
         <Link to="/">
           <img src={LogoImage} alt="Tarteel-logo" />
-          {/*<Tooltip*/}
-            {/*title="Total Recited Ayahs"*/}
-            {/*position="bottom"*/}
-            {/*trigger="mouseenter"*/}
-          {/*>*/}
+          <Tooltip
+            title="Total Recited Ayahs"
+            position="bottom"
+            trigger="mouseenter"
+          >
             <Link to={'/about'}
               data-balloon="Total Ayas Recited"
               data-balloon-pos="down"
               className="counter">
-                {
-                  counterText || commaFormatter(this.props.recordingCount)
-                }
+                <div className="evaluated">
+                  {
+                    commaFormatter(this.props.profile.evaluationsCount)
+                  }
+                </div>
+                <div className={'recited'}>
+                  /{
+                    commaFormatter(this.props.profile.recordingCount)
+                  }
+                </div>
               </Link>
-          {/*</Tooltip>*/}
+          </Tooltip>
         </Link>
       </Container>
     )
@@ -49,6 +55,7 @@ const Container = styled.div`
   width: 50px;
   height: 50px;
   cursor: pointer;
+  
   img {
     height: 100%;
     width: 100%;
@@ -58,10 +65,6 @@ const Container = styled.div`
     position: absolute;
     left: 56px;
     top: 7px;
-    color: #5fc49e;
-    font-size: 13pt;
-    font-weight: 600;
-    font-family: monospace;
     border-radius: 23px;
     height: 25px;
     line-height: 25px;
@@ -69,12 +72,25 @@ const Container = styled.div`
     background: transparent;
     border: 0;
     padding: 0;
+    color: #000;
+    
+    .evaluated {
+      color: ${props => props.theme.colors.linkColor};
+      font-size: 22px;
+    }
+    .recited {
+      font-size: 14px;
+      font-family: proxima_nova_semibold;
+      position: relative;
+      top: -5px;
+      right: -10px;
+    }
   }
 `
 
 const mapStateToProps = (state: ReduxState): IStateProps => {
   return {
-    recordingCount: state.profile.recordingCount
+    profile: state.profile,
   }
 }
 

@@ -1,12 +1,13 @@
 import {combineReducers} from "redux"
 
-import usersReducer from "./users"
 import ayahsReducer from "./ayahs"
-import statusReducer from "./status"
-import profileReducer from "./profile"
 import demographicDataReducer from "./demographicData"
 import evaluatorReducer from "./evaluator"
+import profileReducer from "./profile"
 import routerReducer from "./router"
+import statusReducer from "./status"
+import recognitionReducer from "./recognition"
+import usersReducer from "./users"
 
 export default combineReducers({
   router: routerReducer,
@@ -16,4 +17,5 @@ export default combineReducers({
   profile: profileReducer,
   demographicData: demographicDataReducer,
   evaluator: evaluatorReducer,
+  recognition: recognitionReducer,
 })

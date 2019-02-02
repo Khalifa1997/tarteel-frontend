@@ -1,14 +1,14 @@
-import WordShape from './WordShape';
 import TranslationShape from './TranslationShape';
+import WordShape from './WordShape';
 
 interface AyahShape {
   verseNumber: number;
   chapterId: number;
-  words: Array<WordShape>;
+  words: WordShape[];
   textMadani: string;
   textSimple: string;
   sajdah?: boolean;
-  translations?: Array<TranslationShape>;
+  translations?: TranslationShape[];
   hash: number;
   sessionId: string;
   [key: string]: any;

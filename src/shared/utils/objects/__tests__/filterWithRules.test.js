@@ -5,7 +5,7 @@ describe('filterWithRules', () => {
     const rules = 'something else';
     const obj = { a: 1, b: 2 };
     expect(() => filterWithRules(rules, obj)).toThrowError(
-      'Filter set an "allow" on path "0", however, this path was not found on the source object.',
+      'Filter set an "allow" on path "0", however, this path was not found on the source object.'
     );
   });
 
@@ -13,7 +13,7 @@ describe('filterWithRules', () => {
     const filterRules = { a: true };
     const obj = 'something else';
     expect(() => filterWithRules(filterRules, obj)).toThrowError(
-      'Filter set an "allow" on path "a", however, this path was not found on the source object.',
+      'Filter set an "allow" on path "a", however, this path was not found on the source object.'
     );
   });
 
@@ -21,7 +21,7 @@ describe('filterWithRules', () => {
     const filterRules = { a: { something: true }, b: true };
     const obj = { a: 1, b: 2 };
     expect(() => filterWithRules(filterRules, obj)).toThrowError(
-      'Expected prop at path "a" to be an object',
+      'Expected prop at path "a" to be an object'
     );
   });
 

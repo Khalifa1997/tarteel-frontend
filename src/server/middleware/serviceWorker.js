@@ -10,8 +10,8 @@ function serviceWorkerMiddleware(req, res, next) {
     pathResolve(
       appRootDir.get(),
       config('bundles.client.outputPath'),
-      config('serviceWorker.fileName'),
-    ),
+      config('serviceWorker.fileName')
+    )
   );
 }
 

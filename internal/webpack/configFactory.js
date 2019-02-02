@@ -9,7 +9,6 @@ import strip from 'strip-loader';
 import { CheckerPlugin } from 'awesome-typescript-loader';
 import UglifyJsPlugin from 'uglifyjs-webpack-plugin';
 
-
 import { happyPackPlugin, log } from '../utils';
 import { ifElse } from '../../src/shared/utils/logic';
 import { mergeDeep } from '../../src/shared/utils/objects';
@@ -51,17 +50,17 @@ export default function webpackConfigFactory(buildOptions) {
   log({
     level: 'info',
     title: 'Webpack',
-    message: `Creating ${isProd
-      ? 'an optimised'
-      : 'a development'} bundle configuration for the "${target}"`,
+    message: `Creating ${
+      isProd ? 'an optimised' : 'a development'
+    } bundle configuration for the "${target}"`,
   });
 
   const bundleConfig =
     isServer || isClient
       ? // This is either our "server" or "client" bundle.
-      config(['bundles', target])
+        config(['bundles', target])
       : // Otherwise it must be an additional node bundle.
-      config(['additionalNodeBundles', target]);
+        config(['additionalNodeBundles', target]);
 
   if (!bundleConfig) {
     throw new Error('No bundle configuration exists for target:', target);
@@ -84,9 +83,9 @@ export default function webpackConfigFactory(buildOptions) {
         // Required to support hot reloading of our client.
         ifDevClient(
           () =>
-            `webpack-hot-middleware/client?reload=true&path=http://${config('host')}:${config(
-              'clientDevServerPort',
-            )}/__webpack_hmr`,
+            `webpack-hot-middleware/client?reload=true&path=http://${config(
+              'host'
+            )}:${config('clientDevServerPort')}/__webpack_hmr`
         ),
         // The source entry file for the bundle.
         path.resolve(appRootDir.get(), bundleConfig.srcEntryFile),
@@ -111,7 +110,7 @@ export default function webpackConfigFactory(buildOptions) {
         // For any other bundle (typically a server/node) bundle we want a
         // determinable output name to allow for easier importing/execution
         // of the bundle by our scripts.
-        '[name].js',
+        '[name].js'
       ),
       // The name format for any additional chunks produced for the bundle.
       chunkFilename: '[name]-[chunkhash].js',
@@ -125,18 +124,18 @@ export default function webpackConfigFactory(buildOptions) {
         // As we run a seperate development server for our client and server
         // bundles we need to use an absolute http path for the public path.
         `http://${config('host')}:${config('clientDevServerPort')}${config(
-          'bundles.client.webPath',
+          'bundles.client.webPath'
         )}`,
         // Otherwise we expect our bundled client to be served from this path.
-        bundleConfig.webPath,
+        bundleConfig.webPath
       ),
     },
 
     target: isClient
       ? // Only our client bundle will target the web as a runtime.
-      'web'
+        'web'
       : // Any other bundle must be targetting node as a runtime.
-      'node',
+        'node',
 
     // Ensure that webpack polyfills the following node features for use
     // within any bundles that are targetting node as a runtime. This will be
@@ -175,12 +174,12 @@ export default function webpackConfigFactory(buildOptions) {
         isDev ||
         // Allow for the following flag to force source maps even for production
         // builds.
-        config('includeSourceMapsForOptimisedClientBundle'),
+        config('includeSourceMapsForOptimisedClientBundle')
     )(
       // Produces an external source map (lives next to bundle output files).
       'source-map',
       // Produces no source map.
-      'hidden-source-map',
+      'hidden-source-map'
     ),
 
     // Performance budget feature.
@@ -193,7 +192,7 @@ export default function webpackConfigFactory(buildOptions) {
       // Enable webpack's performance hints for production client builds.
       { hints: 'warning' },
       // Else we have to set a value of "false" if we don't want the feature.
-      false,
+      false
     ),
 
     resolve: {
@@ -228,8 +227,8 @@ export default function webpackConfigFactory(buildOptions) {
               // And any items that have been whitelisted in the config need
               // to be included in the bundling process too.
               .concat(config('nodeExternalsFileTypeWhitelist') || []),
-          },
-        ),
+          }
+        )
       ),
     ]),
 
@@ -245,7 +244,7 @@ export default function webpackConfigFactory(buildOptions) {
             banner: 'require("source-map-support").install();',
             raw: true,
             entryOnly: false,
-          }),
+          })
       ),
 
       // Implement webpack 3 scope hoisting that will remove function wrappers
@@ -322,7 +321,7 @@ export default function webpackConfigFactory(buildOptions) {
           new AssetsPlugin({
             filename: config('bundleAssetsFileName'),
             path: path.resolve(appRootDir.get(), bundleConfig.outputPath),
-          }),
+          })
       ),
 
       // We don't want webpack errors to occur during development as it will
@@ -338,7 +337,7 @@ export default function webpackConfigFactory(buildOptions) {
         () =>
           new webpack.LoaderOptionsPlugin({
             minimize: true,
-          }),
+          })
       ),
 
       // For the production build of the client we need to extract the CSS into
@@ -348,7 +347,7 @@ export default function webpackConfigFactory(buildOptions) {
           new MiniCssExtractPlugin({
             filename: '[name]-[contenthash].css',
             allChunks: true,
-          }),
+          })
       ),
 
       // -----------------------------------------------------------------------
@@ -425,7 +424,7 @@ export default function webpackConfigFactory(buildOptions) {
                   ifProd('transform-react-constant-elements'),
                 ].filter(x => x != null),
               },
-              buildOptions,
+              buildOptions
             ),
           },
         ],
@@ -670,12 +669,12 @@ export default function webpackConfigFactory(buildOptions) {
                 // paths used on the client.
                 publicPath: isDev
                   ? // When running in dev mode the client bundle runs on a
-                  // seperate port so we need to put an absolute path here.
-              `http://${config('host')}:${config('clientDevServerPort')}${config(
-                'bundles.client.webPath',
-              )}`
+                    // seperate port so we need to put an absolute path here.
+                    `http://${config('host')}:${config(
+                      'clientDevServerPort'
+                    )}${config('bundles.client.webPath')}`
                   : // Otherwise we just use the configured web path for the client.
-                  config('bundles.client.webPath'),
+                    config('bundles.client.webPath'),
                 // We only emit files when building a web bundle, for the server
                 // bundle we only care about the file loader being able to create
                 // the correct asset URLs.

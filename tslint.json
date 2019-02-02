@@ -1,0 +1,33 @@
+{
+  "extends": [
+    "tslint:latest",
+    "tslint-react",
+    "tslint-config-prettier"
+  ],
+
+  "rules": {
+    "adjacent-overload-signatures": true,
+    "class-name": true,
+    "no-console": false,
+    "type-literal-delimiter": true,
+    "member-ordering": false, // Prefer react/sort-comp
+    "member-access": false,
+    "ordered-imports": false,
+    "no-angle-bracket-type-assertion": true,
+    "no-empty-interface": true,
+    "no-reference": true,
+    "no-parameter-properties": true,
+    "no-unused-variables": true,
+    "no-use-before-declare": true,
+    "no-internal-module": true,
+    "object-literal-sort-keys": false,
+    "no-submodule-imports": false,
+    "trailing-comma": [true, {"multiline": "always", "singleline": "never"}],
+    "jsx-curly-spacing": "always",
+    "jsx-no-string-ref": "always",
+    "jsx-self-close": "always",
+    "jsx-space-before-trailing-slash": "always",
+    "jsx-no-lambda": false
+  }
+
+}

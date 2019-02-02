@@ -1,12 +1,12 @@
 import React, {SFC} from 'react';
-import styled from "styled-components";
-import {connect} from "react-redux";
 import {withCookies} from 'react-cookie'
+import {connect} from "react-redux";
+import styled from "styled-components";
 
 import LOCALE_KEYS from '../locale/keys';
-import T from "./T";
-import ReduxState from "../types/GlobalState";
 import {toggleIsContinuous} from "../store/actions/status";
+import ReduxState from "../types/GlobalState";
+import T from "./T";
 
 interface IOwnProps {
   text: LOCALE_KEYS;
@@ -24,11 +24,11 @@ interface IDispatchProps {
 type IProps = IOwnProps & IDispatchProps & IStateProps
 
 class ToggleButton extends React.Component<IProps, never> {
-  toggle = () => {
+  public toggle = () => {
     this.props.cookies.set("continuous", !this.props.isContinuous)
     this.props.toggleIsContinuous()
   }
-  render() {
+  public render() {
     return (
       <Container onClick={this.toggle}>
         <span />
@@ -140,7 +140,7 @@ const mapDispatchToProps = (dispatch) => {
   return {
     toggleIsContinuous: () => {
       dispatch(toggleIsContinuous())
-    }
+    },
   }
 }
 

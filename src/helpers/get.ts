@@ -1,8 +1,8 @@
-import {setFetchedProfile, setPassedOnBoarding, setUserRecitedAyahs} from "../store/actions/profile";
-import {setAyah} from "../store/actions/ayahs";
-import {toggleIsContinuous} from "../store/actions/status";
-import {setDemographicData} from "../store/actions/demographicData";
 import {fetchSessionData} from "../api";
+import {setAyah} from "../store/actions/ayahs";
+import {setDemographicData} from "../store/actions/demographicData";
+import {setFetchedProfile, setPassedOnBoarding, setUserRecitedAyahs} from "../store/actions/profile";
+import {toggleIsContinuous} from "../store/actions/status";
 import {IProfile} from "../types/GlobalState";
 
 export const getLocalStorage = async (store: any) => {

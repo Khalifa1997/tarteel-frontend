@@ -1,7 +1,7 @@
 import React from 'react';
-import {Link} from "react-router-dom";
 import {Helmet} from "react-helmet";
-import {injectIntl, InjectedIntl} from "react-intl"
+import {InjectedIntl, injectIntl} from "react-intl"
+import {Link} from "react-router-dom";
 
 import T from "../components/T";
 import KEYS from "../locale/keys";
@@ -12,7 +12,7 @@ interface IProps {
 }
 
 class NotFound extends React.Component<IProps> {
-  render() {
+  public render() {
     const {intl} = this.props;
     return (
       <div>

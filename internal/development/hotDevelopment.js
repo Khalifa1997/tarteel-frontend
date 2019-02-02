@@ -11,11 +11,12 @@ import config from '../../config';
 const usesDevVendorDLL = bundleConfig =>
   bundleConfig.devVendorDLL != null && bundleConfig.devVendorDLL.enabled;
 
-const vendorDLLsFailed = (err) => {
+const vendorDLLsFailed = err => {
   log({
     title: 'vendorDLL',
     level: 'error',
-    message: 'Unfortunately an error occured whilst trying to build the vendor dll(s) used by the development server. Please check the console for more information.',
+    message:
+      'Unfortunately an error occured whilst trying to build the vendor dll(s) used by the development server. Please check the console for more information.',
     notify: true,
   });
   if (err) {
@@ -39,17 +40,19 @@ const initializeBundle = (name, bundleConfig) => {
             manifest: require(pathResolve(
               appRootDir.get(),
               bundleConfig.outputPath,
-              `${bundleConfig.devVendorDLL.name}.json`,
+              `${bundleConfig.devVendorDLL.name}.json`
             )),
-          }),
+          })
         );
       }
+
       return webpack(webpackConfig);
     } catch (err) {
       log({
         title: 'development',
         level: 'error',
-        message: 'Webpack config is invalid, please check the console for more information.',
+        message:
+          'Webpack config is invalid, please check the console for more information.',
         notify: true,
       });
       console.error(err);
@@ -67,45 +70,48 @@ class HotDevelopment {
 
     const clientBundle = initializeBundle('client', config('bundles.client'));
 
-    const nodeBundles = [initializeBundle('server', config('bundles.server'))].concat(
+    const nodeBundles = [
+      initializeBundle('server', config('bundles.server')),
+    ].concat(
       Object.keys(config('additionalNodeBundles')).map(name =>
-        initializeBundle(name, config('additionalNodeBundles')[name]),
-      ),
+        initializeBundle(name, config('additionalNodeBundles')[name])
+      )
     );
 
     Promise.resolve(
       // First ensure the client dev vendor DLLs is created if needed.
       usesDevVendorDLL(config('bundles.client'))
         ? createVendorDLL('client', config('bundles.client'))
-        : true,
+        : true
     )
       // Then start the client development server.
       .then(
         () =>
-          new Promise((resolve) => {
+          new Promise(resolve => {
             const { createCompiler } = clientBundle;
             const compiler = createCompiler();
-            compiler.plugin('done', (stats) => {
+            compiler.plugin('done', stats => {
               if (!stats.hasErrors()) {
                 resolve(compiler);
               }
             });
             this.hotClientServer = new HotClientServer(compiler);
           }),
-        vendorDLLsFailed,
+        vendorDLLsFailed
       )
       // Then start the node development server(s).
-      .then((clientCompiler) => {
+      .then(clientCompiler => {
         this.hotNodeServers = nodeBundles.map(
           ({ name, createCompiler }) =>
             // $FlowFixMe
-            new HotNodeServer(name, createCompiler(), clientCompiler),
+            new HotNodeServer(name, createCompiler(), clientCompiler)
         );
       });
   }
 
   dispose() {
-    const safeDisposer = server => (server ? server.dispose() : Promise.resolve());
+    const safeDisposer = server =>
+      server ? server.dispose() : Promise.resolve();
 
     // First the hot client server.
     return (

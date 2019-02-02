@@ -1,7 +1,7 @@
 import React, {CSSProperties} from 'react';
-import ReactModal from 'react-modal';
 import {Icon} from "react-icons-kit";
 import {close as closeIcon} from 'react-icons-kit/ionicons/close'
+import ReactModal from 'react-modal';
 
 import ModalClose from "./ModalClose";
 
@@ -14,7 +14,7 @@ interface IProps {
 }
 
 class Modal extends React.Component<IProps> {
-  render() {
+  public render() {
     return (
       <ReactModal
         {...this.props}
@@ -29,12 +29,12 @@ class Modal extends React.Component<IProps> {
             zIndex: 100,
             margin: 'auto',
             overflow: 'visible',
-            ...this.props.style
+            ...this.props.style,
           },
           overlay: {
             zIndex: 100,
             backgroundColor: 'rgba(0, 0, 0, 0.75)',
-          }
+          },
         }}
       >
         {

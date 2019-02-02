@@ -1,10 +1,10 @@
-import { createStore, applyMiddleware, compose } from 'redux';
-import { createLogger } from 'redux-logger';
+import { applyMiddleware, compose, createStore } from 'redux';
 import { batchedSubscribe } from 'redux-batched-subscribe';
+import { createLogger } from 'redux-logger';
 import thunk from 'redux-thunk';
 
-import reducer from './reducers';
 import initState from "./initState";
+import reducer from './reducers';
 
 
 const logger = createLogger({

@@ -13,6 +13,10 @@ const locales = {
   ar: 'العربية',
 };
 
+const API_URL = 'https://api.tarteel.io';
+
+const CDN_URL = 'http://d2sf46268wowyo.cloudfront.net';
+
 // All these configurations would only be readable on only the server bundle,
 // if you want to have it in the client bundle you should add a filter with it's name
 // under clientConfigFilter in the values obj down below.
@@ -42,6 +46,7 @@ const values = {
     androidAppLink: true,
     IOSAppLink: true,
     apiURL: true,
+    cdnURL: true,
     // sentryClient: true,
   },
 
@@ -56,7 +61,9 @@ const values = {
   // The port on which the server should run.
   port: EnvVars.number('PORT', 3000),
 
-  apiURL: EnvVars.string('API_URL', 'http://localhost:8000'),
+  apiURL: API_URL,
+
+  cdnURL: CDN_URL,
 
   androidAppLink: 'http://bit.ly/2Owlhio',
 
@@ -141,7 +148,7 @@ const values = {
     styleSrc: [
       'cdn.rawgit.com/milligram/milligram/master/dist/milligram.min.css',
       'fonts.googleapis.com/css',
-      'cdn-images.mailchimp.com/embedcode/horizontal-slim-10_7.css'
+      'cdn-images.mailchimp.com/embedcode/horizontal-slim-10_7.css',
     ],
   },
 
@@ -354,7 +361,7 @@ const values = {
 // client bundle. That would be a big NO NO to do. :)
 if (process.env.BUILD_FLAG_IS_CLIENT === 'true') {
   throw new Error(
-    "You shouldn't be importing the `<projectroot>/config/values.js` directly into code that will be included in your 'client' bundle as the configuration object will be sent to user's browsers. This could be a security risk! Instead, use the `config` helper function located at `<projectroot>/config/index.ts`.",
+    "You shouldn't be importing the `<projectroot>/config/values.js` directly into code that will be included in your 'client' bundle as the configuration object will be sent to user's browsers. This could be a security risk! Instead, use the `config` helper function located at `<projectroot>/config/index.ts`."
   );
 }
 

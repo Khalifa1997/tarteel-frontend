@@ -6,6 +6,8 @@
 
 ## Getting started
 
+At first you need to get the api server [Tarteel](https://github.com/Tarteel-io/tarteel.io) running locally to avoid submitting testing ayahs to production or to may any change need some backend support.
+
 ```bash
 git clone https://github.com/Tarteel-io/tarteel-frontend.git tarteel-frontend
 cd tarteel-frontend

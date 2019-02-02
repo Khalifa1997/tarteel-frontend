@@ -1,24 +1,24 @@
+import classnames from 'classnames'
+import pick from "lodash/pick";
 import React from 'react'
-import styled, {keyframes} from "styled-components";
-import {Link as link} from "react-router-dom";
+import {withCookies} from "react-cookie";
+import { BrowserView, isMobileOnly } from 'react-device-detect'
 import { Icon } from 'react-icons-kit'
 import {navicon} from 'react-icons-kit/fa/navicon'
+import {InjectedIntl, injectIntl} from 'react-intl';
 import OutsideClickHandler from 'react-outside-click-handler';
+import {Link as link} from "react-router-dom";
 import {withRouter} from "react-router-dom";
-import pick from "lodash/pick";
-import { isMobileOnly, BrowserView } from 'react-device-detect'
-import classnames from 'classnames'
-import {injectIntl, InjectedIntl} from 'react-intl';
-import {withCookies} from "react-cookie";
+import styled, {keyframes} from "styled-components";
 
-import T from "./T";
-import KEYS from "../locale/keys";
-import {fetchRandomAyah} from "../api/ayahs";
-import ReduxState, {IProfile} from "../types/GlobalState";
 import {connect} from "react-redux";
-import {setAyah} from "../store/actions/ayahs";
+import {fetchRandomAyah} from "../api/ayahs";
+import KEYS from "../locale/keys";
 import AyahShape from "../shapes/AyahShape";
+import {setAyah} from "../store/actions/ayahs";
 import theme from "../theme";
+import ReduxState, {IProfile} from "../types/GlobalState";
+import T from "./T";
 
 interface IOwnProps {
   location: Location;
@@ -41,6 +41,7 @@ interface ILink {
   textID: KEYS;
   href: string;
   onClick?(): void;
+  busy: boolean;
 }
 
 type IProps = IDispatchProps & IStateProps & IOwnProps;
@@ -61,12 +62,12 @@ const linksFactory: ({sessionKey}: {sessionKey: string}) => {[key: string]: ILin
     },
     home: {
       textID: KEYS.HOME_LINK_TEXT,
-      href: '/'
+      href: '/',
     },
     randomAyah: {
       textID: KEYS.RANDOM_AYAH_LINK_TEXT,
       href: "",
-      onClick: randomAyah
+      onClick: randomAyah,
     },
     about: {
       textID: KEYS.ABOUT_LINK_TEXT,
@@ -75,19 +76,28 @@ const linksFactory: ({sessionKey}: {sessionKey: string}) => {[key: string]: ILin
     demographics: {
       textID: KEYS.DEMOGRAPHIC_INFO_LINK_TEXT,
       href: "/demographics",
+      busy: true,
     },
     subscribe: {
       textID: KEYS.SUBSCRIBE_BUTTON_TEXT,
       href: "/subscribe",
-    }
+    },
+    // datasets: {
+    //   textID: KEYS.CONTACT_US_BUTTON_TEXT,
+    //   href: '',
+    // },
+    // contact: {
+    //   textID: KEYS.CONTACT_US_BUTTON_TEXT,
+    //   href: '',
+    // },
   }
 }
 
 class NavMenu extends React.Component<IProps, IState>{
-  state = {
-    showDropdown: false
+  public state = {
+    showDropdown: false,
   }
-  toggleDropdown = () => {
+  public toggleDropdown = () => {
     this.setState((state: IState) => {
       console.log('changed !');
       return {
@@ -95,31 +105,34 @@ class NavMenu extends React.Component<IProps, IState>{
       };
     });
   }
-  handleRandomAyah = () => {
+  public handleRandomAyah = () => {
     fetchRandomAyah()
       .then((ayah: AyahShape) => {
         this.props.setAyah(ayah)
       })
   }
-  renderItem = (item: ILink, className?: string) => {
+  public renderItem = (item: ILink, className?: string) => {
     const classNames = classnames({
       active: item.href === this.props.location.pathname,
-      [className]: className
+      busy: item.busy,
+      [className]: className,
     })
     return (
       <Link to={item.href} onClick={item.onClick} className={classNames}>
-        <T id={item.textID}/>
+        <div className="text">
+          <T id={item.textID} />
+        </div>
       </Link>
     )
   }
-  render() {
+  public render() {
     const isHome = this.props.location.pathname === "/";
     const mobileLinks = ["demographics", "subscribe", 'mobile', 'about'];
-    if (isMobileOnly) mobileLinks.push(...["home", "profile", "evaluator"]);
-    if (isHome) mobileLinks.unshift(...['randomAyah']);
+    if (isMobileOnly) { mobileLinks.push(...["home", "profile", "evaluator"]); }
+    if (isHome) { mobileLinks.unshift(...['randomAyah']); }
     const links = linksFactory({
       randomAyah: this.handleRandomAyah,
-      sessionKey: this.props.profile.sessionKey
+      sessionKey: this.props.profile.sessionKey,
     })
     const currentLocale = this.props.cookies.get('currentLocale') || 'en';
     const urlLocale = currentLocale === 'en' ? 'ar' : 'en'
@@ -132,11 +145,6 @@ class NavMenu extends React.Component<IProps, IState>{
               return this.renderItem(links[key]);
             })
           }
-          {/*<a href={`?lang=${ urlLocale }`}>*/}
-            {/*{*/}
-              {/*currentLocale === 'en' ? 'العربية' : 'English'*/}
-            {/*}*/}
-          {/*</a>*/}
         </BrowserView>
         <a href={`?lang=${ urlLocale }`}>
           {
@@ -182,6 +190,24 @@ const Link = styled(link)`
   text-decoration: none;
   margin: 0 10px;
   transition: 0.25s;
+  
+  &.busy {
+    .text {
+      display: inline-block;
+      position: relative;
+      
+      &:before {
+        content: '';
+        width: 5px;
+        height: 5px;
+        border-radius: 50%;
+        background-color: ${props => props.theme.colors.linkColor};
+        position: absolute;
+        right: -5px;
+        top: -3px;
+      }
+    }
+  }
   
   &:hover {
     color: ${props => props.theme.colors.linkColor}
@@ -297,7 +323,7 @@ const Container = styled.div`
 
 const mapStateToProps = (state: ReduxState): IStateProps => {
   return {
-    profile: state.profile
+    profile: state.profile,
   }
 }
 
@@ -305,7 +331,7 @@ const mapDispatchToProps = (dispatch): IDispatchProps => {
   return {
     setAyah: (ayah: AyahShape) => {
       dispatch(setAyah(ayah));
-    }
+    },
   }
 }
 

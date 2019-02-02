@@ -1,8 +1,8 @@
 import KEYS from './keys';
 
-type Shape = {
+interface Shape {
   messages: { [key: string]: string };
-};
+}
 
 const EN: Shape = {
   messages: {
@@ -53,6 +53,7 @@ const EN: Shape = {
     [KEYS.DEMOGRAPHIC_INFO_LINK_TEXT]: "Demographic info",
     [KEYS.PROFILE_LINK_TEXT]: "My Profile",
     [KEYS.MOBILE_APP_LINK_TEXT]: "Mobile",
+    [KEYS.TARTEEL_DATASET_LINK_TEXT]: 'Tarteel datasets',
     [KEYS.HOME_LINK_TEXT]: 'Home',
     [KEYS.COOKIES_BUTTON_TEXT]: 'Got it!',
     [KEYS.PRIVACY_POLICY_LINK_TEXT]: 'Privacy Policy',

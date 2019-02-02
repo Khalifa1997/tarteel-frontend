@@ -1,12 +1,15 @@
 import React from 'react';
 import {Helmet} from "react-helmet";
 
-import {Container} from "./styles";
-import Navbar from "../../components/Navbar";
 import Ayah from "../../components/Ayah";
-import {IStatus} from "../../types/GlobalState";
 import Footer from "../../components/Footer";
-import AyahShape from "../shapes/AyahShape";
+import Navbar from "../../components/Navbar";
+import {IStatus} from "../../types/GlobalState";
+import AyahShape from "../../shapes/AyahShape";
+import {Container} from "./styles";
+import config from '../../../config';
+
+const cdnURL = config('cdnURL');
 
 interface IProps {
   currentAyah: AyahShape;
@@ -16,14 +19,24 @@ interface IProps {
 }
 
 class Main extends React.Component<IProps, never> {
-  componentDidMount() {
+  handleOGImage = () => {
+    const locale = this.props.cookies.get('currentLocale') || 'en';
+    return `${cdnURL}/main_${locale}.png`
+  }
+  public componentDidMount() {
     if (this.props.currentAyah.textSimple) {
       this.props.cookies.set("lastAyah", this.props.currentAyah, { path: '/' });
     }
   }
-  render() {
+  public render() {
     return (
       <Container>
+        <Helmet>
+          <meta
+            property={'og:image'}
+            content={this.handleOGImage()}
+          />
+        </Helmet>
         <Navbar withBullets={true} />
         <div className={"content"}>
           <Ayah

@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-  padding: 1em 3em;
+  padding: 1em;
   color: #485364;
   
   .header {
@@ -32,7 +32,7 @@ export const Container = styled.div`
   
   
   .content {
-    padding: 0 3em;     
+    padding: 1em 0;     
     width: 75%;
     margin: auto;
     

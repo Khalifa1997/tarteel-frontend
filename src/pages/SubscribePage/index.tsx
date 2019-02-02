@@ -1,16 +1,16 @@
 import React, {Component} from "react"
+import {Helmet} from "react-helmet";
 import Icon from "react-icons-kit";
 import {facebook as FacebookIcon} from 'react-icons-kit/fa/facebook'
-import {twitter as TwitterIcon} from 'react-icons-kit/fa/twitter'
 import {linkedin as LinkedinIcon} from 'react-icons-kit/fa/linkedin'
-import {Helmet} from "react-helmet";
-import {injectIntl, InjectedIntl} from 'react-intl'
+import {twitter as TwitterIcon} from 'react-icons-kit/fa/twitter'
+import {InjectedIntl, injectIntl} from 'react-intl'
 
-import T from "../../components/T";
 import FooterButton from "../../components/FooterButton";
+import Navbar from "../../components/Navbar";
+import T from "../../components/T";
 import KEYS from "../../locale/keys";
 import {Container} from "./styles";
-import Navbar from "../../components/Navbar";
 
 interface IDispatchProps {
 }
@@ -25,9 +25,9 @@ interface IStateProps {
 type IProps = IOwnProps & IDispatchProps & IStateProps;
 
 class SubscribePage extends Component<IProps, never> {
-  componentDidMount() {
+  public componentDidMount() {
   }
-  render() {
+  public render() {
     const recordingCount = 0
     const {intl} = this.props;
     const rtl = intl.messages.local === "arabic" ? "rtl" : "";
@@ -52,10 +52,16 @@ class SubscribePage extends Component<IProps, never> {
             <form
               action="https://tarteel.us19.list-manage.com/subscribe/post?u=ab8add36046818c66a55a4f9c&amp;id=4015afc1f5"
               method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" className="validate"
-              target="_blank" noValidate>
+              target="_blank" noValidate={true}>
               <div id="mc_embed_signup_scroll">
-                <input type="email" value="" name="EMAIL" className="email" id="mce-EMAIL" placeholder="email address"
-                       required />
+                <input
+                  type="email"
+                  value=""
+                  name="EMAIL"
+                  className="email"
+                  id="mce-EMAIL"
+                  placeholder={ intl.formatMessage({id: KEYS.SUBSCRIBE_PAGE_EMAIL_PLACEHOLDER_TEXT}) }
+                  required={true} />
                    {/* real people should not fill this in and expect good things - do not remove this or risk form bot signups */}
                   <div style={{position: "absolute", left: "-5000px"}} aria-hidden="true">
                     <input type="text"
@@ -65,7 +71,7 @@ class SubscribePage extends Component<IProps, never> {
                   <div className="clear">
                     <input
                       type="submit"
-                      value="Subscribe for Updates on Tarteel"
+                      value={ intl.formatMessage({id: KEYS.SUBSCRIBE_PAGE_EMAIL_BUTTON_TEXT}) }
                       name="subscribe" id="mc-embedded-subscribe"
                       className="button" />
                   </div>

@@ -1,8 +1,8 @@
 import { ActionType, getType } from 'typesafe-actions';
 
-import initState from '../initState';
-import * as profile from '../actions/profile';
 import {IProfile} from "../../types/GlobalState";
+import * as profile from '../actions/profile';
+import initState from '../initState';
 
 export type ProfileAction = ActionType<typeof profile>;
 
@@ -20,12 +20,12 @@ export default (state: IProfile = INITIAL_STATE, action: ProfileAction) => {
     case getType(profile.setUserRecitedAyahs):
       return {
         ...state,
-        userRecitedAyahs: action.payload
+        userRecitedAyahs: action.payload,
       }
     case getType(profile.setFetchedProfile):
       return {
         ...state,
-        ...action.payload
+        ...action.payload,
       }
     case getType(profile.setPassedOnBoarding):
       return {

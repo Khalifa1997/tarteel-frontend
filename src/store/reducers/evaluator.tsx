@@ -1,8 +1,8 @@
 import { ActionType, getType } from 'typesafe-actions';
 
-import initState from '../initState';
-import * as evaluator from '../actions/evaluator';
 import ReduxState from "../../types/GlobalState";
+import * as evaluator from '../actions/evaluator';
+import initState from '../initState';
 
 export type evaluatorActions = ActionType<typeof evaluator>;
 

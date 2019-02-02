@@ -1,28 +1,28 @@
 import React from 'react';
-import Helmet from 'react-helmet';
-import { renderToString, renderToStaticMarkup } from 'react-dom/server';
-import { StaticRouter } from 'react-router-dom';
-import { AsyncComponentProvider, createAsyncContext } from 'react-async-component';
 import asyncBootstrapper from 'react-async-bootstrapper';
-import { matchRoutes } from "react-router-config"
-import { Provider } from 'react-redux';
+import { AsyncComponentProvider, createAsyncContext } from 'react-async-component';
+import { CookiesProvider }  from 'react-cookie';
+import { renderToStaticMarkup, renderToString } from 'react-dom/server';
+import Helmet from 'react-helmet';
 import { IntlProvider } from 'react-intl';
+import { Provider } from 'react-redux';
+import { matchRoutes } from "react-router-config"
+import { StaticRouter } from 'react-router-dom';
 import {
-  ThemeProvider,
   ServerStyleSheet,
   StyleSheetManager,
+  ThemeProvider,
 } from 'styled-components';
-import { CookiesProvider }  from 'react-cookie';
 
-import getLocalMessages from '../../../helpers/setLocale';
 import config from '../../../../config/index';
-import theme from '../../../theme';
+import getLocalMessages from '../../../helpers/setLocale';
 import configStore from '../../../store/index';
+import theme from '../../../theme';
 
 
-import ServerHTML from './ServerHTML';
 import App from '../../../App';
 import routes from "../../../routes";
+import ServerHTML from './ServerHTML';
 
 import { log } from '../../../../internal/utils';
 import {loadSessionData} from "../../../helpers/get";

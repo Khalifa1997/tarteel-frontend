@@ -2,22 +2,22 @@
 import 'babel-polyfill';
 import 'isomorphic-fetch';
 
+import appRootDir from 'app-root-dir';
+import compression from 'compression';
 import express from 'express';
 import path from 'path';
-import compression from 'compression';
 import { resolve as pathResolve } from 'path';
-import appRootDir from 'app-root-dir';
-import cookiesMiddleware from 'universal-cookie-express'
 import favicon from 'serve-favicon';
+import cookiesMiddleware from 'universal-cookie-express'
 
-import reactApplication from './middleware/reactApplication/index';
-import security from './middleware/security';
-import clientBundle from './middleware/clientBundle';
-import serviceWorker from './middleware/serviceWorker';
-import offlinePage from './middleware/offlinePage';
-import errorHandlers from './middleware/errorHandlers';
 import config from '../../config/index';
 import { log } from '../../internal/utils';
+import clientBundle from './middleware/clientBundle';
+import errorHandlers from './middleware/errorHandlers';
+import offlinePage from './middleware/offlinePage';
+import reactApplication from './middleware/reactApplication/index';
+import security from './middleware/security';
+import serviceWorker from './middleware/serviceWorker';
 
 // Create our express based server.
 const app = express();
@@ -37,13 +37,13 @@ app.use(compression());
 // Static content
 app.use(
   favicon(
-    path.join(process.cwd(), '/public/favicon.ico')
-  )
+    path.join(process.cwd(), '/public/favicon.ico'),
+  ),
 );
 app.use(
   '/public',
   express.static(
-    path.join(process.cwd(), '/public'))
+    path.join(process.cwd(), '/public')),
 );
 // app.use(
 //   '/public',
@@ -76,7 +76,6 @@ app.get('*', (request, response, next) => {
   if (request.universalCookies.get('isFirstTime') === undefined) {
     request.universalCookies.set('isFirstTime', true, {path: '/'});
   }
-
 
   if (request.path === '/' && JSON.parse(request.universalCookies.get('isFirstTime'))) {
     const queryString = Object.entries(request.query).map(([key, val]) => `${key}=${val}`).join('&');

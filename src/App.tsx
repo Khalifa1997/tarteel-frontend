@@ -1,19 +1,24 @@
-import React from "react";
-import styled from "styled-components"
-import {injectIntl} from 'react-intl'
 import {History, Location} from "history";
+import React from "react";
+import {injectIntl} from 'react-intl'
 import {connect} from "react-redux";
-import { createGlobalStyle } from 'styled-components'
 import {withRouter} from "react-router";
+import styled from "styled-components"
+import { createGlobalStyle } from 'styled-components'
 
-import Routes from "./components/Routes";
 import AppHelmet from "./components/AppHelmet";
-import LanguagePicker from "./components/LanguagePicker";
 import CookiesBanner from "./components/CookiesBanner";
+import LanguagePicker from "./components/LanguagePicker";
+import Routes from "./components/Routes";
 import {setLocation} from "./store/actions/router";
 
 import 'react-tippy/dist/tippy.css'
 import './styles/index.scss'
+import Amplify from "aws-amplify";
+import AWSConfig from "./aws-exports";
+
+
+Amplify.configure(AWSConfig)
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -33,16 +38,16 @@ interface IDispatchProps {
 type IProps = IOwnProps & IDispatchProps;
 
 class App extends React.Component<IProps, never> {
-  componentDidMount() {
+  public componentDidMount() {
     this.props.history.listen((location, action) => {
       this.props.setLocation(location)
     })
   }
-  render() {
+  public render() {
     return (
       <Container>
         <GlobalStyle path={this.props.location.pathname} />
-        <AppHelmet/>
+        <AppHelmet />
         <Routes />
         {/*<CookiesBanner />*/}
       </Container>
@@ -66,13 +71,14 @@ const Container = styled.div`
   .text-center {
     text-align: center;
   }
+  
 `
 
 const mapDispatchToProps = (dispatch) => {
   return {
     setLocation: (location: Location) => {
       dispatch(setLocation(location))
-    }
+    },
   }
 }
 

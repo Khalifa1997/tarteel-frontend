@@ -1,27 +1,27 @@
+import {History, Location} from "history";
+import humps from 'humps'
 import React from "react";
-import styled from "styled-components";
+import {Cookies, withCookies} from "react-cookie";
+import {BrowserView, MobileView} from 'react-device-detect'
 import {Icon} from "react-icons-kit";
-import {micA} from 'react-icons-kit/ionicons/micA'
 import {refresh} from 'react-icons-kit/fa/refresh'
 import {stop} from 'react-icons-kit/fa/stop'
 import {close as closeIcon} from 'react-icons-kit/ionicons/close'
+import {micA} from 'react-icons-kit/ionicons/micA'
 import {connect} from "react-redux";
 import {Link, withRouter} from "react-router-dom";
-import {MobileView, BrowserView} from 'react-device-detect'
-import {History, Location} from "history";
-import {withCookies, Cookies} from "react-cookie";
-import humps from 'humps'
-
-import {toggleIsRecording, toggleDoneRecording} from "../store/actions/status";
-import {increaseRecitedAyahs, setPassedOnBoarding} from "../store/actions/profile";
-import KEYS from "../locale/keys";
-import T from "./T";
-import ToggleButton from "./ToggleButton";
-import RecordingButton from "./RecordingButton";
-import NoteButton from "./NoteButton";
-import FooterButton from "./FooterButton";
-import ReduxState, {IProfile, IStatus} from "../types/GlobalState";
+import styled from "styled-components";
+import {getType} from "typesafe-actions";
+import config from '../../config';
+import HandShakeImage from '../../public/handshake-icon.png'
 import {fetchRandomAyah, fetchSpecificAyah, sendRecording} from "../api/ayahs";
+import surahs from "../api/surahs";
+import {storePassedOnBoarding, storeUserRecitedAyahs} from "../helpers";
+import {getNextAyah, getPrevAyah} from "../helpers/ayahs";
+import { getBlob, startRecording, stopRecording} from "../helpers/recorder";
+import KEYS from "../locale/keys";
+import {ModalContent} from "../pages/Evaluator/styles";
+import AyahShape from "../shapes/AyahShape";
 import {
   loadNextAyah, loadNextQueue, loadPreviousAyah, loadPrevQueue,
   popNextAyah, popPrevAyah,
@@ -29,23 +29,21 @@ import {
   shiftNextAyah,
   shiftPrevAyah,
   unShiftNextAyah,
-  unShiftPrevAyah
+  unShiftPrevAyah,
 } from "../store/actions/ayahs";
-import surahs from "../api/surahs";
-import {storePassedOnBoarding, storeUserRecitedAyahs} from "../helpers";
-import { getBlob, startRecording, stopRecording} from "../helpers/recorder";
-import {ModalContent} from "../pages/Evaluator/styles";
+import {increaseRecitedAyahs, setPassedOnBoarding} from "../store/actions/profile";
+import {toggleDoneRecording, toggleIsRecording} from "../store/actions/status";
+import ReduxState, {IProfile, IStatus} from "../types/GlobalState";
+import FooterButton from "./FooterButton";
 import Modal from "./Modal";
-import HandShakeImage from '../../public/handshake-icon.png'
-import config from '../../config';
-import AyahShape from "../shapes/AyahShape";
-import {getType} from "typesafe-actions";
-import {getNextAyah, getPrevAyah} from "../helpers/ayahs";
+import NoteButton from "./NoteButton";
+import RecordingButton from "./RecordingButton";
+import T from "./T";
+import ToggleButton from "./ToggleButton";
 
 
 interface IOwnProps {
   history: History;
-  location: Location;
 }
 
 interface IDispatchPros {
@@ -72,7 +70,7 @@ interface IStateProps {
   currentAyah: AyahShape;
   nextAyah: AyahShape[];
   prevAyah: AyahShape[];
-  location: ReduxState['router']
+  router: ReduxState['router']
 }
 
 interface IState {
@@ -83,21 +81,12 @@ interface IState {
 type IProps = IOwnProps & IStateProps & IDispatchPros;
 
 class Footer extends React.Component<IProps, IState>  {
-  state = {
+  public state = {
     showModal: false,
     showErrorMessage: false,
   }
-  setAyah = async (ayah: AyahShape) => {
-    await this.props.setAyah(ayah);
-    this.props.cookies.set("lastAyah", ayah, { path: '/' });
-  }
 
-  fetchAyah = (surahKey: number, ayah: number) => {
-    fetchSpecificAyah(surahKey, ayah)
-      .then(this.setAyah);
-  };
-
-  setPreviousAyah = async () => {
+  public setPreviousAyah = async () => {
     const {verseNumber: ayah, chapterId: surah} = this.props.currentAyah;
     const {prevSurah, prevAyah} = getPrevAyah(surah, ayah)
 
@@ -105,13 +94,13 @@ class Footer extends React.Component<IProps, IState>  {
     await this.props.unShiftNextAyah(this.props.currentAyah)
 
     if (this.props.prevAyah.length && this.props.prevAyah[0].verseNumber === prevAyah) {
-      await this.setAyah(this.props.prevAyah[0])
+      await this.props.setAyah(this.props.prevAyah[0])
     }
 
     await this.props.shiftPrevAyah();
     this.props.loadPrevQueue();
   }
-  setNextAyah = async () => {
+  public setNextAyah = async () => {
     const {verseNumber: ayah, chapterId: surah} = this.props.currentAyah;
     const {nextSurah, nextAyah} = getNextAyah(surah, ayah)
 
@@ -119,32 +108,32 @@ class Footer extends React.Component<IProps, IState>  {
     await this.props.unShiftPrevAyah(this.props.currentAyah)
 
     if (this.props.nextAyah.length && this.props.nextAyah[0].verseNumber === nextAyah) {
-      await this.setAyah(this.props.nextAyah[0])
+      await this.props.setAyah(this.props.nextAyah[0])
     }
 
     await this.props.shiftNextAyah();
     await this.props.loadNextQueue();
   }
-  handleError = () => {
+  public handleError = () => {
     this.setState({
-      showErrorMessage: true
+      showErrorMessage: true,
     });
     this.props.toggleIsRecording();
   }
-  handleRetry = () => {
+  public handleRetry = () => {
     this.handleStartRecording();
     this.props.toggleDoneRecording();
   }
-  increaseRecitedAyahs = async () => {
+  public increaseRecitedAyahs = async () => {
     await this.props.increaseRecitedAyahs()
     storeUserRecitedAyahs(this.props.profile.userRecitedAyahs)
   }
-  handleSubmit = async (lastOne: boolean = false) => {
+  public handleSubmit = async (lastOne: boolean = false) => {
     const record = {
       surahNum: this.props.currentAyah.chapterId,
       ayahNum: this.props.currentAyah.verseNumber,
-      hashString: this.props.currentAyah.sessionId,
-      audio: getBlob()
+      hashString: this.props.currentAyah.hash,
+      audio: getBlob(),
     }
     sendRecording(
       record.audio,
@@ -152,7 +141,7 @@ class Footer extends React.Component<IProps, IState>  {
       record.ayahNum,
       record.hashString,
       this.props.currentAyah.sessionId,
-      this.props.status.isContinuous
+      this.props.status.isContinuous,
     )
       .then((res: Response) => {
         if (res.status === 201) {
@@ -189,16 +178,16 @@ class Footer extends React.Component<IProps, IState>  {
 
     }
   }
-  handleStartRecording = () => {
+  public handleStartRecording = () => {
     const config = {
-      onError: this.handleError
+      onError: this.handleError,
     }
     startRecording(config)
       .then(() => {
         this.props.toggleIsRecording();
       })
   }
-  handleStopRecording = () => {
+  public handleStopRecording = () => {
     stopRecording()
       .then(() => {
         if (this.props.status.isContinuous) {
@@ -212,28 +201,28 @@ class Footer extends React.Component<IProps, IState>  {
         }
       })
   }
-  handleReviewPreviousAyah = () => {
+  public handleReviewPreviousAyah = () => {
     this.props.toggleDoneRecording()
     this.setPreviousAyah();
   }
 
-  handleRecordingButton = () => {
+  public handleRecordingButton = () => {
     if (this.props.status.isRecording) {
       this.handleStopRecording()
     } else {
       this.handleStartRecording()
     }
   }
-  handleCloseModal = () => {
+  public handleCloseModal = () => {
     this.setState({ showModal: false });
   }
-  fetchRandomAyah = () => {
+  public fetchRandomAyah = () => {
     fetchRandomAyah()
       .then((ayah: AyahShape) => {
-        this.setAyah(ayah)
+        this.props.setAyah(ayah)
       })
   }
-  async componentDidMount() {
+  public async componentDidMount() {
     if (this.props.currentAyah.textSimple){
       if (!this.props.router.location.state) {
         await this.props.loadNextAyah()
@@ -246,7 +235,7 @@ class Footer extends React.Component<IProps, IState>  {
     }
   }
 
-  render() {
+  public render() {
     const {isRecording, isDoneRecording, isContinuous} = this.props.status;
     const {showErrorMessage} = this.state;
     return (
@@ -255,7 +244,9 @@ class Footer extends React.Component<IProps, IState>  {
          {
            !isDoneRecording ?
              <div className="mic-wrapper">
-               <RecordingButton className={`mic ${ isRecording ? "recording" : "" }`} onClick={this.handleRecordingButton}>
+               <RecordingButton
+                 className={`mic ${ isRecording ? "recording" : "" }`}
+                 onClick={this.handleRecordingButton}>
                  <div className="icon">
                    {
                      !isRecording ?
@@ -315,7 +306,7 @@ class Footer extends React.Component<IProps, IState>  {
            {
              isDoneRecording ?
                <NoteButton className="previous-ayah arabic-text rtl" onClick={this.handleReviewPreviousAyah}>
-                 <T id={KEYS.PREVIOUS_AYAH}/>
+                 <T id={KEYS.PREVIOUS_AYAH} />
                </NoteButton>
                : null
            }
@@ -355,7 +346,7 @@ class Footer extends React.Component<IProps, IState>  {
          handleCloseModal={this.handleCloseModal}
          style={{height: '60%', width: '50%'}}
          shouldCloseOnOverlayClick={true}
-         closable
+         closable={true}
        >
          <ModalContent>
            <h1 className="modal-title">Thank You!</h1>

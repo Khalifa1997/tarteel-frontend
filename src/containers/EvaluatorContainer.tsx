@@ -3,10 +3,10 @@ import {Dispatch} from "redux";
 import {ActionType} from "typesafe-actions";
 
 import {fetchEvaluatorAyah} from "../api/evaluator";
-import ReduxState, {IProfile} from "../types/GlobalState";
-import {setAyah, setNextAyah} from "../store/actions/evaluator";
 import Evaluator from "../pages/Evaluator";
 import AyahShape from "../shapes/AyahShape";
+import {setAyah, setNextAyah} from "../store/actions/evaluator";
+import ReduxState, {IProfile} from "../types/GlobalState";
 
 
 interface IDispatchProps {
@@ -45,5 +45,5 @@ export const EvaluatorContainer = {
       .then((ayah: AyahShape) => {
         return store.dispatch(setAyah(ayah))
       })
-  }
+  },
 };

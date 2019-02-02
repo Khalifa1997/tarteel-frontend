@@ -1,19 +1,19 @@
 import React, {Component} from 'react';
-import {connect} from "react-redux";
-import {arrowLeft} from 'react-icons-kit/feather/arrowLeft'
-import { injectIntl, InjectedIntl } from "react-intl"
 import {Helmet} from "react-helmet";
 import Icon from "react-icons-kit";
+import {arrowLeft} from 'react-icons-kit/feather/arrowLeft'
+import { InjectedIntl, injectIntl } from "react-intl"
+import {connect} from "react-redux";
 import {Link} from "react-router-dom";
 
-import {Container} from "./styles"
-import ReduxState from "../../types/GlobalState";
+import Truncate from "react-truncate";
 import surahs from "../../api/surahs"
+import Navbar from "../../components/Navbar";
 import T from "../../components/T";
 import KEYS from "../../locale/keys";
 import AyahShape from "../../shapes/AyahShape";
-import Navbar from "../../components/Navbar";
-import Truncate from "react-truncate";
+import ReduxState from "../../types/GlobalState";
+import {Container} from "./styles"
 
 interface IOwnProps {
   match: any;
@@ -42,12 +42,12 @@ interface IState {
 type IProps = IStateProps & IOwnProps;
 
 class SurahPicker extends Component<IProps, IState> {
-  state = {
+  public state = {
     surahs,
     searchText: "",
-    isFetching: false
+    isFetching: false,
   }
-  renderSurahs = () => {
+  public renderSurahs = () => {
     let {searchText} = this.state;
     searchText = searchText.toLowerCase().trim();
     return Object.keys(this.state.surahs)
@@ -67,7 +67,7 @@ class SurahPicker extends Component<IProps, IState> {
                 <Truncate
                   lines={1}
                   ellipsis='...'
-                  trimWhitespace
+                  trimWhitespace={true}
                 >
                   { surah.latin } ({surah.english})
                 </Truncate>
@@ -78,12 +78,12 @@ class SurahPicker extends Component<IProps, IState> {
         )
       })
   }
-  handleSearchText = (e: any) => {
+  public handleSearchText = (e: any) => {
     this.setState({
       searchText: e.currentTarget.value,
     });
   }
-  render() {
+  public render() {
     const { intl } = this.props;
     return (
       <Container>
@@ -116,7 +116,7 @@ class SurahPicker extends Component<IProps, IState> {
 
 const mapStateToProps = (state: ReduxState): IStateProps => {
   return {
-    currentAyah: state.ayahs.currentAyah
+    currentAyah: state.ayahs.currentAyah,
   }
 }
 

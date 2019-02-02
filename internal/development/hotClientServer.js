@@ -13,7 +13,7 @@ class HotClientServer {
     const httpPath = compiler.options.output.publicPath;
     if (!httpPath.startsWith('http') && !httpPathRegex.test(httpPath)) {
       throw new Error(
-        'You must supply an absolute public path to a development build of a web target bundle as it will be hosted on a seperate development server to any node target bundles.',
+        'You must supply an absolute public path to a development build of a web target bundle as it will be hosted on a seperate development server to any node target bundles.'
       );
     }
 
@@ -24,7 +24,9 @@ class HotClientServer {
       quiet: true,
       noInfo: true,
       headers: {
-        'Access-Control-Allow-Origin': `http://${config('host')}:${config('port')}`,
+        'Access-Control-Allow-Origin': `http://${config('host')}:${config(
+          'port'
+        )}`,
       },
       // Ensure that the public path is taken from the compiler webpack config
       // as it will have been created as an absolute path to avoid conflicts
@@ -47,12 +49,13 @@ class HotClientServer {
       });
     });
 
-    compiler.plugin('done', (stats) => {
+    compiler.plugin('done', stats => {
       if (stats.hasErrors()) {
         log({
           title: 'client',
           level: 'error',
-          message: 'Build failed, please check the console for more information.',
+          message:
+            'Build failed, please check the console for more information.',
           notify: true,
         });
         console.error(stats.toString());
@@ -70,7 +73,9 @@ class HotClientServer {
   dispose() {
     this.webpackDevMiddleware.close();
 
-    return this.listenerManager ? this.listenerManager.dispose() : Promise.resolve();
+    return this.listenerManager
+      ? this.listenerManager.dispose()
+      : Promise.resolve();
   }
 }
 

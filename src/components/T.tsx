@@ -1,17 +1,17 @@
 import React, { ReactNode } from 'react';
 import {
-  injectIntl,
   FormattedHTMLMessage,
-  InjectedIntlProps, // eslint-disable-line
+  InjectedIntlProps,
+  injectIntl, // eslint-disable-line
 } from 'react-intl';
 import config from '../../config';
 import LOCALE_KEYS from '../locale/keys';
 
-type Props = {
+interface Props {
   id: LOCALE_KEYS;
   values?: { [key: string]: string };
   children?: (...formattedMessage: Array<string | JSX.Element>) => ReactNode;
-};
+}
 
 const { en } = config('localeMessages');
 
@@ -19,7 +19,7 @@ const T: React.SFC<Props> = ({
   id,
   values,
   children,
-  ...rest
+  ...rest,
 }: Props & InjectedIntlProps) => {
   return (
     <FormattedHTMLMessage id={id} defaultMessage={en.messages[id]} values={values} {...rest}>

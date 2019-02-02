@@ -4,8 +4,8 @@ interface ReduxState {
   users: IUser[];
   ayahs: {
     currentAyah: AyahShape;
-    prevAyah: AyahShape[],
-    nextAyah: AyahShape[],
+    prevAyah: AyahShape[];
+    nextAyah: AyahShape[];
     isFetchingCurrentAyah: boolean;
     currentSurah: ISearchSurah;
   };
@@ -13,6 +13,7 @@ interface ReduxState {
   demographicData: IDemographics;
   profile: IProfile;
   evaluator: IEvaluator;
+  recognition: IRecognition;
   router: {
     location: Location;
   }
@@ -59,8 +60,16 @@ export interface ISearchAyah {
 export interface ISearchSurah {
   chapterId: string;
   ayahs: {
-    [key: string]: ISearchAyah
+    [key: string]: ISearchAyah;
   };
+}
+
+export interface IRecognition {
+  queryText: string;
+  suggestions: [];
+  matchedTerms: string[];
+  matches: any[];
+  canRecord: boolean;
 }
 
 export default ReduxState;

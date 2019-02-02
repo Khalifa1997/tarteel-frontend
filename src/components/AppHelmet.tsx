@@ -1,9 +1,10 @@
 import React from 'react';
 import Helmet from 'react-helmet';
-import { injectIntl, InjectedIntl, defineMessages } from 'react-intl';
+import { defineMessages, injectIntl } from 'react-intl';
 
 import config from '../../config';
 
+const cdnURL = config('cdnURL');
 
 const messages = defineMessages({
   title: {
@@ -46,7 +47,7 @@ const AppHelmet: React.SFC = ({intl}) => {
   const description = intl.formatMessage(messages.description);
 
   const tags = {
-    title: title,
+    title,
     titleTemplate: `%s - ${title}`,
     meta: [
       {
@@ -99,7 +100,7 @@ const AppHelmet: React.SFC = ({intl}) => {
       },
       {
         property: 'og:image',
-        content: 'https://tarteel.io/static/img/tarteel_share_photo_50000.png',
+        content: cdnURL + '/main_en.png',
       },
       {
         property: 'og:locale',
@@ -119,8 +120,7 @@ const AppHelmet: React.SFC = ({intl}) => {
       },
       {
         property: 'og:url',
-        // content: 'https://tarteel.io',
-        content: '',
+        content: 'https://tarteel.io',
       },
       {
         property: 'og:type',
@@ -140,7 +140,7 @@ const AppHelmet: React.SFC = ({intl}) => {
       },
       {
         name: 'twitter:image',
-        content: 'https://tarteel.io/static/img/tarteel_share_photo_50000.png',
+        content: cdnURL + '/main_en.png',
       },
       {
         name: 'twitter:image:width',

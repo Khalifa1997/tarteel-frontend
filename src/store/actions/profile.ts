@@ -1,5 +1,5 @@
-import { createAction } from 'typesafe-actions';
 import humps from 'humps';
+import { createAction } from 'typesafe-actions';
 
 import {IProfile} from "../../types/GlobalState";
 

@@ -1,13 +1,13 @@
-import {backendRequestOptions} from "../helpers/cookie";
 import config from '../../config';
+import {backendRequestOptions} from "../helpers/cookie";
 
-const API_URL =  config('apiURL');
+const API_URL =  __DEVELOPMENT__ ? 'http://localhost:8000' : config('apiURL');
 
 export const fetchRandomAyah = (req?: any) => {
   const options = __SERVER__ ? backendRequestOptions(req) : {
     credentials: 'include',
   };
-  return fetch(`${ API_URL }/get_ayah/`, options)
+  return fetch(`${ API_URL }/api/get_ayah/?format=json`, options)
     .then(res => res.json())
     .then(json => {
       // console.log(json);
@@ -29,7 +29,7 @@ export const fetchSpecificAyah = (surah: number, ayah: number) => {
     },
     credentials: "include",
   }
-  return fetch(`${ API_URL }/get_ayah/`, options)
+  return fetch(`${ API_URL }/api/get_ayah/?format=json`, options)
     .then(res => res.json())
 }
 
@@ -48,22 +48,11 @@ export const sendRecording =  (audio: any, surah: number, ayah: number, hash: st
   return fetch(`${ API_URL }/api/recordings/`, {
     method: "POST",
     body,
-    credentials: "include"
+    credentials: "include",
   })
 }
 
 export const fetchSurah = (num: number) => {
-  return fetch(`${API_URL}/surah/${ num }/`)
+  return fetch(`${API_URL}/api/surah/${ num }/?format=json`)
     .then(res => res.json())
-}
-
-export const fetchTranslit = (surah: number, ayah: number) => {
-  const params = {
-    surah,
-    ayah
-  }
-  const paramString = Object.entries(params).map(([key, val]) => `${key}=${val}`).join('&');
-
-  return fetch(`${API_URL}/get_ayah_translit?${paramString}`)
-    .then(res => res.json());
 }

@@ -1,8 +1,8 @@
 import { ActionType, getType } from 'typesafe-actions';
 
-import initState from '../initState';
-import * as demographicData from '../actions/demographicData';
 import {IDemographics} from "../../types/GlobalState";
+import * as demographicData from '../actions/demographicData';
+import initState from '../initState';
 
 export type DemographicsAction = ActionType<typeof demographicData>;
 
@@ -15,7 +15,7 @@ export default (state: IDemographics = INITIAL_STATE, action: DemographicsAction
     case getType(demographicData.updateDemographicData):
       return {
         ...state,
-        ...action.payload
+        ...action.payload,
       };
     default:
       return state;

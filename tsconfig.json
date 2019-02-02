@@ -17,9 +17,7 @@
   },
   "include": [
     "./src/**/*",
-    "./config/**/*",
-    "./src/client/**/*",
-    "./src/server/**/*"
+    "./config/**/*"
   ],
   "exclude": [
     "./tests/**/*",

@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components'
 
 class Privacy extends React.Component {
-  render() {
+  public render() {
     return (
       <Container>
         <h1>Tarteel Privacy Policy</h1>

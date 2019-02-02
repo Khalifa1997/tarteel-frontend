@@ -46,6 +46,7 @@ export default {
     [KEYS.RANDOM_AYAH_LINK_TEXT]: "آية عشوائية",
     [KEYS.ABOUT_LINK_TEXT]: "عن ترتيل",
     [KEYS.DEMOGRAPHIC_INFO_LINK_TEXT]: "بياناتك",
+    [KEYS.PROFILE_LINK_TEXT]: "حسابي",
     [KEYS.MOBILE_APP_LINK_TEXT]: "تطبيق الهاتف",
     [KEYS.HOME_LINK_TEXT]: 'الرئيسيه',
     [KEYS.EVALUATE_AYAHS]: "تقييم آيات",
@@ -95,7 +96,7 @@ export default {
   [KEYS.CONTRIBUTOR_5]: "أحمد بهاء ، طالب هندسة برمجيات",
   [KEYS.CONTRIBUTOR_6]: "حمزه خان ، مهندس برمجيات - أوبر",
   [KEYS.CONTRIBUTOR_7]: "عريبه عابد ، طالبة هندسة الطب الحيوي -  معهد جورجيا للتكنولوجيا",
-  [KEYS.CONTRIBUTOR_8]: "عبدالرحمن الفوزان ، مهندس برمجيات - فيسبوك"
+  [KEYS.CONTRIBUTOR_8]: "عبدالرحمن الفوزان ، مهندس برمجيات - فيسبوك",
 
   },
 };

@@ -2,11 +2,10 @@ import React from 'react';
 import {connect} from "react-redux";
 import styled from "styled-components";
 
-import NavMenu from "./NavMenu";
 import Logo from "../components/Logo";
-import {IStatus} from "../types/GlobalState";
 import ProgressBubbles from "../components/ProgressBubbles";
-import ReduxState from "../types/GlobalState";
+import ReduxState, {IStatus} from "../types/GlobalState";
+import NavMenu from "./NavMenu";
 
 interface IOwnProps {
   withBullets?: boolean;
@@ -21,11 +20,11 @@ interface IStateProps {
 type IProps = IOwnProps & IStateProps ;
 
 class Navbar extends React.Component<IProps, never> {
-  render() {
+  public render() {
     const {passedOnBoarding, counterText, withBullets} = this.props
     return (
       <Container>
-        <Logo counterText={counterText}/>
+        <Logo counterText={counterText} />
         <NavMenu />
       </Container>
     )

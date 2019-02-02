@@ -1,14 +1,14 @@
-import React from "react";
-import styled from "styled-components";
-import {Link} from "react-router-dom";
 import classNames from 'classnames'
+import React from "react";
 import ContentLoader from "react-content-loader";
+import {Link} from "react-router-dom";
+import styled from "styled-components";
 
-import T from "./T";
 import KEYS from "../locale/keys";
-import {WORD_TYPES} from "../types";
-import WordShape from "../shapes/WordShape";
 import AyahShape from "../shapes/AyahShape";
+import WordShape from "../shapes/WordShape";
+import {WORD_TYPES} from "../types";
+import T from "./T";
 
 interface IProps {
   ayah: AyahShape;
@@ -20,24 +20,24 @@ interface IState {
 }
 
 class Ayah extends React.Component<IProps, IState> {
-  state = {
+  public state = {
     showTranslit: false,
   }
-  toggleTranslit = () => {
+  public toggleTranslit = () => {
     this.setState((state, props) => {
       return {
         showTranslit: !state.showTranslit,
       }
     });
   }
-  componentDidUpdate(prevProps: IProps) {
+  public componentDidUpdate(prevProps: IProps) {
     if (prevProps.ayah.verseNumber !== this.props.ayah.verseNumber) {
       this.setState({
         showTranslit: false,
       });
     }
   }
-  renderTransliteration = () => {
+  public renderTransliteration = () => {
     if (this.props.ayah.translations) {
       return this.props.ayah.translations
         .filter((trans) => {
@@ -45,7 +45,7 @@ class Ayah extends React.Component<IProps, IState> {
         })[0].text
     }
   }
-  renderAyah = () => {
+  public renderAyah = () => {
     return (
       this.props.ayah.words.map(((word: WordShape) => {
         const className = classNames({
@@ -68,7 +68,7 @@ class Ayah extends React.Component<IProps, IState> {
       <em>Loading ayah... (if an ayah does not show up, try clicking "next ayah")</em>
     )
   }
-  renderAyahLoader = () => {
+  public renderAyahLoader = () => {
     return (
       <ContentLoader height={42}>
         {/* Pure SVG */}
@@ -76,7 +76,7 @@ class Ayah extends React.Component<IProps, IState> {
       </ContentLoader>
     )
   }
-  render() {
+  public render() {
     const {ayah, isFetchingAyah} = this.props;
     return (
       <Container>

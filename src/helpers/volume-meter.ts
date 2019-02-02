@@ -42,9 +42,9 @@ export function createAudioMeter(
   audioContext: any,
   clipLevel?: any,
   averaging?: any,
-  clipLag?: any
+  clipLag?: any,
 ) {
-	let processor = audioContext.createScriptProcessor(512);
+	const processor = audioContext.createScriptProcessor(512);
 	processor.onaudioprocess = volumeAudioProcess;
 	processor.clipping = false;
 	processor.lastClip = 0;
@@ -59,10 +59,12 @@ export function createAudioMeter(
 
 	processor.checkClipping =
 		function(){
-			if (!this.clipping)
+			if (!this.clipping) {
 				return false;
-			if ((this.lastClip + this.clipLag) < window.performance.now())
+			}
+			if ((this.lastClip + this.clipLag) < window.performance.now()) {
 				this.clipping = false;
+			}
 			return this.clipping;
 		};
 
@@ -76,8 +78,8 @@ export function createAudioMeter(
 }
 
 function volumeAudioProcess( event: any ) {
-	let buf = event.inputBuffer.getChannelData(0);
-    let bufLength = buf.length;
+	const buf = event.inputBuffer.getChannelData(0);
+    const bufLength = buf.length;
 	let sum = 0;
     let x;
 
@@ -92,7 +94,7 @@ function volumeAudioProcess( event: any ) {
     }
 
     // ... then take the square root of the sum.
-    let rms =  Math.sqrt(sum / bufLength);
+    const rms =  Math.sqrt(sum / bufLength);
 
     // Now smooth this out with the averaging factor applied
     // to the previous sample - take the max here because we

@@ -1,15 +1,15 @@
 import React, {Component} from "react"
-import {injectIntl, InjectedIntl} from "react-intl"
+import {InjectedIntl, injectIntl} from "react-intl"
 
-import {IUser} from "../../types/GlobalState";
-import T from "../../components/T";
-import KEYS from "../../locale/keys";
-import {Container} from "./styles";
 import FooterButton from "../../components/FooterButton";
 import Navbar from "../../components/Navbar";
+import T from "../../components/T";
+import KEYS from "../../locale/keys";
+import {IUser} from "../../types/GlobalState";
+import {Container} from "./styles";
 
-import LogoImage from "../../../public/logo-3x.png";
 import {withCookies} from "react-cookie";
+import LogoImage from "../../../public/logo-3x.png";
 
 interface IDispatchProps {
   setUsers(users: IUser[]): Promise<IUser[]>;
@@ -26,11 +26,11 @@ interface IStateProps {
 type IProps = IOwnProps & IDispatchProps & IStateProps;
 
 class WelcomePage extends Component<IProps, never> {
-  handleStart = () => {
+  public handleStart = () => {
     this.props.cookies.set('isFirstTime', 'false', {path: '/'});
     this.props.history.push('/')
   }
-  render() {
+  public render() {
     const rtl = this.props.intl.messages.local === "arabic" ? "rtl" : "";
     return (
       <Container>

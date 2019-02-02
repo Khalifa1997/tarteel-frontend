@@ -1,9 +1,9 @@
 import React, {Component} from "react"
 
-import {IUser} from "../../types/GlobalState";
 import {fetchUsers} from "../../api/users";
 import T from "../../components/T";
 import KEYS from "../../locale/keys";
+import {IUser} from "../../types/GlobalState";
 import {Container} from "./styles";
 
 interface IDispatchProps {
@@ -21,13 +21,13 @@ interface IStateProps {
 type IProps = IOwnProps & IDispatchProps & IStateProps;
 
 class Users extends Component<IProps, never> {
-  componentDidMount() {
+  public componentDidMount() {
     return fetchUsers()
       .then((users: IUser[]) => {
         return this.props.setUsers(users)
       })
   }
-  render() {
+  public render() {
     return (
       <Container>
         <h3>

@@ -3,15 +3,14 @@ import styled from "styled-components"
 export const Container = styled.div`
   background-color: #F4F3F2;
   min-height: 100%;
-  padding: 1em 3em;
+  padding: 1em;
   position: relative;
   display: flex;
   flex-flow: column;
   justify-content: space-between;
   
   .pills {
-    flex: 1;
-    max-width: 20%;
+    max-width: 10%;
     margin-top: -25px;
   
     .inner {
@@ -42,14 +41,14 @@ export const Container = styled.div`
         -webkit-box-orient: horizontal;
         -webkit-box-direction: normal;
         display: flex!important;
-        height: 57px;
+        height: 40px;
         width: 100%;
         padding: 0 12px;
         margin-left: auto;
         margin-top: 20px;
         
         svg {
-          margin: 0 23px;
+          margin-right: 10px;
         }
         &:nth-child(1) {
           margin-top: 0;
@@ -58,12 +57,13 @@ export const Container = styled.div`
           -webkit-box-align: center;
           align-items: center;
           justify-content: center;
-          width: 32px;
-          height: 32px;
+          width: 25px;
+          height: 25px;
           border-radius: 50%;
           font-weight: 600;
           display: flex;
           -webkit-box-pack: center;
+          font-size: 14px;
         }
         &.pending .num {
           background: #fff;
@@ -103,13 +103,12 @@ export const Container = styled.div`
   .cards-and-pills {
     display: flex;
     flex-flow: row;
-    padding: 0 1em;
     justify-content: flex-end;
     
     .cards {
-      flex: 2;
-      max-width: 60%;
+      flex: 1;
       margin-top: 3em;
+      max-width: 100%;
       
       .instruction {
         display: flex;
@@ -125,6 +124,8 @@ export const Container = styled.div`
         }
       }
       .card {
+        width: 100%;
+        box-sizing: border-box;
         background-color: #fff;
         display: flex;
         align-items: center;
@@ -144,12 +145,13 @@ export const Container = styled.div`
           margin-top: 0;
           color: black;
           text-align: center;
-          
-          p {
-            display: inline-block;
-            direction: rtl;
-            font-family: 'UthmanicHafs';
-            font-size: 6vmin;
+          display: inline-block;
+          font-family: 'UthmanicHafs';
+          font-size: 6vmin;
+          max-width: 100%;
+            
+          span.p3 a {
+            font-size: 5vmin;
           }
           
           .verse-number {
@@ -306,7 +308,7 @@ export const Container = styled.div`
     background: transparent;
     position: absolute;
     bottom: 25px;
-    right: 50px;
+    right: 0px;
     height: 45px;
     width: 100px;
     
@@ -328,7 +330,7 @@ export const Container = styled.div`
     background: transparent;
     position: absolute;
     bottom: 25px;
-    left: 50px;
+    left: 0px;
     text-decoration: none;
     font-size: 14px;
     text-transform: uppercase;
@@ -390,7 +392,7 @@ export const Container = styled.div`
             }
           }
           &:nth-child(1) {
-            padding-top: 20px;
+            margin-top: 20px;
           }
           
         }

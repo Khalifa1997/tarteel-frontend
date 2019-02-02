@@ -1,12 +1,12 @@
 import React from 'react';
-import styled from "styled-components";
 import {Link} from 'react-router-dom';
+import styled from "styled-components";
 
-import T from './T';
-import KEYS from "../locale/keys";
-import ReduxState from "../types/GlobalState";
 import {withCookies} from "react-cookie";
 import {BrowserView} from "react-device-detect";
+import KEYS from "../locale/keys";
+import ReduxState from "../types/GlobalState";
+import T from './T';
 
 interface IProps {
   cookies: any;

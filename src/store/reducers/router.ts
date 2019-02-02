@@ -1,7 +1,7 @@
 import { ActionType, getType } from 'typesafe-actions';
 
-import initState from '../initState';
 import * as router from '../actions/router';
+import initState from '../initState';
 
 export type RouterAction = ActionType<typeof router>;
 

@@ -1,36 +1,33 @@
+import {History} from "history";
 import React from "react";
-import styled, {keyframes} from "styled-components";
+import {Helmet} from "react-helmet";
+import { InjectedIntl, injectIntl } from "react-intl"
 import {connect} from "react-redux";
 import Select from "react-select";
-import { injectIntl, InjectedIntl } from "react-intl"
-import {History} from "history";
-import {Helmet} from "react-helmet";
-import {circleONotch} from 'react-icons-kit/fa/circleONotch'
-import fadeInUp from 'react-animations/lib/fade-in-up'
+import styled from "styled-components";
 
-import RadioButton from "../../components/RadioButton";
-import FooterButton from "../../components/FooterButton";
-import NoteButton from "../../components/NoteButton";
-import CountryList from "../../components/CountryList";
-import ReduxState, {IDemographics, IProfile} from "../../types/GlobalState";
-import {updateDemographicData} from "../../store/actions/demographicData";
-import {setDemographicData} from "../../helpers";
-import T from "../../components/T";
-import KEYS from "../../locale/keys";
 import {submitDemographics} from "../../api";
+import CountryList from "../../components/CountryList";
+import FooterButton from "../../components/FooterButton";
 import Navbar from "../../components/Navbar";
-import Icon from "react-icons-kit";
+import NoteButton from "../../components/NoteButton";
+import RadioButton from "../../components/RadioButton";
+import T from "../../components/T";
+import {setDemographicData} from "../../helpers";
+import KEYS from "../../locale/keys";
+import {updateDemographicData} from "../../store/actions/demographicData";
+import ReduxState, {IDemographics, IProfile} from "../../types/GlobalState";
 
 
 const genderOptions = [
   {
     text: KEYS.GENDER_INPUT_OPTION_MALE,
-    value: "male"
+    value: "male",
   },
   {
     text: KEYS.GENDER_INPUT_OPTION_FEMALE,
-    value: "female"
-  }
+    value: "female",
+  },
 ]
 
 const ageOptions = [
@@ -79,17 +76,15 @@ type IProps = IDispatchProps & IStateProps& IOwnProps;
 
 interface IState {
   isSubmitting: boolean;
-  isJustSubmitted: boolean;
 }
 
 class DemographicsPage extends React.Component<IProps, IState> {
   state = {
     isSubmitting: false,
-    isJustSubmitted: false,
   }
   qiraahOptions = [
     {
-      label: this.props.intl.formatMessage({id: KEYS.QIRAAH_INPUT_OPTION_HAFS,}),
+      label: this.props.intl.formatMessage({id: KEYS.QIRAAH_INPUT_OPTION_HAFS}),
       value: "hafs",
     },
     {
@@ -112,20 +107,16 @@ class DemographicsPage extends React.Component<IProps, IState> {
         setDemographicData(this.props.demographicData);
         this.setState({
           isSubmitting: false,
-          isJustSubmitted: true,
         });
-        setTimeout(() => {
-          this.setState({isJustSubmitted: false});
-        }, 800)
       })
   };
   handleChange = (key, option) => {
     this.props.updateDemographics({
-      [key]: option.value
+      [key]: option.value,
     })
   }
   render() {
-    const {isJustSubmitted, isSubmitting} = this.state
+    const {isSubmitting} = this.state
     const askForPermissions = false;
     const {demographicData, intl} = this.props;
     const selectedAge = ageOptions.filter(opt => opt.value === demographicData.age)[0]
@@ -209,17 +200,12 @@ class DemographicsPage extends React.Component<IProps, IState> {
           </div>
 
           <div className={"footer"}>
-            <FooterButton onClick={this.submitDemographics}>
-              {
-                isSubmitting ?
-                  <div className={'icon spin'}>
-                    <Icon icon={circleONotch} size={20}/>
-                  </div>
-                   :
-                   isJustSubmitted ?
-                    <span className={'fadeup'}>Saved !</span> :
-                  <T id={KEYS.DEMOGRAPHICS_FORM_SUBMIT_BUTTON_TEXT} />
-              }
+            <FooterButton
+              onClick={this.submitDemographics}
+              isLoading={isSubmitting}
+              afterLoadingMessage={'Saved !'}
+            >
+              <T id={KEYS.DEMOGRAPHICS_FORM_SUBMIT_BUTTON_TEXT} />
             </FooterButton>
             <NoteButton className={"skip"} onClick={() => {
               this.props.history.push("/")
@@ -233,16 +219,9 @@ class DemographicsPage extends React.Component<IProps, IState> {
   }
 }
 
-const spin = keyframes`
-  0% {transform:rotate(0deg);}
-  50% {transform:rotate(180deg);}
-  100% {transform:rotate(360deg);}
-`;
-
-const fadeUp = keyframes`${fadeInUp}`;
 
 const Container = styled.div`
-  padding: 1em 3em;
+  padding: 1em;
   
   .content {
     width: 50%;
@@ -278,15 +257,6 @@ const Container = styled.div`
     .icon {
       color: white;
     }
-    .fadeup {
-      animation: 500ms ${fadeUp};
-    }
-    .spin {
-      svg {
-        animation: 800ms ${spin} infinite ;
-        transform-origin: center;
-      }
-    }
   }
   
   @media screen and (max-width: ${props => props.theme.breakpoints.sm}px) {
@@ -313,7 +283,7 @@ const mapDispatchToProps = (dispatch): IDispatchProps => {
   return {
     updateDemographics: (obj: Partial<IDemographics>) => {
       dispatch(updateDemographicData(obj))
-    }
+    },
   }
 }
 

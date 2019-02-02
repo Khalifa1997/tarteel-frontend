@@ -1,8 +1,8 @@
-import React from "react";
-import styled from "styled-components";
-import range from "lodash/range";
-import {connect} from "react-redux";
 import classnames from 'classnames'
+import range from "lodash/range";
+import React from "react";
+import {connect} from "react-redux";
+import styled from "styled-components";
 
 import ReduxState from "../types/GlobalState";
 
@@ -17,13 +17,13 @@ interface IStateProps {
 type IProps = IOwnProps & IStateProps;
 
 class ProgressBubbles extends React.Component<IProps, never> {
-  render() {
+  public render() {
     return (
       <Container>
         {
           range(1, 6).map((num, i) => {
             const classname = classnames({
-              completed: this.props.userRecitedAyahs >= i
+              completed: this.props.userRecitedAyahs >= i,
             })
             return <Bubble key={i} className={classname} >{ num }</Bubble>
           })
@@ -63,7 +63,7 @@ const Bubble = styled.div`
 
 const mapStateToProps = (state: ReduxState): IStateProps => {
   return {
-    userRecitedAyahs: state.profile.userRecitedAyahs
+    userRecitedAyahs: state.profile.userRecitedAyahs,
   }
 }
 

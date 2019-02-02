@@ -1,10 +1,10 @@
 import {asyncComponent} from "react-async-component";
-import {fetchUsers} from "../api/users";
-import {IUser} from "../types/GlobalState";
-import {setUsers} from "../store/actions/users";
 import {connect} from "react-redux";
 import {Dispatch} from "redux";
 import {ActionType} from "typesafe-actions";
+import {fetchUsers} from "../api/users";
+import {setUsers} from "../store/actions/users";
+import {IUser} from "../types/GlobalState";
 
 interface IDispatchProps {
   setUsers(users: IUser[]): ActionType<typeof setUsers>;
@@ -17,14 +17,14 @@ interface IStateProps {
 const mapDispatchToProps = (dispatch: Dispatch<ActionType<typeof setUsers>>): IDispatchProps => {
   return {
     setUsers:
-      (users: IUser[]) => dispatch(setUsers(users))
+      (users: IUser[]) => dispatch(setUsers(users)),
 
   }
 };
 
 const mapStateToProps = (state: IStateProps): IStateProps => {
   return {
-    users: state.users
+    users: state.users,
   }
 };
 
@@ -40,5 +40,5 @@ export const UsersContainer = {
       .then((users: IUser[]) => {
         return store.dispatch(setUsers(users))
       })
-  }
+  },
 };

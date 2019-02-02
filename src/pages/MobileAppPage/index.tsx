@@ -1,18 +1,18 @@
-import React, {Component} from "react"
 import {History} from "history";
+import React, {Component} from "react"
 import {Helmet} from "react-helmet";
-import {injectIntl, InjectedIntl} from "react-intl"
+import {InjectedIntl, injectIntl} from "react-intl"
 
-import T from "../../components/T";
-import KEYS from "../../locale/keys";
-import Navbar from "../../components/Navbar";
 import config from "../../../config";
 import FooterButton from "../../components/FooterButton";
+import Navbar from "../../components/Navbar";
+import T from "../../components/T";
+import KEYS from "../../locale/keys";
 import {Container} from "./styles";
 
-import LogoImage from "../../../public/logo-3x.png";
 import AndroidLogo from "../../../public/android-logo.png";
 import AppleLogo from "../../../public/apple-logo.png";
+import LogoImage from "../../../public/logo-3x.png";
 
 interface IDispatchProps {
 }
@@ -28,9 +28,9 @@ interface IStateProps {
 type IProps = IOwnProps & IDispatchProps & IStateProps;
 
 class MobileAppPage extends Component<IProps, never> {
-  componentDidMount() {
+  public componentDidMount() {
   }
-  render() {
+  public render() {
     const {intl} = this.props;
     return (
       <Container>

@@ -34,7 +34,7 @@ const initState: (cookies?: any) => ReduxState = (cookies) => {
     status: {
       isRecording: false,
       isDoneRecording: false,
-      isContinuous: cookies ? JSON.stringify(cookies.get('continuous')) : false,
+      isContinuous: cookies ? cookies.get('continuous') ? JSON.parse(cookies.get('continuous')) : false : false,
       isFetching: true,
     },
     demographicData: {
@@ -56,9 +56,16 @@ const initState: (cookies?: any) => ReduxState = (cookies) => {
       currentAyah: emptyAyah,
       nextAyah: emptyAyah,
     },
+    recognition: {
+      queryText: '',
+      matches: [],
+      matchedTerms: [],
+      suggestions: [],
+      canRecord: true,
+    },
     router: {
-      location: {}
-    }
+      location: {},
+    },
   })
 };
 

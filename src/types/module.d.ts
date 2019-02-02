@@ -28,6 +28,7 @@ declare module 'react-outside-click-handler';
 declare module 'styled-components-spacing';
 declare module 'progressbar.js';
 declare module 'siriwave/dist/siriwave.min';
+declare module 'react-animations/*';
 declare module 'react-device-detect';
 declare module 'i';
 declare module '*.png';

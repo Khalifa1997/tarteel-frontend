@@ -1,36 +1,40 @@
-import React, {Component} from "react"
-import ProgressBar from "progressbar.js"
 import Chart from 'chart.js/dist/Chart.bundle.min'
 import humps from 'humps';
+import ProgressBar from "progressbar.js"
+import React, {Component} from "react"
 import {Helmet} from "react-helmet";
-import {injectIntl, InjectedIntl} from "react-intl"
+import {InjectedIntl, injectIntl} from "react-intl"
 
-import T from "../../components/T";
+import config from '../../../config';
+import {fetchAboutData} from "../../api";
 import FooterButton from "../../components/FooterButton";
+import Navbar from "../../components/Navbar";
+import T from "../../components/T";
+import {commaFormatter} from "../../helpers/utils";
 import KEYS from "../../locale/keys";
 import {Container} from "./styles";
-import Navbar from "../../components/Navbar";
-import {commaFormatter} from "../../helpers/utils";
-import {fetchAboutData} from "../../api";
-import config from '../../../config';
+import {connect} from "react-redux";
+import ReduxState, {IProfile} from "../../types/GlobalState";
 
-interface IDispatchProps {
-}
 
 interface IOwnProps {
   intl: InjectedIntl
 }
 
 interface IStateProps {
+  profile: IProfile;
 }
 
 interface IState {
   data: any;
 }
 
-type IProps = IOwnProps & IDispatchProps & IStateProps;
+type IProps = IOwnProps & IStateProps;
 
 class About extends Component<IProps, IState> {
+  state = {
+    data: {},
+  }
   async componentDidMount() {
     const data = humps.camelizeKeys(await fetchAboutData())
     this.setState({data});
@@ -46,7 +50,7 @@ class About extends Component<IProps, IState> {
       easing: 'easeInOut',
       duration: 1400,
       text: {
-        autoStyleContainer: false
+        autoStyleContainer: false,
       },
       from: { color: '#5ec49e', width: 1 },
       to: { color: '#5ec49e', width: 4 },
@@ -54,14 +58,14 @@ class About extends Component<IProps, IState> {
       step: (state, circle) =>  {
         circle.path.setAttribute('stroke', state.color);
         circle.path.setAttribute('stroke-width', state.width);
-        //var value = Math.round(circle.value() * 50000);
+        // var value = Math.round(circle.value() * 50000);
         const value = Math.round(circle.value() * recitedAyahs * config('objective')/ recitedAyahs );
         if (value === 0) {
           circle.setText('');
         } else {
           circle.setText(commaFormatter(value));
         };
-      }
+      },
     });
     bar.text.style.fontFamily = 'Roboto';
     bar.text.style.fontSize = '2rem';
@@ -84,16 +88,16 @@ class About extends Component<IProps, IState> {
       label: "Reported Gender",
       backgroundColor: backgroundColors2,
       data: this.state.data.genderData,
-  }]
+  }],
   },
 
     // Configuration options go here
     options: {
       title: {
         display: true,
-          text: 'Reported Gender'
-      }
-    }
+          text: 'Reported Gender',
+      },
+    },
   });
 
     const ageCTX = document.getElementById('age_chart').getContext('2d');
@@ -107,24 +111,24 @@ class About extends Component<IProps, IState> {
     datasets: [{
       backgroundColor:  backgroundColors6,
       data: this.state.data.ageData,
-  }]
+  }],
   },
 
     // Configuration options go here
     options: {
       legend:{
-        display:false
+        display:false,
       },
       title: {
         display: true,
-          text: 'Reported Age'
+          text: 'Reported Age',
       },
       scales: {
         yAxes: [{
           scaleLabel: {
             display: true,
-            labelString: 'Number of Users'
-          }
+            labelString: 'Number of Users',
+          },
         }],
       },
     },
@@ -141,24 +145,24 @@ class About extends Component<IProps, IState> {
     datasets: [{
       backgroundColor:  backgroundColors6,
       data: this.state.data.ethnicityData,
-  }]
+  }],
   },
 
     // Configuration options go here
     options: {
       legend:{
-        display:false
+        display:false,
       },
       title: {
         display: true,
-          text: 'Reported Ethnic Background'
+          text: 'Reported Ethnic Background',
       },
       scales: {
         yAxes: [{
           scaleLabel: {
             display: true,
-            labelString: 'Number of Users'
-          }
+            labelString: 'Number of Users',
+          },
         }],
       },
     },
@@ -176,27 +180,27 @@ class About extends Component<IProps, IState> {
     datasets: [{
       backgroundColor:  backgroundColors6,
       data: this.state.data.countData,
-  }]
+  }],
   },
 
     // Configuration options go here
     options: {
       legend:{
-        display:false
+        display:false,
       },
       title: {
         display: true,
-          text: 'How many verses have __ # of recordings'
+          text: 'How many verses have __ # of recordings',
       },
       scales: {
         yAxes: [{
           scaleLabel: {
             display: true,
-            labelString: 'Number of verses'
+            labelString: 'Number of verses',
           },
           ticks: {
             min: 0,
-          }
+          },
         }],
       },
     },
@@ -223,7 +227,12 @@ class About extends Component<IProps, IState> {
               </p>
             </div>
             <p className="large-arabic-text text-center">
-              <T id={KEYS.ABOUT_PAGE_RECITED_AYAHS_MESSAGE} values={{users: "10", recitedAyahs: "100"}} />
+              <T
+                id={KEYS.ABOUT_PAGE_RECITED_AYAHS_MESSAGE}
+                values={{
+                  users: this.state.data.uniqueUserCount,
+                  recitedAyahs: commaFormatter(this.props.profile.recordingCount),
+                }} />
             </p>
           </div>
 
@@ -378,4 +387,12 @@ class About extends Component<IProps, IState> {
 
 }
 
-export default injectIntl(About);
+const mapStateToProps = (state: ReduxState): IStateProps => {
+  return {
+    profile: state.profile,
+  }
+}
+
+export default connect(
+  mapStateToProps,
+)(injectIntl(About));

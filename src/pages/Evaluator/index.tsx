@@ -1,31 +1,33 @@
+import classNames from 'classnames'
+import range from 'lodash/range';
 import React from "react";
 import Icon from "react-icons-kit";
-import {thumbsUp} from 'react-icons-kit/feather/thumbsUp'
-import {thumbsDown} from 'react-icons-kit/feather/thumbsDown'
-import {skipForward} from 'react-icons-kit/feather/skipForward'
-import {chevronsLeft} from 'react-icons-kit/feather/chevronsLeft'
-import {volume2 as volumeIcon} from 'react-icons-kit/feather/volume2'
 import {play} from 'react-icons-kit/fa/play'
 import {stop} from 'react-icons-kit/fa/stop'
-import range from 'lodash/range';
-import SiriWave from '../../../modified_modules/siriwave';
-import classNames from 'classnames'
+import {chevronsLeft} from 'react-icons-kit/feather/chevronsLeft'
+import {skipForward} from 'react-icons-kit/feather/skipForward'
+import {thumbsDown} from 'react-icons-kit/feather/thumbsDown'
+import {thumbsUp} from 'react-icons-kit/feather/thumbsUp'
+import {volume2 as volumeIcon} from 'react-icons-kit/feather/volume2'
 import {ActionType} from "typesafe-actions";
+import SiriWave from '../../../modified_modules/siriwave';
+import Helmet from 'react-helmet';
 
-import {Container, ModalContent} from "./styles";
-import Navbar from "../../components/Navbar";
-import Modal from "../../components/Modal";
-import {IProfile} from "../../types/GlobalState";
-import {fetchEvaluatorAyah, submitAyah} from "../../api/evaluator";
-import {createAudioMeter} from "../../helpers/volume-meter";
 import HandShakeImage from '../../../public/handshake-icon.png'
-import {setAyah, setNextAyah} from "../../store/actions/evaluator";
-import WordShape from "../../shapes/WordShape";
-import {WORD_TYPES} from "../../types";
-import AyahShape from "../../shapes/AyahShape";
+import {fetchEvaluatorAyah, submitAyah} from "../../api/evaluator";
+import Modal from "../../components/Modal";
+import Navbar from "../../components/Navbar";
 import {commaFormatter} from "../../helpers/utils";
+import {createAudioMeter} from "../../helpers/volume-meter";
+import AyahShape from "../../shapes/AyahShape";
+import WordShape from "../../shapes/WordShape";
+import {setAyah, setNextAyah} from "../../store/actions/evaluator";
+import {WORD_TYPES} from "../../types";
+import {IProfile} from "../../types/GlobalState";
+import {Container, ModalContent} from "./styles";
+import config from '../../../config';
 
-const API_URL =  __DEVELOPMENT__ ?  "http://localhost:8000" : "https://tarteel-api.herokuapp.com"
+const cdnURL = config('cdnURL');
 
 interface IProps {
   currentAyah: AyahShape;
@@ -45,17 +47,17 @@ interface IState {
 
 class Evaluator extends React.Component<IProps, IState> {
 
-  audio: null | HTMLAudioElement;
-  siriWave: null | HTMLElement;
+  public audio: null | HTMLAudioElement;
+  public siriWave: null | HTMLElement;
 
-  state = {
+  public state = {
     played: false,
     isPlaying: false,
     showModal: false,
     currentStep: 1,
     pills: new Array(5),  //  ['wrong', 'skipped', ...]
   }
-  getNewAyah = () => {
+  public getNewAyah = () => {
     if (this.props.nextAyah.ayahText) {
       return this.props.setAyah(this.props.nextAyah)
     } else {
@@ -65,23 +67,23 @@ class Evaluator extends React.Component<IProps, IState> {
         })
     }
   }
-  loadNextAyah = () => {
+  public loadNextAyah = () => {
     return fetchEvaluatorAyah()
       .then((ayah: AyahShape) => {
         this.props.setNextAyah(ayah)
       })
   }
-  updatePills = (action: string) => {
+  public updatePills = (action: string) => {
     this.setState((state, props) => {
       const newPills = state.pills;
       newPills[state.currentStep - 1] = action
       console.log(newPills);
       return {
-        pills: newPills
+        pills: newPills,
       }
     });
   }
-  handleAyahChange = async (action: string) => {
+  public handleAyahChange = async (action: string) => {
     this.setState((state, props) => {
         return {
           played: false,
@@ -102,24 +104,24 @@ class Evaluator extends React.Component<IProps, IState> {
     //   })
     // }
   }
-  handleSkip = () => {
+  public handleSkip = () => {
     this.handleAyahChange("skipped")
   }
-  handleWrongAyah = () => {
+  public handleWrongAyah = () => {
     if  (this.state.played) {
       this.handleAyahChange("wrong")
       submitAyah("incorrect", this.props.currentAyah.recordingId)
 
     }
   }
-  handleRightAyah = () => {
+  public handleRightAyah = () => {
     if (this.state.played) {
       this.handleAyahChange("right")
       submitAyah("correct", this.props.currentAyah.recordingId)
     }
 
   }
-  handlePlay = () => {
+  public handlePlay = () => {
     const siriWave = this.startWave();
     if (this.audio) {
       this.audio.addEventListener("ended", () => {
@@ -135,7 +137,7 @@ class Evaluator extends React.Component<IProps, IState> {
         this.audio.play();
         this.setState({
           isPlaying: true,
-          played: true
+          played: true,
         });
         this.siriWave.style.display = "block";
         siriWave.start();
@@ -146,7 +148,7 @@ class Evaluator extends React.Component<IProps, IState> {
       }
     }
   }
-  startWave = () => {
+  public startWave = () => {
     const siriWave = new SiriWave({
       container: this.siriWave,
       width: 640,
@@ -155,27 +157,35 @@ class Evaluator extends React.Component<IProps, IState> {
     });
     return siriWave
   }
-  startAnimating = () => {
+  public startAnimating = () => {
     const audio_context = new AudioContext();
     const input = audio_context.createMediaElementSource(this.audio.cloneNode(true));
     const meter = createAudioMeter(audio_context);
     input.connect(meter);
   }
-  handleCloseModal = () => {
+  public handleCloseModal = () => {
     this.setState({ showModal: false });
   }
-  componentDidMount() {
+  public componentDidMount() {
     window.AudioContext = window.AudioContext || window.webkitAudioContext;
     if (!this.props.currentAyah.textSimple) {
       this.getNewAyah()
     }
   }
-
-  render() {
+  handleOGImage = (): string => {
+    return cdnURL + '/evaluator_en.png'
+  }
+  public render() {
     const {currentAyah, profile} = this.props;
     const {isPlaying, played, pills, currentStep} = this.state;
     return (
       <Container>
+        <Helmet>
+          <meta
+            property={'og:image'}
+            content={this.handleOGImage()}
+          />
+        </Helmet>
         <Navbar
           counterText={
             `${commaFormatter(profile.evaluationsCount)}/${commaFormatter(profile.recordingCount)}`
@@ -213,69 +223,67 @@ class Evaluator extends React.Component<IProps, IState> {
                {/* Start ayah-container */}
               <div className="card">
                 <div className="ayah-text">
-                  <p>
-                    {
-                      currentAyah.words.map((word: WordShape) => {
-                        const className = classNames({
-                          [word.className]: true,
-                          [word.charType]: true,
-                        })
-                        return (
-                          <span>
-                            <a
-                              className={className}
-                              dangerouslySetInnerHTML={{ __html: word.code }}
-                            />
-                            {
-                              word.charType === WORD_TYPES.CHAR_TYPE_WORD && (
-                                <small style={{ letterSpacing: -15 }}>&nbsp;</small>
-                              )
-                            }
-                          </span>
-                        )
+                  {
+                    currentAyah.words.map((word: WordShape) => {
+                      const className = classNames({
+                        [word.className]: true,
+                        [word.charType]: true,
                       })
-                    }
-                  </p>
+                      return (
+                        <span className={className}>
+                          <a
+                            className={className}
+                            dangerouslySetInnerHTML={{ __html: word.code }}
+                          />
+                          {
+                            word.charType === WORD_TYPES.CHAR_TYPE_WORD && (
+                              <small style={{ letterSpacing: -15 }}>&nbsp;</small>
+                            )
+                          }
+                        </span>
+                      )
+                    })
+                  }
                 </div>
               </div>
               {/* End ayah-container */}
             </div>
 
-            <div className="pills">
-              <div className="inner">
-                {
-                  range(1, 6).map((num: number) => {
-                    const isActive = currentStep === num;
-                    const className = classNames({
-                      wrong: pills[num] === 'wrong',
-                      right: pills[num] === 'right',
-                      skipped: pills[num] === 'skipped',
-                      active: isActive,
-                      pending: !isActive
-                    })
-                    return (
-                      <div className={`pill ${className}`}>
-                        {
-                          isActive ?
-                            <div className="contents">
-                              <Icon icon={volumeIcon} size={24} />
-                            </div>
-                            :
-                            null
-                        }
-                        <div className="num">{ num }</div>
-                      </div>
-                    )
-                  })
-                }
-
-              </div>
-            </div>
+            {/*<div className="pills">*/}
+              {/*<div className="inner">*/}
+                {/*{*/}
+                  {/*range(1, 6).map((num: number) => {*/}
+                    {/*const isActive = currentStep === num;*/}
+                    {/*const className = classNames({*/}
+                      {/*wrong: pills[num] === 'wrong',*/}
+                      {/*right: pills[num] === 'right',*/}
+                      {/*skipped: pills[num] === 'skipped',*/}
+                      {/*active: isActive,*/}
+                      {/*pending: !isActive*/}
+                    {/*})*/}
+                    {/*return (*/}
+                      {/*<div className={`pill ${className}`}>*/}
+                        {/*{*/}
+                          {/*isActive ?*/}
+                            {/*<div className="contents">*/}
+                              {/*<Icon icon={volumeIcon} size={24} />*/}
+                            {/*</div>*/}
+                            {/*:*/}
+                            {/*null*/}
+                        {/*}*/}
+                        {/*<div className="num">{ num }</div>*/}
+                      {/*</div>*/}
+                    {/*)*/}
+                  {/*})*/}
+                {/*}*/}
+              {/**/}
+              {/*</div>*/}
+            {/*</div>*/}
           </div>
         </div>
 
         <audio ref={(C) => this.audio = C}>
-          <source src={`${ API_URL}/audio${currentAyah.audioUrl}`} type="audio/mp3" />
+          <source src={currentAyah.audioUrl} type="audio/mp3" />
         </audio>
 
         <div className="primary-buttons">

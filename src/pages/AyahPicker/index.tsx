@@ -1,21 +1,21 @@
-import React, {Component} from 'react';
-import {connect} from "react-redux";
-import {arrowLeft} from 'react-icons-kit/feather/arrowLeft'
-import ContentLoader  from 'react-content-loader'
-import range from 'lodash/range'
-import { defineMessages, injectIntl, InjectedIntl } from "react-intl"
-import {Helmet} from "react-helmet";
 import {History} from "history";
+import range from 'lodash/range'
+import React, {Component} from 'react';
+import ContentLoader  from 'react-content-loader'
+import {Helmet} from "react-helmet";
+import {arrowLeft} from 'react-icons-kit/feather/arrowLeft'
+import { defineMessages, InjectedIntl, injectIntl } from "react-intl"
 import LazyLoad from 'react-lazyload';
+import {connect} from "react-redux";
 import Truncate from 'react-truncate';
 
-import {Container} from "./styles";
-import ReduxState, {ISearchSurah} from "../../types/GlobalState";
-import {fetchSpecificAyah, fetchSurah} from "../../api/ayahs";
-import T from "../../components/T";
-import KEYS from "../../locale/keys";
 import Icon from "react-icons-kit";
 import {Link} from "react-router-dom";
+import {fetchSpecificAyah, fetchSurah} from "../../api/ayahs";
+import Navbar from "../../components/Navbar";
+import T from "../../components/T";
+import KEYS from "../../locale/keys";
+import AyahShape from "../../shapes/AyahShape";
 import {
   clearNextAyah,
   clearPrevAyah,
@@ -25,16 +25,16 @@ import {
   loadPrevQueue,
   setAyah,
   setSurah,
-  toggleFetchingCurrentAyah
+  toggleFetchingCurrentAyah,
 } from "../../store/actions/ayahs";
-import AyahShape from "../../shapes/AyahShape";
-import Navbar from "../../components/Navbar";
+import ReduxState, {ISearchSurah} from "../../types/GlobalState";
+import {Container} from "./styles";
 
 
 const messages = defineMessages({
   placeholder: {
     id: KEYS.AYAH_PICKER_SEARCH_PLACEHOLDER,
-  }
+  },
 })
 
 
@@ -70,11 +70,11 @@ interface IState {
 type IProps = IStateProps & IDispatchProps & IOwnProps;
 
 class AyahPicker extends Component<IProps, IState> {
-  state = {
+  public state = {
     searchText: "",
-    isFetching: false
+    isFetching: false,
   }
-  componentDidMount() {
+  public componentDidMount() {
     if (!this.props.currentSurah || this.props.currentSurah.chapterId !== this.props.match.params.num) {
       this.setState({
         isFetching: true,
@@ -82,13 +82,13 @@ class AyahPicker extends Component<IProps, IState> {
       fetchSurah(this.props.match.params.num)
         .then(ayahs => {
           this.setState({
-            isFetching: false
+            isFetching: false,
           });
           this.props.setSurah(ayahs)
         })
     }
   }
-  handleAyahClick = (ayahNum: number) => {
+  public handleAyahClick = (ayahNum: number) => {
     if (this.props.currentAyah.verseNumber !== ayahNum) {
       this.props.toggleFetchingCurrentAyah();
       fetchSpecificAyah(this.props.match.params.num, ayahNum)
@@ -105,7 +105,7 @@ class AyahPicker extends Component<IProps, IState> {
     }
     this.props.history.replace({pathname: '/', state: {k: 'ayahPicker'}});
   }
-  renderAyahs = () => {
+  public renderAyahs = () => {
     return Object.keys(this.props.currentSurah.ayahs)
       .filter((ayahNum: string) => {
         return this.props.currentSurah.ayahs[ayahNum].text.toLowerCase().trim().includes(this.state.searchText.toLowerCase().trim())
@@ -114,14 +114,14 @@ class AyahPicker extends Component<IProps, IState> {
         ayahNum = Number(ayahNum);
       const active = this.props.currentAyah.surah === this.props.match.params.num && this.props.currentAyah.ayah === ayahNum
       return (
-        <LazyLoad height={35} offset={0} once overflow={true}>
+        <LazyLoad height={35} offset={0} once={true} overflow={true}>
           <div className={`list-item ${active ? "active": ""}`} onClick={() => this.handleAyahClick(ayahNum)}>
             <p className={"number"}>{ ayahNum }</p>
             <p className={"text"}>
               <Truncate
                 lines={1}
                 ellipsis='...'
-                trimWhitespace
+                trimWhitespace={true}
               >
                 {this.props.currentSurah.ayahs[ayahNum].displayText}
               </Truncate>
@@ -131,12 +131,12 @@ class AyahPicker extends Component<IProps, IState> {
       )
     })
   }
-  handleSearchText = (e: any) => {
+  public handleSearchText = (e: any) => {
     this.setState({
       searchText: e.currentTarget.value,
     });
   }
-  renderLoader = () => {
+  public renderLoader = () => {
     return range(6).map(n => {
       return (
         <ContentLoader height={42} style={{transform: "rotate(-180deg)"}}>
@@ -147,7 +147,7 @@ class AyahPicker extends Component<IProps, IState> {
       )
     })
   }
-  render() {
+  public render() {
     const {intl} = this.props
     return (
       <Container>

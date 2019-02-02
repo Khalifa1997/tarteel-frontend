@@ -1,13 +1,13 @@
+import {withCookies} from "react-cookie";
 import {connect} from "react-redux";
 import {Dispatch} from "redux";
 import {ActionType} from "typesafe-actions";
-import {withCookies} from "react-cookie";
 
 import {fetchRandomAyah} from "../api/ayahs";
-import ReduxState, {IStatus} from "../types/GlobalState";
-import {setAyah} from "../store/actions/ayahs";
 import Main from "../pages/MainPage";
 import AyahShape from "../shapes/AyahShape";
+import {setAyah} from "../store/actions/ayahs";
+import ReduxState, {IStatus} from "../types/GlobalState";
 
 interface IDispatchProps {
   setAyah(ayah: AyahShape): ActionType<typeof setAyah>;
@@ -23,7 +23,7 @@ interface IStateProps {
 const mapDispatchToProps = (dispatch: Dispatch<ActionType<typeof setAyah>>): IDispatchProps => {
   return {
     setAyah:
-      (ayah: AyahShape) => dispatch(setAyah(ayah))
+      (ayah: AyahShape) => dispatch(setAyah(ayah)),
 
   }
 };
@@ -48,5 +48,5 @@ export const MainPageContainer = {
       .then((ayah: AyahShape) => {
         return store.dispatch(setAyah(ayah))
       })
-  }
+  },
 };

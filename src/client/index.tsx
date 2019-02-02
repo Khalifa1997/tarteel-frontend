@@ -1,23 +1,23 @@
 /* eslint-disable global-require */
 
 import React from 'react';
-import ReactDOM, { render } from 'react-dom';
-import {BrowserRouter} from 'react-router-dom';
 import asyncBootstrapper from 'react-async-bootstrapper';
 import { AsyncComponentProvider } from 'react-async-component';
-import { IntlProvider } from 'react-intl';
-import { ThemeProvider } from "styled-components"
-import { Provider } from 'react-redux';
 import { Cookies, CookiesProvider } from 'react-cookie';
+import ReactDOM, {hydrate, render} from 'react-dom';
+import { IntlProvider } from 'react-intl';
+import { Provider } from 'react-redux';
+import {BrowserRouter} from 'react-router-dom';
+import { ThemeProvider } from "styled-components"
 
 import './polyfills/index';
 
-import ReactHotLoader from './components/ReactHotLoader';
 import App from '../App';
-import configStore from '../store';
 import { getLocalStorage } from '../helpers/get';
 import getLocalMessages from '../helpers/setLocale';
+import configStore from '../store';
 import theme from '../theme';
+import ReactHotLoader from './components/ReactHotLoader';
 
 // Get the DOM Element that will host our React application.
 const container = document.querySelector('#app');
@@ -34,7 +34,7 @@ window.clearCookies = () => {
 
 const fakeRequest = {
   universalCookies: cookies,
-  query: {}
+  query: {},
 }
 
 // Does the user's browser support the HTML5 history API?
@@ -77,7 +77,7 @@ function renderApp(TheApp) {
   // We use the react-async-component in order to support code splitting of
   // our bundle output. It's important to use this helper.
   // @see https://github.com/ctrlplusb/react-async-component
-  asyncBootstrapper(app).then(() => render(app, container));
+  asyncBootstrapper(app).then(() => hydrate(app, container));
 }
 
 // Execute the first render of our app.

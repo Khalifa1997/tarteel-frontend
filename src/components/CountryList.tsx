@@ -1,9 +1,9 @@
+import countries from "i18n-iso-countries"
 import React from "react";
 import Select, {components} from 'react-select';
-import styled from "styled-components";
-import countries from "i18n-iso-countries"
 // import Flag from 'react-world-flags'
 import Truncate from "react-truncate";
+import styled from "styled-components";
 
 
 
@@ -32,7 +32,7 @@ const CustomOption = ({ innerProps, isDisabled, selectProps, label, value}: any)
       <Truncate
         lines={1}
         ellipsis='...'
-        trimWhitespace
+        trimWhitespace={true}
       >
         { label }
       </Truncate>
@@ -42,7 +42,7 @@ const CustomOption = ({ innerProps, isDisabled, selectProps, label, value}: any)
 }
 
 class CountryList extends React.Component<IProps, never> {
-  render() {
+  public render() {
     if (this.props.locale === "arabic") {
       countries.registerLocale(require("i18n-iso-countries/langs/ar.json"));
     } else {
