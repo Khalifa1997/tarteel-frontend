@@ -15,6 +15,7 @@ export const Container = styled.div`
   flex-flow: column;
   height: 100%;
   position: relative;
+  text-align: center;
   
   .not-supported {
     margin-top: 5em;
@@ -35,7 +36,6 @@ export const Container = styled.div`
     .status {
       color: #848484;
       font-size: 22px;
-      font-family: "Proxima Nova";
     }
     .words {
       span {
@@ -57,6 +57,18 @@ export const Container = styled.div`
       position: absolute;
       bottom: 1em;
       right: 0;
+    }
+  }
+  
+  @media screen and (max-width: ${props => props.theme.breakpoints.sm}px) {
+    .content {
+      .splittable {
+        display: flex;
+        flex-flow: column;
+      }
+      .iqra {
+        right: 10px;
+      }
     }
   }
 `;

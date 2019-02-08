@@ -88,7 +88,7 @@ const AppHelmet: React.SFC = ({intl}) => {
       },
       {
         name: 'google-site-verification',
-        content: 'CWENvKQ-c1fvAqOVC6P0-HJKA6IX0wun-0EwoR6lOcY',
+        content: '66FOg5_DAyDr7kihZYrWG0oW-4hc8z20r7E8DAMiFiA',
       },
       {
         name: 'theme-color',
@@ -100,7 +100,7 @@ const AppHelmet: React.SFC = ({intl}) => {
       },
       {
         property: 'og:image',
-        content: cdnURL + '/main_en.png',
+        content: cdnURL + '/og/main_en.png',
       },
       {
         property: 'og:locale',
@@ -118,10 +118,10 @@ const AppHelmet: React.SFC = ({intl}) => {
         property: 'og:description',
         content: description,
       },
-      {
-        property: 'og:url',
-        content: 'https://tarteel.io',
-      },
+      // {
+        // property: 'og:url',
+        // content: 'https://tarteel.io',
+      // },
       {
         property: 'og:type',
         content: 'website',
@@ -140,7 +140,7 @@ const AppHelmet: React.SFC = ({intl}) => {
       },
       {
         name: 'twitter:image',
-        content: cdnURL + '/main_en.png',
+        content: cdnURL + '/og/main_en.png',
       },
       {
         name: 'twitter:image:width',
@@ -153,11 +153,11 @@ const AppHelmet: React.SFC = ({intl}) => {
     ],
     link: [
 
-      // {
-      //   rel: 'preconnect',
-      //   href: 'https://quran-1f14.kxcdn.com',
-      //   crossOrigin: '',
-      // },
+      {
+        rel: 'preconnect',
+        href: 'https://d2sf46268wowyo.cloudfront.net',
+        crossOrigin: '',
+      },
       // {
       //   rel: 'preconnect',
       //   href: 'https://assets-1f14.kxcdn.com',
@@ -194,7 +194,7 @@ const AppHelmet: React.SFC = ({intl}) => {
             "@context": "http://schema.org",
             "@type": "Organization",
             "url": "https://tarteel.io",
-            "logo": "https://tarteel.io/static/img/tarteel_share_photo_50000.png"
+            "logo": "https://d2sf46268wowyo.cloudfront.net/logo-3x.png"
           }`,
       },
     ],

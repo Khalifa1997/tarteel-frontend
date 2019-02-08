@@ -3,11 +3,13 @@ import {connect} from "react-redux";
 import {Dispatch} from "redux";
 import {ActionType} from "typesafe-actions";
 
-import {fetchRandomAyah} from "../api/ayahs";
+import {fetchSpecificAyah} from "../api/ayahs";
 import Main from "../pages/MainPage";
 import AyahShape from "../shapes/AyahShape";
 import {loadNextAyah, loadNextQueue, loadPreviousAyah, loadPrevQueue, setAyah} from "../store/actions/ayahs";
-import ReduxState, {IRouter, IStatus} from "../types/GlobalState";
+import ReduxState, {IStatus, IRouter} from "../types/GlobalState";
+import {removeNil} from '../shared/utils/arrays'
+import {isCorrectAyah} from "../helpers/ayahs";
 
 interface IDispatchProps {
   setAyah(ayah: AyahShape): ActionType<typeof setAyah>;
@@ -21,14 +23,14 @@ interface IStateProps {
   currentAyah: AyahShape;
   isFetchingCurrentAyah: boolean;
   passedOnBoarding: boolean;
-  status: IStatus;
+  status: IStatus,
   router: IRouter;
 }
 
 const mapDispatchToProps = (dispatch: Dispatch<ActionType<typeof setAyah>>): IDispatchProps => {
   return {
     setAyah: (ayah: AyahShape) => {
-      return dispatch(setAyah(ayah))
+      return dispatch(setAyah(ayah));
     },
     loadNextAyah: (ayah?: AyahShape) => {
       return dispatch(loadNextAyah(ayah));
@@ -55,16 +57,18 @@ const mapStateToProps = (state: ReduxState): IStateProps => {
   }
 };
 
-export const MainPageContainer = {
+export const AyahPageContainer = {
   component: withCookies(connect(mapStateToProps, mapDispatchToProps)(Main)),
-  loadData: (store: any, req: any) => {
-    const lastAyah = req.universalCookies.get('lastAyah')
-    if (lastAyah) {
-      return Promise.resolve(store.dispatch(setAyah(lastAyah)));
+  loadData: (store: any, req: any, res: any) => {
+    const params = req.params[0].split('/').filter((a: string) => a).slice(1);
+    const [surah, ayah] = params;
+    if (isCorrectAyah(surah, ayah)) {
+      return fetchSpecificAyah(surah, ayah)
+        .then((fetchedAyah: AyahShape) => {
+          return store.dispatch(setAyah(fetchedAyah))
+        })
+    } else {
+      return res.redirect('/ayah_not_found');
     }
-    return fetchRandomAyah(req)
-      .then((ayah: AyahShape) => {
-        return store.dispatch(setAyah(ayah))
-      })
   },
 };

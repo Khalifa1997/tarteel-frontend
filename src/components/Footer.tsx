@@ -2,17 +2,14 @@ import {History, Location} from "history";
 import humps from 'humps'
 import React from "react";
 import {Cookies, withCookies} from "react-cookie";
-import {BrowserView, MobileView} from 'react-device-detect'
 import {Icon} from "react-icons-kit";
 import {refresh} from 'react-icons-kit/fa/refresh'
 import {stop} from 'react-icons-kit/fa/stop'
-import {close as closeIcon} from 'react-icons-kit/ionicons/close'
 import {micA} from 'react-icons-kit/ionicons/micA'
 import {connect} from "react-redux";
 import {Link, withRouter} from "react-router-dom";
 import styled from "styled-components";
 import {getType} from "typesafe-actions";
-import config from '../../config';
 import HandShakeImage from '../../public/handshake-icon.png'
 import {fetchRandomAyah, fetchSpecificAyah, sendRecording} from "../api/ayahs";
 import surahs from "../api/surahs";
@@ -40,6 +37,7 @@ import NoteButton from "./NoteButton";
 import RecordingButton from "./RecordingButton";
 import T from "./T";
 import ToggleButton from "./ToggleButton";
+import RecordingError from "./RecordingError";
 
 
 interface IOwnProps {
@@ -114,7 +112,7 @@ class Footer extends React.Component<IProps, IState>  {
     await this.props.shiftNextAyah();
     await this.props.loadNextQueue();
   }
-  public handleError = () => {
+  public handleRecordingError = () => {
     this.setState({
       showErrorMessage: true,
     });
@@ -179,10 +177,10 @@ class Footer extends React.Component<IProps, IState>  {
     }
   }
   public handleStartRecording = () => {
-    const config = {
-      onError: this.handleError,
+    const recConfig = {
+      onError: this.handleRecordingError,
     }
-    startRecording(config)
+    startRecording(recConfig)
       .then(() => {
         this.props.toggleIsRecording();
       })
@@ -222,19 +220,6 @@ class Footer extends React.Component<IProps, IState>  {
         this.props.setAyah(ayah)
       })
   }
-  public async componentDidMount() {
-    if (this.props.currentAyah.textSimple){
-      if (!this.props.router.location.state) {
-        await this.props.loadNextAyah()
-        await this.props.loadPreviousAyah()
-        await this.props.loadNextQueue()
-        await this.props.loadPrevQueue()
-      }
-    } else {
-      this.fetchRandomAyah()
-    }
-  }
-
   public render() {
     const {isRecording, isDoneRecording, isContinuous} = this.props.status;
     const {showErrorMessage} = this.state;
@@ -250,9 +235,9 @@ class Footer extends React.Component<IProps, IState>  {
                  <div className="icon">
                    {
                      !isRecording ?
-                       <Icon icon={micA} size={30}/>
+                       <Icon icon={micA} size={30} />
                        :
-                       <Icon icon={stop} size={30}/>
+                       <Icon icon={stop} size={30} />
                    }
                  </div>
                </RecordingButton>
@@ -286,10 +271,10 @@ class Footer extends React.Component<IProps, IState>  {
              isDoneRecording ?
              <RecordingButton className={"retry"} onClick={this.handleRetry}>
                <div className="icon">
-                 <Icon icon={refresh} size={30}/>
+                 <Icon icon={refresh} size={30} />
                </div>
                <p>
-                 <T id={KEYS.RETRY_BUTTON_TEXT}/>
+                 <T id={KEYS.RETRY_BUTTON_TEXT} />
                </p>
              </RecordingButton>
                : null
@@ -318,26 +303,11 @@ class Footer extends React.Component<IProps, IState>  {
        }
        {
          showErrorMessage ?
-           <div className={'error'} >
-             <MobileView>
-               <div className="close" onClick={() => {
-                 this.setState({showErrorMessage: false});
-               }}>
-                 <Icon icon={closeIcon} />
-               </div>
-               <p>It doesn't look like you have microphone permissions enabled. Get a better experience on mobile!</p>
-               <a href={config('androidAppLink')}>Android</a>
-               <a href={config('IOSAppLink')}>iOS</a>
-             </MobileView>
-             <BrowserView>
-               <div className="close" onClick={() => {
-                 this.setState({showErrorMessage: false});
-               }}>
-                 <Icon icon={closeIcon} />
-               </div>
-               <p>To upload recordings, please enable microphone access, or use a different browser.</p>
-             </BrowserView>
-           </div>
+            <RecordingError
+              onClose={() => {
+                this.setState({showErrorMessage: false});
+              }}
+            />
            :
            null
        }
@@ -398,38 +368,6 @@ const Container = styled.div`
       top: -23px;
     }
   } 
-  
-  .error {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    text-align: center;
-    padding: 1em 0;
-    color: #fff;
-    margin: 10px 10px 20px 10px;
-    background: rebeccapurple;
-    border-radius: 15px;
-    z-index: 5;
-    
-    .close {
-      position: absolute;
-      right: 10px;
-      top: 5px;
-    }
-    p {
-      margin: 1em 10px;
-    }
-    a {
-      color: #fff;
-      text-decoration: none;
-      border: 1px solid #fff;
-      border-radius: 3px;
-      padding: 7px 10px;
-      display: inline-block;
-      margin: 0 5px;
-    }
-  }
   
   @media screen and (max-width: ${props => props.theme.breakpoints.sm}px) {
     //height: 200px;

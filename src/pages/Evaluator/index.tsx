@@ -13,6 +13,7 @@ import {ActionType} from "typesafe-actions";
 import SiriWave from '../../../modified_modules/siriwave';
 import Helmet from 'react-helmet';
 
+
 import HandShakeImage from '../../../public/handshake-icon.png'
 import {fetchEvaluatorAyah, submitAyah} from "../../api/evaluator";
 import Modal from "../../components/Modal";
@@ -26,6 +27,7 @@ import {WORD_TYPES} from "../../types";
 import {IProfile} from "../../types/GlobalState";
 import {Container, ModalContent} from "./styles";
 import config from '../../../config';
+import KEYS from "../../locale/keys";
 
 const cdnURL = config('cdnURL');
 
@@ -173,18 +175,21 @@ class Evaluator extends React.Component<IProps, IState> {
     }
   }
   handleOGImage = (): string => {
-    return cdnURL + '/evaluator_en.png'
+    return cdnURL + '/og/evaluation_en.png'
   }
   public render() {
     const {currentAyah, profile} = this.props;
     const {isPlaying, played, pills, currentStep} = this.state;
+    const ogTitle = this.props.intl.formatMessage({ id: KEYS.EVALUATE_AYAHS });
+    const localName = this.props.intl.formatMessage({ id: KEYS.LOCAL_NAME })
     return (
       <Container>
         <Helmet>
-          <meta
-            property={'og:image'}
-            content={this.handleOGImage()}
-          />
+          <title>{ogTitle}</title>
+          <meta property={'og:title'} content={`${ogTitle} | ${localName}`} />
+          <meta property={'og:image'} content={this.handleOGImage()} />
+          <meta name={'twitter:title'} content={`${ogTitle} | ${localName}`} />
+          <meta name={'twitter:image'} content={this.handleOGImage()} />
         </Helmet>
         <Navbar
           counterText={

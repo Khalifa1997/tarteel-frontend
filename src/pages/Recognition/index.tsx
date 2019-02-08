@@ -8,6 +8,7 @@ import Helmet from "react-helmet";
 import {withCookies} from "react-cookie";
 import {micA} from 'react-icons-kit/ionicons/micA'
 import {stop} from 'react-icons-kit/fa/stop'
+import { injectIntl, InjectedIntl } from 'react-intl';
 
 import RecordingButton from '../../components/RecordingButton';
 import Navbar from "../../components/Navbar";
@@ -16,11 +17,16 @@ import {connect} from "react-redux";
 import ReduxState from "../../types/GlobalState";
 import {setRecognitionResults, setUnableToRecord} from "../../store/actions/recognition";
 import config from '../../../config'
+import {startRecording, stopRecording} from "../../helpers/recorder";
+import {toggleIsRecording} from "../../store/actions/status";
+import RecordingError from "../../components/RecordingError";
+import KEYS from "../../locale/keys";
 
 const cdnURL = config('cdnURL');
 
 interface IOwnProps {
   history: History;
+  intl: InjectedIntl;
 }
 
 interface IState {
@@ -29,6 +35,8 @@ interface IState {
   query: string;
   isLoading: boolean;
   recognitionMessage: string;
+  showErrorMessage: boolean;
+  errorMessage: Element;
 }
 
 interface IStateProps {
@@ -38,6 +46,7 @@ interface IStateProps {
 interface IDispatchProps {
   setRecognitionResults(result: any): void;
   setUnableToRecord(): void;
+  toggleIsRecording(): void;
 }
 
 type IProps = IOwnProps & IDispatchProps & IStateProps
@@ -51,6 +60,8 @@ class Recognition extends React.Component<IProps, IState> {
     query: '',
     isLoading: false,
     recognitionMessage: 'Tap on the mic and recite a full or partial verse',
+    showErrorMessage: false,
+    errorMessage: '',
   }
   handleRecordingButton = () => {
     if (this.state.isLoading) {
@@ -58,6 +69,7 @@ class Recognition extends React.Component<IProps, IState> {
     }
     else if (this.state.isRecording) {
       this.stopRecognition();
+      this.handleStopRecording();
     } else {
       this.startRecognition();
     }
@@ -68,6 +80,24 @@ class Recognition extends React.Component<IProps, IState> {
     });
     this.recognition.onend = () =>  null;
     this.recognition.stop();
+  }
+  public handleRecordingError = () => {
+    this.props.toggleIsRecording();
+  }
+  public handleStartRecording = () => {
+    const recConfig = {
+      onError: this.handleRecordingError,
+    }
+    startRecording(recConfig)
+      .then(() => {
+        this.props.toggleIsRecording();
+      })
+  }
+  public handleStopRecording = () => {
+    stopRecording()
+      .then(() => {
+          this.props.toggleIsRecording();
+      })
   }
   handleRecognitionResult = (e) => {
     let interimTranscript = '';
@@ -98,15 +128,18 @@ class Recognition extends React.Component<IProps, IState> {
     this.recognition.onerror = this.handleRecognitionError;
     this.recognition.onend = this.recognition.start;
 
+    this.handleStartRecording();
     this.recognition.start();
 
   }
-  showErrorMessage = (message) => {
+  showErrorMessage = (message: Element) => {
     this.setState({
+      showErrorMessage: true,
       errorMessage: message,
     })
   }
   handleRecognitionError = (event) => {
+    this.stopRecognition();
     const errorLink = '//support.google.com/websearch/answer/2940021';
     const chromeLink = '//support.google.com/chrome/answer/2693767';
     if (event.error === 'no-speech') {
@@ -139,6 +172,7 @@ class Recognition extends React.Component<IProps, IState> {
     });
   }
   handleSearch = (query: string) => {
+    this.recognition.stop();
     this.setState({
       isLoading: true,
     })
@@ -172,6 +206,8 @@ class Recognition extends React.Component<IProps, IState> {
           this.stopRecognition()
           this.props.history.push('/recognition/results');
           console.log(json.result);
+        } else {
+          this.recognition.start();
         }
       })
 
@@ -187,30 +223,43 @@ class Recognition extends React.Component<IProps, IState> {
   }
   handleOGImage = () => {
     const locale = this.props.cookies.get('currentLocale') || 'en';
-    return `${cdnURL}/recognition_${locale}.png`
+    return `${cdnURL}/og/recognition_${locale}.png`
   }
   componentWillUnmount() {
     if (this.recognition) {
       this.recognition.stop();
+      this.handleStopRecording();
     }
   }
   render() {
     const classnames = classNames({
       recording: this.state.isRecording,
     })
+    const ogTitle = this.props.intl.formatMessage({ id: KEYS.AYAH_RECOGNITION })
+    const localName = this.props.intl.formatMessage({ id: KEYS.LOCAL_NAME })
     return (
       <Container>
         <Helmet>
-          <meta
-            property={'og:image'}
-            content={this.handleOGImage()}
-          />
+          <title>{ ogTitle }</title>
+          <meta property={'og:title'} content={`${ogTitle} | ${localName}`} />
+          <meta property={'og:image'} content={this.handleOGImage()} />
+          <meta name={'twitter:title'} content={`${ogTitle} | ${localName}`} />
+          <meta name={'twitter:image'} content={this.handleOGImage()} />
         </Helmet>
         <Navbar />
         {
+          this.state.showErrorMessage &&
+            <RecordingError
+              message={this.state.errorMessage}
+              onClose={() => {
+                this.setState({showErrorMessage: false});
+              }}
+            />
+        }
+        {
           !this.props.canRecord ?
-            <h3 className={'not-supported'}>Thank you for trying to use Iqra.
-              Unfortunately, Iqra is not supported by this browser. Upgrade
+            <h3 className={'not-supported'}>Thank you for trying to use Tarteel.
+              Unfortunately, Tarteel is not supported by this browser. Upgrade
               to <a href="//www.google.com/chrome">Chrome</a> version 25 or later.
             </h3>
             :
@@ -248,8 +297,10 @@ class Recognition extends React.Component<IProps, IState> {
                       <Icon icon={stop} size={30} />
                 }
               </RecordingButton>
-              <p>
-                Want to improve Accuracy?
+              <p className={'splittable'}>
+                <span>
+                  Want to improve Accuracy?
+                </span>
                 &nbsp;
                 <Link to={'/'}>
                   Contribute your recording
@@ -280,10 +331,13 @@ const mapDispatchToProps = (dispatch): IDispatchProps => {
     setUnableToRecord: () => {
       return dispatch(setUnableToRecord())
     },
+    toggleIsRecording: () => {
+      return dispatch(toggleIsRecording())
+    },
   }
 }
 
-export default withCookies(connect(
+export default injectIntl(withCookies(connect(
   mapStateToProps,
   mapDispatchToProps,
-)(Recognition));
+)(Recognition)));

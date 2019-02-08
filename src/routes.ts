@@ -1,7 +1,8 @@
 import {asyncComponent} from "react-async-component";
 import {EvaluatorContainer} from "./containers/EvaluatorContainer";
 import {MainPageContainer} from "./containers/MainPageContainer";
-import {UsersContainer} from "./containers/UsersContainer";
+import {AyahPageContainer} from "./containers/AyahPageContainer";
+import {Redirect} from "react-router-dom";
 
 
 
@@ -10,10 +11,6 @@ export default [
     path: '/',
     ...MainPageContainer,
     exact: true,
-  },
-  {
-    path: '/users',
-    ...UsersContainer,
   },
   {
     path: '/surah/:num',
@@ -95,7 +92,17 @@ export default [
   {
     path: '/recognition/results',
     component: asyncComponent({
-      resolve: () => import(/* webpackChunkName: "Recognition/results" */ './pages/RecognitionResults'),
+      resolve: () => import(/* webpackChunkName: "RecognitionResults" */ './pages/RecognitionResults'),
+    }),
+  },
+  {
+    path: '/ayah/:surah/:ayah',
+    ...AyahPageContainer,
+  },
+  {
+    path: '/ayah_not_found',
+    component: asyncComponent({
+      resolve: () => import(/* webpackChunkName: "AyahNotFound" */ './pages/NotFound/Ayah'),
     }),
   },
 ];

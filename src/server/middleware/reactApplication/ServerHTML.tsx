@@ -105,6 +105,7 @@ const ServerHTML: React.SFC<any> = (props: IProps) => {
     // ifElse(isProd)(() =>
     //   scriptTag(config('zendesk.url'), { id: config('zendesk.id') })
     // ),
+
   ];
 
   const headerElements = removeNil([

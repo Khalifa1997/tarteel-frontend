@@ -14,9 +14,11 @@ interface ReduxState {
   profile: IProfile;
   evaluator: IEvaluator;
   recognition: IRecognition;
-  router: {
-    location: Location;
-  }
+  router: IRouter
+}
+
+export interface IRouter {
+  location: Location;
 }
 
 export interface IUser {

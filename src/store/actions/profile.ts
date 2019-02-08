@@ -12,7 +12,9 @@ export const setUserRecitedAyahs = createAction('profile/SET_USER_RECITED_AYAHS'
 export const setPassedOnBoarding = createAction('profile/SET_PASSED_ONBOARDING', resolve => {
   return () => resolve();
 });
-
+export const unsetAskForDemographics = createAction('profile/UNSET_ASK_FOR_DEMOGRAPHICS', resolve => {
+  return () => resolve();
+});
 export const setFetchedProfile = createAction('profile/SET_FETCHED_PROFILE', resolve => {
   return (profile: Partial<IProfile>) => resolve(humps.camelizeKeys(profile));
 });

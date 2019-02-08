@@ -47,3 +47,7 @@ export const getPrevAyah = (surah: number, ayah: number) => {
     }
   }
 }
+
+export const isCorrectAyah = (surah: number, ayah: number) => {
+  return ayah > 0 && surahs[surah].ayah >= ayah;
+}

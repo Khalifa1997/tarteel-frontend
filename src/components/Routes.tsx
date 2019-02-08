@@ -3,7 +3,7 @@ import React from 'react';
 import {Route, Switch, withRouter} from 'react-router-dom';
 
 import {connect} from "react-redux";
-import NotFound from '../pages/NotFound';
+import NotFound from '../pages/NotFound/index';
 import routes from '../routes';
 import {toggleIsFetching} from "../store/actions/status";
 import ReduxState from "../types/GlobalState";

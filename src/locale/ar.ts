@@ -10,6 +10,7 @@ export default {
     [KEYS.SETTING_TITLE]: 'خيارات',
     [KEYS.LOCAL_TITLE]: 'ترتيل - تحدي ٥٠ ألف آيه',
     [KEYS.LOCAL_DESCRIPTION]: 'ترتيل هو مشروع مفتوح المصدر صُمم للمساعده في بناء برامج لتحليل قراءة القرآن. بالنظر لأهمية تلاوة القرآن في حياة المسلمين ، من المهم بناء أدوات برمجية يمكن أن تساعد المسلمين العاديين على قراءة القرآن بشكل أكثر دقة.',
+    [KEYS.LOCAL_NAME]: 'ترتيل',
 
     [KEYS.USERS_LIST_TITLE]: 'قائمة الأعضاء',
     [KEYS.NEXT_AYAH]: "الآية التالية",
@@ -50,6 +51,7 @@ export default {
     [KEYS.MOBILE_APP_LINK_TEXT]: "تطبيق الهاتف",
     [KEYS.HOME_LINK_TEXT]: 'الرئيسيه',
     [KEYS.EVALUATE_AYAHS]: "تقييم آيات",
+    [KEYS.AYAH_RECOGNITION]: "التعرف علي الآيات",
     [KEYS.DEMOGRAPHIC_PAGE_FIRST_PARAGRAPH_1]: "بمساعدتك، لقد وصلنا إلي",
     [KEYS.DEMOGRAPHIC_PAGE_FIRST_PARAGRAPH_2]: "تسجيل. هذا جيد ، ولكن في ترتيل نسعي لأن تكون التسجيلات بصوت رجال و نساء من جميع الأعمار والثقافات المختلفه ، لتحسين جودة البرنامج.",
     [KEYS.DEMOGRAPHIC_PAGE_SECOND_PARAGRAPH]: "ساعدنا لتحسين أداء البرنامج بتسجيل بعض المعلومات عنك.",
@@ -61,6 +63,7 @@ export default {
     [KEYS.SUBSCRIBE_PAGE_HELP_US_MESSAGE_2]: "مع أصدقائك و عائلتك",
     [KEYS.NOT_FOUND_PAGE_TEMPLATE_TITLE]: "صفحه غير موجوده",
     [KEYS.NOT_FOUND_PAGE_TEXT]: "هذه الصفحه غير موجوده",
+    [KEYS.AYAH_NOT_FOUND_PAGE_TEXT]: "رقم هذه الآيه غير صحيح",
     [KEYS.AYAHS_RECITED]: "آيات مسجلة",
     [KEYS.ABOUT_PAGE_TEMPLATE_TITLE]: "عن ترتيل",
     [KEYS.ABOUT_PAGE_FIRST_PARAGRAPH_TITLE]: "ما هو ترتيل ؟",

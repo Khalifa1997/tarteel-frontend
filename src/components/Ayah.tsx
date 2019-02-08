@@ -9,6 +9,10 @@ import AyahShape from "../shapes/AyahShape";
 import WordShape from "../shapes/WordShape";
 import {WORD_TYPES} from "../types";
 import T from "./T";
+import ShareModal from '../components/ShareModal';
+
+import * as shareIcon from '../../public/share-icon.png'
+import {withCookies} from "react-cookie";
 
 interface IProps {
   ayah: AyahShape;
@@ -17,27 +21,29 @@ interface IProps {
 
 interface IState {
   showTranslit: boolean;
+  showShareModal: boolean;
 }
 
 class Ayah extends React.Component<IProps, IState> {
-  public state = {
+  state = {
     showTranslit: false,
+    showShareModal: false,
   }
-  public toggleTranslit = () => {
+  toggleTranslit = () => {
     this.setState((state, props) => {
       return {
         showTranslit: !state.showTranslit,
       }
     });
   }
-  public componentDidUpdate(prevProps: IProps) {
+  componentDidUpdate(prevProps: IProps) {
     if (prevProps.ayah.verseNumber !== this.props.ayah.verseNumber) {
       this.setState({
         showTranslit: false,
       });
     }
   }
-  public renderTransliteration = () => {
+  renderTransliteration = () => {
     if (this.props.ayah.translations) {
       return this.props.ayah.translations
         .filter((trans) => {
@@ -45,7 +51,7 @@ class Ayah extends React.Component<IProps, IState> {
         })[0].text
     }
   }
-  public renderAyah = () => {
+  renderAyah = () => {
     return (
       this.props.ayah.words.map(((word: WordShape) => {
         const className = classNames({
@@ -68,7 +74,7 @@ class Ayah extends React.Component<IProps, IState> {
       <em>Loading ayah... (if an ayah does not show up, try clicking "next ayah")</em>
     )
   }
-  public renderAyahLoader = () => {
+  renderAyahLoader = () => {
     return (
       <ContentLoader height={42}>
         {/* Pure SVG */}
@@ -76,8 +82,14 @@ class Ayah extends React.Component<IProps, IState> {
       </ContentLoader>
     )
   }
-  public render() {
+  handleShareAyah = () => {
+    this.setState({
+      showShareModal: true,
+    })
+  }
+  render() {
     const {ayah, isFetchingAyah} = this.props;
+    const locale = this.props.cookies.get('currentLocale') || 'en';
     return (
       <Container>
         <div id="ayah-text">
@@ -102,14 +114,27 @@ class Ayah extends React.Component<IProps, IState> {
               null
           }
         </div>
-        <Link to={`/surah/${ayah.chapterId}`} className="change-ayah-container">
-          <div id="ayah-loc">
+        <div className={'ayah-loc-container'}>
+          <div className="ayah-loc">
             ({ ayah.chapterId } : {ayah.verseNumber})
           </div>
-          <span className="change-ayah">
-            <T id={KEYS.CHANGE_AYAH_TEXT}/>
+          <a className="share" onClick={this.handleShareAyah}>
+            <img src={shareIcon} alt="share icon" />
+          </a>
+        </div>
+        <Link to={`/surah/${ayah.chapterId}`} className={'change-ayah'}>
+          <span>
+            <T id={KEYS.CHANGE_AYAH_TEXT} />
           </span>
         </Link>
+        <ShareModal
+          show={this.state.showShareModal}
+          quote={``}
+          url={`https://tarteel.io/ayah/${ayah.chapterId}/${ayah.verseNumber}${locale === 'ar' ? '/?lang=ar' : ''}`}
+          handleCloseModal={() => {
+            this.setState({ showShareModal: false });
+          }}
+        />
       </Container>
     )
   }
@@ -150,22 +175,34 @@ const Container = styled.div`
       color: ${props => props.theme.colors.textColor};
     }
   }
-  .change-ayah-container {
-    cursor: pointer;
-    display: inline-block;
-    
-    #ayah-loc {
-      margin-top: 14px;
+  .ayah-loc-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 14px;
+
+    .share {
+      position: relative;
+      right: -10px;
+      cursor: pointer;
+    }
+    .ayah-loc {
       color: #9fa1a8;
       font-size: 18px;
       transition: 0.2s;
     }
+  }
     .change-ayah {
-      color: #9fa1a8;
-      font-size: 16px;
-      transition: 0.2s;
+      cursor: pointer;
+      display: inline-block;
+      span {
+        color: #9fa1a8;
+        font-size: 16px;
+        transition: 0.2s;
+      }
     }
-    &:hover .change-ayah {
+    
+    &:hover .change-ayah span {
       color: #5ec49e;
     }
     
@@ -177,16 +214,15 @@ const Container = styled.div`
         font-size: 14px;
       }
     }
-    .change-ayah-container {
-      #ayah-loc {
-        font-size: 16px;
-      }
-      .change-ayah {
+    .ayah-loc {
+      font-size: 16px;
+    }
+    .change-ayah {
+      span {
         font-size: 14px;
       }
     }
-
   }   
 `
 
-export default Ayah;
+export default withCookies(Ayah);

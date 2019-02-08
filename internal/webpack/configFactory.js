@@ -607,33 +607,6 @@ export default function webpackConfigFactory(buildOptions) {
                     'happypack/loader?id=happypack-devclient-global-scss',
                   ],
                 }),
-                // For a production client build we use the ExtractTextPlugin which
-                // will extract our CSS into CSS files. We don't use happypack here
-                // as there are some edge cases where it fails when used within
-                // an ExtractTextPlugin instance.
-                // Note: The ExtractTextPlugin needs to be registered within the
-                // plugins section too.
-                ifProdClient(() => ({
-                  use: [
-                    MiniCssExtractPlugin.loader,
-                    {
-                      loader: 'css-loader',
-                      query: {
-                        minimize: true,
-                        importLoaders: 2,
-                        sourceMap: false,
-                      },
-                    },
-                    {
-                      loader: 'sass-loader',
-                      options: {
-                        outputStyle: 'compressed',
-                        sourceMap: false,
-                        sourceMapContents: false,
-                      },
-                    },
-                  ],
-                })),
                 // When targetting the server we use the "/locals" version of the
                 // css loader, as we don't need any css files for the server.
                 ifNode({

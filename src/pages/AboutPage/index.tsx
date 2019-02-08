@@ -67,7 +67,7 @@ class About extends Component<IProps, IState> {
         };
       },
     });
-    bar.text.style.fontFamily = 'Roboto';
+    bar.text.style.fontFamily = 'Proxima Nova';
     bar.text.style.fontSize = '2rem';
     const animate_value = recitedAyahs/config('objective');
     bar.animate(animate_value);  // Number from 0.0 to 1.0

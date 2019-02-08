@@ -79,7 +79,7 @@ app.get('*', (request, response, next) => {
 
   if (request.path === '/' && JSON.parse(request.universalCookies.get('isFirstTime'))) {
     const queryString = Object.entries(request.query).map(([key, val]) => `${key}=${val}`).join('&');
-    return response.redirect(`/welcome/?${queryString}`)
+    return response.redirect(`/welcome/${queryString ? '?' + queryString : ''}`)
   }
 
   next()

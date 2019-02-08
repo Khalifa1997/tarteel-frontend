@@ -5,7 +5,7 @@ const ani = keyframes`
   0 { background-color : #bf9999 }
   50% { background-color : #af7070 }
   100% { background-color : #bf9999 }
-`
+`;
 
 const RecordingButton = styled.div`
   height: 50px;

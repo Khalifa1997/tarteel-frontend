@@ -27,7 +27,9 @@ export default function withServiceWorker(webpackConfig, bundleConfig) {
         __dirname,
         './offlinePageTemplate.js'
       )}`,
+      allChunks: true,
       production: true,
+      chunksSortMode: 'dependency',
       minify: {
         removeComments: true,
         collapseWhitespace: true,

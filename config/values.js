@@ -15,7 +15,7 @@ const locales = {
 
 const API_URL = 'https://api.tarteel.io';
 
-const CDN_URL = 'http://d2sf46268wowyo.cloudfront.net';
+const CDN_URL = 'https://d2sf46268wowyo.cloudfront.net';
 
 // All these configurations would only be readable on only the server bundle,
 // if you want to have it in the client bundle you should add a filter with it's name
@@ -32,7 +32,7 @@ const values = {
     welcomeMessage: true,
     // We only need to expose the enabled flag of the service worker.
     serviceWorker: {
-      enabled: false,
+      enabled: true,
     },
     // We need to expose all the polyfill.io settings.
     polyfillIO: true,

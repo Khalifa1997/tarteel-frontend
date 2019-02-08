@@ -52,7 +52,7 @@ class RecognitionResults extends React.Component<IProps> {
             {
               this.props.recognition.matches.map((ayah: IRecognitionAyah, i: number) => {
                 return (
-                  <Ayah {...ayah} key={i} >
+                  <Ayah {...ayah} key={i} to={`/ayah/${ayah.surahNum}/${ayah.ayahNum}`} >
                     <p>{ ayah.arabicSurahName }</p>
                     <p>{ ayah.translationSurahName }</p>
                     <div className="surah-index">
@@ -95,7 +95,7 @@ const New = styled(Link)`
   }
 `;
 
-const Ayah = styled.div`
+const Ayah = styled(Link)`
   background-color: ${props => props.theme.colors.brandPrimary };
   border-radius: 5px;
   color: #fff;

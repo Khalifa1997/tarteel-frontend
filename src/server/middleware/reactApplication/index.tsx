@@ -26,6 +26,7 @@ import ServerHTML from './ServerHTML';
 
 import { log } from '../../../../internal/utils';
 import {loadSessionData} from "../../../helpers/get";
+import Fonts from "../../../fonts";
 
 /**
  * React application middleware, supports server side rendering.
@@ -91,7 +92,7 @@ export default function reactApplicationMiddleware(request: any, response: any) 
   // components are resolved for the render.
   const promises = matchRoutes(routes, request.path)
     .map(({ route }) => {
-      return route.loadData ? route.loadData(store, request) : null;
+      return route.loadData ? route.loadData(store, request, response) : null;
     })
     .map(promise => {
       if (promise) {

@@ -7,7 +7,7 @@ import Evaluator from "../pages/Evaluator";
 import AyahShape from "../shapes/AyahShape";
 import {setAyah, setNextAyah} from "../store/actions/evaluator";
 import ReduxState, {IProfile} from "../types/GlobalState";
-
+import { injectIntl } from 'react-intl';
 
 interface IDispatchProps {
   setAyah(ayah: AyahShape): ActionType<typeof setAyah>;
@@ -39,7 +39,7 @@ const mapStateToProps = (state: ReduxState): IStateProps => {
 };
 
 export const EvaluatorContainer = {
-  component: connect(mapStateToProps, mapDispatchToProps)(Evaluator),
+  component: injectIntl(connect(mapStateToProps, mapDispatchToProps)(Evaluator)),
   loadData: (store: any, req: any) => {
     return fetchEvaluatorAyah(req)
       .then((ayah: AyahShape) => {

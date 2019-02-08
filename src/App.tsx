@@ -4,7 +4,7 @@ import {injectIntl} from 'react-intl'
 import {connect} from "react-redux";
 import {withRouter} from "react-router";
 import styled from "styled-components"
-import { createGlobalStyle } from 'styled-components'
+import { createGlobalStyle } from 'styled-components';
 
 import AppHelmet from "./components/AppHelmet";
 import CookiesBanner from "./components/CookiesBanner";
@@ -24,7 +24,7 @@ const GlobalStyle = createGlobalStyle`
   body {
     background-color: ${(props: any) => props.path === '/evaluator' ? '#F4F3F2' : '#fff'};
   }
-`
+`;
 
 interface IOwnProps {
   location: Location;

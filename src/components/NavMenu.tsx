@@ -7,8 +7,7 @@ import { Icon } from 'react-icons-kit'
 import {navicon} from 'react-icons-kit/fa/navicon'
 import {InjectedIntl, injectIntl} from 'react-intl';
 import OutsideClickHandler from 'react-outside-click-handler';
-import {Link as link} from "react-router-dom";
-import {withRouter} from "react-router-dom";
+import {withRouter, Link} from "react-router-dom";
 import styled, {keyframes} from "styled-components";
 
 import {connect} from "react-redux";
@@ -41,12 +40,13 @@ interface ILink {
   textID: KEYS;
   href: string;
   onClick?(): void;
+  external: boolean;
   busy: boolean;
 }
 
 type IProps = IDispatchProps & IStateProps & IOwnProps;
 
-const linksFactory: ({sessionKey}: {sessionKey: string}) => {[key: string]: ILink} = ({sessionKey, randomAyah}) => {
+const linksFactory: (props:any) => {[key: string]: ILink} = (props) => {
   return {
     mobile: {
       textID: KEYS.MOBILE_APP_LINK_TEXT,
@@ -54,7 +54,7 @@ const linksFactory: ({sessionKey}: {sessionKey: string}) => {[key: string]: ILin
     },
     profile: {
       textID: KEYS.PROFILE_LINK_TEXT,
-      href: `/profile/${ sessionKey }`,
+      href: `/profile/${ props.profile.sessionKey }`,
     },
     evaluator: {
       textID: KEYS.EVALUATE_AYAHS,
@@ -67,7 +67,7 @@ const linksFactory: ({sessionKey}: {sessionKey: string}) => {[key: string]: ILin
     randomAyah: {
       textID: KEYS.RANDOM_AYAH_LINK_TEXT,
       href: "",
-      onClick: randomAyah,
+      onClick: props.randomAyah,
     },
     about: {
       textID: KEYS.ABOUT_LINK_TEXT,
@@ -76,20 +76,21 @@ const linksFactory: ({sessionKey}: {sessionKey: string}) => {[key: string]: ILin
     demographics: {
       textID: KEYS.DEMOGRAPHIC_INFO_LINK_TEXT,
       href: "/demographics",
-      busy: true,
+      busy: props.profile.askForDemographics,
     },
     subscribe: {
       textID: KEYS.SUBSCRIBE_BUTTON_TEXT,
       href: "/subscribe",
     },
-    // datasets: {
-    //   textID: KEYS.CONTACT_US_BUTTON_TEXT,
-    //   href: '',
-    // },
-    // contact: {
-    //   textID: KEYS.CONTACT_US_BUTTON_TEXT,
-    //   href: '',
-    // },
+    dataset: {
+      textID: 'Tarteel datasets',
+      href: 'https://api.tarteel.io/download-full-dataset-csv/',
+      external: true,
+    },
+    recognition: {
+      textID: KEYS.AYAH_RECOGNITION,
+      href: '/recognition',
+    },
   }
 }
 
@@ -99,7 +100,6 @@ class NavMenu extends React.Component<IProps, IState>{
   }
   public toggleDropdown = () => {
     this.setState((state: IState) => {
-      console.log('changed !');
       return {
         showDropdown: !state.showDropdown,
       };
@@ -117,22 +117,25 @@ class NavMenu extends React.Component<IProps, IState>{
       busy: item.busy,
       [className]: className,
     })
+    const Component = item.external ? 'a' : Link;
     return (
-      <Link to={item.href} onClick={item.onClick} className={classNames}>
-        <div className="text">
-          <T id={item.textID} />
-        </div>
-      </Link>
+      <LinkContainer>
+        <Component href={item.href} to={item.href} onClick={item.onClick} className={classNames}>
+          <div className="text">
+            <T id={item.textID} />
+          </div>
+        </Component>
+      </LinkContainer>
     )
   }
   public render() {
     const isHome = this.props.location.pathname === "/";
-    const mobileLinks = ["demographics", "subscribe", 'mobile', 'about'];
+    const mobileLinks = ["demographics", "subscribe", 'mobile', 'recognition', 'dataset', 'about'];
     if (isMobileOnly) { mobileLinks.push(...["home", "profile", "evaluator"]); }
     if (isHome) { mobileLinks.unshift(...['randomAyah']); }
     const links = linksFactory({
       randomAyah: this.handleRandomAyah,
-      sessionKey: this.props.profile.sessionKey,
+      profile: this.props.profile,
     })
     const currentLocale = this.props.cookies.get('currentLocale') || 'en';
     const urlLocale = currentLocale === 'en' ? 'ar' : 'en'
@@ -185,32 +188,34 @@ class NavMenu extends React.Component<IProps, IState>{
   }
 }
 
-const Link = styled(link)`
-  color: ${props => props.theme.colors.tuatara};
-  text-decoration: none;
-  margin: 0 10px;
-  transition: 0.25s;
-  
-  &.busy {
-    .text {
-      display: inline-block;
-      position: relative;
-      
-      &:before {
-        content: '';
-        width: 5px;
-        height: 5px;
-        border-radius: 50%;
-        background-color: ${props => props.theme.colors.linkColor};
-        position: absolute;
-        right: -5px;
-        top: -3px;
+const LinkContainer = styled.div`
+    margin: 0 10px;
+  a {
+    color: ${props => props.theme.colors.tuatara};
+    text-decoration: none;
+    transition: 0.25s;
+    
+    &.busy {
+      .text {
+        display: inline-block;
+        position: relative;
+        
+        &:before {
+          content: '';
+          width: 7px;
+          height: 7px;
+          border-radius: 50%;
+          background-color: ${props => props.theme.colors.linkColor};
+          position: absolute;
+          right: -5px;
+          top: 3px;
+        }
       }
     }
-  }
-  
-  &:hover {
-    color: ${props => props.theme.colors.linkColor}
+    
+    &:hover {
+      color: ${props => props.theme.colors.linkColor}
+    }
   }
 `
 
@@ -262,7 +267,6 @@ const Container = styled.div`
     }
   }
   .settings {
-    color: ${props => props.theme.colors.brandPrimary}
     display: flex;
     justify-content: center;
     align-items: center;
@@ -290,7 +294,7 @@ const Container = styled.div`
       flex-flow: column;
 
       .list-item {
-        padding: 5px 0;
+        line-height: 35px;
         transition: background 200ms;
         margin: 0;
         font-size: 14px;

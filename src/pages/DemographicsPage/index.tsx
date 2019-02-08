@@ -17,6 +17,7 @@ import {setDemographicData} from "../../helpers";
 import KEYS from "../../locale/keys";
 import {updateDemographicData} from "../../store/actions/demographicData";
 import ReduxState, {IDemographics, IProfile} from "../../types/GlobalState";
+import {unsetAskForDemographics} from "../../store/actions/profile";
 
 
 const genderOptions = [
@@ -64,6 +65,7 @@ interface IOwnProps {
 
 interface IDispatchProps {
   updateDemographics(obj: Partial<IDemographics>): void;
+  unsetAskForDemographics(): void;
 }
 
 interface IStateProps {
@@ -105,6 +107,7 @@ class DemographicsPage extends React.Component<IProps, IState> {
     submitDemographics(this.props.demographicData)
       .then(() => {
         setDemographicData(this.props.demographicData);
+        this.props.unsetAskForDemographics();
         this.setState({
           isSubmitting: false,
         });
@@ -283,6 +286,9 @@ const mapDispatchToProps = (dispatch): IDispatchProps => {
   return {
     updateDemographics: (obj: Partial<IDemographics>) => {
       dispatch(updateDemographicData(obj))
+    },
+    unsetAskForDemographics: () => {
+      dispatch(unsetAskForDemographics())
     },
   }
 }

@@ -32,6 +32,11 @@ export default (state: IProfile = INITIAL_STATE, action: ProfileAction) => {
         ...state,
         passedOnBoarding: true,
       }
+    case getType(profile.unsetAskForDemographics):
+      return {
+        ...state,
+        askForDemographics: false,
+      }
     default:
       return state;
   }

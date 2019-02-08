@@ -4,7 +4,7 @@ import React from 'react';
 import asyncBootstrapper from 'react-async-bootstrapper';
 import { AsyncComponentProvider } from 'react-async-component';
 import { Cookies, CookiesProvider } from 'react-cookie';
-import ReactDOM, {hydrate, render} from 'react-dom';
+import ReactDOM, {hydrate} from 'react-dom';
 import { IntlProvider } from 'react-intl';
 import { Provider } from 'react-redux';
 import {BrowserRouter} from 'react-router-dom';
