@@ -1,12 +1,14 @@
 import React from 'react';
 import {Link} from "react-router-dom";
 import { Tooltip } from 'react-tippy';
+import Tippy from '@tippy.js/react';
 import styled from "styled-components";
 
 import {connect} from "react-redux";
 import LogoImage from "../../public/logo-3x.png";
 import {commaFormatter} from "../helpers/utils";
 import ReduxState, {IProfile} from "../types/GlobalState";
+
 
 interface IOwnProps {
   counterText: string;
@@ -24,27 +26,32 @@ class Logo extends React.Component<IProps, never> {
       <Container>
         <Link to="/">
           <img src={LogoImage} alt="Tarteel-logo" />
-          <Tooltip
-            title="Total Recited Ayahs"
-            position="bottom"
-            trigger="mouseenter"
-          >
+
             <Link to={'/about'}
               data-balloon="Total Ayas Recited"
               data-balloon-pos="down"
               className="counter">
+              <Tippy
+                content="Evaluated Ayahs"
+                trigger="mouseenter"
+              >
                 <div className="evaluated">
                   {
                     commaFormatter(this.props.profile.evaluationsCount)
                   }
                 </div>
+              </Tippy>
+              <Tippy
+                content="Total Recited Ayahs"
+                trigger="mouseenter"
+              >
                 <div className={'recited'}>
                   /{
                     commaFormatter(this.props.profile.recordingCount)
                   }
                 </div>
-              </Link>
-          </Tooltip>
+              </Tippy>
+            </Link>
         </Link>
       </Container>
     )

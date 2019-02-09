@@ -116,6 +116,7 @@ const ServerHTML: React.SFC<any> = (props: IProps) => {
     ifElse(clientEntryAssets && clientEntryAssets.css)(() => stylesheetTag(clientEntryAssets.css)),
     ...ifElse(helmet)(() => helmet.style.toComponent(), []),
     ...styleTags,
+    scriptTag('https://unpkg.com/tippy.js@3/dist/tippy.all.min.js'),
     stylesheetTag("//cdn-images.mailchimp.com/embedcode/horizontal-slim-10_7.css"),
   ]);
 

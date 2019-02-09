@@ -12,7 +12,8 @@ import LanguagePicker from "./components/LanguagePicker";
 import Routes from "./components/Routes";
 import {setLocation} from "./store/actions/router";
 
-import 'react-tippy/dist/tippy.css'
+// import 'react-tippy/dist/tippy.css';
+import 'tippy.js/dist/tippy.css';
 import './styles/index.scss'
 import Amplify from "aws-amplify";
 import AWSConfig from "./aws-exports";

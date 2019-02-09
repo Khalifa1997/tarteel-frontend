@@ -58,6 +58,7 @@
   },
   "homepage": "https://github.com/ctrlplusb/react-universally#readme",
   "dependencies": {
+    "@tippy.js/react": "1.1.1",
     "@types/camelcase-keys": "4.0.0",
     "@types/chart.js": "^2.7.42",
     "@types/classnames": "2.2.7",

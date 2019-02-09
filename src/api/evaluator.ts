@@ -15,9 +15,10 @@ export const fetchEvaluatorAyah = (req?: any) => {
 
 export const submitAyah = (evaluation: string, recordingId: number) => {
   const ayah = {
-    "recording_id": recordingId,
+    recording_id: recordingId,
     evaluation,
   }
+  console.log(ayah);
   fetch(`${ API_URL }/api/v2/evaluator/`, {
     method: "POST",
     headers: {
