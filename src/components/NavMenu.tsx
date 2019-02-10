@@ -1,23 +1,23 @@
-import classnames from 'classnames'
-import pick from "lodash/pick";
-import React from 'react'
-import {withCookies} from "react-cookie";
-import { BrowserView, isMobileOnly } from 'react-device-detect'
-import { Icon } from 'react-icons-kit'
-import {navicon} from 'react-icons-kit/fa/navicon'
-import {InjectedIntl, injectIntl} from 'react-intl';
+import classnames from 'classnames';
+import pick from 'lodash/pick';
+import React from 'react';
+import { withCookies } from 'react-cookie';
+import { BrowserView, isMobileOnly } from 'react-device-detect';
+import { Icon } from 'react-icons-kit';
+import { navicon } from 'react-icons-kit/fa/navicon';
+import { InjectedIntl, injectIntl } from 'react-intl';
 import OutsideClickHandler from 'react-outside-click-handler';
-import {withRouter, Link} from "react-router-dom";
-import styled, {keyframes} from "styled-components";
+import { withRouter, Link } from 'react-router-dom';
+import styled, { keyframes } from 'styled-components';
 
-import {connect} from "react-redux";
-import {fetchRandomAyah} from "../api/ayahs";
-import KEYS from "../locale/keys";
-import AyahShape from "../shapes/AyahShape";
-import {setAyah} from "../store/actions/ayahs";
-import theme from "../theme";
-import ReduxState, {IProfile} from "../types/GlobalState";
-import T from "./T";
+import { connect } from 'react-redux';
+import { fetchRandomAyah } from '../api/ayahs';
+import KEYS from '../locale/keys';
+import AyahShape from '../shapes/AyahShape';
+import { setAyah } from '../store/actions/ayahs';
+import theme from '../theme';
+import ReduxState, { IProfile } from '../types/GlobalState';
+import T from './T';
 
 interface IOwnProps {
   location: Location;
@@ -33,7 +33,7 @@ interface IStateProps {
 }
 
 interface IState {
-  showDropdown: boolean
+  showDropdown: boolean;
 }
 
 interface ILink {
@@ -46,19 +46,19 @@ interface ILink {
 
 type IProps = IDispatchProps & IStateProps & IOwnProps;
 
-const linksFactory: (props:any) => {[key: string]: ILink} = (props) => {
+const linksFactory: (props: any) => { [key: string]: ILink } = props => {
   return {
     mobile: {
       textID: KEYS.MOBILE_APP_LINK_TEXT,
-      href: "/mobile_app",
+      href: '/mobile_app',
     },
     profile: {
       textID: KEYS.PROFILE_LINK_TEXT,
-      href: `/profile/${ props.profile.sessionKey }`,
+      href: `/profile/${props.profile.sessionKey}`,
     },
     evaluator: {
       textID: KEYS.EVALUATE_AYAHS,
-      href: "/evaluator",
+      href: '/evaluator',
     },
     home: {
       textID: KEYS.HOME_LINK_TEXT,
@@ -66,21 +66,21 @@ const linksFactory: (props:any) => {[key: string]: ILink} = (props) => {
     },
     randomAyah: {
       textID: KEYS.RANDOM_AYAH_LINK_TEXT,
-      href: "",
+      href: '',
       onClick: props.randomAyah,
     },
     about: {
       textID: KEYS.ABOUT_LINK_TEXT,
-      href: "/about",
+      href: '/about',
     },
     demographics: {
       textID: KEYS.DEMOGRAPHIC_INFO_LINK_TEXT,
-      href: "/demographics",
+      href: '/demographics',
       busy: props.profile.askForDemographics,
     },
     subscribe: {
       textID: KEYS.SUBSCRIBE_BUTTON_TEXT,
-      href: "/subscribe",
+      href: '/subscribe',
     },
     dataset: {
       textID: 'Tarteel datasets',
@@ -91,115 +91,122 @@ const linksFactory: (props:any) => {[key: string]: ILink} = (props) => {
       textID: KEYS.AYAH_RECOGNITION,
       href: '/recognition',
     },
-  }
-}
+  };
+};
 
-class NavMenu extends React.Component<IProps, IState>{
+class NavMenu extends React.Component<IProps, IState> {
   public state = {
     showDropdown: false,
-  }
+  };
   public toggleDropdown = () => {
     this.setState((state: IState) => {
       return {
         showDropdown: !state.showDropdown,
       };
     });
-  }
+  };
   public handleRandomAyah = () => {
-    fetchRandomAyah()
-      .then((ayah: AyahShape) => {
-        this.props.setAyah(ayah)
-      })
-  }
+    fetchRandomAyah().then((ayah: AyahShape) => {
+      this.props.setAyah(ayah);
+    });
+  };
   public renderItem = (item: ILink, className?: string) => {
     const classNames = classnames({
       active: item.href === this.props.location.pathname,
       busy: item.busy,
       [className]: className,
-    })
+    });
     const Component = item.external ? 'a' : Link;
     return (
       <LinkContainer>
-        <Component href={item.href} to={item.href} onClick={item.onClick} className={classNames}>
+        <Component
+          href={item.href}
+          to={item.href}
+          onClick={item.onClick}
+          className={classNames}
+        >
           <div className="text">
             <T id={item.textID} />
           </div>
         </Component>
       </LinkContainer>
-    )
-  }
+    );
+  };
   public render() {
-    const isHome = this.props.location.pathname === "/";
-    const mobileLinks = ["demographics", "subscribe", 'mobile', 'recognition', 'dataset', 'about'];
-    if (isMobileOnly) { mobileLinks.push(...["home", "profile", "evaluator"]); }
-    if (isHome) { mobileLinks.unshift(...['randomAyah']); }
+    const isHome = this.props.location.pathname === '/';
+    let mobileLinks = [
+      'profile',
+      'recognition',
+      'demographics',
+      'subscribe',
+      'mobile',
+      'dataset',
+    ];
+    if (isMobileOnly) {
+      mobileLinks = ['home', 'about', 'evaluator'].concat(mobileLinks)
+    }
+    if (isHome) {
+      mobileLinks.unshift(...['randomAyah']);
+    }
     const links = linksFactory({
       randomAyah: this.handleRandomAyah,
       profile: this.props.profile,
-    })
+    });
     const currentLocale = this.props.cookies.get('currentLocale') || 'en';
-    const urlLocale = currentLocale === 'en' ? 'ar' : 'en'
+    const urlLocale = currentLocale === 'en' ? 'ar' : 'en';
 
     return (
       <Container>
         <BrowserView viewClassName="list">
-          {
-            Object.keys(pick(links, ["home", "profile", "evaluator"])).map((key: string) => {
+          {Object.keys(pick(links, ['home', 'about', 'evaluator'])).map(
+            (key: string) => {
               return this.renderItem(links[key]);
-            })
-          }
+            }
+          )}
         </BrowserView>
-        <a href={`?lang=${ urlLocale }`}>
-          {
-            currentLocale === 'en' ? 'العربية' : 'English'
-          }
+        <a href={`?lang=${urlLocale}`}>
+          {currentLocale === 'en' ? 'العربية' : 'English'}
         </a>
         <div className="settings" onClick={this.toggleDropdown}>
           <Icon icon={navicon} size={25} />
         </div>
-        {
-          this.state.showDropdown ?
-            <div className="settings-menu">
-              <OutsideClickHandler
-                onOutsideClick={(e: any) => {
-                  const button = document.querySelector(".settings")
-                  if (button && button.contains(e.target)) {
-                    // Nothing..
-                  } else  {
-                    this.setState({showDropdown: false});
-                  }
-                }}
-              >
-                <div className="list">
-                  {
-                    Object.keys(pick(links, mobileLinks)).map((key: string) => {
-                      return this.renderItem(links[key], "list-item")
-                    })
-                  }
-                </div>
-              </OutsideClickHandler>
-            </div>
-            :
-              null
-        }
-
+        {this.state.showDropdown ? (
+          <div className="settings-menu">
+            <OutsideClickHandler
+              onOutsideClick={(e: any) => {
+                const button = document.querySelector('.settings');
+                if (button && button.contains(e.target)) {
+                  // Nothing..
+                } else {
+                  this.setState({ showDropdown: false });
+                }
+              }}
+            >
+              <div className="list">
+                {Object.keys(pick(links, mobileLinks)).map((key: string) => {
+                  return this.renderItem(links[key], 'list-item');
+                })}
+              </div>
+            </OutsideClickHandler>
+          </div>
+        ) : null}
       </Container>
-    )
+    );
   }
 }
 
 const LinkContainer = styled.div`
-    margin: 0 10px;
+  margin: 0 10px;
   a {
     color: ${props => props.theme.colors.tuatara};
     text-decoration: none;
     transition: 0.25s;
-    
+
     &.busy {
       .text {
         display: inline-block;
         position: relative;
-        
+
         &:before {
           content: '';
           width: 7px;
@@ -212,12 +219,12 @@ const LinkContainer = styled.div`
         }
       }
     }
-    
+
     &:hover {
-      color: ${props => props.theme.colors.linkColor}
+      color: ${props => props.theme.colors.linkColor};
     }
   }
-`
+`;
 
 const fadeInUp = keyframes`
   from {
@@ -234,7 +241,7 @@ const Container = styled.div`
   position: relative;
   display: flex;
   justify-content: center;
-  
+
   > a {
     color: ${props => props.theme.colors.tuatara};
     text-decoration: none;
@@ -243,7 +250,7 @@ const Container = styled.div`
     display: flex;
     align-items: center;
     font-size: 14px;
-    
+
     &.active, &:hover {
       color: ${props => props.theme.colors.linkColor};
     }
@@ -259,7 +266,7 @@ const Container = styled.div`
     height: 100%;
     box-sizing: border-box;
     cursor: pointer;
-    
+
     a {
       &.active {
         color: ${props => props.theme.colors.linkColor};
@@ -270,7 +277,7 @@ const Container = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    
+
     svg {
       height: 21px;
       width: 18px;
@@ -306,40 +313,45 @@ const Container = styled.div`
       }
     }
   }
-  
-  
+
+
   @media screen and (max-width: ${props => props.theme.breakpoints.sm}px) {
     position: static;
-    
+
     .settings-menu {
       left: 0;
       top: 110%;
-    
+
       .list {
-        .list-item {      
+        .list-item {
           font-size: 16px;
           padding: 1em 0;
         }
       }
   }
-`
-
+`;
 
 const mapStateToProps = (state: ReduxState): IStateProps => {
   return {
     profile: state.profile,
-  }
-}
+  };
+};
 
 const mapDispatchToProps = (dispatch): IDispatchProps => {
   return {
     setAyah: (ayah: AyahShape) => {
       dispatch(setAyah(ayah));
     },
-  }
-}
+  };
+};
 
-export default withRouter(injectIntl(withCookies(connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(NavMenu))));
+export default withRouter(
+  injectIntl(
+    withCookies(
+      connect(
+        mapStateToProps,
+        mapDispatchToProps
+      )(NavMenu)
+    )
+  )
+);
