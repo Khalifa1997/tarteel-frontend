@@ -48,6 +48,7 @@ class WelcomePage extends Component<IProps, never> {
                 <T id={KEYS.LANDING_FIRST_PARAGRAPH}/>
               </p>
               <h3 className={rtl}>
+                <br />
                 <T id={KEYS.LANDING_SECOND_PARAGRAPH_TITLE}/>
               </h3>
               <ul>
@@ -62,6 +63,7 @@ class WelcomePage extends Component<IProps, never> {
                 </li>
               </ul>
               <div className={rtl}>
+                <br />
                 <T id={KEYS.LANDING_LAST_LINE}/>
               </div>
             </div>

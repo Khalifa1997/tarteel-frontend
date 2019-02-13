@@ -89,14 +89,14 @@ const New = styled(Link)`
   align-items: center;
   z-index: 5;
   background: #fff;
-  
+
   @media screen and (max-width: ${props => props.theme.breakpoints.md}px) {
     right: 1em;
   }
 `;
 
 const Ayah = styled(Link)`
-  background-color: ${props => props.theme.colors.brandPrimary };
+  background-color: ${props => props.theme.colors.linkColor};
   border-radius: 5px;
   color: #fff;
   display: flex;
@@ -108,15 +108,15 @@ const Ayah = styled(Link)`
   position: relative;
   box-sizing: border-box;
   padding: 10px 1em;
-  
+
   p {
     text-align: left;
-    
+
     &:nth-child(1) {
       margin-bottom: 10px;
     }
   }
-  
+
   .surah-index {
     position: absolute;
     top: 10px;
@@ -130,7 +130,7 @@ const Container = styled.div`
   flex-flow: column;
   height: 100%;
   box-sizing: border-box;
-  
+
   .content {
     padding: 1em;
     padding-top: 2em;
@@ -143,10 +143,12 @@ const Container = styled.div`
     .query {
       color: ${props => props.theme.colors.brandPrimary};
       text-align: center;
+      margin-top: 20px;
     }
     h3 {
       color: gray;
       text-align: center;
+      margin-top: 10px;
     }
     .list {
       margin-top: 2em;
@@ -161,7 +163,7 @@ const Container = styled.div`
         justify-content: center;
       }
     }
-  } 
+  }
 `
 
 const mapStateToProps = (state: ReduxState): IStateProps => {

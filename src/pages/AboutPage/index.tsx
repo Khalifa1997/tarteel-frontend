@@ -373,7 +373,7 @@ class About extends Component<IProps, IState> {
 
               <footer>
                 <FooterButton onClick={() => {
-                  window.open('mailto:tarteel@abdellatif.io', '_self');
+                  window.open('mailto:contact.tarteel@gmail.com', '_self');
                 }}>
                   <T id={KEYS.CONTACT_US_BUTTON_TEXT} />
                 </FooterButton>
