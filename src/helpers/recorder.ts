@@ -37,11 +37,15 @@ function startUserMedia(stream: any) {
 }
 
 export function stopRecording() {
-  return recorder.stop().then(({blob}: {blob: Blob}) => {
-    currentBlob = blob;
-    meter.shutdown();
-    audioStream.getTracks()[0].stop();
-  });
+  if (recorder) {
+    return recorder.stop().then(({blob}: {blob: Blob}) => {
+      currentBlob = blob;
+      meter.shutdown();
+      audioStream.getTracks()[0].stop();
+    });
+  } else {
+    return Promise.reject();
+  }
 }
 
 export async function startRecording(props?: any) {

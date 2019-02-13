@@ -1,7 +1,6 @@
 import AyahShape from "../shapes/AyahShape";
 
 interface ReduxState {
-  users: IUser[];
   ayahs: {
     currentAyah: AyahShape;
     prevAyah: AyahShape[];
@@ -19,10 +18,6 @@ interface ReduxState {
 
 export interface IRouter {
   location: Location;
-}
-
-export interface IUser {
-  name: string;
 }
 
 export interface IStatus {

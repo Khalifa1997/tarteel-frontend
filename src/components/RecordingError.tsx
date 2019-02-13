@@ -2,8 +2,11 @@ import React from 'react';
 import {BrowserView, MobileView} from "react-device-detect";
 import {Icon} from "react-icons-kit";
 import {close as closeIcon} from 'react-icons-kit/ionicons/close'
-import config from '../../config';
 import styled from "styled-components";
+import classNames from 'classnames';
+
+import config from '../../config';
+import {withCookies} from "react-cookie";
 
 interface IProps {
   onClose(): void;
@@ -11,6 +14,9 @@ interface IProps {
 }
 
 const RecordingError = (props: IProps) => {
+  const classes = classNames({
+    rtl: props.cookies.get('currentLocale') || 'en',
+  })
   return (
     <Container >
       <MobileView>
@@ -25,12 +31,14 @@ const RecordingError = (props: IProps) => {
         <div className="close" onClick={props.onClose}>
           <Icon icon={closeIcon} />
         </div>
-        {
-          !props.message ?
-            <p>To upload recordings, please enable microphone access, or use a different browser.</p>
-            :
-            <p>{ props.message }</p>
-        }
+        <div className={`msg ${classes}`}>
+          {
+            !props.message ?
+                'To upload recordings, please enable microphone access, or use a different browser.'
+              :
+                props.message
+          }
+        </div>
       </BrowserView>
     </Container>
   )
@@ -54,8 +62,12 @@ const Container = styled.div`
     right: 10px;
     top: 5px;
   }
-  p {
+  .msg {
     margin: 1em 10px;
+    
+    &.rtl {
+      direction: rtl;
+    }
   }
   a {
     color: #fff;
@@ -68,4 +80,4 @@ const Container = styled.div`
   }
 `
 
-export default RecordingError;
+export default withCookies(RecordingError);

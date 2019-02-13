@@ -28,7 +28,8 @@ interface IOwnProps {
   currentAyah: AyahShape;
   isFetchingCurrentAyah: boolean;
   passedOnBoarding: boolean;
-  status: IStatus
+  status: IStatus;
+  isAyahPage?: boolean;
 }
 
 type IProps = IOwnProps & IDispatchProps;
@@ -122,8 +123,8 @@ class Main extends React.Component<IProps, never> {
             ayah={this.props.currentAyah}
             isFetchingAyah={this.props.isFetchingCurrentAyah}
           />
+          <Footer isAyahPage={this.props.isAyahPage} />
         </div>
-        <Footer />
       </Container>
     );
   }

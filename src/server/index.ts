@@ -18,6 +18,7 @@ import offlinePage from './middleware/offlinePage';
 import reactApplication from './middleware/reactApplication/index';
 import security from './middleware/security';
 import serviceWorker from './middleware/serviceWorker';
+import {getCookie} from "../helpers/cookie";
 
 // Create our express based server.
 const app = express();
@@ -73,11 +74,7 @@ app.use(express.static(pathResolve(appRootDir.get(), config('publicAssetsPath'))
 
 app.get('*', (request, response, next) => {
 
-  if (request.universalCookies.get('isFirstTime') === undefined) {
-    request.universalCookies.set('isFirstTime', true, {path: '/'});
-  }
-
-  if (request.path === '/' && JSON.parse(request.universalCookies.get('isFirstTime'))) {
+  if (request.path === '/' && !getCookie(request.universalCookies, 'passedOnBoarding')) {
     const queryString = Object.entries(request.query).map(([key, val]) => `${key}=${val}`).join('&');
     return response.redirect(`/welcome/${queryString ? '?' + queryString : ''}`)
   }

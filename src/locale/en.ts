@@ -60,7 +60,6 @@ const EN: Shape = {
     [KEYS.PRIVACY_POLICY_LINK_TEXT]: 'Privacy Policy',
     [KEYS.COOKIE_POLICY_LINK_TEXT]: 'Cookie Policy',
     [KEYS.EVALUATE_AYAHS]: "Evaluate Ayahs",
-    [KEYS.AYAH_RECOGNITION]: "Ayah Recognition",
     [KEYS.DEMOGRAPHIC_PAGE_FIRST_PARAGRAPH_1]: "With your help, we have reached a total of",
     [KEYS.DEMOGRAPHIC_PAGE_FIRST_PARAGRAPH_2]: "recordings. That's great, but at Tarteel, we're also committed to making sure that our recordings reflect recitations by both women and men and from the different ethnicities and ages that make up the Muslim ummah.",
     [KEYS.DEMOGRAPHIC_PAGE_SECOND_PARAGRAPH]: "Help us assess how well we're doing by telling us a little bit about yourself...",
@@ -73,6 +72,7 @@ const EN: Shape = {
     [KEYS.NOT_FOUND_PAGE_TEMPLATE_TITLE]: "Not Found",
     [KEYS.NOT_FOUND_PAGE_TEXT]: "Page Not Found",
     [KEYS.AYAH_NOT_FOUND_PAGE_TEXT]: "Not A Correct Ayah Index",
+    [KEYS.PICK_DIFFERENT_AYAH]: "Pick Different Ayah",
     [KEYS.AYAHS_RECITED]: "Ayahs recited",
     [KEYS.ABOUT_PAGE_TEMPLATE_TITLE]: "About",
     [KEYS.ABOUT_PAGE_RECITED_AYAHS_MESSAGE]: "Over <b>{users}</b> unique users have helped us reach a total of <b>{recitedAyahs}</b> ayahs so far alhamdulillah!",
@@ -99,6 +99,15 @@ const EN: Shape = {
     [KEYS.MOBILE_PAGE_TITLE]: "Download our mobile app.",
     [KEYS.MOBILE_PAGE_PARAGRAPH]: "Use Tarteel on the go to make your breaks and commutes more productive and full of reward with our Android and iOS apps.",
     [KEYS.CONTACT_US_BUTTON_TEXT]: "contact us",
+
+    [KEYS.NAME_INPUT_PLACEHOLDER]:  "e.g. Mohamed",
+    [KEYS.EMAIL_ADDRESS_INPUT_PLACEHOLDER]:  "e.g. Mohamed@example.com",
+    [KEYS.MESSAGE_TEXTAREA_PLACEHOLDER]:  "Your message here...",
+
+    [KEYS.NAME_INPUT_LABEL]: "Name",
+    [KEYS.EMAIL_ADDRESS_INPUT_LABEL]: "Email Address",
+    [KEYS.MESSAGE_TEXTAREA_LABEL]: "Message",
+
     [KEYS.LANDING_GREETING_MESSAGE]: "Salaam!",
     [KEYS.LANDING_FIRST_PARAGRAPH]: " Welcome to the <b>Tarteel 50,000 Challenge</b>! Thank you for helping us build the world's first public, open-source dataset</a> of Quran recitations by ordinary Muslim men and women. <a href='/about'>Learn more</a>",
     [KEYS.LANDING_SECOND_PARAGRAPH_TITLE]: "How it works",
@@ -107,7 +116,20 @@ const EN: Shape = {
     [KEYS.LANDING_LIST_THIRD_ITEM]: "These recitations <a href='/privacy'>will be released</a> as an open-source initiative to encourage machine learning applications based on recitations of the Quran.",
     [KEYS.LANDING_LAST_LINE]: "Click <strong>START</strong> below to get started!",
     [KEYS.LANDING_BUTTON_TEXT]: "Start",
+    [KEYS.GET_STARTED]: "Get Started",
 
+    [KEYS.CONTACT_US_SEND]: "Send",
+
+    [KEYS.AYAH_RECOGNITION]: "Ayah Recognition",
+    [KEYS.AYAH_RECOGNITION_POWERED_BY]: "Powered by <a href='#'>Iqra</a>",
+    [KEYS.AYAH_RECOGNITION_RECOGNITION_MESSAGE]: "Tap on the mic and recite a full or partial verse",
+    [KEYS.AYAH_RECOGNITION_IMPROVE_ACCURACY]: "Want to improve Accuracy?",
+    [KEYS.AYAH_RECOGNITION_CONTRIBUTE]: "Contribute your recording",
+    [KEYS.AYAH_RECOGNITION_UPDATE_REQUIRED]: "Thank you for trying to use Tarteel.\n Unfortunately, Tarteel is not supported by this browser. Upgrade \n to <a href='//www.google.com/chrome\'>Chrome</a> version 25 or later.",
+    [KEYS.AYAH_RECOGNITION_MIC_PERMISSION_ERROR]: "Permission to use microphone is blocked. To fix, please \n <a target='_blank' href={chromeLink}> change your settings here</a>.",
+    [KEYS.AYAH_RECOGNITION_AUDIO_CAPTURE_ERROR]: "No microphone was found. Ensure that a microphone is installed and that your \n <a target='_blank' href={errorLink}> microphone settings </a> \n are configured correctly.",
+    [KEYS.AYAH_RECOGNITION_NO_SPEECH_ERROR]: "No speech was detected. You may need to adjust your <a target='_blank' href={errorLink}> microphone settings</a>.",
+    [KEYS.RESULTS]: "Results",
 
     [KEYS.CONTRIBUTOR_1]: "Abubakar Abid, PhD student at Stanford University",
     [KEYS.CONTRIBUTOR_2]: "Ali Abid, software engineer at Google",

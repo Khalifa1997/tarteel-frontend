@@ -7,10 +7,6 @@ import {IProfile} from "../types/GlobalState";
 
 export const getLocalStorage = async (store: any) => {
   try {
-    const passedOnBoarding = Boolean(JSON.parse(await localStorage.getItem("passedOnBoarding")));
-    if (passedOnBoarding) {
-      store.dispatch(setPassedOnBoarding());
-    }
     store.dispatch(setUserRecitedAyahs(Number(await localStorage.getItem("userRecitedAyahs"))));
     const demographicData = await localStorage.getItem("demographicData");
     if (demographicData) {

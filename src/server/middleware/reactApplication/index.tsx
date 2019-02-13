@@ -130,6 +130,7 @@ export default function reactApplicationMiddleware(request: any, response: any) 
           return;
         }
 
+        response.setHeader('Content-Type', 'text/html');
         response
           .status(
             reactRouterContext.missed

@@ -1,4 +1,5 @@
 import ReduxState from "../types/GlobalState";
+import {getCookie} from "../helpers/cookie";
 
 const emptyAyah = {
   id: -1,
@@ -20,7 +21,6 @@ const emptyAyah = {
 
 const initState: (cookies?: any) => ReduxState = (cookies) => {
   return ({
-    users: [],
     ayahs: {
       currentAyah: emptyAyah,
       prevAyah: [],
@@ -34,7 +34,7 @@ const initState: (cookies?: any) => ReduxState = (cookies) => {
     status: {
       isRecording: false,
       isDoneRecording: false,
-      isContinuous: cookies ? cookies.get('continuous') ? JSON.parse(cookies.get('continuous')) : false : false,
+      isContinuous: getCookie(cookies, 'continuous'),
       isFetching: true,
     },
     demographicData: {
@@ -44,7 +44,7 @@ const initState: (cookies?: any) => ReduxState = (cookies) => {
       ethnicity: "",
     },
     profile: {
-      passedOnBoarding: false,
+      passedOnBoarding: getCookie(cookies, 'passedOnBoarding'),
       recordingCount: 0,
       dailyCount: 0,
       userRecitedAyahs: 0,

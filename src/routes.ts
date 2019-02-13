@@ -105,4 +105,10 @@ export default [
       resolve: () => import(/* webpackChunkName: "AyahNotFound" */ './pages/NotFound/Ayah'),
     }),
   },
+  {
+    path: '/contact_us',
+    component: asyncComponent({
+      resolve: () => import(/* webpackChunkName: "ContactUs" */ './pages/ContactUs'),
+    }),
+  },
 ];

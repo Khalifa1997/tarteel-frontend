@@ -16,3 +16,8 @@ export const setCookie = (name: string, value: any, options: CookieAttributes) =
     Cookies.set(name, value, options)
   }
 }
+
+
+export const getCookie = (cookies, key) => {
+  return cookies ? cookies.get(key) ? JSON.parse(cookies.get(key)) : false : false
+}

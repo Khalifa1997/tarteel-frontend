@@ -1,4 +1,5 @@
 import KEYS from './keys';
+import {KEY} from "redux-pack";
 
 export default {
   messages: {
@@ -51,7 +52,6 @@ export default {
     [KEYS.MOBILE_APP_LINK_TEXT]: "تطبيق الهاتف",
     [KEYS.HOME_LINK_TEXT]: 'الرئيسيه',
     [KEYS.EVALUATE_AYAHS]: "تقييم آيات",
-    [KEYS.AYAH_RECOGNITION]: "التعرف علي الآيات",
     [KEYS.DEMOGRAPHIC_PAGE_FIRST_PARAGRAPH_1]: "بمساعدتك، لقد وصلنا إلي",
     [KEYS.DEMOGRAPHIC_PAGE_FIRST_PARAGRAPH_2]: "تسجيل. هذا جيد ، ولكن في ترتيل نسعي لأن تكون التسجيلات بصوت رجال و نساء من جميع الأعمار والثقافات المختلفه ، لتحسين جودة البرنامج.",
     [KEYS.DEMOGRAPHIC_PAGE_SECOND_PARAGRAPH]: "ساعدنا لتحسين أداء البرنامج بتسجيل بعض المعلومات عنك.",
@@ -64,6 +64,7 @@ export default {
     [KEYS.NOT_FOUND_PAGE_TEMPLATE_TITLE]: "صفحه غير موجوده",
     [KEYS.NOT_FOUND_PAGE_TEXT]: "هذه الصفحه غير موجوده",
     [KEYS.AYAH_NOT_FOUND_PAGE_TEXT]: "رقم هذه الآيه غير صحيح",
+    [KEYS.PICK_DIFFERENT_AYAH]: "أختر آيه أخري",
     [KEYS.AYAHS_RECITED]: "آيات مسجلة",
     [KEYS.ABOUT_PAGE_TEMPLATE_TITLE]: "عن ترتيل",
     [KEYS.ABOUT_PAGE_FIRST_PARAGRAPH_TITLE]: "ما هو ترتيل ؟",
@@ -82,6 +83,15 @@ export default {
     [KEYS.MOBILE_PAGE_TITLE]: "حمل تطبيق ترتيل",
     [KEYS.MOBILE_PAGE_PARAGRAPH]: "حمل تطبيق ترتيل علي هاتفك واجعل وقت فراغك مفيد و مليئ بالثواب",
     [KEYS.CONTACT_US_BUTTON_TEXT]: "تواصل معنا",
+
+    [KEYS.NAME_INPUT_PLACEHOLDER]:  "(مثال): محمد",
+    [KEYS.EMAIL_ADDRESS_INPUT_PLACEHOLDER]:  "(مثال): Mohamed@example.com",
+    [KEYS.MESSAGE_TEXTAREA_PLACEHOLDER]:  "أكتب رسالتك هنا...",
+
+    [KEYS.NAME_INPUT_LABEL]: "الأسم",
+    [KEYS.EMAIL_ADDRESS_INPUT_LABEL]: "البريد الألكتروني",
+    [KEYS.MESSAGE_TEXTAREA_LABEL]: "الرساله",
+
     [KEYS.LANDING_GREETING_MESSAGE]: "سلام !",
     [KEYS.LANDING_FIRST_PARAGRAPH]: "أهلاً بك في تحدي ترتيل 50,000 ، شكراً لمساعدتنا في بناء أول مجموعة بيانات عامة مفتوحة المصدر في العالم لتلاوات القرآن من قبل أشخاص عاديين مثلي ومثلك. <a href='/about'>اقرأ المزيد</a> ",
     [KEYS.LANDING_SECOND_PARAGRAPH_TITLE]: "كيف يعمل ؟",
@@ -90,16 +100,29 @@ export default {
     [KEYS.LANDING_LIST_THIRD_ITEM]: " هذه التسجيلات سوف ستكون متاحة للمطورين المهتمين ببناء تطبيقات قائمة علي تلاوة القرآن.",
     [KEYS.LANDING_LAST_LINE]: "<a href='/privacy'>سياسة الخصوصية</a>",
     [KEYS.LANDING_BUTTON_TEXT]: "ابدأ",
+    [KEYS.GET_STARTED]: "أبدأ الآن",
 
+    [KEYS.AYAH_RECOGNITION]: "التعرف علي الآيات",
+    [KEYS.AYAH_RECOGNITION_POWERED_BY]: "بواسطة <a href='#'>إقرأ</a>",
+    [KEYS.AYAH_RECOGNITION_RECOGNITION_MESSAGE]: "إبدأ بالضغط علي زر الميكروفون لتبدأ بتسجيل أيه كامله أو مقطع",
+    [KEYS.AYAH_RECOGNITION_IMPROVE_ACCURACY]: "تريد المساعده في تطوير البرنامج ؟",
+    [KEYS.AYAH_RECOGNITION_CONTRIBUTE]: "شارك تسجيل الآيه بصوتك",
+    [KEYS.AYAH_RECOGNITION_UPDATE_REQUIRED]: "شكراً لإستعمالك ترتيل للأسف هذا المتصفح لا يدعم التشغيل قم بتطوير  <a href='//www.google.com/chrome\\'>كروم</a>  للإصدار ٢٥ أو أكثر.",
+    [KEYS.AYAH_RECOGNITION_MIC_PERMISSION_ERROR]: "لايوجد أذن لإستخدام الميكروفون لحل هذه المشكله من فضلك غير إعدادات الصوت لديك <a target='_blank' href={chromeLink}> من هنا</a>.",
+    [KEYS.AYAH_RECOGNITION_AUDIO_CAPTURE_ERROR]: "لا يوجد ميكروفون. تأكد من توصيلك للميكروفون وأن إعدادات الميكروفون صحيحه <a target=‘_blank’ href={errorLink}> من هنا </a>",
+    [KEYS.AYAH_RECOGNITION_NO_SPEECH_ERROR]: "لم يتم التعرف علي أي صوت .  يمكن أن تتأكد من إعدادات الميكروفون  <a target=‘_blank’ href={errorLink}> من هنا</a>.",
+    [KEYS.RESULTS]: "نتيجه",
 
-  [KEYS.CONTRIBUTOR_1]: "أبوبكر عابد ، طالب دكتوراه - جامعة ستانفورد",
-  [KEYS.CONTRIBUTOR_2]: "علي عابد ، مهندس برمجيات - جوجل",
-  [KEYS.CONTRIBUTOR_3]: "علي عبدالله ، مهندس ميكانيكا - تيسلا",
-  [KEYS.CONTRIBUTOR_4]: "عبد اللطيف عبد الفتاح ، مهندس برمجيات - تويتر",
-  [KEYS.CONTRIBUTOR_5]: "أحمد بهاء ، طالب هندسة برمجيات",
-  [KEYS.CONTRIBUTOR_6]: "حمزه خان ، مهندس برمجيات - أوبر",
-  [KEYS.CONTRIBUTOR_7]: "عريبه عابد ، طالبة هندسة الطب الحيوي -  معهد جورجيا للتكنولوجيا",
-  [KEYS.CONTRIBUTOR_8]: "عبدالرحمن الفوزان ، مهندس برمجيات - فيسبوك",
+    [KEYS.CONTACT_US_SEND]: "إرسال",
+
+    [KEYS.CONTRIBUTOR_1]: "أبوبكر عابد ، طالب دكتوراه - جامعة ستانفورد",
+    [KEYS.CONTRIBUTOR_2]: "علي عابد ، مهندس برمجيات - جوجل",
+    [KEYS.CONTRIBUTOR_3]: "علي عبدالله ، مهندس ميكانيكا - تيسلا",
+    [KEYS.CONTRIBUTOR_4]: "عبد اللطيف عبد الفتاح ، مهندس برمجيات - تويتر",
+    [KEYS.CONTRIBUTOR_5]: "أحمد بهاء ، طالب هندسة برمجيات",
+    [KEYS.CONTRIBUTOR_6]: "حمزه خان ، مهندس برمجيات - أوبر",
+    [KEYS.CONTRIBUTOR_7]: "عريبه عابد ، طالبة هندسة الطب الحيوي -  معهد جورجيا للتكنولوجيا",
+    [KEYS.CONTRIBUTOR_8]: "عبدالرحمن الفوزان ، مهندس برمجيات - فيسبوك",
 
   },
 };

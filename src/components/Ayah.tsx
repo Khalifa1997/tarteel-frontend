@@ -97,36 +97,36 @@ class Ayah extends React.Component<IProps, IState> {
             isFetchingAyah || !ayah.textSimple ? this.renderAyahLoader() : this.renderAyah()
           }
         </div>
-        <div className="ayah-translit">
-          <p className="translit-button" onClick={this.toggleTranslit}>
+        <div className="ayah-data">
+          <div className="ayah-translit">
+            <p className="translit-button" onClick={this.toggleTranslit}>
+              {
+                this.state.showTranslit ? "Hide" : "Show"
+              } Transliteration
+            </p>
             {
-              this.state.showTranslit ? "Hide" : "Show"
-            } Transliteration
-          </p>
-          {
-            this.state.showTranslit ?
-              <p className="translit" >
-                {
-                  this.renderTransliteration()
-                }
-              </p>
-              :
-              null
-          }
-        </div>
-        <div className={'ayah-loc-container'}>
-          <div className="ayah-loc">
-            ({ ayah.chapterId } : {ayah.verseNumber})
+              this.state.showTranslit ?
+                <p className="translit" >
+                  {
+                    this.renderTransliteration()
+                  }
+                </p>
+                :
+                null
+            }
           </div>
-          <a className="share" onClick={this.handleShareAyah}>
-            <img src={shareIcon} alt="share icon" />
-          </a>
-        </div>
-        <Link to={`/surah/${ayah.chapterId}`} className={'change-ayah'}>
-          <span>
+          <div className={'ayah-loc-container'}>
+            <div className="ayah-loc">
+              ({ ayah.chapterId } : {ayah.verseNumber})
+            </div>
+            <a className="share" onClick={this.handleShareAyah}>
+              <img src={shareIcon} alt="share icon" />
+            </a>
+          </div>
+          <Link to={`/surah/${ayah.chapterId}`} className={'change-ayah'}>
             <T id={KEYS.CHANGE_AYAH_TEXT} />
-          </span>
-        </Link>
+          </Link>
+        </div>
         <ShareModal
           show={this.state.showShareModal}
           quote={``}
@@ -143,10 +143,15 @@ class Ayah extends React.Component<IProps, IState> {
 const Container = styled.div`
   text-align: center;
   padding: 10px;
+  box-sizing: border-box;
   z-index: 5;
   position: relative;
   max-width: 750px;
   margin: auto;
+  flex: 1;
+  display: flex;
+  flex-flow: column;
+  justify-content: space-evenly;
   
   #ayah-text {
     //margin-top: 20px;
@@ -164,7 +169,6 @@ const Container = styled.div`
     }
   }
   .ayah-translit {
-    margin-top: 30px;
     height: 50px;
     display: flex;
     flex-flow: column;
@@ -200,14 +204,13 @@ const Container = styled.div`
         font-size: 16px;
         transition: 0.2s;
       }
+      
+      &:hover span {
+        color: #5ec49e;
+      }
     }
     
-    &:hover .change-ayah span {
-      color: #5ec49e;
-    }
     
-  }
-  
   @media screen and (max-height: ${props => props.theme.breakpoints.sm}px) { 
     .ayah-translit {
       .translit-button {

@@ -9,7 +9,10 @@ export const Container = styled.div`
   box-sizing: border-box;
   
   .content {
-    //padding: 15px;
+    flex: 1;
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
   }
   @media screen and (max-width: ${props => props.theme.breakpoints.sm}px) {
     padding: 1em;

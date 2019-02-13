@@ -1,21 +1,27 @@
 import React from 'react';
 import styled from "styled-components";
 import {DebounceInput} from 'react-debounce-input';
+import classNames from 'classnames';
+import {withCookies} from "react-cookie";
 
 interface IProps{
   debounce?: boolean;
   label: string;
+  type: string;
   [x: string]: any;
 }
 
 class Input extends React.Component<IProps, never> {
   render() {
+    const classes = classNames({
+      rtl: this.props.cookies.get('currentLocale') === 'ar',
+    });
     return (
-      <Container>
+      <Container className={classes}>
         <label>
           {
             this.props.label
-          }:
+          } :
         </label>
         {
           this.props.debounce ?
@@ -27,7 +33,7 @@ class Input extends React.Component<IProps, never> {
               {...this.props}
             />
             :
-            <input {...this.props} />
+            this.props.type !== 'textarea' ? <input {...this.props} /> : <textarea {...this.props} />
         }
       </Container>
     );
@@ -35,12 +41,17 @@ class Input extends React.Component<IProps, never> {
 }
 
 const Container = styled.div`
+
+  &.rtl {
+    direction: rtl;
+  }
+  
   label {
     margin-left: 5px;
     margin-bottom: 5px;
     font-size: 14px;
   }
-  input {
+  input, textarea {
     height: 30px;
     border-radius: 5px;
     border: 2px solid lightgray;
@@ -57,6 +68,11 @@ const Container = styled.div`
       border: 2px solid ${props => props.theme.colors.linkColor};
     }
   }
+  
+  textarea {
+    height: auto;
+    padding: 10px;
+  }
 `;
 
-export default Input;
+export default withCookies(Input);

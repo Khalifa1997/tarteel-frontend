@@ -10,8 +10,10 @@ import {connect} from "react-redux";
 import {Link, withRouter} from "react-router-dom";
 import styled from "styled-components";
 import {getType} from "typesafe-actions";
+import classNames from 'classnames';
+
 import HandShakeImage from '../../public/handshake-icon.png'
-import {fetchRandomAyah, fetchSpecificAyah, sendRecording} from "../api/ayahs";
+import {fetchRandomAyah, sendRecording} from "../api/ayahs";
 import surahs from "../api/surahs";
 import {storePassedOnBoarding, storeUserRecitedAyahs} from "../helpers";
 import {getNextAyah, getPrevAyah} from "../helpers/ayahs";
@@ -42,6 +44,8 @@ import RecordingError from "./RecordingError";
 
 interface IOwnProps {
   history: History;
+  location: Location;
+  isAyahPage?: boolean;
 }
 
 interface IDispatchPros {
@@ -74,6 +78,7 @@ interface IStateProps {
 interface IState {
   showModal: boolean;
   showErrorMessage: boolean;
+  showGetStarted: boolean;
 }
 
 type IProps = IOwnProps & IStateProps & IDispatchPros;
@@ -82,8 +87,8 @@ class Footer extends React.Component<IProps, IState>  {
   public state = {
     showModal: false,
     showErrorMessage: false,
+    showGetStarted: Boolean(this.props.isAyahPage) && !this.props.profile.passedOnBoarding,
   }
-
   public setPreviousAyah = async () => {
     const {verseNumber: ayah, chapterId: surah} = this.props.currentAyah;
     const {prevSurah, prevAyah} = getPrevAyah(surah, ayah)
@@ -167,7 +172,7 @@ class Footer extends React.Component<IProps, IState>  {
 
       if (this.props.profile.userRecitedAyahs === 5 && !this.props.profile.passedOnBoarding) {
         this.props.setPassedOnBoarding();
-        storePassedOnBoarding();
+        this.props.cookies.set('passedOnBoarding', true, { path: '/' });
         this.props.history.push('/demographics');
       } else {
         this.props.toggleDoneRecording();
@@ -220,41 +225,57 @@ class Footer extends React.Component<IProps, IState>  {
         this.props.setAyah(ayah)
       })
   }
+  handleGetStarted = () => {
+    this.setState({
+      showGetStarted: true,
+    });
+  }
   public render() {
     const {isRecording, isDoneRecording, isContinuous} = this.props.status;
-    const {showErrorMessage} = this.state;
+    const {showErrorMessage, showGetStarted} = this.state;
+    const classes = classNames({
+      'get-started': showGetStarted,
+      'more-right': showGetStarted,
+    });
     return (
-     <Container>
+     <Container className={classes}>
        <div className="buttons-wrapper">
          {
            !isDoneRecording ?
              <div className="mic-wrapper">
-               <RecordingButton
-                 className={`mic ${ isRecording ? "recording" : "" }`}
-                 onClick={this.handleRecordingButton}>
-                 <div className="icon">
-                   {
-                     !isRecording ?
-                       <Icon icon={micA} size={30} />
-                       :
-                       <Icon icon={stop} size={30} />
-                   }
-                 </div>
-               </RecordingButton>
                {
-                 !isRecording ?
-                 <NoteButton className="previous arabic-text rtl" onClick={this.setPreviousAyah}>
-                   <T id={KEYS.PREVIOUS_AYAH} />
-                 </NoteButton>
-                   : null
+                 !showGetStarted ?
+                 <RecordingButton
+                   className={`mic ${ isRecording ? "recording" : "" }`}
+                   onClick={this.handleRecordingButton}>
+                   <div className="icon">
+                     {
+                       !isRecording ?
+                         <Icon icon={micA} size={30} />
+                         :
+                         <Icon icon={stop} size={30} />
+                     }
+                   </div>
+                 </RecordingButton>
+                   :
+                    null
                }
-               {
-                  !isRecording ?
-                 <NoteButton className="next arabic-text rtl" onClick={this.setNextAyah}>
-                   <T id={KEYS.NEXT_AYAH} />
-                 </NoteButton>
-                    : null
-               }
+               <div className="navigation-button">
+                 {
+                   !isRecording ?
+                     <NoteButton className={`${classes} previous arabic-text rtl`} onClick={this.setPreviousAyah}>
+                       <T id={KEYS.PREVIOUS_AYAH} />
+                     </NoteButton>
+                     : null
+                 }
+                 {
+                   !isRecording ?
+                     <NoteButton className={`next ${classes} arabic-text rtl`} onClick={this.setNextAyah}>
+                       <T id={KEYS.NEXT_AYAH} />
+                     </NoteButton>
+                     : null
+                 }
+               </div>
              </div>
              :
              null
@@ -299,7 +320,16 @@ class Footer extends React.Component<IProps, IState>  {
          </div>
        </div>
        {
-         !isDoneRecording && !isRecording ? <ToggleButton text={KEYS.CONTINUOUS_MODE_NOTE_TEXT} /> : null
+         !showGetStarted && !isDoneRecording && !isRecording ? <ToggleButton text={KEYS.CONTINUOUS_MODE_NOTE_TEXT} /> : null
+       }
+       {
+        showGetStarted
+         ?
+          <FooterButton className={'get-started-button'} onClick={this.handleGetStarted}>
+            <T id={KEYS.GET_STARTED} />
+          </FooterButton>
+          :
+          null
        }
        {
          showErrorMessage ?
@@ -356,6 +386,13 @@ const Container = styled.div`
   align-content: stretch;
   text-align: center;
   
+  &.get-started {
+    box-sizing: border-box;
+    padding: 1em 0;
+    top: 2em;
+    position: relative;
+  }
+  
   .buttons-wrapper {
     .mic-wrapper {
       position: relative;
@@ -368,6 +405,15 @@ const Container = styled.div`
       top: -23px;
     }
   } 
+  
+  .get-started-button {
+    margin-top: 2em;
+    span {
+      font-weight: normal;
+      text-transform: none;
+    }
+    padding: 8px 2em;
+  }
   
   @media screen and (max-width: ${props => props.theme.breakpoints.sm}px) {
     //height: 200px;

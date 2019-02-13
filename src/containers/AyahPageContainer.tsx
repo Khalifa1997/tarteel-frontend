@@ -1,3 +1,4 @@
+import React from 'react';
 import {withCookies} from "react-cookie";
 import {connect} from "react-redux";
 import {Dispatch} from "redux";
@@ -58,7 +59,7 @@ const mapStateToProps = (state: ReduxState): IStateProps => {
 };
 
 export const AyahPageContainer = {
-  component: withCookies(connect(mapStateToProps, mapDispatchToProps)(Main)),
+  component: withCookies(connect(mapStateToProps, mapDispatchToProps)((props) => <Main isAyahPage={true} {...props} />)),
   loadData: (store: any, req: any, res: any) => {
     const params = req.params[0].split('/').filter((a: string) => a).slice(1);
     const [surah, ayah] = params;

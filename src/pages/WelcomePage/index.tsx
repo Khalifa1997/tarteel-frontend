@@ -27,14 +27,14 @@ type IProps = IOwnProps & IDispatchProps & IStateProps;
 
 class WelcomePage extends Component<IProps, never> {
   public handleStart = () => {
-    this.props.cookies.set('isFirstTime', 'false', {path: '/'});
+    // this.props.cookies.set('isFirstTime', 'false', {path: '/'});
     this.props.history.push('/')
   }
   public render() {
     const rtl = this.props.intl.messages.local === "arabic" ? "rtl" : "";
     return (
       <Container>
-        <Navbar/>
+        <Navbar />
         <div className="content">
           <div className="banner">
             <img src={LogoImage} alt="Tarteel-logo" className="logo-img" />

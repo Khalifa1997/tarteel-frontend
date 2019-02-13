@@ -18,9 +18,9 @@ import ReduxState from "../../types/GlobalState";
 import {setRecognitionResults, setUnableToRecord} from "../../store/actions/recognition";
 import config from '../../../config'
 import {startRecording, stopRecording} from "../../helpers/recorder";
-import {toggleIsRecording} from "../../store/actions/status";
 import RecordingError from "../../components/RecordingError";
 import KEYS from "../../locale/keys";
+import T from "../../components/T";
 
 const cdnURL = config('cdnURL');
 
@@ -34,9 +34,8 @@ interface IState {
   partialQuery: string;
   query: string;
   isLoading: boolean;
-  recognitionMessage: string;
   showErrorMessage: boolean;
-  errorMessage: Element;
+  errorMessage: JSX.Element;
 }
 
 interface IStateProps {
@@ -46,7 +45,6 @@ interface IStateProps {
 interface IDispatchProps {
   setRecognitionResults(result: any): void;
   setUnableToRecord(): void;
-  toggleIsRecording(): void;
 }
 
 type IProps = IOwnProps & IDispatchProps & IStateProps
@@ -59,7 +57,6 @@ class Recognition extends React.Component<IProps, IState> {
     partialQuery: '',
     query: '',
     isLoading: false,
-    recognitionMessage: 'Tap on the mic and recite a full or partial verse',
     showErrorMessage: false,
     errorMessage: '',
   }
@@ -81,23 +78,17 @@ class Recognition extends React.Component<IProps, IState> {
     this.recognition.onend = () =>  null;
     this.recognition.stop();
   }
-  public handleRecordingError = () => {
-    this.props.toggleIsRecording();
+  public handleRecordingError = (e) => {
+    console.log(e);
   }
   public handleStartRecording = () => {
     const recConfig = {
       onError: this.handleRecordingError,
     }
-    startRecording(recConfig)
-      .then(() => {
-        this.props.toggleIsRecording();
-      })
+    startRecording(recConfig);
   }
   public handleStopRecording = () => {
-    stopRecording()
-      .then(() => {
-          this.props.toggleIsRecording();
-      })
+    stopRecording();
   }
   handleRecognitionResult = (e) => {
     let interimTranscript = '';
@@ -132,7 +123,7 @@ class Recognition extends React.Component<IProps, IState> {
     this.recognition.start();
 
   }
-  showErrorMessage = (message: Element) => {
+  showErrorMessage = (message: JSX.Element) => {
     this.setState({
       showErrorMessage: true,
       errorMessage: message,
@@ -140,29 +131,26 @@ class Recognition extends React.Component<IProps, IState> {
   }
   handleRecognitionError = (event) => {
     this.stopRecognition();
+    this.handleStopRecording();
     const errorLink = '//support.google.com/websearch/answer/2940021';
     const chromeLink = '//support.google.com/chrome/answer/2693767';
     if (event.error === 'no-speech') {
       this.showErrorMessage(
         <p>
-          No speech was detected. You may need to adjust your
-          <a target="_blank" href={errorLink}> microphone settings</a>.
-        </p>
+          <T id={KEYS.AYAH_RECOGNITION_NO_SPEECH_ERROR} values={{errorLink}} />
+        </p>,
       );
     } else if (event.error === 'audio-capture') {
       this.showErrorMessage(
         <p>
-          No microphone was found. Ensure that a microphone is installed and that your
-          <a target="_blank" href={errorLink}> microphone settings </a>
-          are configured correctly.
-        </p>
+          <T id={KEYS.AYAH_RECOGNITION_AUDIO_CAPTURE_ERROR} values={{errorLink}} />
+        </p>,
       );
     } else if (event.error === 'not-allowed') {
       this.showErrorMessage(
         <p>
-          Permission to use microphone is blocked. To fix, please
-          <a target="_blank" href={chromeLink}> change your settings here</a>.
-        </p>
+          <T id={KEYS.AYAH_RECOGNITION_MIC_PERMISSION_ERROR} values={{chromeLink}}/>
+        </p>,
       );
     }
   };
@@ -192,7 +180,7 @@ class Recognition extends React.Component<IProps, IState> {
       body: JSON.stringify({
         arabicText: query,
         translation: 'en-hilali',
-        apikey: '5995a4ed5c311227c1bfad46da592e9de5fc10e2036eebf95c601375ead8d532',
+        apikey: config('iqraApiKey'),
       }),
 
     })
@@ -258,16 +246,13 @@ class Recognition extends React.Component<IProps, IState> {
         }
         {
           !this.props.canRecord ?
-            <h3 className={'not-supported'}>Thank you for trying to use Tarteel.
-              Unfortunately, Tarteel is not supported by this browser. Upgrade
-              to <a href="//www.google.com/chrome">Chrome</a> version 25 or later.
+            <h3 className={'not-supported'}>
+              <T id={KEYS.AYAH_RECOGNITION_UPDATE_REQUIRED} />
             </h3>
             :
             <div className={'content'}>
               <p className={'status'}>
-                {
-                  this.state.recognitionMessage
-                }
+                <T id={KEYS.AYAH_RECOGNITION_RECOGNITION_MESSAGE} />
               </p>
               <div className="words">
                 <span className={'query'}>
@@ -298,16 +283,14 @@ class Recognition extends React.Component<IProps, IState> {
                 }
               </RecordingButton>
               <p className={'splittable'}>
-                <span>
-                  Want to improve Accuracy?
-                </span>
+                <T id={KEYS.AYAH_RECOGNITION_IMPROVE_ACCURACY} />
                 &nbsp;
                 <Link to={'/'}>
-                  Contribute your recording
+                  <T id={KEYS.AYAH_RECOGNITION_CONTRIBUTE} />
                 </Link>
               </p>
               <p className={'iqra'}>
-                Powered by <a href="#">Iqra</a>
+                <T id={KEYS.AYAH_RECOGNITION_POWERED_BY} />
               </p>
             </div>
         }
@@ -330,9 +313,6 @@ const mapDispatchToProps = (dispatch): IDispatchProps => {
     },
     setUnableToRecord: () => {
       return dispatch(setUnableToRecord())
-    },
-    toggleIsRecording: () => {
-      return dispatch(toggleIsRecording())
     },
   }
 }

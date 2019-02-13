@@ -18,6 +18,7 @@ interface IProps {
 class AyahNotFound extends React.Component<IProps> {
   public render() {
     const {intl} = this.props;
+
     return (
       <Container>
         <Helmet>
@@ -31,9 +32,9 @@ class AyahNotFound extends React.Component<IProps> {
           <h1>
             <T id={KEYS.AYAH_NOT_FOUND_PAGE_TEXT} />
           </h1>
-          <Link to="/">
+          <Link to="/surahs">
             <b>
-              Go Home
+              <T id={KEYS.PICK_DIFFERENT_AYAH} />
             </b>
           </Link>
         </div>

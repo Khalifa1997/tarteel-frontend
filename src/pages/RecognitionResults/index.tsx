@@ -2,12 +2,14 @@ import React from 'react';
 import styled from "styled-components";
 import pluralize from 'pluralize';
 import {androidAdd} from 'react-icons-kit/ionicons/androidAdd'
+import {injectIntl, InjectedIntl} from 'react-intl';
 
 import Navbar from "../../components/Navbar";
 import {connect} from "react-redux";
 import ReduxState, {IRecognition} from "../../types/GlobalState";
 import {Link} from "react-router-dom";
 import Icon from "react-icons-kit";
+import KEYS from "../../locale/keys";
 
 interface IRecognitionAyah {
   arabicAyah: string;
@@ -23,12 +25,9 @@ interface IStateProps {
 }
 
 interface IOwnProps {
-
+  intl: InjectedIntl;
 }
 
-interface IOwnProps {
-
-}
 
 type IProps = IStateProps & IOwnProps & IOwnProps;
 
@@ -45,7 +44,9 @@ class RecognitionResults extends React.Component<IProps> {
           </h1>
           <h3 className="count">
             {
-              pluralize('result', this.props.recognition.matches.length, true)
+              pluralize(
+                this.props.intl.formatMessage({id: KEYS.RESULTS})
+                , this.props.recognition.matches.length, true)
             }
           </h3>
           <div className="list">
@@ -170,6 +171,6 @@ const mapStateToProps = (state: ReduxState): IStateProps => {
   }
 }
 
-export default connect(
+export default injectIntl(connect(
   mapStateToProps,
-)(RecognitionResults);
+)(RecognitionResults));

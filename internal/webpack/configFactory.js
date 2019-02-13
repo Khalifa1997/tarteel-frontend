@@ -106,14 +106,14 @@ export default function webpackConfigFactory(buildOptions) {
         // Note: as we are using the WebpackMd5Hash plugin, the hashes will
         // only change when the file contents change. This means we can
         // set very aggressive caching strategies on our bundle output.
-        '[name]-[chunkhash].js',
+        '[name]-[hash].js',
         // For any other bundle (typically a server/node) bundle we want a
         // determinable output name to allow for easier importing/execution
         // of the bundle by our scripts.
         '[name].js'
       ),
       // The name format for any additional chunks produced for the bundle.
-      chunkFilename: '[name]-[chunkhash].js',
+      chunkFilename: '[name]-[hash].js',
 
       hotUpdateChunkFilename: '[hash].hot-update.js', // use for AssetsPlugin to filter out hot updates
       // When targetting node we will output our bundle as a commonjs2 module.
@@ -345,8 +345,16 @@ export default function webpackConfigFactory(buildOptions) {
       ifProdClient(
         () =>
           new MiniCssExtractPlugin({
-            filename: '[name]-[contenthash].css',
-            allChunks: true,
+            filename: '[name]-[hash].css',
+            chunkFilename: "[id]-[hash].css",
+            optimization: {
+              splitChunks: {
+                default: {
+                  chunks: 'all'
+                }
+              }
+            }
+
           })
       ),
 

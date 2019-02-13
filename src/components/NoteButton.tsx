@@ -10,6 +10,9 @@ const NoteButton  = styled.div`
   &:hover {
     color: #5EC49E;
   }
+  &.get-started {
+    text-decoration: underline;
+  }
   &.previous {
     position: absolute;
     top: 50%;
@@ -23,6 +26,10 @@ const NoteButton  = styled.div`
     right: -100px;
     margin: 0;
     transform: translateY(-50%);
+    
+    &.more-right { 
+      right: -115px;
+    }
   }
   &.previous-ayah {
     margin-top: 1em;

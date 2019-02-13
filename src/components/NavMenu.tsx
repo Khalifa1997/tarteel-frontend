@@ -42,6 +42,7 @@ interface ILink {
   onClick?(): void;
   external: boolean;
   busy: boolean;
+  badgeText: string;
 }
 
 type IProps = IDispatchProps & IStateProps & IOwnProps;
@@ -90,6 +91,7 @@ const linksFactory: (props:any) => {[key: string]: ILink} = (props) => {
     recognition: {
       textID: KEYS.AYAH_RECOGNITION,
       href: '/recognition',
+      badgeText: 'BETA',
     },
   }
 }
@@ -115,12 +117,20 @@ class NavMenu extends React.Component<IProps, IState>{
     const classNames = classnames({
       active: item.href === this.props.location.pathname,
       busy: item.busy,
+      badge: item.badgeText,
       [className]: className,
     })
     const Component = item.external ? 'a' : Link;
     return (
       <LinkContainer>
-        <Component href={item.href} to={item.href} onClick={item.onClick} className={classNames}>
+        <Component
+          href={item.href}
+          to={item.href}
+          onClick={item.onClick}
+          className={classNames}>
+          <span className={'badge-text'}>
+            {item.badgeText}
+          </span>
           <div className="text">
             <T id={item.textID} />
           </div>
@@ -189,7 +199,7 @@ class NavMenu extends React.Component<IProps, IState>{
 }
 
 const LinkContainer = styled.div`
-    margin: 0 10px;
+  margin: 0 10px;
   a {
     color: ${props => props.theme.colors.tuatara};
     text-decoration: none;
@@ -210,6 +220,18 @@ const LinkContainer = styled.div`
           right: -5px;
           top: 3px;
         }
+      }
+    }
+    
+    &.badge {
+      position: relative;
+      display: block;
+      .badge-text{
+        position: absolute;
+        font-size: 13px;
+        color: ${props => props.theme.colors.linkColor};
+        right: 8px;
+        top: -13px;
       }
     }
     
@@ -249,7 +271,7 @@ const Container = styled.div`
     }
   }
   > .list {
-    margin: 0;
+    margin: 0 10px;
     position: relative;
     line-height: 50px;
     display: flex;
@@ -293,6 +315,9 @@ const Container = styled.div`
       display: flex;
       flex-flow: column;
 
+      > div {
+        margin: 0;    
+      }
       .list-item {
         line-height: 35px;
         transition: background 200ms;

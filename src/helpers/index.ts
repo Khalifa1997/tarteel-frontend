@@ -16,12 +16,3 @@ export function storeUserRecitedAyahs(num: number) {
     console.log(e.message)
   }
 }
-
-export function storePassedOnBoarding() {
-  try {
-    localStorage.setItem("passedOnBoarding", String(true));
-  }
-  catch (e) {
-    console.log(e.message)
-  }
-}
