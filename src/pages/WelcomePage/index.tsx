@@ -1,5 +1,6 @@
 import React, {Component} from "react"
 import {InjectedIntl, injectIntl} from "react-intl"
+import classNames from 'classnames';
 
 import FooterButton from "../../components/FooterButton";
 import Navbar from "../../components/Navbar";
@@ -27,11 +28,12 @@ type IProps = IOwnProps & IDispatchProps & IStateProps;
 
 class WelcomePage extends Component<IProps, never> {
   public handleStart = () => {
-    // this.props.cookies.set('isFirstTime', 'false', {path: '/'});
-    this.props.history.push('/')
+    this.props.history.push('/');
   }
   public render() {
-    const rtl = this.props.intl.messages.local === "arabic" ? "rtl" : "";
+    const classes = classNames({
+      rtl: this.props.cookies.get('currentLocale') === 'ar';
+    })
     return (
       <Container>
         <Navbar />
@@ -41,28 +43,30 @@ class WelcomePage extends Component<IProps, never> {
           </div>
           <div className="core-text">
             <div className="info start-text">
-              <h3 className={rtl}>
-                <T id={KEYS.LANDING_GREETING_MESSAGE}/>
+              <h3 className={classes}>
+                <T id={KEYS.LANDING_GREETING_MESSAGE} />
               </h3>
-              <p className={rtl}>
-                <T id={KEYS.LANDING_FIRST_PARAGRAPH}/>
+              <p className={classes}>
+                <T id={KEYS.LANDING_FIRST_PARAGRAPH} />
               </p>
-              <h3 className={rtl}>
-                <T id={KEYS.LANDING_SECOND_PARAGRAPH_TITLE}/>
+              <h3 className={classes}>
+                <br />
+                <T id={KEYS.LANDING_SECOND_PARAGRAPH_TITLE} />
               </h3>
-              <ul>
-                <li className={rtl}>
-                  <T id={KEYS.LANDING_LIST_FIRST_ITEM}/>
+              <ul className={classes}>
+                <li className={classes}>
+                  <T id={KEYS.LANDING_LIST_FIRST_ITEM} />
                 </li>
-                <li className={rtl}>
-                  <T id={KEYS.LANDING_LIST_SECOND_ITEM}/>
+                <li className={classes}>
+                  <T id={KEYS.LANDING_LIST_SECOND_ITEM} />
                 </li>
-                <li className={rtl}>
-                  <T id={KEYS.LANDING_LIST_THIRD_ITEM}/>
+                <li className={classes}>
+                  <T id={KEYS.LANDING_LIST_THIRD_ITEM} />
                 </li>
               </ul>
-              <div className={rtl}>
-                <T id={KEYS.LANDING_LAST_LINE}/>
+              <div className={classes}>
+                <br />
+                <T id={KEYS.LANDING_LAST_LINE} />
               </div>
             </div>
           </div>

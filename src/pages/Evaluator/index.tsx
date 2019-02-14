@@ -36,6 +36,7 @@ interface IProps {
   nextAyah: AyahShape;
   setAyah(ayah: AyahShape): ActionType<typeof setAyah>;
   setNextAyah(ayah: AyahShape): ActionType<typeof setNextAyah>;
+  increaseEvaluatedAyahs(): ActionType<typeof increaseEvaluatedAyahs>
   profile: IProfile;
 }
 
@@ -93,13 +94,19 @@ class Evaluator extends React.Component<IProps, IState> {
         }
     });
 
+    this.props.increaseEvaluatedAyahs()
     await this.getNewAyah();
     this.loadNextAyah();
     this.audio.pause();
+    try {
+      this.audio.load();
+    } catch (e) {
+      console.log(e);
+    }
     this.audio.load();
     this.updatePills(action);
     this.audio.dispatchEvent(new Event("ended"))
-    this.handlePlay()
+    this.handlePlay();
     // if (this.state.currentStep > 5) {
     //   this.setState({
     //     showModal: true,
@@ -110,18 +117,16 @@ class Evaluator extends React.Component<IProps, IState> {
     this.handleAyahChange("skipped")
   }
   public handleWrongAyah = () => {
-    if  (this.state.played) {
+    // if  (this.state.played) { commnented because it's blocking the continuous mode
       this.handleAyahChange("wrong")
       submitAyah("incorrect", this.props.currentAyah.recordingId)
-
-    }
+    // }
   }
   public handleRightAyah = () => {
-    if (this.state.played) {
+    // if (this.state.played) { commnented because it's blocking the continuous mode
       this.handleAyahChange("right")
       submitAyah("correct", this.props.currentAyah.recordingId)
-    }
-
+    // }
   }
   public handlePlay = () => {
     const siriWave = this.startWave();
@@ -293,7 +298,12 @@ class Evaluator extends React.Component<IProps, IState> {
 
         <div className="primary-buttons">
           <div ref={(C) => this.siriWave = C} className={"siri-wave"} />
-          <button type="button" className="vote-button yes" onClick={this.handleRightAyah} disabled={!played}>
+          <button
+            type="button"
+            className="vote-button yes"
+            onClick={this.handleRightAyah}
+            // disabled={!played}
+          >
             <Icon icon={thumbsUp} size={24} />
             <span>Yes</span>
           </button>
@@ -303,7 +313,12 @@ class Evaluator extends React.Component<IProps, IState> {
             </button>
             <div className="background" />
           </div>
-          <button type="button" className="vote-button no" onClick={this.handleWrongAyah} disabled={!played}>
+          <button
+            type="button"
+            className="vote-button no"
+            onClick={this.handleWrongAyah}
+            // disabled={!played}
+          >
             <Icon icon={thumbsDown} size={24} />
             <span>No</span>
           </button>

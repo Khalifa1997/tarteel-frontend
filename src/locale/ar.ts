@@ -103,15 +103,16 @@ export default {
     [KEYS.GET_STARTED]: "أبدأ الآن",
 
     [KEYS.AYAH_RECOGNITION]: "التعرف علي الآيات",
-    [KEYS.AYAH_RECOGNITION_POWERED_BY]: "بواسطة <a href='#'>إقرأ</a>",
-    [KEYS.AYAH_RECOGNITION_RECOGNITION_MESSAGE]: "إبدأ بالضغط علي زر الميكروفون لتبدأ بتسجيل أيه كامله أو مقطع",
+    [KEYS.AYAH_RECOGNITION_POWERED_BY]: "بواسطة <a href={url} target='_blank'>إقرأ</a>",
+    [KEYS.AYAH_RECOGNITION_RECOGNITION_MESSAGE]: "إبدأ بالضغط علي زر الميكروفون وأبدأ بالتسجيل لتجد الآيه الأقرب.",
     [KEYS.AYAH_RECOGNITION_IMPROVE_ACCURACY]: "تريد المساعده في تطوير البرنامج ؟",
     [KEYS.AYAH_RECOGNITION_CONTRIBUTE]: "شارك تسجيل الآيه بصوتك",
     [KEYS.AYAH_RECOGNITION_UPDATE_REQUIRED]: "شكراً لإستعمالك ترتيل للأسف هذا المتصفح لا يدعم التشغيل قم بتطوير  <a href='//www.google.com/chrome\\'>كروم</a>  للإصدار ٢٥ أو أكثر.",
     [KEYS.AYAH_RECOGNITION_MIC_PERMISSION_ERROR]: "لايوجد أذن لإستخدام الميكروفون لحل هذه المشكله من فضلك غير إعدادات الصوت لديك <a target='_blank' href={chromeLink}> من هنا</a>.",
     [KEYS.AYAH_RECOGNITION_AUDIO_CAPTURE_ERROR]: "لا يوجد ميكروفون. تأكد من توصيلك للميكروفون وأن إعدادات الميكروفون صحيحه <a target=‘_blank’ href={errorLink}> من هنا </a>",
     [KEYS.AYAH_RECOGNITION_NO_SPEECH_ERROR]: "لم يتم التعرف علي أي صوت .  يمكن أن تتأكد من إعدادات الميكروفون  <a target=‘_blank’ href={errorLink}> من هنا</a>.",
-    [KEYS.RESULTS]: "نتيجه",
+    [KEYS.AYAH_RECOGNITION_RESULTS]: "نتيجه",
+    [KEYS.AYAH_RECOGNITION_NEW_SEARCH]: "بحث جديد",
 
     [KEYS.CONTACT_US_SEND]: "إرسال",
 

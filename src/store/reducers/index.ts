@@ -6,6 +6,7 @@ import evaluatorReducer from "./evaluator"
 import profileReducer from "./profile"
 import routerReducer from "./router"
 import statusReducer from "./status"
+import datasetReducer from "./dataset"
 import recognitionReducer from "./recognition"
 
 export default combineReducers({
@@ -16,4 +17,5 @@ export default combineReducers({
   demographicData: demographicDataReducer,
   evaluator: evaluatorReducer,
   recognition: recognitionReducer,
+  dataset: datasetReducer,
 })

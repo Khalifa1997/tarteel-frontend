@@ -2,8 +2,7 @@ import {asyncComponent} from "react-async-component";
 import {EvaluatorContainer} from "./containers/EvaluatorContainer";
 import {MainPageContainer} from "./containers/MainPageContainer";
 import {AyahPageContainer} from "./containers/AyahPageContainer";
-import {Redirect} from "react-router-dom";
-
+import {DataSetContainer} from "./containers/DataSetContainer";
 
 
 export default [
@@ -110,5 +109,9 @@ export default [
     component: asyncComponent({
       resolve: () => import(/* webpackChunkName: "ContactUs" */ './pages/ContactUs'),
     }),
+  },
+  {
+    path: '/dataset',
+    ...DataSetContainer,
   },
 ];

@@ -1,4 +1,5 @@
 import KEYS from './keys';
+import React from "react";
 
 interface Shape {
   messages: { [key: string]: string };
@@ -80,12 +81,12 @@ const EN: Shape = {
     [KEYS.ABOUT_PAGE_FIRST_PARAGRAPH_TEXT]: "Tarteel is an open-source project designed to help build digital tools to analyze the recitation of the Quran. Given the important place of reciting the Quran in the lives of Muslims, it is important to build software tools that can help ordinary Muslims recite the Quran with greater accuracy and appreciation. The name tarteel comes from the Quran itself, where God commands us to \"recite the Quran with tarteel (slow, measured rhythmic tones)\" (73:4).",
     [KEYS.ABOUT_PAGE_SECOND_PARAGRAPH_TITLE]: "What is the Tarteel 50,000 challenge?",
     [KEYS.ABOUT_PAGE_SECOND_PARAGRAPH_TEXT_1]: "The goal of the Tarteel 50,000 Challenge is to build the world's first public dataset of Quranic recitations carried out by ordinary Muslims. Most of the available audio of the Quran being recited is from professional reciters with strong fluency in tajweed (rules of recitation) and is recorded in studios. This is valuable when someone wants to listen to a recitation of the Quran.",
-    [KEYS.ABOUT_PAGE_SECOND_PARAGRAPH_TEXT_2]: "However, many software tools that Muslim developers are interested in building require training machine learning models on Quranic recitation (e.g. to convert recitation2text), as it is recited by ordinary Muslims. The recitation of ordinary Muslims differs from professional recordings in many ways: for example, it may include background noise, or may be recited by people with limited knowledge of tajweed, or the demographics of reciters may be different. By collecting this data, we can train machine learning models, which we will release to software-developers who are interested in developing <a href='https://docs.google.com/presentation/d/1hlcbAcEfBg2y_KWwzyPPYjh5SMxowDEWM1XkDC48ZGQ/edit?usp=sharing'>a wide variety of applications</a> that are based on recitation2text, things like:",
+    [KEYS.ABOUT_PAGE_SECOND_PARAGRAPH_TEXT_2]: "However, many software tools that Muslim developers are interested in building require training machine learning models on Quranic recitation (e.g. to convert recitation2text), as it is recited by ordinary Muslims. The recitation of ordinary Muslims differs from professional recordings in many ways: for example, it may include background noise, or may be recited by people with limited knowledge of tajweed, or the demographics of reciters may be different. By collecting this data, we can train machine learning models, which we will release to software developers who are interested in developing <a href='https://docs.google.com/presentation/d/1hlcbAcEfBg2y_KWwzyPPYjh5SMxowDEWM1XkDC48ZGQ/edit?usp=sharing'>a wide variety of applications</a> that are based on recitation2text, things like:",
     [KEYS.ABOUT_PAGE_SECOND_PARAGRAPH_TEXT_2_LINK]: "a wide variety of applications",
     [KEYS.ABOUT_PAGE_THIRD_PARAGRAPH_TITLE]: "Who is a part of Tarteel?",
     [KEYS.ABOUT_PAGE_THIRD_PARAGRAPH_TEXT]: "Tarteel came out bi'iznillah and with the efforts of the following people:",
     [KEYS.ABOUT_PAGE_FOURTH_PARAGRAPH_TITLE]: "How can I help?",
-    [KEYS.ABOUT_PAGE_FOURTH_PARAGRAPH_TEXT]: "Tarteel is an open-source project that is maintained by developers interested in furthering the mission of Tarteel. If you'd like to contribute, please check out our GitHub repo: <a href='https://github.com/abidlabs/tarteel.io'>https://github.com/abidlabs/tarteel.io</a>",
+    [KEYS.ABOUT_PAGE_FOURTH_PARAGRAPH_TEXT]: "Tarteel is an open-source project that is maintained by developers interested in furthering the mission of Tarteel. If you'd like to contribute, please <a href='contact.tarteel@gmail.com'>email us</a> or check out our GitHub repos: <a href='https://github.com/Tarteel-io/'>https://github.com/Tarteel-io/</a>",
     [KEYS.ABOUT_PAGE_FIFTH_PARAGRAPH_TITLE]: "What is the demographic breakdown of Tarteel users?",
     [KEYS.ABOUT_PAGE_SIXTH_PARAGRAPH_TITLE]: "Are the verses that are being recited varied?",
     [KEYS.ABOUT_PAGE_SIXTH_PARAGRAPH_TEXT]: "To build good machine learning models, it helps to have people recite different verses from across the entire Quran. We're measuring how well we've covered the Qur'an and these are our stats so far:",
@@ -94,7 +95,7 @@ const EN: Shape = {
     [KEYS.ABOUT_PAGE_LAST_PARAGRAPH_TITLE]: "Where can I learn more about Tarteel?",
     [KEYS.ABOUT_PAGE_LAST_PARAGRAPH_TEXT]: "For more information, please check out our <a href='https://api.tarteel.io/static/docs/white-paper.pdf' target='_blank'>white paper</a>.",
     [KEYS.FIELDS_OF_USE_FIRST_ITEM]: "Hifz helping tools that automatically correct mistakes",
-    [KEYS.FIELDS_OF_USE_SECOND_ITEM]: "Tarjweed teaching tools in a similar vein",
+    [KEYS.FIELDS_OF_USE_SECOND_ITEM]: "Tajweed teaching tools in a similar vein",
     [KEYS.FIELDS_OF_USE_THIRD_ITEM]: "Masjid kiosks that follow the imam and display the translation of the verse",
     [KEYS.MOBILE_PAGE_TITLE]: "Download our mobile app.",
     [KEYS.MOBILE_PAGE_PARAGRAPH]: "Use Tarteel on the go to make your breaks and commutes more productive and full of reward with our Android and iOS apps.",
@@ -121,15 +122,16 @@ const EN: Shape = {
     [KEYS.CONTACT_US_SEND]: "Send",
 
     [KEYS.AYAH_RECOGNITION]: "Ayah Recognition",
-    [KEYS.AYAH_RECOGNITION_POWERED_BY]: "Powered by <a href='#'>Iqra</a>",
-    [KEYS.AYAH_RECOGNITION_RECOGNITION_MESSAGE]: "Tap on the mic and recite a full or partial verse",
+    [KEYS.AYAH_RECOGNITION_POWERED_BY]: "Powered by <a href={url} target='_blank'>Iqra</a>",
+    [KEYS.AYAH_RECOGNITION_RECOGNITION_MESSAGE]: "Tap on the mic below and start recording to find the ayah with the closest match.",
     [KEYS.AYAH_RECOGNITION_IMPROVE_ACCURACY]: "Want to improve Accuracy?",
     [KEYS.AYAH_RECOGNITION_CONTRIBUTE]: "Contribute your recording",
-    [KEYS.AYAH_RECOGNITION_UPDATE_REQUIRED]: "Thank you for trying to use Tarteel.\n Unfortunately, Tarteel is not supported by this browser. Upgrade \n to <a href='//www.google.com/chrome\'>Chrome</a> version 25 or later.",
+    [KEYS.AYAH_RECOGNITION_UPDATE_REQUIRED]: "Thank you for trying to use Tarteel Ayah Recognition. Unfortunately, Ayah recognition is not supported by this browser. Switch to <a href='//www.google.com/chrome'>Chrome</a> to use it.",
     [KEYS.AYAH_RECOGNITION_MIC_PERMISSION_ERROR]: "Permission to use microphone is blocked. To fix, please \n <a target='_blank' href={chromeLink}> change your settings here</a>.",
     [KEYS.AYAH_RECOGNITION_AUDIO_CAPTURE_ERROR]: "No microphone was found. Ensure that a microphone is installed and that your \n <a target='_blank' href={errorLink}> microphone settings </a> \n are configured correctly.",
     [KEYS.AYAH_RECOGNITION_NO_SPEECH_ERROR]: "No speech was detected. You may need to adjust your <a target='_blank' href={errorLink}> microphone settings</a>.",
-    [KEYS.RESULTS]: "Results",
+    [KEYS.AYAH_RECOGNITION_RESULTS]: "Results",
+    [KEYS.AYAH_RECOGNITION_NEW_SEARCH]: "New Search",
 
     [KEYS.CONTRIBUTOR_1]: "Abubakar Abid, PhD student at Stanford University",
     [KEYS.CONTRIBUTOR_2]: "Ali Abid, software engineer at Google",

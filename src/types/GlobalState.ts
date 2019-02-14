@@ -13,7 +13,8 @@ interface ReduxState {
   profile: IProfile;
   evaluator: IEvaluator;
   recognition: IRecognition;
-  router: IRouter
+  router: IRouter;
+  dataset: IDataset;
 }
 
 export interface IRouter {
@@ -35,6 +36,10 @@ export interface IProfile {
   userRecitedAyahs: number;
   sessionKey: string;
   askForDemographics: boolean;
+}
+
+export interface IDataset {
+  sample: string[];
 }
 
 export interface IDemographics {

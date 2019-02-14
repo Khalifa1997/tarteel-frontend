@@ -66,6 +66,9 @@ const initState: (cookies?: any) => ReduxState = (cookies) => {
     router: {
       location: {},
     },
+    dataset: {
+      sample: [],
+    },
   })
 };
 

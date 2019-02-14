@@ -18,3 +18,6 @@ export const unsetAskForDemographics = createAction('profile/UNSET_ASK_FOR_DEMOG
 export const setFetchedProfile = createAction('profile/SET_FETCHED_PROFILE', resolve => {
   return (profile: Partial<IProfile>) => resolve(humps.camelizeKeys(profile));
 });
+export const increaseEvaluatedAyahs = createAction('profile/INCREASE_EVALUATED_AYAHS', resolve => {
+  return () => resolve();
+});

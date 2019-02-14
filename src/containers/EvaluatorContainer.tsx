@@ -8,10 +8,12 @@ import AyahShape from "../shapes/AyahShape";
 import {setAyah, setNextAyah} from "../store/actions/evaluator";
 import ReduxState, {IProfile} from "../types/GlobalState";
 import { injectIntl } from 'react-intl';
+import {increaseEvaluatedAyahs} from "../store/actions/profile";
 
 interface IDispatchProps {
   setAyah(ayah: AyahShape): ActionType<typeof setAyah>;
   setNextAyah(ayah: AyahShape): ActionType<typeof setNextAyah>;
+  increaseEvaluatedAyahs(): ActionType<typeof increaseEvaluatedAyahs>;
 }
 
 interface IStateProps {
@@ -26,7 +28,9 @@ const mapDispatchToProps = (dispatch: Dispatch<ActionType<typeof setAyah>>): IDi
       (ayah: AyahShape) => dispatch(setAyah(ayah)),
     setNextAyah:
       (ayah: AyahShape) => dispatch(setNextAyah(ayah)),
-
+    increaseEvaluatedAyahs: () => {
+      return dispatch(increaseEvaluatedAyahs())
+    },
   }
 };
 

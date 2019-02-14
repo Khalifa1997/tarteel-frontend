@@ -37,6 +37,11 @@ export default (state: IProfile = INITIAL_STATE, action: ProfileAction) => {
         ...state,
         askForDemographics: false,
       }
+    case getType(profile.increaseEvaluatedAyahs):
+      return {
+        ...state,
+        evaluationsCount: state.evaluationsCount + 1,
+      }
     default:
       return state;
   }

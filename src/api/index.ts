@@ -42,3 +42,11 @@ export const fetchSessionData = (req?: any) => {
   return fetch(`${ API_URL }/api/index/?format=json`, options)
     .then(res => res.json())
 }
+
+export const getDatasetRecordings = (req?: any) => {
+  const options = __SERVER__ ? backendRequestOptions(req) : {
+    credentials: 'include',
+  };
+  return fetch(`${ API_URL }/api/download-audio/?format=json`, options)
+    .then(res => res.json())
+}

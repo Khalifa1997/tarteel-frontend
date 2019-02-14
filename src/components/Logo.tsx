@@ -32,7 +32,7 @@ class Logo extends React.Component<IProps, never> {
               data-balloon-pos="down"
               className="counter">
               <Tippy
-                content="Evaluated Ayahs"
+                content="Total Evaluated Ayahs"
                 trigger="mouseenter"
               >
                 <div className="evaluated">
@@ -62,7 +62,7 @@ const Container = styled.div`
   width: 50px;
   height: 50px;
   cursor: pointer;
-  
+
   img {
     height: 100%;
     width: 100%;
@@ -80,7 +80,7 @@ const Container = styled.div`
     border: 0;
     padding: 0;
     color: #000;
-    
+
     .evaluated {
       color: ${props => props.theme.colors.linkColor};
       font-size: 22px;

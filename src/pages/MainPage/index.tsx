@@ -80,9 +80,9 @@ class Main extends React.Component<IProps, never> {
     if (surah && ayah) {
       ogTitle = (
         locale === 'ar' ?
-          `سورة [${surahs[surah].arabic}] آيه ${ayah}  | ترتيل `
+          `سورة ${surahs[surah].arabic} آيه ${ayah}  | ترتيل `
           :
-          `Surah [${surahs[surah].latin}] ayah ${ ayah } | Tarteel`
+          `Surah ${surahs[surah].latin} Ayah ${ ayah } | Tarteel`
       )
     }
     return (
