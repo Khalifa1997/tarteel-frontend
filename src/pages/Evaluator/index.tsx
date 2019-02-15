@@ -8,7 +8,8 @@ import {chevronsLeft} from 'react-icons-kit/feather/chevronsLeft'
 import {skipForward} from 'react-icons-kit/feather/skipForward'
 import {thumbsDown} from 'react-icons-kit/feather/thumbsDown'
 import {thumbsUp} from 'react-icons-kit/feather/thumbsUp'
-import {volume2 as volumeIcon} from 'react-icons-kit/feather/volume2'
+import {volume2 as volumeIcon} from 'react-icons-kit/feather/volume2';
+import {threeHorizontal} from 'react-icons-kit/entypo/threeHorizontal';
 import {ActionType} from "typesafe-actions";
 import SiriWave from '../../../modified_modules/siriwave';
 import Helmet from 'react-helmet';
@@ -23,6 +24,7 @@ import {createAudioMeter} from "../../helpers/volume-meter";
 import AyahShape from "../../shapes/AyahShape";
 import WordShape from "../../shapes/WordShape";
 import {setAyah, setNextAyah} from "../../store/actions/evaluator";
+import {increaseEvaluatedAyahs} from "../../store/actions/profile";
 import {WORD_TYPES} from "../../types";
 import {IProfile} from "../../types/GlobalState";
 import {Container, ModalContent} from "./styles";
@@ -46,6 +48,7 @@ interface IState {
   showModal: boolean;
   pills: number[];
   currentStep: number;
+  isLoading: boolean;
 }
 
 class Evaluator extends React.Component<IProps, IState> {
@@ -58,10 +61,11 @@ class Evaluator extends React.Component<IProps, IState> {
     isPlaying: false,
     showModal: false,
     currentStep: 1,
-    pills: new Array(5),  //  ['wrong', 'skipped', ...]
+    pills: new Array(5),  //  ['wrong', 'skipped', ...],
+    isLoading: false,
   }
   public getNewAyah = () => {
-    if (this.props.nextAyah.ayahText) {
+    if (this.props.nextAyah.textSimple) {
       return this.props.setAyah(this.props.nextAyah)
     } else {
       return fetchEvaluatorAyah()
@@ -79,7 +83,7 @@ class Evaluator extends React.Component<IProps, IState> {
   public updatePills = (action: string) => {
     this.setState((state, props) => {
       const newPills = state.pills;
-      newPills[state.currentStep - 1] = action
+      newPills[state.currentStep - 1] = action;
       console.log(newPills);
       return {
         pills: newPills,
@@ -91,6 +95,7 @@ class Evaluator extends React.Component<IProps, IState> {
         return {
           played: false,
           currentStep: state.currentStep + 1,
+          isLoading: true,
         }
     });
 
@@ -107,6 +112,9 @@ class Evaluator extends React.Component<IProps, IState> {
     this.updatePills(action);
     this.audio.dispatchEvent(new Event("ended"))
     this.handlePlay();
+    this.setState({
+      isLoading: false,
+    })
     // if (this.state.currentStep > 5) {
     //   this.setState({
     //     showModal: true,
@@ -184,7 +192,7 @@ class Evaluator extends React.Component<IProps, IState> {
   }
   public render() {
     const {currentAyah, profile} = this.props;
-    const {isPlaying, played, pills, currentStep} = this.state;
+    const {isPlaying, played, isLoading, pills, currentStep} = this.state;
     const ogTitle = this.props.intl.formatMessage({ id: KEYS.EVALUATE_AYAHS });
     const localName = this.props.intl.formatMessage({ id: KEYS.LOCAL_NAME })
     return (
@@ -309,7 +317,7 @@ class Evaluator extends React.Component<IProps, IState> {
           </button>
           <div className="primary-button play" onClick={this.handlePlay}>
             <button type="button">
-              <Icon icon={!isPlaying ? play : stop} size={24} />
+              <Icon icon={isLoading ? threeHorizontal : !isPlaying ? play : stop} size={24} />
             </button>
             <div className="background" />
           </div>

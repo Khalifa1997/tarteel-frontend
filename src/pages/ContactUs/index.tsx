@@ -141,9 +141,17 @@ class ContactUs extends React.Component<IProps, IState> {
     return (
       <Container>
         <Helmet>
-          <title>Contact Us</title>
-          <meta property={'og:title'} content={'Contact Us'} />
-          <meta name={'twitter:title'} content={'Contact Us'} />
+          <title>
+            { intl.formatMessage({ id: KEYS.CONTACT_US }) }
+            </title>
+          <meta
+            property={'og:title'}
+            content={intl.formatMessage({ id: KEYS.CONTACT_US })}
+          />
+          <meta
+            name={'twitter:title'}
+            content={intl.formatMessage({ id: KEYS.CONTACT_US })}
+          />
         </Helmet>
         <Navbar />
         <div className="content">

@@ -92,6 +92,10 @@ const linksFactory: (props: any) => { [key: string]: ILink } = props => {
       href: '/recognition',
       badgeText: 'BETA',
     },
+    contact: {
+      textID: KEYS.CONTACT_US,
+      href: '/contact_us',
+    },
   };
 };
 
@@ -148,6 +152,7 @@ class NavMenu extends React.Component<IProps, IState> {
       'subscribe',
       'mobile',
       'dataset',
+      'contact',
     ];
     if (isMobileOnly) {
       mobileLinks = ['home', 'about', 'evaluator'].concat(mobileLinks)

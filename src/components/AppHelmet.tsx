@@ -91,6 +91,10 @@ const AppHelmet: React.SFC = ({intl}) => {
         content: '66FOg5_DAyDr7kihZYrWG0oW-4hc8z20r7E8DAMiFiA',
       },
       {
+        name: 'msvalidate.01',
+        content: 'B3EB6CF2ACCBA23C47B1C80C51C49FA6',
+      },
+      {
         name: 'theme-color',
         content: '#004f54',
       },
@@ -112,7 +116,7 @@ const AppHelmet: React.SFC = ({intl}) => {
       },
       {
         property: 'og:title',
-        content: title,
+        content: `%s | ${title}`,
       },
       {
         property: 'og:description',

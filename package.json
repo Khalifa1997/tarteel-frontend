@@ -7,11 +7,11 @@
     "node": ">=6"
   },
   "scripts": {
-    "analyze:client": "cross-env NODE_ENV=production ts-node -O '{\"module\": \"commonjs\"}' internal/scripts/analyze -- --client",
-    "analyze:server": "ts-node -O '{\"module\": \"commonjs\"}' internal/scripts/analyze -- --server",
-    "build": "ts-node -T -O '{\"module\": \"commonjs\"}' internal/scripts/build -- --optimize",
-    "build:dev": "ts-node -O '{\"module\": \"commonjs\"}' internal/scripts/build",
-    "clean": "cross-env ts-node -O '{\"module\": \"commonjs\"}' internal/scripts/clean",
+    "analyze:client": "cross-env NODE_ENV=production ts-node -O '{\"module\": \"commonjs\"}' --transpileOnly internal/scripts/analyze -- --client",
+    "analyze:server": "ts-node -O '{\"module\": \"commonjs\"}' --transpileOnly internal/scripts/analyze -- --server",
+    "build": "ts-node -T -O '{\"module\": \"commonjs\"}' --transpileOnly internal/scripts/build -- --optimize",
+    "build:dev": "ts-node -O '{\"module\": \"commonjs\"}' --transpileOnly internal/scripts/build",
+    "clean": "cross-env ts-node -O '{\"module\": \"commonjs\"}' --transpileOnly internal/scripts/clean",
     "deploy": "babel-node internal/scripts/deploy",
     "dev": "cross-env DEPLOYMENT=development ts-node -O '{\"module\": \"commonjs\"}' --transpileOnly internal/development",
     "lint": "tslint -c tslint.json 'src/**/*.{ts,tsx}'",
@@ -28,35 +28,20 @@
       "git add"
     ]
   },
-  "jest": {
-    "collectCoverageFrom": [
-      "shared/**/*.{js,jsx}"
-    ],
-    "snapshotSerializers": [
-      "<rootDir>/node_modules/enzyme-to-json/serializer"
-    ],
-    "testPathIgnorePatterns": [
-      "<rootDir>/(build|internal|node_modules|flow-typed|public)/"
-    ]
-  },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ctrlplusb/react-universally.git"
+    "url": "git+https://github.com/Tarteel-io/tarteel-frontend.git"
   },
   "keywords": [
-    "react",
-    "boilerplate",
-    "starter kit",
-    "universal",
-    "javascript",
-    "express",
-    "webpack"
+    "Tarteel",
+    "Quran",
+    "Voice Recognition"
   ],
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/ctrlplusb/react-universally/issues"
+    "url": "https://github.com/Tarteel-io/tarteel-frontend/issues"
   },
-  "homepage": "https://github.com/ctrlplusb/react-universally#readme",
+  "homepage": "https://github.com/Tarteel-io/tarteel-frontend#readme",
   "dependencies": {
     "@tippy.js/react": "1.1.1",
     "@types/camelcase-keys": "4.0.0",

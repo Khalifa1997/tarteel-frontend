@@ -82,7 +82,6 @@ export default {
     [KEYS.FIELDS_OF_USE_THIRD_ITEM]: "أكشاك المسجد التي تتبع الإمام وتعرض ترجمة الآية",
     [KEYS.MOBILE_PAGE_TITLE]: "حمل تطبيق ترتيل",
     [KEYS.MOBILE_PAGE_PARAGRAPH]: "حمل تطبيق ترتيل علي هاتفك واجعل وقت فراغك مفيد و مليئ بالثواب",
-    [KEYS.CONTACT_US_BUTTON_TEXT]: "تواصل معنا",
 
     [KEYS.NAME_INPUT_PLACEHOLDER]:  "(مثال): محمد",
     [KEYS.EMAIL_ADDRESS_INPUT_PLACEHOLDER]:  "(مثال): Mohamed@example.com",
@@ -114,7 +113,9 @@ export default {
     [KEYS.AYAH_RECOGNITION_RESULTS]: "نتيجه",
     [KEYS.AYAH_RECOGNITION_NEW_SEARCH]: "بحث جديد",
 
+    [KEYS.CONTACT_US]: "تواصل معنا",
     [KEYS.CONTACT_US_SEND]: "إرسال",
+    [KEYS.CONTACT_US_BUTTON_TEXT]: "تواصل معنا",
 
     [KEYS.CONTRIBUTOR_1]: "أبوبكر عابد ، طالب دكتوراه - جامعة ستانفورد",
     [KEYS.CONTRIBUTOR_2]: "علي عابد ، مهندس برمجيات - جوجل",

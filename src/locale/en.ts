@@ -99,7 +99,6 @@ const EN: Shape = {
     [KEYS.FIELDS_OF_USE_THIRD_ITEM]: "Masjid kiosks that follow the imam and display the translation of the verse",
     [KEYS.MOBILE_PAGE_TITLE]: "Download our mobile app.",
     [KEYS.MOBILE_PAGE_PARAGRAPH]: "Use Tarteel on the go to make your breaks and commutes more productive and full of reward with our Android and iOS apps.",
-    [KEYS.CONTACT_US_BUTTON_TEXT]: "contact us",
 
     [KEYS.NAME_INPUT_PLACEHOLDER]:  "e.g. Mohamed",
     [KEYS.EMAIL_ADDRESS_INPUT_PLACEHOLDER]:  "e.g. Mohamed@example.com",
@@ -119,7 +118,9 @@ const EN: Shape = {
     [KEYS.LANDING_BUTTON_TEXT]: "Start",
     [KEYS.GET_STARTED]: "Get Started",
 
+    [KEYS.CONTACT_US]: "Contact Us",
     [KEYS.CONTACT_US_SEND]: "Send",
+    [KEYS.CONTACT_US_BUTTON_TEXT]: "contact us",
 
     [KEYS.AYAH_RECOGNITION]: "Ayah Recognition",
     [KEYS.AYAH_RECOGNITION_POWERED_BY]: "Powered by <a href={url} target='_blank'>Iqra</a>",
