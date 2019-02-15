@@ -3,7 +3,6 @@ import React from "react";
 import {Helmet} from "react-helmet";
 import { InjectedIntl, injectIntl } from "react-intl"
 import {connect} from "react-redux";
-import Select from "react-select";
 import styled from "styled-components";
 
 import {submitDemographics} from "../../api";
@@ -18,6 +17,7 @@ import KEYS from "../../locale/keys";
 import {updateDemographicData} from "../../store/actions/demographicData";
 import ReduxState, {IDemographics, IProfile} from "../../types/GlobalState";
 import {unsetAskForDemographics} from "../../store/actions/profile";
+import Select from '../../components/Select';
 
 
 const genderOptions = [

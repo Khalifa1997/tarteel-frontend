@@ -124,7 +124,10 @@ class NavMenu extends React.Component<IProps, IState> {
         <Component
           href={item.href}
           to={item.href}
-          onClick={item.onClick}
+          onClick={() => {
+            this.setState({ showDropdown: false });
+            item.onClick();
+          }}
           className={classNames}>
           <span className={'badge-text'}>
             {item.badgeText}

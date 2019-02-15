@@ -167,7 +167,7 @@ const values = {
   includeSourceMapsForOptimisedClientBundle: false,
 
   // These extensions are tried when resolving src files for our bundles..
-  bundleSrcTypes: ['ts', 'tsx', 'json', 'jsx', 'js'],
+  bundleSrcTypes: ['ts', 'tsx', 'json', 'jsx', 'js', 'css'],
 
   // What should we name the json output file that webpack generates
   // containing details of all output files for a bundle?
@@ -256,6 +256,8 @@ const values = {
           'react-router-dom',
           'styled-components',
           'react-intl',
+          'react-tippy',
+          'react-select',
         ],
 
         // The name of the vendor DLL.

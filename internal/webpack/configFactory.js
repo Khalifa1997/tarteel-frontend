@@ -464,7 +464,7 @@ export default function webpackConfigFactory(buildOptions) {
               path: 'css-loader',
               // Include sourcemaps for dev experience++.
               query: {
-                modules: true,
+                modules: false,
                 importLoaders: 2,
                 sourceMap: true,
                 localIdentName: '[path][name]__[local]--[hash:base64:5]',

@@ -13,12 +13,13 @@ export const colors = {
   tuatara: '#32312C',
   gray: "#777",
   black: '#000000',
-  brandPrimary: '#2CA4AB', 
+  brandPrimary: '#2CA4AB',
   linkColor: '#5fc49e',
   brandInfo: '#c4beb0',
   textMuted: '#d1d0d0',
   textColor: '#939598',
   errorColor: '#ff0000',
+  brandHover: "#E0EAFC",
 };
 
 const breakpoints = {

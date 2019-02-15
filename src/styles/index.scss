@@ -1,6 +1,9 @@
 @import "arabic-text";
 @import "../../public/fonts/ProximaNova/fonts";
 
+@import "~tippy.js/dist/tippy.css";
+@import "~react-notifications-component/dist/theme.css";
+
 @font-face {
   font-family: "surah_names";
   src: url("../../public/fonts/surah_names/surah_names.eot");

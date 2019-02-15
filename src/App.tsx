@@ -1,5 +1,3 @@
-import './styles/index.scss'
-
 import {History, Location} from "history";
 import React from "react";
 import {injectIntl} from 'react-intl'
@@ -14,7 +12,8 @@ import LanguagePicker from "./components/LanguagePicker";
 import Routes from "./components/Routes";
 import {setLocation} from "./store/actions/router";
 
-// import 'tippy.js/dist/tippy.css';
+import './styles/index.scss';
+
 import Amplify from "aws-amplify";
 import AWSConfig from "./aws-exports";
 

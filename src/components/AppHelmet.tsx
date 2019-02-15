@@ -118,10 +118,10 @@ const AppHelmet: React.SFC = ({intl}) => {
         property: 'og:description',
         content: description,
       },
-      // {
-        // property: 'og:url',
-        // content: 'https://tarteel.io',
-      // },
+      {
+        property: 'og:url',
+        content: 'https://tarteel.io',
+      },
       {
         property: 'og:type',
         content: 'website',
