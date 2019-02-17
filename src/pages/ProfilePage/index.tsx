@@ -100,11 +100,11 @@ class ProfilePage extends Component<IProps, IState> {
               <T id={KEYS.YOUR_RECITATIONS} />
             </h1>
             <p>
-              <T id={KEYS.THANKS_USER_FOR_CONTRIBUTING_MESSAGE} />
+              <T id={KEYS.PROFILE_THANKS_USER_FOR_CONTRIBUTING_MESSAGE} />
               {
                 userRecitedAyahs ?
                   <span>
-                    <T id={KEYS.TOTAL_OF_VERSES_HAS_BEEN_RECITED} />
+                    <T id={KEYS.PROFILE_TOTAL_OF_VERSES_HAS_BEEN_RECITED} />
                   </span>
                   :
                   null
