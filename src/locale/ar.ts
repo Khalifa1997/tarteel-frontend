@@ -26,7 +26,7 @@ export default {
     [KEYS.SURAH_PICKER_TITLE]: "اختر سورة",
     [KEYS.SURAH_PICKER_SEARCH_PLACEHOLDER]: "بحث",
     [KEYS.SURAH_PICKER_BACK_BUTTON_TEXT]: "الرئيسيه",
-    [KEYS.DEMOGRAPHICS_PAGE_TITLE]: "تعديل بياناتك",
+    [KEYS.DEMOGRAPHICS_PAGE_EDIT_DATA_TEXT]: "تعديل بياناتك",
     [KEYS.DEMOGRAPHICS_FORM_SUBMIT_BUTTON_TEXT]: "حفظ",
     [KEYS.SKIP_BUTTON_TEXT]: "تخطي",
     [KEYS.GENDER_INPUT_LABEL]: "الجنس",

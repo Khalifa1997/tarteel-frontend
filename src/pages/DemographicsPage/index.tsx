@@ -129,17 +129,21 @@ class DemographicsPage extends React.Component<IProps, IState> {
     return (
       <Container>
         <Helmet>
-          <title>Demographic Data</title>
+          <title>
+            <T id={KEYS.DEMOGRAPHICS_PAGE_TITLE} />
+          </title>
         </Helmet>
         <Navbar />
         <div className="content">
           <span className={`flag-icon flag-icon-gr flag-icon-squared`} />
           {
             askForPermissions ?
-              <h3> Thank you! <span className="one-more">One more thing... </span></h3>
+              <h3>
+                <T id={KEYS.DEMOGRAPHICS_THANKS_TEXT} />
+              </h3>
               :
               <h3 style={{textAlign: "center"}}>
-                <T id={KEYS.DEMOGRAPHICS_PAGE_TITLE} />
+                <T id={KEYS.DEMOGRAPHICS_PAGE_EDIT_DATA_TEXT} />
               </h3>
           }
           <div className={`arabic-text ${rtl} paragraph`}>
@@ -225,7 +229,7 @@ class DemographicsPage extends React.Component<IProps, IState> {
 
 const Container = styled.div`
   padding: 1em;
-  
+
   .content {
     width: 50%;
     margin: auto;
@@ -242,7 +246,7 @@ const Container = styled.div`
     flex-flow: row;
     justify-content: space-between;
     align-items: center;
-    margin: 2em 0; 
+    margin: 2em 0;
   }
   .select {
     width: 300px;
@@ -253,7 +257,7 @@ const Container = styled.div`
     flex-flow: column;
     justify-content: center;
     align-items: center;
-    
+
     .skip {
       margin-top: 1em;
     }
@@ -261,13 +265,13 @@ const Container = styled.div`
       color: white;
     }
   }
-  
+
   @media screen and (max-width: ${props => props.theme.breakpoints.sm}px) {
     padding: 1em;
-    
+
     .content {
       width: 100%;
-      
+
       .select {
         width: 200px;
       }
