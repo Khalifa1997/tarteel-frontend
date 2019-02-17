@@ -157,7 +157,9 @@ class ContactUs extends React.Component<IProps, IState> {
         <div className="content">
           <div className="form">
             <div className="select-container">
-              <label>Subject: </label>
+              <label>
+                <T id={KEYS.CONTACT_US_SUBJECT} />
+              </label>
               <Select
                 isRtl={Boolean(rtl)}
                 isSearchable={true}
@@ -203,7 +205,7 @@ const Container = styled.div`
   flex-flow: column;
   height: 100%;
   box-sizing: border-box;
-  
+
   .content {
     padding: 1em;
     padding-top: 2em;
@@ -212,13 +214,13 @@ const Container = styled.div`
     flex-flow: column;
     position: relative;
     box-sizing: border-box;
-    
+
     .form {
       display: flex;
       flex-flow: column;
       justify-content: center;
       align-items: center;
-      
+
       label {
         margin-bottom: 5px;
         font-size: 16px;
@@ -230,11 +232,11 @@ const Container = styled.div`
       }
     }
   }
-  
+
   @media screen and (max-width: ${props => props.theme.breakpoints.sm}px) {
     .content {
       width: 100%;
-      
+
       .select {
         width: 200px;
       }
