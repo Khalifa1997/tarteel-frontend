@@ -1,5 +1,6 @@
 import React from 'react';
 import {Helmet} from "react-helmet";
+import ReactGA from 'react-ga';
 
 import Ayah from "../../components/Ayah";
 import Footer from "../../components/Footer";
@@ -46,6 +47,7 @@ class Main extends React.Component<IProps, never> {
     await this.props.loadPrevQueue();
   }
   public async componentDidMount() {
+    ReactGA.pageview(window.location.pathname + window.location.search);
     const {surah, ayah} = this.props.match.params;
     if (surah && ayah) {
       if (isCorrectAyah(surah, ayah)) {

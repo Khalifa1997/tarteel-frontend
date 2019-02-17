@@ -40,7 +40,6 @@ interface ILink {
   textID: KEYS;
   href: string;
   onClick?(): void;
-  external: boolean;
   busy: boolean;
   badgeText: string;
 }
@@ -122,15 +121,15 @@ class NavMenu extends React.Component<IProps, IState> {
       badge: item.badgeText,
       [className]: className,
     });
-    const Component = item.external ? 'a' : Link;
     return (
       <LinkContainer>
-        <Component
-          href={item.href}
+        <Link
           to={item.href}
           onClick={() => {
             this.setState({ showDropdown: false });
-            item.onClick();
+            if (item.onClick) {
+              item.onClick();
+            }
           }}
           className={classNames}>
           <span className={'badge-text'}>
@@ -139,7 +138,7 @@ class NavMenu extends React.Component<IProps, IState> {
           <div className="text">
             <T id={item.textID} />
           </div>
-        </Component>
+        </Link>
       </LinkContainer>
     );
   };

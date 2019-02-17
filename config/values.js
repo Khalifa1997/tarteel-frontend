@@ -48,6 +48,7 @@ const values = {
     apiURL: true,
     cdnURL: true,
     iqraApiKey: true,
+    google: true,
     // sentryClient: true,
   },
 

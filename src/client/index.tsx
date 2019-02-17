@@ -18,6 +18,8 @@ import getLocalMessages from '../helpers/setLocale';
 import configStore from '../store';
 import theme from '../theme';
 import ReactHotLoader from './components/ReactHotLoader';
+import ReactGA from "react-ga";
+import config from '../../config';
 
 // Get the DOM Element that will host our React application.
 const container = document.querySelector('#app');
@@ -26,11 +28,14 @@ window.ReactDOM = ReactDOM; // For chrome dev tool support
 
 const cookies = new Cookies(document.cookie)
 
-
 window.clearCookies = () => {
   // reactCookie.remove('isFirstTime');
   // cookies.remove('currentLocale');
 };
+
+if (!__DEVELOPMENT__) {
+  ReactGA.initialize(config('google.analytics.id'));
+}
 
 const fakeRequest = {
   universalCookies: cookies,
