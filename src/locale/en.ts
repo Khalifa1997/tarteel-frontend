@@ -91,6 +91,8 @@ const EN: Shape = {
     [KEYS.NOT_FOUND_PAGE_TEXT]: "Page Not Found",
     [KEYS.AYAH_NOT_FOUND_PAGE_TEXT]: "Not A Correct Ayah Index",
     [KEYS.PICK_DIFFERENT_AYAH]: "Pick Different Ayah",
+    [KEYS.AYAH_COMPONENT_TRANSLITERATION]: "Transliteration",
+    [KEYS.AYAH_COMPONENT_LOADING_MESSAGE]: "Loading ayah... (if an ayah does not show up, try clicking \"next ayah\")",
     [KEYS.AYAHS_RECITED]: "Ayahs recited",
     [KEYS.ABOUT_PAGE_TEMPLATE_TITLE]: "About",
     [KEYS.ABOUT_PAGE_RECITED_AYAHS_MESSAGE]: "Over <b>{users}</b> unique users have helped us reach a total of <b>{recitedAyahs}</b> ayahs so far alhamdulillah!",

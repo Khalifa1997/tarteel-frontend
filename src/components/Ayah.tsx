@@ -71,7 +71,9 @@ class Ayah extends React.Component<IProps, IState> {
         )
       }))
       ||
-      <em>Loading ayah... (if an ayah does not show up, try clicking "next ayah")</em>
+      <em>
+        <T id={KEYS.AYAH_COMPONENT_LOADING_MESSAGE} />
+      </em>
     )
   }
   renderAyahLoader = () => {
@@ -102,7 +104,7 @@ class Ayah extends React.Component<IProps, IState> {
             <p className="translit-button" onClick={this.toggleTranslit}>
               {
                 this.state.showTranslit ? "Hide" : "Show"
-              } Transliteration
+              } <T id={KEYS.AYAH_COMPONENT_TRANSLITERATION} />
             </p>
             {
               this.state.showTranslit ?
@@ -152,7 +154,7 @@ const Container = styled.div`
   display: flex;
   flex-flow: column;
   justify-content: space-evenly;
-  
+
   #ayah-text {
     //margin-top: 20px;
     direction: rtl !important;
@@ -160,7 +162,7 @@ const Container = styled.div`
     font-size: 5.5vmin;
     color: black;
     min-height: 180px;
-    
+
     .word {
       display: inline-block;
       span {
@@ -204,14 +206,14 @@ const Container = styled.div`
         font-size: 16px;
         transition: 0.2s;
       }
-      
+
       &:hover span {
         color: #5ec49e;
       }
     }
-    
-    
-  @media screen and (max-height: ${props => props.theme.breakpoints.sm}px) { 
+
+
+  @media screen and (max-height: ${props => props.theme.breakpoints.sm}px) {
     .ayah-translit {
       .translit-button {
         font-size: 14px;
@@ -225,7 +227,7 @@ const Container = styled.div`
         font-size: 14px;
       }
     }
-  }   
+  }
 `
 
 export default withCookies(Ayah);
