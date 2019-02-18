@@ -349,23 +349,25 @@ class Footer extends React.Component<IProps, IState>  {
          closable={true}
        >
          <ModalContent>
-           <h1 className="modal-title">Thank You!</h1>
+           <h1 className="modal-title">
+              <T id={KEYS.THANK_YOU_MESSAGE} />
+           </h1>
            <img src={HandShakeImage} alt="" />
              <p>
                <b>
-                 Thanks for helping us in reciting ayahs.
+                <T id={KEYS.FOOTER_MESSAGE_1} />
                </b>
              </p>
              <p>
-               You can also help us evaluating some ayahs other people has recited.
+              <T id={KEYS.FOOTER_MESSAGE_2} />
              </p>
              <p>
-               With the help of users like you, we have evaluated
-               <b className="count"> {this.props.profile.evaluationsCount} </b> ayahs.
+              <T id={KEYS.FOOTER_MESSAGE_3} />
+               <b className="count"> {this.props.profile.evaluationsCount} </b> <T id={KEYS.AYAHS_WORD} />.
              </p>
              <p>
                <Link to="/evaluator">
-                 Want to help us evaluating some ayahs?
+                <T id={KEYS.FOOTER_EVALUATOR_LINK} />
                </Link>
              </p>
          </ModalContent>
@@ -385,14 +387,14 @@ const Container = styled.div`
   align-items: center;
   align-content: stretch;
   text-align: center;
-  
+
   &.get-started {
     box-sizing: border-box;
     padding: 1em 0;
     top: 2em;
     position: relative;
   }
-  
+
   .buttons-wrapper {
     .mic-wrapper {
       position: relative;
@@ -404,8 +406,8 @@ const Container = styled.div`
       position: relative;
       top: -23px;
     }
-  } 
-  
+  }
+
   .get-started-button {
     margin-top: 2em;
     span {
@@ -414,16 +416,16 @@ const Container = styled.div`
     }
     padding: 8px 2em;
   }
-  
+
   @media screen and (max-width: ${props => props.theme.breakpoints.sm}px) {
     //height: 200px;
     //justify-content: center;
   }
    // Special styling for very small screens like IPhone 5s and SE
-  @media screen and (max-height: ${props => props.theme.breakpoints.sm}px) { 
+  @media screen and (max-height: ${props => props.theme.breakpoints.sm}px) {
     height: 125px;
-  
-  }   
+
+  }
 `
 
 const mapStateToProps = (state: ReduxState): IStateProps => {
