@@ -87,6 +87,7 @@ const EN: Shape = {
     [KEYS.SUBSCRIBE_PAGE_HELP_US_MESSAGE_1]: "You can also help us reach our goal by sharing the Tarteel 50,000 challenge",
     [KEYS.SUBSCRIBE_PAGE_HELP_US_MESSAGE_2]: "with your friends and family!",
     [KEYS.NOT_FOUND_PAGE_TEMPLATE_TITLE]: "Not Found",
+    [KEYS.NOT_FOUND_PAGE_GO_HOME_LINK]: "Go Home",
     [KEYS.NOT_FOUND_PAGE_TEXT]: "Page Not Found",
     [KEYS.AYAH_NOT_FOUND_PAGE_TEXT]: "Not A Correct Ayah Index",
     [KEYS.PICK_DIFFERENT_AYAH]: "Pick Different Ayah",
