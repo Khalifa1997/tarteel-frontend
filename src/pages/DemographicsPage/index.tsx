@@ -217,7 +217,7 @@ class DemographicsPage extends React.Component<IProps, IState> {
             <NoteButton className={"skip"} onClick={() => {
               this.props.history.push("/")
             }}>
-              <T id={KEYS.SKIP_BUTTON_TEXT} />
+              <T id={KEYS.SKIP_WORD} />
             </NoteButton>
           </div>
         </div>

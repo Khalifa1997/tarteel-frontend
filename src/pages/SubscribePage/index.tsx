@@ -40,7 +40,7 @@ class SubscribePage extends Component<IProps, never> {
         <Navbar />
         <div className="content">
           <h1>
-            <T id={KEYS.SUBSCRIBE_PAGE_TITLE}/>
+            <T id={KEYS.THANK_YOU_MESSAGE}/>
           </h1>
           <p className={`subtitle large-arabic-text ${rtl}`}>
             <T id={KEYS.SUBSCRIBE_PAGE_FIRST_PARAGRAPH_1}/>

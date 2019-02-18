@@ -62,7 +62,7 @@ const linksFactory: (props: any) => { [key: string]: ILink } = props => {
       href: '/evaluator',
     },
     home: {
-      textID: KEYS.HOME_LINK_TEXT,
+      textID: KEYS.HOME_WORD,
       href: '/',
     },
     randomAyah: {
@@ -243,7 +243,7 @@ const LinkContainer = styled.div`
         top: -13px;
       }
     }
-    
+
     &:hover {
       color: ${props => props.theme.colors.linkColor};
     }
@@ -325,7 +325,7 @@ const Container = styled.div`
       flex-flow: column;
 
       > div {
-        margin: 0;    
+        margin: 0;
       }
       .list-item {
         line-height: 35px;
