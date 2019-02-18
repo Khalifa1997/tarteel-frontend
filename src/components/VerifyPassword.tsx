@@ -4,6 +4,8 @@ import styled from "styled-components";
 import Input from "./Input";
 import FooterButton from "./FooterButton";
 import FormErrorMessage from "./FormErrorMessage";
+import KEYS from '../locale/keys';
+import T from './T';
 
 interface IProps {
   destination: string;
@@ -51,16 +53,18 @@ class VerifyPassword extends React.Component<IProps, IState> {
   render() {
     return (
       <Container>
-        <h2>Reset Your Password</h2>
+        <h2>
+          <T id={KEYS.VERIFY_PASSWORD_TITLE} />
+        </h2>
         <p>
-          We've sent you a verification code to your email: {this.props.destination}
+          <T id={KEYS.VERIFY_PASSWORD_MESSAGE} />{this.props.destination}
         </p>
         <div className="form">
           <Input
             type={'text'}
             placeholder={'Verification Code'}
             name={'code'}
-            label={'Verification Code'}
+            label={<T id={KEYS.VERIFY_PASSWORD_VERIFICATION_CODE_LABEL} />}
             onChange={this.handleChange}
             debounce={true}
           />
@@ -68,7 +72,7 @@ class VerifyPassword extends React.Component<IProps, IState> {
             type={'text'}
             placeholder={'New Password'}
             name={'newPassword'}
-            label={'New Password'}
+            label={<T id={KEYS.VERIFY_PASSWORD_NEW_PASSWORD_LABEL} />}
             onChange={this.handleChange}
             debounce={true}
           />
@@ -76,7 +80,7 @@ class VerifyPassword extends React.Component<IProps, IState> {
             onClick={this.handleReset}
           >
             <span>
-              Change Password
+              <T id={KEYS.VERIFY_PASSWORD_BUTTON} />
             </span>
           </FooterButton>
           <FormErrorMessage message={this.state.errorMessage} />
@@ -87,7 +91,7 @@ class VerifyPassword extends React.Component<IProps, IState> {
 }
 
 const Container = styled.div`
-  
+
   h2 {
     text-align: center;
   }

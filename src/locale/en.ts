@@ -157,6 +157,11 @@ const EN: Shape = {
 
     [KEYS.NEW_PASSSWORD_VERIFY_LOGIN_MESSAGE]: "          Your New Password has been set, you can start using it to log in now.",
     [KEYS.NEW_PASSSWORD_VERIFY_LOGIN_BUTTON]: "Login Now?",
+    [KEYS.VERIFY_PASSWORD_TITLE]: "Reset Your Password",
+    [KEYS.VERIFY_PASSWORD_MESSAGE]: "We've sent you a verification code to your email:",
+    [KEYS.VERIFY_PASSWORD_BUTTON]: "Change Password",
+    [KEYS.VERIFY_PASSWORD_VERIFICATION_CODE_LABEL]: "Verification Code",
+    [KEYS.VERIFY_PASSWORD_NEW_PASSWORD_LABEL]: "New Password",
 
     [KEYS.RECORDING_ERROR_MESSAGE_1]: "It doesn't look like you have microphone permissions enabled. Get a better experience on mobile!",
     [KEYS.RECORDING_ERROR_MESSAGE_2]: "To upload recordings, please enable microphone access, or use a different browser.",
