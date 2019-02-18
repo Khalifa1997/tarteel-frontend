@@ -188,6 +188,7 @@ const EN: Shape = {
     [KEYS.CONTRIBUTOR_13]: "Haider Ahmad, recent Duke University grad",
     [KEYS.CONTRIBUTOR_14]: "Marwa Abdulhai, computer science undergraduate at MIT",
     [KEYS.CONTRIBUTOR_15]: "Moin Nadeem, junior at MIT studying computer science",
+    [KEYS.CONTRIBUTOR_16]: "Moumen Soliman, Front End Software Engineer",
 
   },
 };
