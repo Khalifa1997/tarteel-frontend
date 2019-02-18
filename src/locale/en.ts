@@ -150,6 +150,9 @@ const EN: Shape = {
     [KEYS.LOGIN_PASSWORD_LABEL]: "Password",
     [KEYS.LOGIN_PASSWORD_PLACEHOLDER]: "Type your Password",
 
+    [KEYS.NEW_PASSSWORD_VERIFY_LOGIN_MESSAGE]: "          Your New Password has been set, you can start using it to log in now.",
+    [KEYS.NEW_PASSSWORD_VERIFY_LOGIN_BUTTON]: "Login Now?",
+
     [KEYS.FOOTER_EVALUATOR_LINK]: "Want to help us evaluating some ayahs?",
     [KEYS.FOOTER_MESSAGE_1]: "Thanks for helping us in reciting ayahs.",
     [KEYS.FOOTER_MESSAGE_2]: "You can also help us evaluating some ayahs other people has recited.",
