@@ -29,6 +29,7 @@ import {WORD_TYPES} from "../../types";
 import {IProfile} from "../../types/GlobalState";
 import {Container, ModalContent} from "./styles";
 import config from '../../../config';
+import T from "../../components/T";
 import KEYS from "../../locale/keys";
 
 const cdnURL = config('cdnURL');
@@ -212,17 +213,17 @@ class Evaluator extends React.Component<IProps, IState> {
         <div id="container">
           <div className="start-text">
             <h1 className="title">
-              Listen and Evaluate
+              <T id={KEYS.EVALUATOR_TITLE_TEXT} />
             </h1>
             <div className="text">
               <p>
-                Is the correct verse being recited in this recording?
+                <T id={KEYS.EVALUATOR_PARAGRAPH_1} />
               </p>
               <p>
-                If so (don't worry about <em>tajweed</em>, background noise, or minor mistakes), click YES.
+                <T id={KEYS.EVALUATOR_PARAGRAPH_2} />
               </p>
               <p>
-                If the wrong verse (or no verse) is recited, click NO.
+                <T id={KEYS.EVALUATOR_PARAGRAPH_3} />
               </p>
             </div>
           </div>
@@ -231,9 +232,9 @@ class Evaluator extends React.Component<IProps, IState> {
               {
                 !played ?
                   <div className="instruction hidden-sm-down">
-                    Click
+                    <T id={KEYS.CLICK_WORD} />
                     <Icon icon={play} className={'icon'} />
-                    to hear the sentence.
+                    <T id={KEYS.EVALUATOR_CLICK_TO_HEAR_TEXT} />
                   </div>
                   :
                   null
@@ -313,7 +314,7 @@ class Evaluator extends React.Component<IProps, IState> {
             // disabled={!played}
           >
             <Icon icon={thumbsUp} size={24} />
-            <span>Yes</span>
+            <span><T id={KEYS.YES_WORD} /></span>
           </button>
           <div className="primary-button play" onClick={this.handlePlay}>
             <button type="button">
@@ -328,19 +329,19 @@ class Evaluator extends React.Component<IProps, IState> {
             // disabled={!played}
           >
             <Icon icon={thumbsDown} size={24} />
-            <span>No</span>
+            <span><T id={KEYS.NO_WORD} /></span>
           </button>
         </div>
 
         <button type="button" className="skip vote-button" onClick={this.handleSkip}>
-          <span>Skip</span>
+          <span><T id={KEYS.SKIP_WORD} /></span>
           <Icon icon={skipForward} size={24} />
         </button>
 
         <button className="back-to-home vote-button" onClick={() => {
           this.props.history.push('/')
         }}>
-          <span>Home</span>
+          <span><T id={KEYS.HOME_WORD} /></span>
           <Icon icon={chevronsLeft} size={24} />
 
         </button>
@@ -351,14 +352,21 @@ class Evaluator extends React.Component<IProps, IState> {
           style={{height: '60%', width: '50%'}}
         >
           <ModalContent>
-            <h1 className="modal-title">Thank You!</h1>
+            <h1 className="modal-title">
+              <T id={KEYS.THANK_YOU_MESSAGE} />
+            </h1>
             <img src={HandShakeImage} alt="" />
-            <p><b>Thanks for helping us evaluating the recited ayahs.</b></p>
-            <p>With the help of users like you, we have evaluated
-              <b className="count"> {this.props.profile.evaluationsCount} </b> ayahs.</p>
             <p>
-              Want to help us evaluating more ayahs?
-              <a href="/evaluator"> YES! </a>
+              <b>
+                <T id={KEYS.EVALUATOR_THANKS_FOR_HELPING_MESSAGE_1} />
+              </b>
+            </p>
+            <p>
+              <T id={KEYS.EVALUATOR_THANKS_FOR_HELPING_MESSAGE_2} />
+              <b className="count"> {this.props.profile.evaluationsCount} </b> <T id={KEYS.AYAHS_WORD} />.</p>
+            <p>
+              <T id={KEYS.EVALUATOR_THANKS_FOR_HELPING_MESSAGE_3} />
+              <a href="/evaluator"> <T id={KEYS.YES_WORD} />! </a>
             </p>
           </ModalContent>
         </Modal>
