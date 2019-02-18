@@ -143,6 +143,13 @@ const EN: Shape = {
     [KEYS.CONTACT_US_BUTTON_TEXT]: "contact us",
     [KEYS.CONTACT_US_SUBJECT]: "Subject",
 
+    [KEYS.LOGIN_BUTTON]: "Login",
+    [KEYS.LOGIN_DONT_HAVE_ACCOUNT]: "Don't have an account? Register",
+    [KEYS.LOGIN_FORGET_PASSWORD]: "Forgot password ?",
+    [KEYS.LOGIN_EMAIL_USERNAME_LABEL]: "Email/Username",
+    [KEYS.LOGIN_PASSWORD_LABEL]: "Password",
+    [KEYS.LOGIN_PASSWORD_PLACEHOLDER]: "Type your Password",
+
     [KEYS.FOOTER_EVALUATOR_LINK]: "Want to help us evaluating some ayahs?",
     [KEYS.FOOTER_MESSAGE_1]: "Thanks for helping us in reciting ayahs.",
     [KEYS.FOOTER_MESSAGE_2]: "You can also help us evaluating some ayahs other people has recited.",

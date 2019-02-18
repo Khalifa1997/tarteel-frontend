@@ -8,6 +8,8 @@ import Input from "./Input";
 import FooterButton from "./FooterButton";
 import NoteButton from "./NoteButton";
 import FormErrorMessage from "./FormErrorMessage";
+import KEYS from '../locale/keys';
+import T from './T';
 
 interface IProps {
   history: History;
@@ -96,7 +98,7 @@ class LoginForm extends React.Component<IProps, IState> {
           <Input
             type="text"
             placeholder={'e.g. Mohamed'}
-            label={'Email/Username'}
+            label={<T id={KEYS.LOGIN_EMAIL_USERNAME_LABEL} />}
             name={'username'}
             onChange={this.handleInputChange}
             debounce={true}
@@ -104,7 +106,7 @@ class LoginForm extends React.Component<IProps, IState> {
           <Input
             type="password"
             placeholder={'Type your Password'}
-            label={'Password'}
+            label={<T id={KEYS.LOGIN_PASSWORD_LABEL} />}
             name={'password'}
             onChange={this.handleInputChange}
             debounce={true}
@@ -116,7 +118,7 @@ class LoginForm extends React.Component<IProps, IState> {
             onClick={this.handleLogin}
           >
             <span>
-              Login
+              <T id={KEYS.LOGIN_BUTTON} />
             </span>
           </FooterButton>
         </div>
@@ -124,12 +126,12 @@ class LoginForm extends React.Component<IProps, IState> {
         <NoteButton
           className={'note-button'}
           onClick={this.props.handleToggle} >
-            Don't have an account? Register
+          <T id={KEYS.LOGIN_DONT_HAVE_ACCOUNT} />
         </NoteButton>
         <NoteButton
           className={'note-button'}
           onClick={() => this.props.history.push('/forgot_password')} >
-            Forgot password ?
+          <T id={KEYS.LOGIN_FORGET_PASSWORD} />
         </NoteButton>
       </Container>
     )
@@ -142,7 +144,7 @@ const Container = styled.div`
   justify-content: center;
   align-items: center;
   flex-flow: column;
-  
+
   .form {
     width: inherit;
     display: flex;
@@ -150,11 +152,11 @@ const Container = styled.div`
     align-items: center;
     flex-flow: column;
   }
-  
+
   .submit {
     margin-top: 1em;
   }
-  
+
   .note-button {
     font-size: 14px;
     text-decoration: underline;
