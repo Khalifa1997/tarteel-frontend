@@ -153,6 +153,9 @@ const EN: Shape = {
     [KEYS.NEW_PASSSWORD_VERIFY_LOGIN_MESSAGE]: "          Your New Password has been set, you can start using it to log in now.",
     [KEYS.NEW_PASSSWORD_VERIFY_LOGIN_BUTTON]: "Login Now?",
 
+    [KEYS.RECORDING_ERROR_MESSAGE_1]: "It doesn't look like you have microphone permissions enabled. Get a better experience on mobile!",
+    [KEYS.RECORDING_ERROR_MESSAGE_2]: "To upload recordings, please enable microphone access, or use a different browser.",
+
     [KEYS.FOOTER_EVALUATOR_LINK]: "Want to help us evaluating some ayahs?",
     [KEYS.FOOTER_MESSAGE_1]: "Thanks for helping us in reciting ayahs.",
     [KEYS.FOOTER_MESSAGE_2]: "You can also help us evaluating some ayahs other people has recited.",
