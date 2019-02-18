@@ -125,6 +125,8 @@ const EN: Shape = {
     [KEYS.MESSAGE_TEXTAREA_PLACEHOLDER]:  "Your message here...",
 
     [KEYS.NAME_INPUT_LABEL]: "Name",
+    [KEYS.USERNAME_INPUT_LABEL]: "Username",
+    [KEYS.PHONE_NUMBER_INPUT_LABEL]: "Phone Number",
     [KEYS.EMAIL_ADDRESS_INPUT_LABEL]: "Email Address",
     [KEYS.MESSAGE_TEXTAREA_LABEL]: "Message",
 
@@ -149,6 +151,9 @@ const EN: Shape = {
     [KEYS.LOGIN_EMAIL_USERNAME_LABEL]: "Email/Username",
     [KEYS.LOGIN_PASSWORD_LABEL]: "Password",
     [KEYS.LOGIN_PASSWORD_PLACEHOLDER]: "Type your Password",
+
+    [KEYS.SIGNUP_REGISTER_BUTTON]: "Register",
+    [KEYS.SIGNUP_REGISTER_MESSAGE]: "Already have an account? Login",
 
     [KEYS.NEW_PASSSWORD_VERIFY_LOGIN_MESSAGE]: "          Your New Password has been set, you can start using it to log in now.",
     [KEYS.NEW_PASSSWORD_VERIFY_LOGIN_BUTTON]: "Login Now?",

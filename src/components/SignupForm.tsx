@@ -6,7 +6,8 @@ import Input from "./Input";
 import FooterButton from './FooterButton'
 import NoteButton from './NoteButton'
 import FormErrorMessage from "./FormErrorMessage";
-
+import KEYS from '../locale/keys';
+import T from './T';
 
 interface IProps {
   handleToggle(): void;
@@ -69,7 +70,7 @@ class SignupForm extends React.Component<IProps, IState> {
           <Input
             type="text"
             placeholder={'e.g. Mohamed'}
-            label={'Username'}
+            label={<T id={KEYS.USERNAME_INPUT_LABEL} />}
             name={'username'}
             onChange={this.handleInputChange}
             debounce={true}
@@ -77,7 +78,7 @@ class SignupForm extends React.Component<IProps, IState> {
           <Input
             type="text"
             placeholder={'e.g. Mohamed@example.com'}
-            label={'Email Address'}
+            label={<T id={KEYS.EMAIL_ADDRESS_INPUT_LABEL} />}
             name={'email'}
             onChange={this.handleInputChange}
             debounce={true}
@@ -85,7 +86,7 @@ class SignupForm extends React.Component<IProps, IState> {
           <Input
             type="password"
             placeholder={'Type your Password'}
-            label={'Password'}
+            label={<T id={KEYS.LOGIN_PASSWORD_LABEL} />}
             name={'password'}
             onChange={this.handleInputChange}
             debounce={true}
@@ -94,7 +95,7 @@ class SignupForm extends React.Component<IProps, IState> {
             type="text"
             name={'phoneNumber'}
             placeholder={'(555) 555-5555'}
-            label={'Phone Number'}
+            label={<T id={KEYS.PHONE_NUMBER_INPUT_LABEL} />}
             onChange={this.handleInputChange}
             debounce={true}
           />
@@ -105,7 +106,7 @@ class SignupForm extends React.Component<IProps, IState> {
             onClick={this.handleSignUp}
           >
             <span>
-              Register
+              <T id={KEYS.SIGNUP_REGISTER_BUTTON} />
             </span>
           </FooterButton>
         </div>
@@ -114,7 +115,7 @@ class SignupForm extends React.Component<IProps, IState> {
         <NoteButton
           className={'note-button'}
           onClick={this.props.handleToggle} >
-          Already have an account? Login
+          <T id={KEYS.SIGNUP_REGISTER_MESSAGE} />
         </NoteButton>
       </Container>
     )
@@ -127,7 +128,7 @@ const Container = styled.div`
   justify-content: center;
   align-items: center;
   flex-flow: column;
-  
+
   .form {
     width: inherit;
     display: flex;
@@ -135,11 +136,11 @@ const Container = styled.div`
     align-items: center;
     flex-flow: column;
   }
-  
+
   .submit {
     margin-top: 1em;
   }
-  
+
   .note-button {
     font-size: 14px;
     text-decoration: underline;
