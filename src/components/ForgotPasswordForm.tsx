@@ -3,6 +3,8 @@ import Input from "./Input";
 import FooterButton from "./FooterButton";
 import styled from "styled-components";
 import FormErrorMessage from "./FormErrorMessage";
+import KEYS from '../locale/keys';
+import T from "./T";
 
 interface IProps {
     handleReset(username: string): Promise<void>;
@@ -48,7 +50,9 @@ class ForgotPasswordForm extends React.Component<IProps, IState> {
     const errorMessage = this.state.errorMessage ? 'Error' : '';
     return (
       <Container>
-        <h2>Reset Your Password</h2>
+        <h2>
+          <T id={KEYS.RESET_YOUR_PASSWORD_TITLE} />
+        </h2>
         <div className="form">
           <Input
             type={'text'}
@@ -64,7 +68,7 @@ class ForgotPasswordForm extends React.Component<IProps, IState> {
             onClick={this.handleReset}
           >
               <span>
-                reset
+                <T id={KEYS.RESET_YOUR_PASSWORD_BUTTON} />
               </span>
           </FooterButton>
           <FormErrorMessage message={this.state.errorMessage} />

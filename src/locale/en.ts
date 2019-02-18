@@ -148,6 +148,9 @@ const EN: Shape = {
     [KEYS.FOOTER_MESSAGE_2]: "You can also help us evaluating some ayahs other people has recited.",
     [KEYS.FOOTER_MESSAGE_3]: "With the help of users like you, we have evaluated",
 
+    [KEYS.RESET_YOUR_PASSWORD_TITLE]: "Reset Your Password",
+    [KEYS.RESET_YOUR_PASSWORD_BUTTON]: "Reset",
+
     [KEYS.AYAH_RECOGNITION]: "Ayah Recognition",
     [KEYS.AYAH_RECOGNITION_POWERED_BY]: "Powered by <a href={url} target='_blank'>Iqra</a>",
     [KEYS.AYAH_RECOGNITION_RECOGNITION_MESSAGE]: "Tap on the mic below and start recording to find the ayah with the closest match.",
