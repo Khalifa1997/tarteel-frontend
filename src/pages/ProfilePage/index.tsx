@@ -110,7 +110,7 @@ class ProfilePage extends Component<IProps, IState> {
                   null
 
               }
-              <T id={KEYS.PROFILE_SEE_STATISTICS_MESSAGE} />
+              <T id={KEYS.PROFILE_SEE_STATISTICS_MESSAGE} values={{ sessionKey}} />
             </p>
             <p>
               <div className="profile-link">
