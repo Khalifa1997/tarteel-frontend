@@ -322,9 +322,6 @@ class About extends Component<IProps, IState> {
                 <li className="large-arabic-text">
                   <T id={KEYS.CONTRIBUTOR_15} />
                 </li>
-                <li className="large-arabic-text">
-                  <T id={KEYS.CONTRIBUTOR_16} />
-                </li>
               </ul>
 
               <h2 className={rtl}>
