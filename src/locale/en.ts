@@ -155,7 +155,7 @@ const EN: Shape = {
     [KEYS.SIGNUP_REGISTER_BUTTON]: "Register",
     [KEYS.SIGNUP_REGISTER_MESSAGE]: "Already have an account? Login",
 
-    [KEYS.NEW_PASSSWORD_VERIFY_LOGIN_MESSAGE]: "          Your New Password has been set, you can start using it to log in now.",
+    [KEYS.NEW_PASSSWORD_VERIFY_LOGIN_MESSAGE]: "Your New Password has been set, you can start using it to log in now.",
     [KEYS.NEW_PASSSWORD_VERIFY_LOGIN_BUTTON]: "Login Now?",
     [KEYS.VERIFY_PASSWORD_TITLE]: "Reset Your Password",
     [KEYS.VERIFY_PASSWORD_MESSAGE]: "We've sent you a verification code to your email:",
