@@ -88,29 +88,30 @@ class ProfilePage extends Component<IProps, IState> {
     return (
       <Container>
         <Helmet>
-          <title>Profile</title>
+          <title>
+            <T id={KEYS.PROFILE_TITLE} />
+          </title>
         </Helmet>
         <Navbar />
         <div className={"content"}>
           <div className="info" id="start-text">
 
-            <h1>Your Recitations</h1>
-            <p> Thank you for your work in contributing to Tarteel.
-            {
-              userRecitedAyahs ?
-                <span>You have recited a total of <strong>{userRecitedAyahs}</strong> verses.</span>
-                :
+            <h1>
+              <T id={KEYS.YOUR_RECITATIONS} />
+            </h1>
+            <p>
+              <T id={KEYS.PROFILE_THANKS_USER_FOR_CONTRIBUTING_MESSAGE} />
+              {
+                userRecitedAyahs ?
+                  <span>
+                    <T id={KEYS.PROFILE_TOTAL_OF_VERSES_HAS_BEEN_RECITED} />
+                  </span>
+                  :
                   null
 
-            }
-            This information is based only on
-              sessions recorded
-              using this particular device and browser, and may not show up if you clear your cache or use a different
-              browser. If you'd like to see these statistics on a different device or <a
-                href={`https://facebook.com/sharer/sharer.php?u=https://www.tarteel.io/profile/${sessionKey}`}
-                target="_blank" aria-label="">
-                share</a> these statistics,
-              please use the following permalink: </p>
+              }
+              <T id={KEYS.PROFILE_SEE_STATISTICS_MESSAGE} values={{ sessionKey}} />
+            </p>
             <p>
               <div className="profile-link">
                 <div className="link">
@@ -122,25 +123,35 @@ class ProfilePage extends Component<IProps, IState> {
               </div>
 
             </p>
-            <h1>Your Weekly Activity</h1>
+            <h1>
+              <T id={KEYS.PROFILE_WEEKLY_ACTIVITY} />
+            </h1>
             <div className="canvas-container" id="weekly-canvas">
               <canvas id="weekly_chart" />
             </div>
 
-            <h1>Verses Recited Last Week</h1>
-            <p>These are the verses you recited over the past week. Click on a verse to listen to its recording.</p>
+            <h1>
+              <T id={KEYS.PROFILE_VERSES_RECITED_LAST_WEEK} />
+            </h1>
+            <p>
+              <T id={KEYS.PROFILE_VERSES_RECITED_PARAGRAPH_MESSAGE} />
+            </p>
             <table className="recitations">
               <col width="50" />
                 <col width="150" />
                   <tr>
-                    <th>Surah</th>
-                    <th>Ayahs</th>
+                    <th>
+                      <T id={KEYS.SURAH_WORD} />
+                    </th>
+                    <th>
+                      <T id={KEYS.AYAHS_WORD} />
+                    </th>
                   </tr>
                   {
                     Object.keys(recentDict).map(surahKey => {
                       return (
                         <tr>
-                          <td>Surah {surahKey}</td>
+                          <td><T id={KEYS.SURAH_WORD} /> {surahKey}</td>
                             <td>
                               {
                                 recentDict[surahKey].map(([ayahNum, link]) => {
@@ -156,20 +167,28 @@ class ProfilePage extends Component<IProps, IState> {
                   }
             </table>
 
-            <h1>Older Recitations</h1>
-            <p>These are the verses more than a week ago. Click on a verse to listen to its recording.</p>
+            <h1>
+              <T id={KEYS.PROFILE_OLDER_RECITATIONS} />
+            </h1>
+            <p>
+              <T id={KEYS.PROFILE_OLDER_RECITATIONS_PARAGRAPH_MESSAGE} />
+            </p>
             <table className="recitations">
               <col width="50" />
                 <col width="150" />
                   <tr>
-                    <th>Surah</th>
-                    <th>Ayahs</th>
+                    <th>
+                      <T id={KEYS.SURAH_WORD} />
+                    </th>
+                    <th>
+                      <T id={KEYS.AYAHS_WORD} />
+                    </th>
                   </tr>
                   {
                     Object.keys(oldDict).map(surahKey => {
                       return (
                         <tr>
-                          <td>Surah {surahKey}</td>
+                          <td><T id={KEYS.SURAH_WORD} /> {surahKey}</td>
                           <td>
                             {
                               oldDict[surahKey].map(([ayahNum, link]) => {

@@ -3,6 +3,9 @@ import styled from "styled-components";
 import {checkmarkCircled} from 'react-icons-kit/ionicons/checkmarkCircled'
 import Icon from "react-icons-kit";
 import {Link} from "react-router-dom";
+import { KEY } from 'redux-pack';
+import KEYS from '../locale/keys';
+import T from './T';
 
 class NewPasswordVerified extends React.Component {
   render() {
@@ -10,10 +13,10 @@ class NewPasswordVerified extends React.Component {
       <Container>
         <Icon className={'icon'} icon={checkmarkCircled} size={100} />
         <p>
-          Your New Password has been set, you can start using it to log in now.
+          <T id={KEYS.NEW_PASSSWORD_VERIFY_LOGIN_MESSAGE} />
         </p>
         <Link to={'/login'} >
-          Login Now ?
+          <T id={KEYS.NEW_PASSSWORD_VERIFY_LOGIN_BUTTON} />
         </Link>
       </Container>
     )
@@ -22,7 +25,7 @@ class NewPasswordVerified extends React.Component {
 
 const Container = styled.div`
   text-align: center;
-  
+
   p {
     margin: 2em 0;
   }

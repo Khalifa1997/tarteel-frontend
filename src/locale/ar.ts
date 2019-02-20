@@ -3,7 +3,10 @@ import {KEY} from "redux-pack";
 
 export default {
   messages: {
+    // LANGUAGE
     local: 'arabic',
+
+    // LOCALS
     [KEYS.LOCAL_SITELOCALE]: 'اختر لغة الموقع',
     [KEYS.LOCAL_CHANGELOCALE]: 'اختر اللغة التي تود عرض الموقع بها',
     [KEYS.LOCAL_NATIVENAME]: 'العربية',
@@ -13,6 +16,13 @@ export default {
     [KEYS.LOCAL_DESCRIPTION]: 'ترتيل هو مشروع مفتوح المصدر صُمم للمساعده في بناء برامج لتحليل قراءة القرآن. بالنظر لأهمية تلاوة القرآن في حياة المسلمين ، من المهم بناء أدوات برمجية يمكن أن تساعد المسلمين العاديين على قراءة القرآن بشكل أكثر دقة.',
     [KEYS.LOCAL_NAME]: 'ترتيل',
 
+    // COMMON & GENERAL
+    [KEYS.HOME_WORD]: 'الرئيسية',
+    [KEYS.CLICK_WORD]: 'أضغط',
+    [KEYS.YES_WORD]: 'نعم',
+    [KEYS.NO_WORD]: 'لا',
+    [KEYS.SKIP_WORD]: 'تخطى',
+    [KEYS.THANK_YOU_MESSAGE]: "شكراً جزيلاً",
     [KEYS.USERS_LIST_TITLE]: 'قائمة الأعضاء',
     [KEYS.NEXT_AYAH]: "الآية التالية",
     [KEYS.PREVIOUS_AYAH]: "الآية السابقة",
@@ -20,52 +30,68 @@ export default {
     [KEYS.SUBMIT_BUTTON_TEXT]: "التالي",
     [KEYS.CONTINUOUS_MODE_NOTE_TEXT]: "التسجيل المستمر",
     [KEYS.CHANGE_AYAH_TEXT]: "اضغط هنا لتغيير الآية",
+    [KEYS.CONTINUE_READING_BUTTON_TEXT]: "أكمل القراءة",
+    [KEYS.RANDOM_AYAH_LINK_TEXT]: "آية عشوائية",
+    [KEYS.ABOUT_LINK_TEXT]: "عن ترتيل",
+    [KEYS.PROFILE_LINK_TEXT]: "حسابي",
+    [KEYS.MOBILE_APP_LINK_TEXT]: "تطبيق الهاتف",
+    [KEYS.EVALUATE_AYAHS]: "تقييم آيات",
+    [KEYS.GET_STARTED]: "أبدأ الآن",
+
+    // AYAH PICKER
     [KEYS.AYAH_PICKER_TITLE]: "اختر آية",
     [KEYS.AYAH_PICKER_SEARCH_PLACEHOLDER]: "بحث",
     [KEYS.AYAH_PICKER_BACK_BUTTON_TEXT]: "السورة",
+
+    // SURAH PICKER
     [KEYS.SURAH_PICKER_TITLE]: "اختر سورة",
     [KEYS.SURAH_PICKER_SEARCH_PLACEHOLDER]: "بحث",
     [KEYS.SURAH_PICKER_BACK_BUTTON_TEXT]: "الرئيسيه",
-    [KEYS.DEMOGRAPHICS_PAGE_TITLE]: "تعديل بياناتك",
+
+    // DEMOGRAPHICS PAGE
+    [KEYS.DEMOGRAPHICS_PAGE_EDIT_DATA_TEXT]: "تعديل بياناتك",
     [KEYS.DEMOGRAPHICS_FORM_SUBMIT_BUTTON_TEXT]: "حفظ",
-    [KEYS.SKIP_BUTTON_TEXT]: "تخطي",
+   [KEYS.DEMOGRAPHIC_PAGE_FIRST_PARAGRAPH_1]: "بمساعدتك، لقد وصلنا إلي",
+    [KEYS.DEMOGRAPHIC_PAGE_FIRST_PARAGRAPH_2]: "تسجيل. هذا جيد ، ولكن في ترتيل نسعي لأن تكون التسجيلات بصوت رجال و نساء من جميع الأعمار والثقافات المختلفه ، لتحسين جودة البرنامج.",
+    [KEYS.DEMOGRAPHIC_PAGE_SECOND_PARAGRAPH]: "ساعدنا لتحسين أداء البرنامج بتسجيل بعض المعلومات عنك.",
+    [KEYS.DEMOGRAPHIC_INFO_LINK_TEXT]: "بياناتك",
+
+    // GENDER INPUT
     [KEYS.GENDER_INPUT_LABEL]: "الجنس",
     [KEYS.GENDER_INPUT_OPTION_MALE]: "ذكر",
     [KEYS.GENDER_INPUT_OPTION_FEMALE]: "أنثي",
     [KEYS.AGE_INPUT_LABEL]: "العمر",
+
+    // QIRAAH INPUT
     [KEYS.QIRAAH_INPUT_LABEL]: "القراءة",
     [KEYS.QIRAAH_INPUT_OPTION_HAFS]: "حفص",
     [KEYS.QIRAAH_INPUT_OPTION_WARSH]: "ورش",
     [KEYS.QIRAAH_INPUT_OPTION_NOTSURE]: "لا أعلم",
     [KEYS.QIRAAH_INPUT_OPTION_OTHER]: "أخري",
     [KEYS.HERITAGE_INPUT_LABEL]: "الجنسية",
+
+    // SUBSCRIBE PAGE
     [KEYS.SUBSCRIBE_PAGE_TEMPLATE_TITLE]: "إشترك",
-    [KEYS.SUBSCRIBE_PAGE_TITLE]: "شكراً جزيلاً",
     [KEYS.SUBSCRIBE_BUTTON_TEXT]: "اشتراك",
     [KEYS.SUBSCRIBE_PAGE_EMAIL_PLACEHOLDER_TEXT]: "البريد الالكتروني",
     [KEYS.SUBSCRIBE_PAGE_EMAIL_BUTTON_TEXT]: "اشترك لتصلك أخبار ترتيل",
-    [KEYS.CONTINUE_READING_BUTTON_TEXT]: "أكمل القراءة",
-    [KEYS.RANDOM_AYAH_LINK_TEXT]: "آية عشوائية",
-    [KEYS.ABOUT_LINK_TEXT]: "عن ترتيل",
-    [KEYS.DEMOGRAPHIC_INFO_LINK_TEXT]: "بياناتك",
-    [KEYS.PROFILE_LINK_TEXT]: "حسابي",
-    [KEYS.MOBILE_APP_LINK_TEXT]: "تطبيق الهاتف",
-    [KEYS.HOME_LINK_TEXT]: 'الرئيسيه',
-    [KEYS.EVALUATE_AYAHS]: "تقييم آيات",
-    [KEYS.DEMOGRAPHIC_PAGE_FIRST_PARAGRAPH_1]: "بمساعدتك، لقد وصلنا إلي",
-    [KEYS.DEMOGRAPHIC_PAGE_FIRST_PARAGRAPH_2]: "تسجيل. هذا جيد ، ولكن في ترتيل نسعي لأن تكون التسجيلات بصوت رجال و نساء من جميع الأعمار والثقافات المختلفه ، لتحسين جودة البرنامج.",
-    [KEYS.DEMOGRAPHIC_PAGE_SECOND_PARAGRAPH]: "ساعدنا لتحسين أداء البرنامج بتسجيل بعض المعلومات عنك.",
-    [KEYS.SUBSCRIBE_PAGE_FIRST_PARAGRAPH_1]: "الحمد لله، بمساعدتك وصلنا لـ",
     [KEYS.SUBSCRIBE_PAGE_FIRST_PARAGRAPH_2]: "تسجيل",
     [KEYS.SUBSCRIBE_PAGE_CONGRATS_MESSAGE_1]: "تهانينا ، لقد تم إضافة خاصية",
     [KEYS.SUBSCRIBE_PAGE_CONGRATS_MESSAGE_2]: "يمكنك اختيار أي آية  و أي سورة و القراءة في وضع مستمر ، جربها الآن بالضغط علي 'أكمل القراءة'",
     [KEYS.SUBSCRIBE_PAGE_HELP_US_MESSAGE_1]: "يمكنك أيضاً مساعدتنا لتحقيق هدفنا بمشاركة تحدي ترتيل لتسجيل 50 آلاف آية ",
     [KEYS.SUBSCRIBE_PAGE_HELP_US_MESSAGE_2]: "مع أصدقائك و عائلتك",
+    [KEYS.SUBSCRIBE_PAGE_FIRST_PARAGRAPH_1]: "الحمد لله، بمساعدتك وصلنا لـ",
+
+    // NOT FOUND PAGE
     [KEYS.NOT_FOUND_PAGE_TEMPLATE_TITLE]: "صفحه غير موجوده",
     [KEYS.NOT_FOUND_PAGE_TEXT]: "هذه الصفحه غير موجوده",
+
+    // AYAH COMPONENT
     [KEYS.AYAH_NOT_FOUND_PAGE_TEXT]: "رقم هذه الآيه غير صحيح",
     [KEYS.PICK_DIFFERENT_AYAH]: "أختر آيه أخري",
     [KEYS.AYAHS_RECITED]: "آيات مسجلة",
+
+    // ABOUT PAGE
     [KEYS.ABOUT_PAGE_TEMPLATE_TITLE]: "عن ترتيل",
     [KEYS.ABOUT_PAGE_FIRST_PARAGRAPH_TITLE]: "ما هو ترتيل ؟",
     [KEYS.ABOUT_PAGE_FIRST_PARAGRAPH_TEXT]: "ترتيل هو مشروع مفتوح المصدر صُمم للمساعده في بناء برامج لتحليل قراءة القرآن. بالنظر لأهمية تلاوة القرآن في حياة المسلمين ، من المهم بناء أدوات برمجية يمكن أن تساعد المسلمين العاديين على قراءة القرآن بشكل أكثر دقة. اسم ترتيل يأتي من القرآن نفسه ، حيث يأمرنا الله بتلاوة القرآن مع الترتيل (أَوْ زِدْ عَلَيْهِ وَرَتِّلِ الْقُرْآنَ تَرْتِيلا)(73:4).",
@@ -80,17 +106,20 @@ export default {
     [KEYS.FIELDS_OF_USE_FIRST_ITEM]: "أدوات تصحيح تلقائي لأخطاء التلاوة",
     [KEYS.FIELDS_OF_USE_SECOND_ITEM]: "أدوات تعليم التجويد في نفس السياق",
     [KEYS.FIELDS_OF_USE_THIRD_ITEM]: "أكشاك المسجد التي تتبع الإمام وتعرض ترجمة الآية",
+
+    // MOBILE PAGE
     [KEYS.MOBILE_PAGE_TITLE]: "حمل تطبيق ترتيل",
     [KEYS.MOBILE_PAGE_PARAGRAPH]: "حمل تطبيق ترتيل علي هاتفك واجعل وقت فراغك مفيد و مليئ بالثواب",
 
+    // GENERAL INPUTS
     [KEYS.NAME_INPUT_PLACEHOLDER]:  "(مثال): محمد",
     [KEYS.EMAIL_ADDRESS_INPUT_PLACEHOLDER]:  "(مثال): Mohamed@example.com",
     [KEYS.MESSAGE_TEXTAREA_PLACEHOLDER]:  "أكتب رسالتك هنا...",
-
     [KEYS.NAME_INPUT_LABEL]: "الأسم",
     [KEYS.EMAIL_ADDRESS_INPUT_LABEL]: "البريد الألكتروني",
     [KEYS.MESSAGE_TEXTAREA_LABEL]: "الرساله",
 
+    // LANDING
     [KEYS.LANDING_GREETING_MESSAGE]: "سلام !",
     [KEYS.LANDING_FIRST_PARAGRAPH]: "أهلاً بك في تحدي ترتيل 50,000 ، شكراً لمساعدتنا في بناء أول مجموعة بيانات عامة مفتوحة المصدر في العالم لتلاوات القرآن من قبل أشخاص عاديين مثلي ومثلك. <a href='/about'>اقرأ المزيد</a> ",
     [KEYS.LANDING_SECOND_PARAGRAPH_TITLE]: "كيف يعمل ؟",
@@ -99,8 +128,8 @@ export default {
     [KEYS.LANDING_LIST_THIRD_ITEM]: " هذه التسجيلات سوف ستكون متاحة للمطورين المهتمين ببناء تطبيقات قائمة علي تلاوة القرآن.",
     [KEYS.LANDING_LAST_LINE]: "<a href='/privacy'>سياسة الخصوصية</a>",
     [KEYS.LANDING_BUTTON_TEXT]: "ابدأ",
-    [KEYS.GET_STARTED]: "أبدأ الآن",
 
+    // AYAH RECOGNITION PAGE
     [KEYS.AYAH_RECOGNITION]: "التعرف علي الآيات",
     [KEYS.AYAH_RECOGNITION_POWERED_BY]: "بواسطة <a href={url} target='_blank'>إقرأ</a>",
     [KEYS.AYAH_RECOGNITION_RECOGNITION_MESSAGE]: "إبدأ بالضغط علي زر الميكروفون وأبدأ بالتسجيل لتجد الآيه الأقرب.",
@@ -113,10 +142,12 @@ export default {
     [KEYS.AYAH_RECOGNITION_RESULTS]: "نتيجه",
     [KEYS.AYAH_RECOGNITION_NEW_SEARCH]: "بحث جديد",
 
+    // CONTACT US
     [KEYS.CONTACT_US]: "تواصل معنا",
     [KEYS.CONTACT_US_SEND]: "إرسال",
     [KEYS.CONTACT_US_BUTTON_TEXT]: "تواصل معنا",
 
+    // CONTRIBUTORS
     [KEYS.CONTRIBUTOR_1]: "أبوبكر عابد ، طالب دكتوراه - جامعة ستانفورد",
     [KEYS.CONTRIBUTOR_2]: "علي عابد ، مهندس برمجيات - جوجل",
     [KEYS.CONTRIBUTOR_3]: "علي عبدالله ، مهندس ميكانيكا - تيسلا",

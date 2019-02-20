@@ -33,7 +33,7 @@ class NotFound extends React.Component<IProps> {
           </h1>
           <Link to="/">
             <b>
-              Go Home
+              <T id={KEYS.NOT_FOUND_PAGE_GO_HOME_LINK} />
             </b>
           </Link>
         </div>
@@ -48,14 +48,14 @@ const Container = styled.div`
   height: 100%;
   padding: 1em;
   box-sizing: border-box;
-  
+
   .content {
     padding-top: 5em;
     display: flex;
     align-items: center;
     flex-flow: column;
     flex: 1;
-    
+
     .icon {
       margin-bottom: 1em;
     }

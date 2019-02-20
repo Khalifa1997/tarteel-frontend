@@ -4,9 +4,10 @@ import {Icon} from "react-icons-kit";
 import {close as closeIcon} from 'react-icons-kit/ionicons/close'
 import styled from "styled-components";
 import classNames from 'classnames';
-
 import config from '../../config';
 import {withCookies} from "react-cookie";
+import KEYS from '../locale/keys';
+import T from './T';
 
 interface IProps {
   onClose(): void;
@@ -23,7 +24,9 @@ const RecordingError = (props: IProps) => {
         <div className="close" onClick={props.onClose}>
           <Icon icon={closeIcon} />
         </div>
-        <p>It doesn't look like you have microphone permissions enabled. Get a better experience on mobile!</p>
+        <p>
+          <T id={KEYS.RECORDING_ERROR_MESSAGE_1} />
+        </p>
         <a href={config('androidAppLink')}>Android</a>
         <a href={config('IOSAppLink')}>iOS</a>
       </MobileView>
@@ -34,7 +37,7 @@ const RecordingError = (props: IProps) => {
         <div className={`msg ${classes}`}>
           {
             !props.message ?
-                'To upload recordings, please enable microphone access, or use a different browser.'
+                <T id={KEYS.RECORDING_ERROR_MESSAGE_2} />
               :
                 props.message
           }
@@ -56,7 +59,7 @@ const Container = styled.div`
   background: rebeccapurple;
   border-radius: 15px;
   z-index: 5;
-  
+
   .close {
     position: absolute;
     right: 10px;
@@ -64,7 +67,7 @@ const Container = styled.div`
   }
   .msg {
     margin: 1em 10px;
-    
+
     &.rtl {
       direction: rtl;
     }

@@ -21,22 +21,22 @@ const CookiesBanner = (props: IProps) => {
       <Container>
         <div className={'text'}>
           <p>
-            We use cookies to ensure you have the best browsing experience on our website.
+            <T id={KEYS.COOKIES_NOTICE_MESSAGE_1} />
             <BrowserView>
-              By using our site, you acknowledge that you have read and understood our
+              <T id={KEYS.COOKIES_NOTICE_MESSAGE_2} />
             </BrowserView>
           </p>
 
           <Link to="/cookie">
-            Cookie Policy
+            <T id={KEYS.COOKIE_POLICY_LINK_TEXT} />
           </Link>
           &
           <Link to="/privacy">
-            Privacy Policy
+            <T id={KEYS.PRIVACY_POLICY_LINK_TEXT} />
           </Link>
         </div>
         <button onClick={handleGotIt}>
-          Got it!
+          <T id={KEYS.COOKIES_BUTTON_TEXT} />
         </button>
       </Container>
         :
@@ -52,21 +52,21 @@ const Container = styled.div`
   left: 0;
   right: 0;
   padding: 1em;
-  
+
   .text {
     color: #fff;
     margin: 0 1em;
     padding: 0 1em;
     text-align: center;
     line-height: 20px;
-    
+
     a {
       margin: 0 1em;
       color: #fff;
       text-decoration: underline;
     }
   }
-  
+
   button {
     background-color: #A1EA67;
     border-radius: 5px;
@@ -76,12 +76,12 @@ const Container = styled.div`
 
   @media screen and (max-width: ${props => props.theme.breakpoints.sm }px) {
     padding: 10px;
-    
+
     .text {
       font-size: 12px;
       padding: 0;
     }
-    
+
   }
 `;
 
