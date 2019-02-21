@@ -90,7 +90,7 @@ class Main extends React.Component<IProps, never> {
     }
     return (
       <Container>
-        <Helmet>
+        <Helmet titleTemplate={''}>
           {
             (surah && ayah) &&
               [
@@ -99,8 +99,6 @@ class Main extends React.Component<IProps, never> {
                     ogTitle
                   }
                 </title>,
-                <meta property={'og:title'} content={ogTitle} />,
-                <meta name={'twitter:title'} content={ogTitle} />,
                 <meta
                   property={'og:description'}
                   content={this.props.currentAyah.textSimple}

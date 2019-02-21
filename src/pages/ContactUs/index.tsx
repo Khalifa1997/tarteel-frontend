@@ -148,14 +148,6 @@ class ContactUs extends React.Component<IProps, IState> {
           <title>
             { intl.formatMessage({ id: KEYS.CONTACT_US }) }
             </title>
-          <meta
-            property={'og:title'}
-            content={intl.formatMessage({ id: KEYS.CONTACT_US })}
-          />
-          <meta
-            name={'twitter:title'}
-            content={intl.formatMessage({ id: KEYS.CONTACT_US })}
-          />
         </Helmet>
         <Navbar />
         <div className="content">

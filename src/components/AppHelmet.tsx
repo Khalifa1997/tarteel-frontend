@@ -13,6 +13,9 @@ const messages = defineMessages({
   description: {
     id: 'LOCAL_DESCRIPTION',
   },
+  localName: {
+    id: 'LOCAL_NAME',
+  },
 });
 
 const locale = '' || 'en_US';
@@ -43,12 +46,21 @@ const keywords = [
 
 const AppHelmet: React.SFC = ({intl}) => {
   const title = intl.formatMessage(messages.title);
-  // console.log('title: ', title);
   const description = intl.formatMessage(messages.description);
+  const localName = intl.formatMessage(messages.localName);
+  let ogTitle: string;
+  if (__SERVER__) {
+    const helmet = Helmet.rewind();
+    if (helmet.title.toString().match(/>.+</gi)) {
+      ogTitle = helmet.title.toString().match(/>.+</gi)[0].replace(/\<|\>/gi, '');
+    }
+  } else {
+    // Nothing;
+  }
 
   const tags = {
     title,
-    titleTemplate: `%s - ${title}`,
+    titleTemplate: `%s | ${ localName }`,
     meta: [
       {
         charset: 'utf-8',
@@ -116,7 +128,7 @@ const AppHelmet: React.SFC = ({intl}) => {
       },
       {
         property: 'og:title',
-        content: `%s | ${title}`,
+        content: ogTitle,
       },
       {
         property: 'og:description',
@@ -136,7 +148,7 @@ const AppHelmet: React.SFC = ({intl}) => {
       },
       {
         name: 'twitter:title',
-        content: title,
+        content: ogTitle,
       },
       {
         name: 'twitter:description',

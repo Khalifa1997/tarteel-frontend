@@ -231,14 +231,11 @@ class Recognition extends React.Component<IProps, IState> {
     const ogTitle = this.props.intl.formatMessage({
       id: KEYS.AYAH_RECOGNITION,
     });
-    const localName = this.props.intl.formatMessage({ id: KEYS.LOCAL_NAME });
     return (
       <Container>
         <Helmet>
           <title>{ogTitle}</title>
-          <meta property={'og:title'} content={`${ogTitle} | ${localName}`} />
           <meta property={'og:image'} content={this.handleOGImage()} />
-          <meta name={'twitter:title'} content={`${ogTitle} | ${localName}`} />
           <meta name={'twitter:image'} content={this.handleOGImage()} />
         </Helmet>
         <Navbar />

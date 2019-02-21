@@ -1,6 +1,7 @@
 import humps from "humps";
 import React, {Component} from "react"
 import {Helmet} from "react-helmet";
+import {injectIntl, InjectedIntl} from 'react-intl';
 
 import {connect} from "react-redux";
 import {fetchAboutData, fetchProfileData} from "../../api";
@@ -16,7 +17,7 @@ interface IDispatchProps {
 }
 
 interface IOwnProps {
-
+  intl: InjectedIntl;
 }
 
 interface IStateProps {
@@ -91,7 +92,9 @@ class ProfilePage extends Component<IProps, IState> {
       <Container>
         <Helmet>
           <title>
-            <T id={KEYS.PROFILE_TITLE} />
+            {
+              this.props.intl.formatMessage({ id: KEYS.PROFILE_TITLE })
+            }
           </title>
         </Helmet>
         <Navbar />
@@ -219,4 +222,4 @@ const mapStateToProps = (state: ReduxState): IStateProps => {
   }
 }
 
-export default connect(mapStateToProps)(ProfilePage)
+export default injectIntl(connect(mapStateToProps)(ProfilePage))

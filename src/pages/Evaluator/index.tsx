@@ -199,14 +199,11 @@ class Evaluator extends React.Component<IProps, IState> {
     const {currentAyah, profile} = this.props;
     const {isPlaying, played, isLoading, pills, currentStep} = this.state;
     const ogTitle = this.props.intl.formatMessage({ id: KEYS.EVALUATE_AYAHS });
-    const localName = this.props.intl.formatMessage({ id: KEYS.LOCAL_NAME })
     return (
       <Container>
         <Helmet>
           <title>{ogTitle}</title>
-          <meta property={'og:title'} content={`${ogTitle} | ${localName}`} />
           <meta property={'og:image'} content={this.handleOGImage()} />
-          <meta name={'twitter:title'} content={`${ogTitle} | ${localName}`} />
           <meta name={'twitter:image'} content={this.handleOGImage()} />
         </Helmet>
         <Navbar
