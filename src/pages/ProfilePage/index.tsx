@@ -9,6 +9,7 @@ import T from "../../components/T";
 import KEYS from "../../locale/keys";
 import ReduxState, {IProfile} from "../../types/GlobalState";
 import {Container} from "./styles";
+import logScreen from "../../helpers/logScreen";
 
 interface IDispatchProps {
 
@@ -36,6 +37,7 @@ class ProfilePage extends Component<IProps, IState> {
     },
   }
   public async componentDidMount() {
+    logScreen();
     const sessionKey = this.props.match.params.sessionKey;
     const data = humps.camelizeKeys(await fetchProfileData(sessionKey));
     this.setState({data});

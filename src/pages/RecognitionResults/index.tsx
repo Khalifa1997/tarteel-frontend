@@ -11,6 +11,7 @@ import {Link} from "react-router-dom";
 import Icon from "react-icons-kit";
 import KEYS from "../../locale/keys";
 import T from "../../components/T";
+import logScreen from "../../helpers/logScreen";
 
 interface IRecognitionAyah {
   arabicAyah: string;
@@ -33,6 +34,9 @@ interface IOwnProps {
 type IProps = IStateProps & IOwnProps & IOwnProps;
 
 class RecognitionResults extends React.Component<IProps> {
+  componentDidMount() {
+    logScreen();
+  }
   render() {
     return (
       <Container>

@@ -29,6 +29,7 @@ import {
 } from "../../store/actions/ayahs";
 import ReduxState, {ISearchSurah} from "../../types/GlobalState";
 import {Container} from "./styles";
+import logScreen from "../../helpers/logScreen";
 
 
 const messages = defineMessages({
@@ -75,6 +76,7 @@ class AyahPicker extends Component<IProps, IState> {
     isFetching: false,
   }
   public componentDidMount() {
+    logScreen();
     if (!this.props.currentSurah || this.props.currentSurah.chapterId !== this.props.match.params.num) {
       this.setState({
         isFetching: true,

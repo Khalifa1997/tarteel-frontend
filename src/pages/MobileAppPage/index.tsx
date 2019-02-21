@@ -13,6 +13,7 @@ import {Container} from "./styles";
 import AndroidLogo from "../../../public/android-logo.png";
 import AppleLogo from "../../../public/apple-logo.png";
 import LogoImage from "../../../public/logo-3x.png";
+import logScreen from "../../helpers/logScreen";
 
 interface IDispatchProps {
 }
@@ -29,6 +30,7 @@ type IProps = IOwnProps & IDispatchProps & IStateProps;
 
 class MobileAppPage extends Component<IProps, never> {
   public componentDidMount() {
+    logScreen();
   }
   public render() {
     const {intl} = this.props;

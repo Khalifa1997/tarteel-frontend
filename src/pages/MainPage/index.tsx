@@ -14,6 +14,7 @@ import {isCorrectAyah} from "../../helpers/ayahs";
 import {fetchRandomAyah, fetchSpecificAyah} from "../../api/ayahs";
 import {setAyah} from "../../store/actions/ayahs";
 import {ActionType} from "typesafe-actions";
+import logScreen from "../../helpers/logScreen";
 
 const cdnURL = config('cdnURL');
 
@@ -47,7 +48,7 @@ class Main extends React.Component<IProps, never> {
     await this.props.loadPrevQueue();
   }
   public async componentDidMount() {
-    ReactGA.pageview(window.location.pathname + window.location.search);
+    logScreen();
     const {surah, ayah} = this.props.match.params;
     if (surah && ayah) {
       if (isCorrectAyah(surah, ayah)) {

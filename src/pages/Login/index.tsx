@@ -5,6 +5,7 @@ import LoginForm from "../../components/LoginForm";
 import SignupForm from "../../components/SignupForm";
 
 import Navbar from "../../components/Navbar";
+import logScreen from "../../helpers/logScreen";
 
 interface IProps {
 
@@ -25,6 +26,9 @@ class Login extends React.Component<IProps, IState> {
             isLogin: !state.isLogin,
         }
     });
+  }
+  componentDidMount() {
+    logScreen();
   }
   render() {
     return (

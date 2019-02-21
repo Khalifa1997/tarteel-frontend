@@ -25,6 +25,7 @@ import { toggleIsRecording } from '../../store/actions/status';
 import RecordingError from '../../components/RecordingError';
 import KEYS from '../../locale/keys';
 import T from "../../components/T";
+import logScreen from "../../helpers/logScreen";
 
 const cdnURL = config('cdnURL');
 
@@ -204,6 +205,7 @@ class Recognition extends React.Component<IProps, IState> {
       });
   };
   componentDidMount() {
+    logScreen();
     this.resetSearch();
     if (!Boolean(window.webkitSpeechRecognition)) {
       this.upgradeRequired();

@@ -13,6 +13,7 @@ import FooterButton from "../../components/FooterButton";
 import T from "../../components/T";
 import KEYS from "../../locale/keys";
 import Select from '../../components/Select';
+import logScreen from "../../helpers/logScreen";
 
 
 const subjects: ISubject[] = [
@@ -134,6 +135,9 @@ class ContactUs extends React.Component<IProps, IState> {
         this.showToast('danger', 'Error', errors[key][0]);
       })
     }
+  }
+  componentDidMount() {
+    logScreen();
   }
   render() {
     const { intl } = this.props;

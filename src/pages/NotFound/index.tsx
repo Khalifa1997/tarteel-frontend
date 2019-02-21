@@ -9,6 +9,7 @@ import T from "../../components/T";
 import KEYS from "../../locale/keys";
 import styled from "styled-components";
 import Navbar from "../../components/Navbar";
+import logScreen from "../../helpers/logScreen";
 
 
 interface IProps {
@@ -16,6 +17,9 @@ interface IProps {
 }
 
 class NotFound extends React.Component<IProps> {
+  componentDidMount() {
+    logScreen();
+  }
   public render() {
     const {intl} = this.props;
     return (

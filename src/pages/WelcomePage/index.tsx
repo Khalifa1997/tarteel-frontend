@@ -11,6 +11,7 @@ import {Container} from "./styles";
 
 import {withCookies} from "react-cookie";
 import LogoImage from "../../../public/logo-3x.png";
+import logScreen from "../../helpers/logScreen";
 
 interface IDispatchProps {
   setUsers(users: IUser[]): Promise<IUser[]>;
@@ -29,6 +30,9 @@ type IProps = IOwnProps & IDispatchProps & IStateProps;
 class WelcomePage extends Component<IProps, never> {
   public handleStart = () => {
     this.props.history.push('/');
+  }
+  componentDidMount() {
+    logScreen();
   }
   public render() {
     const classes = classNames({

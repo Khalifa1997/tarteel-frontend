@@ -15,6 +15,7 @@ import KEYS from "../../locale/keys";
 import {Container} from "./styles";
 import {connect} from "react-redux";
 import ReduxState, {IProfile} from "../../types/GlobalState";
+import logScreen from "../../helpers/logScreen";
 
 
 interface IOwnProps {
@@ -36,6 +37,7 @@ class About extends Component<IProps, IState> {
     data: {},
   }
   async componentDidMount() {
+    logScreen();
     const data = humps.camelizeKeys(await fetchAboutData())
     this.setState({data});
 

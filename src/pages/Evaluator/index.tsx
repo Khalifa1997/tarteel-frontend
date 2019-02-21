@@ -31,6 +31,9 @@ import {Container, ModalContent} from "./styles";
 import config from '../../../config';
 import T from "../../components/T";
 import KEYS from "../../locale/keys";
+import {fetchSpecificAyah} from "../../api/ayahs";
+import {getNextAyah} from "../../helpers/ayahs";
+import logScreen from "../../helpers/logScreen";
 
 const cdnURL = config('cdnURL');
 
@@ -183,6 +186,7 @@ class Evaluator extends React.Component<IProps, IState> {
     this.setState({ showModal: false });
   }
   public componentDidMount() {
+    logScreen();
     window.AudioContext = window.AudioContext || window.webkitAudioContext;
     if (!this.props.currentAyah.textSimple) {
       this.getNewAyah()

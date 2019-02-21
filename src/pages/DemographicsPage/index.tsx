@@ -18,6 +18,7 @@ import {updateDemographicData} from "../../store/actions/demographicData";
 import ReduxState, {IDemographics, IProfile} from "../../types/GlobalState";
 import {unsetAskForDemographics} from "../../store/actions/profile";
 import Select from '../../components/Select';
+import logScreen from "../../helpers/logScreen";
 
 
 const genderOptions = [
@@ -117,6 +118,9 @@ class DemographicsPage extends React.Component<IProps, IState> {
     this.props.updateDemographics({
       [key]: option.value,
     })
+  }
+  componentDidMount() {
+    logScreen();
   }
   render() {
     const {isSubmitting} = this.state

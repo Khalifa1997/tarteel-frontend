@@ -11,6 +11,7 @@ import Navbar from "../../components/Navbar";
 import T from "../../components/T";
 import KEYS from "../../locale/keys";
 import {Container} from "./styles";
+import logScreen from "../../helpers/logScreen";
 
 interface IDispatchProps {
 }
@@ -25,7 +26,8 @@ interface IStateProps {
 type IProps = IOwnProps & IDispatchProps & IStateProps;
 
 class SubscribePage extends Component<IProps, never> {
-  public componentDidMount() {
+  componentDidMount() {
+    logScreen();
   }
   public render() {
     const recordingCount = 0
