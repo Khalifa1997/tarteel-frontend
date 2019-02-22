@@ -1,11 +1,11 @@
 import React from 'react';
-import {BrowserView, MobileView} from "react-device-detect";
-import {Icon} from "react-icons-kit";
-import {close as closeIcon} from 'react-icons-kit/ionicons/close'
-import styled from "styled-components";
+import { BrowserView, MobileView } from 'react-device-detect';
+import { Icon } from 'react-icons-kit';
+import { close as closeIcon } from 'react-icons-kit/ionicons/close';
+import styled from 'styled-components';
 import classNames from 'classnames';
 import config from '../../config';
-import {withCookies} from "react-cookie";
+import { withCookies } from 'react-cookie';
 import KEYS from '../locale/keys';
 import T from './T';
 
@@ -17,9 +17,9 @@ interface IProps {
 const RecordingError = (props: IProps) => {
   const classes = classNames({
     rtl: props.cookies.get('currentLocale') || 'en',
-  })
+  });
   return (
-    <Container >
+    <Container>
       <MobileView>
         <div className="close" onClick={props.onClose}>
           <Icon icon={closeIcon} />
@@ -35,17 +35,16 @@ const RecordingError = (props: IProps) => {
           <Icon icon={closeIcon} />
         </div>
         <div className={`msg ${classes}`}>
-          {
-            !props.message ?
-                <T id={KEYS.RECORDING_ERROR_MESSAGE_2} />
-              :
-                props.message
-          }
+          {!props.message ? (
+            <T id={KEYS.RECORDING_ERROR_MESSAGE_2} />
+          ) : (
+            props.message
+          )}
         </div>
       </BrowserView>
     </Container>
-  )
-}
+  );
+};
 
 const Container = styled.div`
   position: fixed;
@@ -81,6 +80,6 @@ const Container = styled.div`
     display: inline-block;
     margin: 0 5px;
   }
-`
+`;
 
 export default withCookies(RecordingError);

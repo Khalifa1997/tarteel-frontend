@@ -131,10 +131,9 @@ class NavMenu extends React.Component<IProps, IState> {
               item.onClick();
             }
           }}
-          className={classNames}>
-          <span className={'badge-text'}>
-            {item.badgeText}
-          </span>
+          className={classNames}
+        >
+          <span className={'badge-text'}>{item.badgeText}</span>
           <div className="text">
             <T id={item.textID} />
           </div>
@@ -154,7 +153,7 @@ class NavMenu extends React.Component<IProps, IState> {
       'contact',
     ];
     if (isMobileOnly) {
-      mobileLinks = ['home', 'about', 'evaluator'].concat(mobileLinks)
+      mobileLinks = ['home', 'about', 'evaluator'].concat(mobileLinks);
     }
     if (isHome) {
       mobileLinks.unshift(...['randomAyah']);
@@ -234,7 +233,7 @@ const LinkContainer = styled.div`
     &.badge {
       position: relative;
       display: block;
-      .badge-text{
+      .badge-text {
         position: absolute;
         font-size: 13px;
         color: ${props => props.theme.colors.linkColor};

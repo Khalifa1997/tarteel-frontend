@@ -1,9 +1,9 @@
 import React from 'react';
-import styled from "styled-components";
+import styled from 'styled-components';
 
-import Input from "./Input";
-import FooterButton from "./FooterButton";
-import FormErrorMessage from "./FormErrorMessage";
+import Input from './Input';
+import FooterButton from './FooterButton';
+import FormErrorMessage from './FormErrorMessage';
 import KEYS from '../locale/keys';
 import T from './T';
 
@@ -25,31 +25,32 @@ class VerifyPassword extends React.Component<IProps, IState> {
     newPassword: '',
     errorMessage: '',
     isLoading: false,
-  }
-  handleChange = (e) => {
+  };
+  handleChange = e => {
     // debounced input only accepts target doesn't accept currentTarget.
     this.setState({
       [e.target.name]: e.target.value,
     });
-  }
+  };
   handleReset = () => {
     this.setState({
       isLoading: true,
       errorMessage: '',
     });
-    this.props.handleSubmit(this.state.code, this.state.newPassword)
+    this.props
+      .handleSubmit(this.state.code, this.state.newPassword)
       .then(() => {
         this.setState({
           isLoading: false,
-        })
+        });
       })
       .catch((e: Error) => {
         this.setState({
           errorMessage: e.message,
           isLoading: false,
         });
-      })
-  }
+      });
+  };
   render() {
     return (
       <Container>
@@ -57,7 +58,8 @@ class VerifyPassword extends React.Component<IProps, IState> {
           <T id={KEYS.VERIFY_PASSWORD_TITLE} />
         </h2>
         <p>
-          <T id={KEYS.VERIFY_PASSWORD_MESSAGE} />{this.props.destination}
+          <T id={KEYS.VERIFY_PASSWORD_MESSAGE} />
+          {this.props.destination}
         </p>
         <div className="form">
           <Input
@@ -76,9 +78,7 @@ class VerifyPassword extends React.Component<IProps, IState> {
             onChange={this.handleChange}
             debounce={true}
           />
-          <FooterButton
-            onClick={this.handleReset}
-          >
+          <FooterButton onClick={this.handleReset}>
             <span>
               <T id={KEYS.VERIFY_PASSWORD_BUTTON} />
             </span>
@@ -86,12 +86,11 @@ class VerifyPassword extends React.Component<IProps, IState> {
           <FormErrorMessage message={this.state.errorMessage} />
         </div>
       </Container>
-    )
+    );
   }
 }
 
 const Container = styled.div`
-
   h2 {
     text-align: center;
   }
@@ -103,6 +102,6 @@ const Container = styled.div`
     position: relative;
     top: 2em;
   }
-`
+`;
 
 export default VerifyPassword;

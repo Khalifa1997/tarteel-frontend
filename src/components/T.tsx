@@ -19,13 +19,18 @@ const T: React.SFC<Props> = ({
   id,
   values,
   children,
-  ...rest,
+  ...rest
 }: Props & InjectedIntlProps) => {
   return (
-    <FormattedHTMLMessage id={id} defaultMessage={en.messages[id]} values={values} {...rest}>
+    <FormattedHTMLMessage
+      id={id}
+      defaultMessage={en.messages[id]}
+      values={values}
+      {...rest}
+    >
       {children}
     </FormattedHTMLMessage>
-  )
+  );
 };
 
 // T.propTypes = {

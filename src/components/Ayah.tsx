@@ -1,18 +1,18 @@
-import classNames from 'classnames'
-import React from "react";
-import ContentLoader from "react-content-loader";
-import {Link} from "react-router-dom";
-import styled from "styled-components";
+import classNames from 'classnames';
+import React from 'react';
+import ContentLoader from 'react-content-loader';
+import { Link } from 'react-router-dom';
+import styled from 'styled-components';
 
-import KEYS from "../locale/keys";
-import AyahShape from "../shapes/AyahShape";
-import WordShape from "../shapes/WordShape";
-import {WORD_TYPES} from "../types";
-import T from "./T";
+import KEYS from '../locale/keys';
+import AyahShape from '../shapes/AyahShape';
+import WordShape from '../shapes/WordShape';
+import { WORD_TYPES } from '../types';
+import T from './T';
 import ShareModal from '../components/ShareModal';
 
-import * as shareIcon from '../../public/share-icon.png'
-import {withCookies} from "react-cookie";
+import * as shareIcon from '../../public/share-icon.png';
+import { withCookies } from 'react-cookie';
 
 interface IProps {
   ayah: AyahShape;
@@ -28,14 +28,14 @@ class Ayah extends React.Component<IProps, IState> {
   state = {
     showTranslit: false,
     showShareModal: false,
-  }
+  };
   toggleTranslit = () => {
     this.setState((state, props) => {
       return {
         showTranslit: !state.showTranslit,
-      }
+      };
     });
-  }
+  };
   componentDidUpdate(prevProps: IProps) {
     if (prevProps.ayah.verseNumber !== this.props.ayah.verseNumber) {
       this.setState({
@@ -45,19 +45,18 @@ class Ayah extends React.Component<IProps, IState> {
   }
   renderTransliteration = () => {
     if (this.props.ayah.translations) {
-      return this.props.ayah.translations
-        .filter((trans) => {
-          return trans.resourceName === 'Transliteration'
-        })[0].text
+      return this.props.ayah.translations.filter(trans => {
+        return trans.resourceName === 'Transliteration';
+      })[0].text;
     }
-  }
+  };
   renderAyah = () => {
     return (
-      this.props.ayah.words.map(((word: WordShape) => {
+      this.props.ayah.words.map((word: WordShape) => {
         const className = classNames({
           [word.className]: true,
           [word.charType]: true,
-        })
+        });
         return (
           <span>
             <a
@@ -68,58 +67,50 @@ class Ayah extends React.Component<IProps, IState> {
               <small style={{ letterSpacing: -15 }}>&nbsp;</small>
             )}
           </span>
-        )
-      }))
-      ||
-      <em>
-        <T id={KEYS.AYAH_COMPONENT_LOADING_MESSAGE} />
-      </em>
-    )
-  }
+        );
+      }) || (
+        <em>
+          <T id={KEYS.AYAH_COMPONENT_LOADING_MESSAGE} />
+        </em>
+      )
+    );
+  };
   renderAyahLoader = () => {
     return (
       <ContentLoader height={42}>
         {/* Pure SVG */}
         <rect x="80" y="10" rx="3" ry="3" width="250" height="10" />
       </ContentLoader>
-    )
-  }
+    );
+  };
   handleShareAyah = () => {
     this.setState({
       showShareModal: true,
-    })
-  }
+    });
+  };
   render() {
-    const {ayah, isFetchingAyah} = this.props;
+    const { ayah, isFetchingAyah } = this.props;
     const locale = this.props.cookies.get('currentLocale') || 'en';
     return (
       <Container>
         <div id="ayah-text">
-          {
-            isFetchingAyah || !ayah.textSimple ? this.renderAyahLoader() : this.renderAyah()
-          }
+          {isFetchingAyah || !ayah.textSimple
+            ? this.renderAyahLoader()
+            : this.renderAyah()}
         </div>
         <div className="ayah-data">
           <div className="ayah-translit">
             <p className="translit-button" onClick={this.toggleTranslit}>
-              {
-                this.state.showTranslit ? "Hide" : "Show"
-              } <T id={KEYS.AYAH_COMPONENT_TRANSLITERATION} />
+              {this.state.showTranslit ? 'Hide' : 'Show'}{' '}
+              <T id={KEYS.AYAH_COMPONENT_TRANSLITERATION} />
             </p>
-            {
-              this.state.showTranslit ?
-                <p className="translit" >
-                  {
-                    this.renderTransliteration()
-                  }
-                </p>
-                :
-                null
-            }
+            {this.state.showTranslit ? (
+              <p className="translit">{this.renderTransliteration()}</p>
+            ) : null}
           </div>
           <div className={'ayah-loc-container'}>
             <div className="ayah-loc">
-              ({ ayah.chapterId } : {ayah.verseNumber})
+              ({ayah.chapterId} : {ayah.verseNumber})
             </div>
             <a className="share" onClick={this.handleShareAyah}>
               <img src={shareIcon} alt="share icon" />
@@ -132,13 +123,15 @@ class Ayah extends React.Component<IProps, IState> {
         <ShareModal
           show={this.state.showShareModal}
           quote={``}
-          url={`https://tarteel.io/ayah/${ayah.chapterId}/${ayah.verseNumber}${locale === 'ar' ? '/?lang=ar' : ''}`}
+          url={`https://tarteel.io/ayah/${ayah.chapterId}/${ayah.verseNumber}${
+            locale === 'ar' ? '/?lang=ar' : ''
+          }`}
           handleCloseModal={() => {
             this.setState({ showShareModal: false });
           }}
         />
       </Container>
-    )
+    );
   }
 }
 
@@ -198,20 +191,19 @@ const Container = styled.div`
       transition: 0.2s;
     }
   }
-    .change-ayah {
-      cursor: pointer;
-      display: inline-block;
-      span {
-        color: #9fa1a8;
-        font-size: 16px;
-        transition: 0.2s;
-      }
-
-      &:hover span {
-        color: #5ec49e;
-      }
+  .change-ayah {
+    cursor: pointer;
+    display: inline-block;
+    span {
+      color: #9fa1a8;
+      font-size: 16px;
+      transition: 0.2s;
     }
 
+    &:hover span {
+      color: #5ec49e;
+    }
+  }
 
   @media screen and (max-height: ${props => props.theme.breakpoints.sm}px) {
     .ayah-translit {
@@ -228,6 +220,6 @@ const Container = styled.div`
       }
     }
   }
-`
+`;
 
 export default withCookies(Ayah);

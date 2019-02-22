@@ -1,14 +1,12 @@
-import classnames from 'classnames'
-import range from "lodash/range";
-import React from "react";
-import {connect} from "react-redux";
-import styled from "styled-components";
+import classnames from 'classnames';
+import range from 'lodash/range';
+import React from 'react';
+import { connect } from 'react-redux';
+import styled from 'styled-components';
 
-import ReduxState from "../types/GlobalState";
+import ReduxState from '../types/GlobalState';
 
-interface IOwnProps {
-
-}
+interface IOwnProps {}
 
 interface IStateProps {
   userRecitedAyahs: number;
@@ -20,16 +18,18 @@ class ProgressBubbles extends React.Component<IProps, never> {
   public render() {
     return (
       <Container>
-        {
-          range(1, 6).map((num, i) => {
-            const classname = classnames({
-              completed: this.props.userRecitedAyahs >= i,
-            })
-            return <Bubble key={i} className={classname} >{ num }</Bubble>
-          })
-        }
+        {range(1, 6).map((num, i) => {
+          const classname = classnames({
+            completed: this.props.userRecitedAyahs >= i,
+          });
+          return (
+            <Bubble key={i} className={classname}>
+              {num}
+            </Bubble>
+          );
+        })}
       </Container>
-    )
+    );
   }
 }
 
@@ -38,7 +38,7 @@ const Container = styled.div`
   display: flex;
   justify-content: space-around;
   align-items: center;
-`
+`;
 
 const Bubble = styled.div`
   font-weight: bold;
@@ -53,18 +53,18 @@ const Bubble = styled.div`
   width: 20px;
   height: 20px;
   margin: 0 5px;
-  
+
   &.completed {
     background-color: #5ec49e;
     border-color: #5ec49e;
     color: white;
   }
-`
+`;
 
 const mapStateToProps = (state: ReduxState): IStateProps => {
   return {
     userRecitedAyahs: state.profile.userRecitedAyahs,
-  }
-}
+  };
+};
 
 export default connect(mapStateToProps)(ProgressBubbles);

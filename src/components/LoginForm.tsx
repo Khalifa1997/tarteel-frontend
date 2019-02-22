@@ -1,13 +1,13 @@
 import React from 'react';
-import styled from "styled-components";
+import styled from 'styled-components';
 import { Auth } from 'aws-amplify';
-import {History} from "history";
-import {withRouter} from "react-router";
+import { History } from 'history';
+import { withRouter } from 'react-router';
 
-import Input from "./Input";
-import FooterButton from "./FooterButton";
-import NoteButton from "./NoteButton";
-import FormErrorMessage from "./FormErrorMessage";
+import Input from './Input';
+import FooterButton from './FooterButton';
+import NoteButton from './NoteButton';
+import FormErrorMessage from './FormErrorMessage';
 import KEYS from '../locale/keys';
 import T from './T';
 
@@ -28,22 +28,24 @@ class LoginForm extends React.Component<IProps, IState> {
     username: '',
     password: '',
     idLoading: false,
-  }
+  };
   handleLogin = async () => {
     this.setState({ isLoading: true });
     const validationData: string[] = [];
     try {
       const user = await Auth.signIn(this.state.username, this.state.password);
-      if (user.challengeName === 'SMS_MFA' ||
-        user.challengeName === 'SOFTWARE_TOKEN_MFA') {
+      if (
+        user.challengeName === 'SMS_MFA' ||
+        user.challengeName === 'SOFTWARE_TOKEN_MFA'
+      ) {
         // You need to get the code from the UI inputs
         // and then trigger the following function with a button click
         const code = getCodeFromUserInput();
         // If MFA is enabled, sign-in should be confirmed with the confirmation code
         const loggedUser = await Auth.confirmSignIn(
-          user,   // Return object from Auth.signIn()
-          code,   // Confirmation code
-          mfaType, // MFA Type e.g. SMS, TOTP.
+          user, // Return object from Auth.signIn()
+          code, // Confirmation code
+          mfaType // MFA Type e.g. SMS, TOTP.
         );
       } else if (user.challengeName === 'NEW_PASSWORD_REQUIRED') {
         const { requiredAttributes } = user.challengeParam; // the array of required attributes, e.g ['email', 'phone_number']
@@ -52,13 +54,13 @@ class LoginForm extends React.Component<IProps, IState> {
         // For example, the email and phone_number are required attributes
         const { username, email, phone_number } = getInfoFromUserInput();
         const loggedUser = await Auth.completeNewPassword(
-          user,               // the Cognito User Object
-          newPassword,       // the new password
+          user, // the Cognito User Object
+          newPassword, // the new password
           // OPTIONAL, the required attributes
           {
             email,
             phone_number,
-          },
+          }
         );
       } else if (user.challengeName === 'MFA_SETUP') {
         // This happens when the MFA method is TOTP
@@ -83,14 +85,13 @@ class LoginForm extends React.Component<IProps, IState> {
         console.log(err);
       }
     }
-
-  }
+  };
   handleInputChange = (e: any) => {
     // debounced input only accepts target doesn't accept currentTarget.
     this.setState({
       [e.target.name]: e.target.value,
-    })
-  }
+    });
+  };
   render() {
     return (
       <Container>
@@ -111,7 +112,7 @@ class LoginForm extends React.Component<IProps, IState> {
             onChange={this.handleInputChange}
             debounce={true}
           />
-          <FormErrorMessage message={this.state.errorMessage}/>
+          <FormErrorMessage message={this.state.errorMessage} />
           <FooterButton
             className={'submit'}
             isLoading={this.state.isLoading}
@@ -123,18 +124,17 @@ class LoginForm extends React.Component<IProps, IState> {
           </FooterButton>
         </div>
 
-        <NoteButton
-          className={'note-button'}
-          onClick={this.props.handleToggle} >
+        <NoteButton className={'note-button'} onClick={this.props.handleToggle}>
           <T id={KEYS.LOGIN_DONT_HAVE_ACCOUNT} />
         </NoteButton>
         <NoteButton
           className={'note-button'}
-          onClick={() => this.props.history.push('/forgot_password')} >
+          onClick={() => this.props.history.push('/forgot_password')}
+        >
           <T id={KEYS.LOGIN_FORGET_PASSWORD} />
         </NoteButton>
       </Container>
-    )
+    );
   }
 }
 
@@ -163,6 +163,6 @@ const Container = styled.div`
     color: #485364;
     margin-top: 1em;
   }
-`
+`;
 
 export default withRouter(LoginForm);

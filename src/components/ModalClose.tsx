@@ -1,5 +1,5 @@
 import React from 'react';
-import styled from "styled-components";
+import styled from 'styled-components';
 
 const ModalClose = styled.div`
   background-color: black;
@@ -10,15 +10,15 @@ const ModalClose = styled.div`
   top: -10px;
   right: -10px;
   z-index: 5;
-  color: ${ props => props.theme.colors.white };
+  color: ${props => props.theme.colors.white};
   display: flex;
   justify-content: center;
   align-items: center;
   cursor: pointer;
-  
+
   .icon {
     margin-bottom: 3px;
   }
-`
+`;
 
-export default ModalClose
+export default ModalClose;

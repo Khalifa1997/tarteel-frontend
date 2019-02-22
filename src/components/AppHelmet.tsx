@@ -43,8 +43,7 @@ const keywords = [
   'Allah',
 ];
 
-
-const AppHelmet: React.SFC = ({intl}) => {
+const AppHelmet: React.SFC = ({ intl }) => {
   const title = intl.formatMessage(messages.title);
   const description = intl.formatMessage(messages.description);
   const localName = intl.formatMessage(messages.localName);
@@ -52,7 +51,10 @@ const AppHelmet: React.SFC = ({intl}) => {
   if (__SERVER__) {
     const helmet = Helmet.rewind();
     if (helmet.title.toString().match(/>.+</gi)) {
-      ogTitle = helmet.title.toString().match(/>.+</gi)[0].replace(/\<|\>/gi, '');
+      ogTitle = helmet.title
+        .toString()
+        .match(/>.+</gi)[0]
+        .replace(/\<|\>/gi, '');
     }
   } else {
     // Nothing;
@@ -60,7 +62,7 @@ const AppHelmet: React.SFC = ({intl}) => {
 
   const tags = {
     title,
-    titleTemplate: `%s | ${ localName }`,
+    titleTemplate: `%s | ${localName}`,
     meta: [
       {
         charset: 'utf-8',
@@ -168,7 +170,6 @@ const AppHelmet: React.SFC = ({intl}) => {
       },
     ],
     link: [
-
       {
         rel: 'preconnect',
         href: 'https://d2sf46268wowyo.cloudfront.net',
@@ -217,6 +218,6 @@ const AppHelmet: React.SFC = ({intl}) => {
   };
 
   return <Helmet {...tags} />;
-}
+};
 
 export default injectIntl(AppHelmet);
