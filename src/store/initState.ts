@@ -1,5 +1,5 @@
-import ReduxState from "../types/GlobalState";
-import {getCookie} from "../helpers/cookie";
+import ReduxState from '../types/GlobalState';
+import { getCookie } from '../helpers/cookie';
 
 const emptyAyah = {
   id: -1,
@@ -17,10 +17,10 @@ const emptyAyah = {
   translations: [],
   hash: -1,
   sessionId: '',
-}
+};
 
-const initState: (cookies?: any) => ReduxState = (cookies) => {
-  return ({
+const initState: (cookies?: any) => ReduxState = cookies => {
+  return {
     ayahs: {
       currentAyah: emptyAyah,
       prevAyah: [],
@@ -38,10 +38,10 @@ const initState: (cookies?: any) => ReduxState = (cookies) => {
       isFetching: true,
     },
     demographicData: {
-      gender: "",
-      age: "",
-      qiraah: "",
-      ethnicity: "",
+      gender: '',
+      age: '',
+      qiraah: '',
+      ethnicity: '',
     },
     profile: {
       passedOnBoarding: getCookie(cookies, 'passedOnBoarding'),
@@ -49,7 +49,7 @@ const initState: (cookies?: any) => ReduxState = (cookies) => {
       dailyCount: 0,
       userRecitedAyahs: 0,
       evaluationsCount: 0,
-      sessionKey: "",
+      sessionKey: '',
       askForDemographics: false,
     },
     evaluator: {
@@ -69,7 +69,7 @@ const initState: (cookies?: any) => ReduxState = (cookies) => {
     dataset: {
       sample: [],
     },
-  })
+  };
 };
 
 export default initState;

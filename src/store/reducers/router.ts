@@ -7,7 +7,10 @@ export type RouterAction = ActionType<typeof router>;
 
 export const INITIAL_STATE = initState().router;
 
-export default (state: {location: Location} = INITIAL_STATE, action: RouterAction) => {
+export default (
+  state: { location: Location } = INITIAL_STATE,
+  action: RouterAction
+) => {
   switch (action.type) {
     case getType(router.setLocation):
       return {
