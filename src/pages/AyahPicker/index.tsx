@@ -1,21 +1,21 @@
-import {History} from "history";
-import range from 'lodash/range'
-import React, {Component} from 'react';
-import ContentLoader  from 'react-content-loader'
-import {Helmet} from "react-helmet";
-import {arrowLeft} from 'react-icons-kit/feather/arrowLeft'
-import { defineMessages, InjectedIntl, injectIntl } from "react-intl"
+import { History } from 'history';
+import range from 'lodash/range';
+import React, { Component } from 'react';
+import ContentLoader from 'react-content-loader';
+import { Helmet } from 'react-helmet';
+import { arrowLeft } from 'react-icons-kit/feather/arrowLeft';
+import { defineMessages, InjectedIntl, injectIntl } from 'react-intl';
 import LazyLoad from 'react-lazyload';
-import {connect} from "react-redux";
+import { connect } from 'react-redux';
 import Truncate from 'react-truncate';
 
-import Icon from "react-icons-kit";
-import {Link} from "react-router-dom";
-import {fetchSpecificAyah, fetchSurah} from "../../api/ayahs";
-import Navbar from "../../components/Navbar";
-import T from "../../components/T";
-import KEYS from "../../locale/keys";
-import AyahShape from "../../shapes/AyahShape";
+import Icon from 'react-icons-kit';
+import { Link } from 'react-router-dom';
+import { fetchSpecificAyah, fetchSurah } from '../../api/ayahs';
+import Navbar from '../../components/Navbar';
+import T from '../../components/T';
+import KEYS from '../../locale/keys';
+import AyahShape from '../../shapes/AyahShape';
 import {
   clearNextAyah,
   clearPrevAyah,
@@ -26,23 +26,21 @@ import {
   setAyah,
   setSurah,
   toggleFetchingCurrentAyah,
-} from "../../store/actions/ayahs";
-import ReduxState, {ISearchSurah} from "../../types/GlobalState";
-import {Container} from "./styles";
-import logScreen from "../../helpers/logScreen";
-
+} from '../../store/actions/ayahs';
+import ReduxState, { ISearchSurah } from '../../types/GlobalState';
+import { Container } from './styles';
+import logScreen from '../../helpers/logScreen';
 
 const messages = defineMessages({
   placeholder: {
     id: KEYS.AYAH_PICKER_SEARCH_PLACEHOLDER,
   },
-})
-
+});
 
 interface IOwnProps {
   match: any;
   intl: InjectedIntl;
-  history: History
+  history: History;
 }
 
 interface IDispatchProps {
@@ -62,7 +60,6 @@ interface IStateProps {
   currentSurah: ISearchSurah;
 }
 
-
 interface IState {
   searchText: string;
   isFetching: boolean;
@@ -72,29 +69,31 @@ type IProps = IStateProps & IDispatchProps & IOwnProps;
 
 class AyahPicker extends Component<IProps, IState> {
   public state = {
-    searchText: "",
+    searchText: '',
     isFetching: false,
-  }
+  };
   public componentDidMount() {
     logScreen();
-    if (!this.props.currentSurah || this.props.currentSurah.chapterId !== this.props.match.params.num) {
+    if (
+      !this.props.currentSurah ||
+      this.props.currentSurah.chapterId !== this.props.match.params.num
+    ) {
       this.setState({
         isFetching: true,
       });
-      fetchSurah(this.props.match.params.num)
-        .then(ayahs => {
-          this.setState({
-            isFetching: false,
-          });
-          this.props.setSurah(ayahs)
-        })
+      fetchSurah(this.props.match.params.num).then(ayahs => {
+        this.setState({
+          isFetching: false,
+        });
+        this.props.setSurah(ayahs);
+      });
     }
   }
   public handleAyahClick = (ayahNum: number) => {
     if (this.props.currentAyah.verseNumber !== ayahNum) {
       this.props.toggleFetchingCurrentAyah();
-      fetchSpecificAyah(this.props.match.params.num, ayahNum)
-        .then(async (ayah: AyahShape) => {
+      fetchSpecificAyah(this.props.match.params.num, ayahNum).then(
+        async (ayah: AyahShape) => {
           await this.props.setAyah(ayah);
           await this.props.clearNextAyah();
           await this.props.clearPrevAyah();
@@ -103,106 +102,107 @@ class AyahPicker extends Component<IProps, IState> {
           this.props.toggleFetchingCurrentAyah();
           await this.props.loadNextQueue();
           await this.props.loadPrevQueue();
-        })
+        }
+      );
     }
-    this.props.history.replace({pathname: '/', state: {k: 'ayahPicker'}});
-  }
+    this.props.history.replace({ pathname: '/', state: { k: 'ayahPicker' } });
+  };
   public renderAyahs = () => {
     return Object.keys(this.props.currentSurah.ayahs)
       .filter((ayahNum: string) => {
-        return this.props.currentSurah.ayahs[ayahNum].text.toLowerCase().trim().includes(this.state.searchText.toLowerCase().trim())
+        return this.props.currentSurah.ayahs[ayahNum].text
+          .toLowerCase()
+          .trim()
+          .includes(this.state.searchText.toLowerCase().trim());
       })
       .map((ayahNum: string) => {
         ayahNum = Number(ayahNum);
-      const active = this.props.currentAyah.surah === this.props.match.params.num && this.props.currentAyah.ayah === ayahNum
-      return (
-        <LazyLoad height={35} offset={0} once={true} overflow={true}>
-          <div className={`list-item ${active ? "active": ""}`} onClick={() => this.handleAyahClick(ayahNum)}>
-            <p className={"number"}>{ ayahNum }</p>
-            <p className={"text"}>
-              <Truncate
-                lines={1}
-                ellipsis='...'
-                trimWhitespace={true}
-              >
-                {this.props.currentSurah.ayahs[ayahNum].displayText}
-              </Truncate>
-            </p>
-          </div>
-        </LazyLoad>
-      )
-    })
-  }
+        const active =
+          this.props.currentAyah.surah === this.props.match.params.num &&
+          this.props.currentAyah.ayah === ayahNum;
+        return (
+          <LazyLoad height={35} offset={0} once={true} overflow={true}>
+            <div
+              className={`list-item ${active ? 'active' : ''}`}
+              onClick={() => this.handleAyahClick(ayahNum)}
+            >
+              <p className={'number'}>{ayahNum}</p>
+              <p className={'text'}>
+                <Truncate lines={1} ellipsis="..." trimWhitespace={true}>
+                  {this.props.currentSurah.ayahs[ayahNum].displayText}
+                </Truncate>
+              </p>
+            </div>
+          </LazyLoad>
+        );
+      });
+  };
   public handleSearchText = (e: any) => {
     this.setState({
       searchText: e.currentTarget.value,
     });
-  }
+  };
   public renderLoader = () => {
     return range(6).map(n => {
       return (
-        <ContentLoader height={42} style={{transform: "rotate(-180deg)"}}>
+        <ContentLoader height={42} style={{ transform: 'rotate(-180deg)' }}>
           {/* Pure SVG */}
           <rect x="80" y="10" rx="3" ry="3" width="250" height="10" />
           <rect x="35" y="8" rx="5" ry="5" width="15" height="15" />
         </ContentLoader>
-      )
-    })
-  }
+      );
+    });
+  };
   public render() {
-    const {intl} = this.props
+    const { intl } = this.props;
     return (
       <Container>
         <Helmet>
-          <title>{ intl.formatMessage({ id: KEYS.AYAH_PICKER_TITLE }) }</title>
+          <title>{intl.formatMessage({ id: KEYS.AYAH_PICKER_TITLE })}</title>
         </Helmet>
         <Navbar />
         <div className="content">
-          <Link to={"/surahs"} className="back-to-surah">
+          <Link to={'/surahs'} className="back-to-surah">
             <Icon icon={arrowLeft} />
-            <T id={KEYS.AYAH_PICKER_BACK_BUTTON_TEXT}/>
+            <T id={KEYS.AYAH_PICKER_BACK_BUTTON_TEXT} />
           </Link>
           <h3 className="title">
-            <T id={KEYS.AYAH_PICKER_TITLE}/>
+            <T id={KEYS.AYAH_PICKER_TITLE} />
           </h3>
           <div className="search-box">
-            <input type="text" name="search" onKeyUp={this.handleSearchText} placeholder={
-              intl.formatMessage(messages.placeholder)
-            } />
+            <input
+              type="text"
+              name="search"
+              onKeyUp={this.handleSearchText}
+              placeholder={intl.formatMessage(messages.placeholder)}
+            />
           </div>
           <div className="list">
-            {
-              this.state.isFetching ?
-                this.renderLoader()
-                :
-                this.renderAyahs()
-            }
+            {this.state.isFetching ? this.renderLoader() : this.renderAyahs()}
           </div>
         </div>
       </Container>
-    )
+    );
   }
 }
-
-
 
 const mapStateToProps = (state: ReduxState): IStateProps => {
   return {
     currentAyah: state.ayahs.currentAyah,
     currentSurah: state.ayahs.currentSurah,
-  }
-}
+  };
+};
 
 const mapDispatchToProps = (dispatch): IDispatchProps => {
   return {
     setAyah: (ayah: AyahShape) => {
-      return dispatch(setAyah(ayah))
+      return dispatch(setAyah(ayah));
     },
     toggleFetchingCurrentAyah: () => {
-      dispatch(toggleFetchingCurrentAyah())
+      dispatch(toggleFetchingCurrentAyah());
     },
     setSurah: (surah: ISearchSurah) => {
-      dispatch(setSurah(surah))
+      dispatch(setSurah(surah));
     },
     loadNextAyah: (ayah?: AyahShape) => {
       return dispatch(loadNextAyah(ayah));
@@ -211,18 +211,21 @@ const mapDispatchToProps = (dispatch): IDispatchProps => {
       return dispatch(loadPreviousAyah(ayah));
     },
     loadNextQueue: () => {
-      return dispatch(loadNextQueue())
+      return dispatch(loadNextQueue());
     },
     loadPrevQueue: () => {
-      return dispatch(loadPrevQueue())
+      return dispatch(loadPrevQueue());
     },
     clearNextAyah: () => {
-      return dispatch(clearNextAyah())
+      return dispatch(clearNextAyah());
     },
     clearPrevAyah: () => {
-      return dispatch(clearPrevAyah())
+      return dispatch(clearPrevAyah());
     },
-  }
-}
+  };
+};
 
-export default connect(mapStateToProps, mapDispatchToProps)(injectIntl(AyahPicker));
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(injectIntl(AyahPicker));

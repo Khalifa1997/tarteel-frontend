@@ -1,47 +1,45 @@
 import React from 'react';
 import styled from 'styled-components';
 import { injectIntl, InjectedIntl } from 'react-intl';
-import {withCookies} from "react-cookie";
+import { withCookies } from 'react-cookie';
 import pick from 'lodash/pick';
-import ReactNotification from "react-notifications-component";
+import ReactNotification from 'react-notifications-component';
 import validate from 'validate.js';
 import Helmet from 'react-helmet';
 
 import Navbar from '../../components/Navbar';
 import Input from '../../components/Input';
-import FooterButton from "../../components/FooterButton";
-import T from "../../components/T";
-import KEYS from "../../locale/keys";
+import FooterButton from '../../components/FooterButton';
+import T from '../../components/T';
+import KEYS from '../../locale/keys';
 import Select from '../../components/Select';
-import logScreen from "../../helpers/logScreen";
-
+import logScreen from '../../helpers/logScreen';
 
 const subjects: ISubject[] = [
   {
-    label: "Bug Report",
-    value: "bug",
+    label: 'Bug Report',
+    value: 'bug',
   },
   {
-    label: "Question",
-    value: "question",
+    label: 'Question',
+    value: 'question',
   },
   {
-    label: "Feature request",
-    value: "featureRequest",
+    label: 'Feature request',
+    value: 'featureRequest',
   },
   {
-    label: "Partnership",
-    value: "partnership",
+    label: 'Partnership',
+    value: 'partnership',
   },
   {
-    label: "Other",
-    value: "other",
+    label: 'Other',
+    value: 'other',
   },
-
-]
+];
 
 interface IProps {
-  intl:  InjectedIntl;
+  intl: InjectedIntl;
 }
 
 interface ISubject {
@@ -62,62 +60,62 @@ class ContactUs extends React.Component<IProps, IState> {
     subject: subjects[0],
     email: '',
     message: '',
-    receivers: [
-      'contact.tarteel@gmail.com',
-      'tarteel@abdellatif.io',
-    ],
+    receivers: ['contact.tarteel@gmail.com', 'tarteel@abdellatif.io'],
     isLoading: false,
-  }
+  };
 
   notificationDOMRef: JSX.Element;
 
-  handleChange = (e) => {
+  handleChange = e => {
     this.setState({
       [e.target.name]: e.target.value,
     });
-  }
+  };
   showToast = (type: string, title: string, message: string) => {
     if (this.notificationDOMRef) {
       this.notificationDOMRef.addNotification({
         title,
         message,
         type,
-        insert: "top",
-        container: "top-right",
-        animationIn: ["animated", "fadeIn"],
-        animationOut: ["animated", "fadeOut"],
+        insert: 'top',
+        container: 'top-right',
+        animationIn: ['animated', 'fadeIn'],
+        animationOut: ['animated', 'fadeOut'],
         dismiss: { duration: 2000 },
         dismissable: { click: true },
       });
     }
-  }
+  };
   validateForm = (body: object) => {
     const constraints = {
       email: {
-        presence: {allowEmpty: false},
+        presence: { allowEmpty: false },
         email: true,
       },
       message: {
-        presence: {allowEmpty: false},
+        presence: { allowEmpty: false },
       },
     };
 
-    return validate(body, constraints)
-  }
+    return validate(body, constraints);
+  };
   handleSubmit = () => {
     const body = pick(this.state, 'subject', 'email', 'message', 'receivers');
     const errors = this.validateForm(body);
 
     if (!errors) {
       this.setState({ isLoading: true });
-      return fetch('https://7gjflh9pwi.execute-api.us-east-1.amazonaws.com/production/contact-us', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(body),
-      })
-        .then((res) => res.json())
+      return fetch(
+        'https://7gjflh9pwi.execute-api.us-east-1.amazonaws.com/production/contact-us',
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(body),
+        }
+      )
+        .then(res => res.json())
         .then(json => {
           if (json.statusCode === 200) {
             this.showToast('success', 'Succeed', 'Message has been sent');
@@ -126,16 +124,16 @@ class ContactUs extends React.Component<IProps, IState> {
           }
           this.setState({ isLoading: false });
         })
-        .catch((e) => {
+        .catch(e => {
           this.setState({ isLoading: false });
           this.showToast('danger', 'Error', e.message);
-        })
+        });
     } else {
       Object.keys(errors).map((key: string) => {
         this.showToast('danger', 'Error', errors[key][0]);
-      })
+      });
     }
-  }
+  };
   componentDidMount() {
     logScreen();
   }
@@ -145,9 +143,7 @@ class ContactUs extends React.Component<IProps, IState> {
     return (
       <Container>
         <Helmet>
-          <title>
-            { intl.formatMessage({ id: KEYS.CONTACT_US }) }
-            </title>
+          <title>{intl.formatMessage({ id: KEYS.CONTACT_US })}</title>
         </Helmet>
         <Navbar />
         <div className="content">
@@ -160,19 +156,23 @@ class ContactUs extends React.Component<IProps, IState> {
                 isRtl={Boolean(rtl)}
                 isSearchable={true}
                 defaultValue={subjects[0]}
-                className={"select"}
+                className={'select'}
                 options={subjects}
-                onChange={(option) => this.setState({ subject: option })}
+                onChange={option => this.setState({ subject: option })}
               />
             </div>
             <Input
-              placeholder={intl.formatMessage({ id: KEYS.EMAIL_ADDRESS_INPUT_PLACEHOLDER })}
+              placeholder={intl.formatMessage({
+                id: KEYS.EMAIL_ADDRESS_INPUT_PLACEHOLDER,
+              })}
               label={intl.formatMessage({ id: KEYS.EMAIL_ADDRESS_INPUT_LABEL })}
               name={'email'}
               onChange={this.handleChange}
             />
             <Input
-              placeholder={intl.formatMessage({ id: KEYS.MESSAGE_TEXTAREA_PLACEHOLDER })}
+              placeholder={intl.formatMessage({
+                id: KEYS.MESSAGE_TEXTAREA_PLACEHOLDER,
+              })}
               label={intl.formatMessage({ id: KEYS.MESSAGE_TEXTAREA_LABEL })}
               name={'message'}
               type={'textarea'}
@@ -189,9 +189,11 @@ class ContactUs extends React.Component<IProps, IState> {
             </FooterButton>
           </div>
         </div>
-        <ReactNotification ref={(C: JSX.Element) => this.notificationDOMRef = C} />
+        <ReactNotification
+          ref={(C: JSX.Element) => (this.notificationDOMRef = C)}
+        />
       </Container>
-    )
+    );
   }
 }
 
@@ -238,6 +240,6 @@ const Container = styled.div`
       }
     }
   }
-`
+`;
 
 export default withCookies(injectIntl(ContactUs));

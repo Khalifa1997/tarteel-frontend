@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const Container = styled.div`
   display: flex;
@@ -7,7 +7,7 @@ export const Container = styled.div`
   justify-content: space-between;
   padding: 1em;
   box-sizing: border-box;
-  
+
   .content {
     flex: 1;
     display: flex;
@@ -17,4 +17,4 @@ export const Container = styled.div`
   @media screen and (max-width: ${props => props.theme.breakpoints.sm}px) {
     padding: 1em;
   }
-`
+`;

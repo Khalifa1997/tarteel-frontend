@@ -1,16 +1,15 @@
 import React from 'react';
-import {Helmet} from "react-helmet";
-import {InjectedIntl, injectIntl} from "react-intl"
-import {Link} from "react-router-dom";
+import { Helmet } from 'react-helmet';
+import { InjectedIntl, injectIntl } from 'react-intl';
+import { Link } from 'react-router-dom';
 import Icon from 'react-icons-kit';
-import {chainBroken} from 'react-icons-kit/fa/chainBroken';
+import { chainBroken } from 'react-icons-kit/fa/chainBroken';
 
-import T from "../../components/T";
-import KEYS from "../../locale/keys";
-import styled from "styled-components";
-import Navbar from "../../components/Navbar";
-import logScreen from "../../helpers/logScreen";
-
+import T from '../../components/T';
+import KEYS from '../../locale/keys';
+import styled from 'styled-components';
+import Navbar from '../../components/Navbar';
+import logScreen from '../../helpers/logScreen';
 
 interface IProps {
   intl: InjectedIntl;
@@ -21,12 +20,12 @@ class NotFound extends React.Component<IProps> {
     logScreen();
   }
   public render() {
-    const {intl} = this.props;
+    const { intl } = this.props;
     return (
       <Container>
         <Helmet>
           <title>
-            { intl.formatMessage({id: KEYS.NOT_FOUND_PAGE_TEMPLATE_TITLE}) }
+            {intl.formatMessage({ id: KEYS.NOT_FOUND_PAGE_TEMPLATE_TITLE })}
           </title>
         </Helmet>
         <Navbar />

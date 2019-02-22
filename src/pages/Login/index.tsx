@@ -1,32 +1,29 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import LoginForm from "../../components/LoginForm";
-import SignupForm from "../../components/SignupForm";
+import LoginForm from '../../components/LoginForm';
+import SignupForm from '../../components/SignupForm';
 
-import Navbar from "../../components/Navbar";
-import logScreen from "../../helpers/logScreen";
+import Navbar from '../../components/Navbar';
+import logScreen from '../../helpers/logScreen';
 
-interface IProps {
-
-}
+interface IProps {}
 
 interface IState {
   isLogin: boolean;
-
 }
 
 class Login extends React.Component<IProps, IState> {
   state = {
     isLogin: true,
-  }
+  };
   handleToggle = () => {
     this.setState((state, props) => {
-        return {
-            isLogin: !state.isLogin,
-        }
+      return {
+        isLogin: !state.isLogin,
+      };
     });
-  }
+  };
   componentDidMount() {
     logScreen();
   }
@@ -35,15 +32,14 @@ class Login extends React.Component<IProps, IState> {
       <Container>
         <Navbar />
         <div className="content">
-          {
-            this.state.isLogin ?
-              <LoginForm handleToggle={this.handleToggle} />
-              :
-              <SignupForm handleToggle={this.handleToggle} />
-          }
+          {this.state.isLogin ? (
+            <LoginForm handleToggle={this.handleToggle} />
+          ) : (
+            <SignupForm handleToggle={this.handleToggle} />
+          )}
         </div>
       </Container>
-    )
+    );
   }
 }
 
@@ -62,6 +58,5 @@ const Container = styled.div`
     flex-flow: column;
   }
 `;
-
 
 export default Login;

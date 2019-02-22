@@ -1,12 +1,12 @@
 import React from 'react';
 
 import config from '../../../config';
-import {Container} from './styles';
-import Navbar from "../../components/Navbar";
-import {IDataset} from "../../types/GlobalState";
-import T from "../../components/T";
+import { Container } from './styles';
+import Navbar from '../../components/Navbar';
+import { IDataset } from '../../types/GlobalState';
+import T from '../../components/T';
 import KEYS from '../../locale/keys';
-import logScreen from "../../helpers/logScreen";
+import logScreen from '../../helpers/logScreen';
 
 interface IProps {
   dataset: IDataset;
@@ -33,7 +33,7 @@ class DataSet extends React.Component<IProps, never> {
                 <T id={KEYS.CURRENT_APPLICATION_VERSION} />
               </a>
               &nbsp;
-                <T id={KEYS.DATASET_DOWNLOAD_DETAILS} />
+              <T id={KEYS.DATASET_DOWNLOAD_DETAILS} />
             </li>
           </ul>
           <h2>
@@ -43,19 +43,17 @@ class DataSet extends React.Component<IProps, never> {
             <T id={KEYS.DATASET_DOWNLOAD_SAMPLE_RECORDINGS_PARAGRAPH} />
           </p>
           <div className="recordings">
-            {
-              this.props.dataset.sample.map((url: string, i: number) => {
-                return (
-                  <audio key={i} controls={true}>
-                    <source src={url} type="audio/mp3" />
-                  </audio>
-                )
-              })
-            }
+            {this.props.dataset.sample.map((url: string, i: number) => {
+              return (
+                <audio key={i} controls={true}>
+                  <source src={url} type="audio/mp3" />
+                </audio>
+              );
+            })}
           </div>
         </div>
       </Container>
-    )
+    );
   }
 }
 

@@ -1,17 +1,17 @@
 import React from 'react';
-import styled from "styled-components";
+import styled from 'styled-components';
 import pluralize from 'pluralize';
-import {androidAdd} from 'react-icons-kit/ionicons/androidAdd'
-import {injectIntl, InjectedIntl} from 'react-intl';
+import { androidAdd } from 'react-icons-kit/ionicons/androidAdd';
+import { injectIntl, InjectedIntl } from 'react-intl';
 
-import Navbar from "../../components/Navbar";
-import {connect} from "react-redux";
-import ReduxState, {IRecognition} from "../../types/GlobalState";
-import {Link} from "react-router-dom";
-import Icon from "react-icons-kit";
-import KEYS from "../../locale/keys";
-import T from "../../components/T";
-import logScreen from "../../helpers/logScreen";
+import Navbar from '../../components/Navbar';
+import { connect } from 'react-redux';
+import ReduxState, { IRecognition } from '../../types/GlobalState';
+import { Link } from 'react-router-dom';
+import Icon from 'react-icons-kit';
+import KEYS from '../../locale/keys';
+import T from '../../components/T';
+import logScreen from '../../helpers/logScreen';
 
 interface IRecognitionAyah {
   arabicAyah: string;
@@ -30,7 +30,6 @@ interface IOwnProps {
   intl: InjectedIntl;
 }
 
-
 type IProps = IStateProps & IOwnProps & IOwnProps;
 
 class RecognitionResults extends React.Component<IProps> {
@@ -42,36 +41,38 @@ class RecognitionResults extends React.Component<IProps> {
       <Container>
         <Navbar />
         <div className="content">
-          <h1 className={'query'}>
-            {
-              this.props.recognition.queryText
-            }
-          </h1>
+          <h1 className={'query'}>{this.props.recognition.queryText}</h1>
           <h3 className="count">
-            {
-              pluralize(
-                this.props.intl.formatMessage({id: KEYS.AYAH_RECOGNITION_RESULTS})
-                , this.props.recognition.matches.length, true)
-            }
+            {pluralize(
+              this.props.intl.formatMessage({
+                id: KEYS.AYAH_RECOGNITION_RESULTS,
+              }),
+              this.props.recognition.matches.length,
+              true
+            )}
           </h3>
           <div className="list">
-            {
-              this.props.recognition.matches.map((ayah: IRecognitionAyah, i: number) => {
+            {this.props.recognition.matches.map(
+              (ayah: IRecognitionAyah, i: number) => {
                 return (
-                  <Ayah {...ayah} key={i} to={`/ayah/${ayah.surahNum}/${ayah.ayahNum}`} >
-                    <p>{ ayah.arabicSurahName }</p>
-                    <p>{ ayah.translationSurahName }</p>
+                  <Ayah
+                    {...ayah}
+                    key={i}
+                    to={`/ayah/${ayah.surahNum}/${ayah.ayahNum}`}
+                  >
+                    <p>{ayah.arabicSurahName}</p>
+                    <p>{ayah.translationSurahName}</p>
                     <div className="surah-index">
-                      (<span>{ ayah.surahNum }</span>
+                      (<span>{ayah.surahNum}</span>
                       &nbsp;:&nbsp;
-                      <span>{ ayah.ayahNum }</span>)
+                      <span>{ayah.ayahNum}</span>)
                     </div>
                   </Ayah>
-                )
-              })
-            }
+                );
+              }
+            )}
           </div>
-          <New to={'/recognition'} >
+          <New to={'/recognition'}>
             <Icon icon={androidAdd} size={25} />
             <p>
               <T id={KEYS.AYAH_RECOGNITION_NEW_SEARCH} />
@@ -79,7 +80,7 @@ class RecognitionResults extends React.Component<IProps> {
           </New>
         </div>
       </Container>
-    )
+    );
   }
 }
 
@@ -88,7 +89,7 @@ const New = styled(Link)`
   padding: 0 1em;
   color: ${props => props.theme.colors.brandPrimary};
   border-radius: 23px;
-  box-shadow: 0 4px 15px 0 rgba(0,0,0,0.25);
+  box-shadow: 0 4px 15px 0 rgba(0, 0, 0, 0.25);
   position: fixed;
   right: 15em;
   bottom: 2em;
@@ -172,14 +173,12 @@ const Container = styled.div`
       }
     }
   }
-`
+`;
 
 const mapStateToProps = (state: ReduxState): IStateProps => {
   return {
     recognition: state.recognition,
-  }
-}
+  };
+};
 
-export default injectIntl(connect(
-  mapStateToProps,
-)(RecognitionResults));
+export default injectIntl(connect(mapStateToProps)(RecognitionResults));

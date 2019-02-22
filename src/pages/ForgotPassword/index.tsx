@@ -1,16 +1,16 @@
 import React from 'react';
-import styled from "styled-components";
+import styled from 'styled-components';
 import { Auth } from 'aws-amplify';
-import {History} from "history";
+import { History } from 'history';
 
-import Navbar from "../../components/Navbar";
-import VerifyPassword from "../../components/VerifyPassword";
-import ForgotPasswordForm from "../../components/ForgotPasswordForm";
-import NewPasswordVerified from "../../components/NewPasswordVerified";
-import logScreen from "../../helpers/logScreen";
+import Navbar from '../../components/Navbar';
+import VerifyPassword from '../../components/VerifyPassword';
+import ForgotPasswordForm from '../../components/ForgotPasswordForm';
+import NewPasswordVerified from '../../components/NewPasswordVerified';
+import logScreen from '../../helpers/logScreen';
 
 interface IProps {
-  history: History
+  history: History;
 }
 
 interface IState {
@@ -26,17 +26,16 @@ class ForgotPassword extends React.Component<IProps, IState> {
     showVerified: false,
     destination: '',
     username: '',
-  }
+  };
   handleReset = (username: string) => {
-    return Auth.forgotPassword(username)
-      .then(data => {
-        this.setState({
-          showVerification: true,
-          destination: data.Destination,
-          username,
-        });
-      })
-  }
+    return Auth.forgotPassword(username).then(data => {
+      this.setState({
+        showVerification: true,
+        destination: data.Destination,
+        username,
+      });
+    });
+  };
   handleNewPassword = (code: string, newPassword: string) => {
     // Collect confirmation code and new password, then
     return Auth.forgotPasswordSubmit(this.state.username, code, newPassword)
@@ -44,17 +43,17 @@ class ForgotPassword extends React.Component<IProps, IState> {
         this.setState({
           showVerification: false,
           showVerified: true,
-        })
+        });
         console.log('changed');
       })
       .catch(err => console.log('err: ', err));
-  }
+  };
   handleChange = (e: any) => {
     // debounced input only accepts target doesn't accept currentTarget.
     this.setState({
       [e.target.name]: e.target.value,
     });
-  }
+  };
   componentDidMount() {
     logScreen();
   }
@@ -63,20 +62,19 @@ class ForgotPassword extends React.Component<IProps, IState> {
       <Container>
         <Navbar />
         <div className="content">
-          {
-            this.state.showVerification ?
-              <VerifyPassword
-                handleSubmit={this.handleNewPassword}
-                destination={this.state.destination} />
-              :
-              this.state.showVerified ?
-                <NewPasswordVerified />
-                :
-                <ForgotPasswordForm handleReset={this.handleReset} />
-          }
+          {this.state.showVerification ? (
+            <VerifyPassword
+              handleSubmit={this.handleNewPassword}
+              destination={this.state.destination}
+            />
+          ) : this.state.showVerified ? (
+            <NewPasswordVerified />
+          ) : (
+            <ForgotPasswordForm handleReset={this.handleReset} />
+          )}
         </div>
       </Container>
-    )
+    );
   }
 }
 
@@ -93,8 +91,7 @@ const Container = styled.div`
     align-items: center;
     flex-flow: column;
     flex: 1;
-
   }
-`
+`;
 
 export default ForgotPassword;

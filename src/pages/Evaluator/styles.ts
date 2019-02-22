@@ -1,18 +1,18 @@
-import styled from "styled-components"
+import styled from 'styled-components';
 
 export const Container = styled.div`
-  background-color: #F4F3F2;
+  background-color: #f4f3f2;
   min-height: 100%;
   padding: 1em;
   position: relative;
   display: flex;
   flex-flow: column;
   justify-content: space-between;
-  
+
   .pills {
     max-width: 10%;
     margin-top: -25px;
-  
+
     .inner {
       direction: ltr;
       position: relative;
@@ -27,7 +27,7 @@ export const Container = styled.div`
       flex-direction: column;
       -webkit-box-pack: start;
       justify-content: flex-start;
-    
+
       .pill {
         border-radius: 29px;
         box-sizing: border-box;
@@ -40,13 +40,13 @@ export const Container = styled.div`
         -webkit-box-pack: justify;
         -webkit-box-orient: horizontal;
         -webkit-box-direction: normal;
-        display: flex!important;
+        display: flex !important;
         height: 40px;
         width: 100%;
         padding: 0 12px;
         margin-left: auto;
         margin-top: 20px;
-        
+
         svg {
           margin-right: 10px;
         }
@@ -80,7 +80,7 @@ export const Container = styled.div`
         &.active {
           border: 2px solid #e7e5e2;
           background: #fff;
-          
+
           .num {
             color: #fff;
             background: #959595;
@@ -89,11 +89,12 @@ export const Container = styled.div`
       }
     }
   }
-  
+
   .start-text {
     margin: 10px 0;
-    
-    .title, .text {
+
+    .title,
+    .text {
       text-align: center;
       color: gray;
       font-weight: bold;
@@ -104,21 +105,21 @@ export const Container = styled.div`
     display: flex;
     flex-flow: row;
     justify-content: flex-end;
-    
+
     .cards {
       flex: 1;
       margin-top: 3em;
       max-width: 100%;
-      
+
       .instruction {
         display: flex;
         justify-content: center;
         margin-bottom: 10px;
         font-style: italic;
         color: #4a4a4a;
-        
+
         .icon {
-          color: #78C1A0;
+          color: #78c1a0;
           width: 35px;
           text-align: center;
         }
@@ -130,14 +131,15 @@ export const Container = styled.div`
         display: flex;
         align-items: center;
         justify-content: center;
-        box-shadow: 0 6px 12px 0 rgba(0,0,0,.05);
+        box-shadow: 0 6px 12px 0 rgba(0, 0, 0, 0.05);
         overflow: auto;
         opacity: 1;
-        transition: transform .5s cubic-bezier(.4,0,.2,1),opacity .5s cubic-bezier(.4,0,.2,1);
+        transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+          opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1);
         min-height: 250px;
         margin-bottom: 2em;
         padding: 0 1em;
-        
+
         .ayah-text {
           direction: rtl;
           word-wrap: break-word;
@@ -149,28 +151,28 @@ export const Container = styled.div`
           font-family: 'UthmanicHafs';
           font-size: 6vmin;
           max-width: 100%;
-            
+
           span.p3 a {
             font-size: 5vmin;
           }
-          
+
           .verse-number {
-            font-family: "Open Sans", sans-serif !important;
+            font-family: 'Open Sans', sans-serif !important;
           }
         }
       }
     }
   }
-  
+
   select {
-    border: 1px solid #78C2A0;
+    border: 1px solid #78c2a0;
     width: 150px;
     padding: 2px 5px;
     border-radius: 3px;
     margin: 0 10px;
     line-height: 15px;
   }
-  
+
   .primary-buttons {
     display: flex;
     justify-content: center;
@@ -178,7 +180,7 @@ export const Container = styled.div`
     margin-top: 1em;
     margin-bottom: 3em;
     position: relative;
-    
+
     .siri-wave {
       position: absolute;
       top: -75px;
@@ -187,24 +189,29 @@ export const Container = styled.div`
       right: 0;
       width: 500px;
       transform: translateX(-50%);
-      
+
       canvas {
-        mask-image: linear-gradient(90deg,transparent 3%,#000,transparent 97%);
+        mask-image: linear-gradient(
+          90deg,
+          transparent 3%,
+          #000,
+          transparent 97%
+        );
         position: absolute;
-        width: 100%!important;
+        width: 100% !important;
         max-width: 1360px;
         height: 250px !important;
       }
     }
   }
-  
+
   .starting-wave {
     position: absolute;
-    mask-image: linear-gradient(90deg,transparent 3%,#000,transparent 97%);
+    mask-image: linear-gradient(90deg, transparent 3%, #000, transparent 97%);
     width: 100%;
     height: 100px;
   }
-  
+
   .vote-button {
     border: none;
     border-radius: 30px;
@@ -217,48 +224,50 @@ export const Container = styled.div`
     letter-spacing: 1px;
     z-index: 2;
     background: #fff;
-    transition: all .2s linear;
+    transition: all 0.2s linear;
     width: 130px;
     height: 57px;
     cursor: pointer;
-    
+
     svg {
       margin-right: 23px;
     }
-    
+
     &.yes {
-      box-shadow: 0 5px 10px rgba(89,203,183,.3);
-      
-      &:hover, &.active {
+      box-shadow: 0 5px 10px rgba(89, 203, 183, 0.3);
+
+      &:hover,
+      &.active {
         background: #59cbb7;
-        box-shadow: 0 5px 10px rgba(89,203,183,.7);
+        box-shadow: 0 5px 10px rgba(89, 203, 183, 0.7);
       }
     }
     &.no {
-      box-shadow: 0 5px 10px rgba(255,79,94,.2);
-      
-      &:hover, &.active {
+      box-shadow: 0 5px 10px rgba(255, 79, 94, 0.2);
+
+      &:hover,
+      &.active {
         background: #ff4f5e;
-        box-shadow: 0 5px 10px rgba(255,79,94,.6);
+        box-shadow: 0 5px 10px rgba(255, 79, 94, 0.6);
       }
     }
-    &:hover, &.active {
+    &:hover,
+    &.active {
       color: #fff;
     }
-    &:hover svg g g, &.active svg g g {
-      fill: #fff
+    &:hover svg g g,
+    &.active svg g g {
+      fill: #fff;
     }
   }
-  
-  
-  
+
   .primary-button {
     margin: 0 40px;
     position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
-    
+
     .background {
       position: absolute;
       margin: 0 auto;
@@ -266,10 +275,16 @@ export const Container = styled.div`
       width: 109px;
       height: 109px;
       filter: blur(7.6px);
-      transition: opacity .2s linear;
-      opacity: .5;
-      background: -webkit-gradient(linear,right top,left top,from(#88d1f1),to(#b1b5e5));
-      background: linear-gradient(270deg,#88d1f1,#b1b5e5);
+      transition: opacity 0.2s linear;
+      opacity: 0.5;
+      background: -webkit-gradient(
+        linear,
+        right top,
+        left top,
+        from(#88d1f1),
+        to(#b1b5e5)
+      );
+      background: linear-gradient(270deg, #88d1f1, #b1b5e5);
     }
     button {
       display: flex;
@@ -281,17 +296,17 @@ export const Container = styled.div`
       width: 88px;
       height: 88px;
       background: #fff;
-      
+
       &:hover {
         opacity: 1;
       }
     }
-    
+
     &.play svg {
       height: 22px;
     }
     &:hover .background {
-      opacity: 1!important;
+      opacity: 1 !important;
     }
   }
 
@@ -311,7 +326,7 @@ export const Container = styled.div`
     right: 0px;
     height: 45px;
     width: 100px;
-    
+
     svg {
       margin-left: 13px;
       margin-right: 0;
@@ -338,33 +353,34 @@ export const Container = styled.div`
     letter-spacing: 1px;
     height: 45px;
     width: 100px;
-    
-    
+
     svg {
       margin-right: 5px;
     }
   }
 
-  .skip:hover, .back-to-home:hover {
+  .skip:hover,
+  .back-to-home:hover {
     border: 2px solid #000;
     color: #000;
   }
-  .skip:hover svg g g, .back-to-home:hover svg g g {
+  .skip:hover svg g g,
+  .back-to-home:hover svg g g {
     fill: #000;
   }
 
   @media screen and (max-width: ${props => props.theme.breakpoints.md}px) {
     padding: 0 10px;
-  
+
     .cards-and-pills {
       flex-flow: column;
       padding: 0;
-      
+
       .instruction {
         font-size: 12px;
       }
     }
-    
+
     .pills {
       max-width: initial;
       align-items: center;
@@ -376,49 +392,47 @@ export const Container = styled.div`
       .inner {
         flex-flow: row;
         margin-left: initial;
-        
+
         .pill {
           width: initial;
-  
+
           svg {
             display: none;
           }
           &.active {
             border: 0;
             background: transparent;
-            
+
             .num {
-              background-color: #5386F7;
+              background-color: #5386f7;
             }
           }
           &:nth-child(1) {
             margin-top: 20px;
           }
-          
         }
-          
       }
     }
-    
+
     .cards {
       max-width: 100% !important;
       margin-top: 1em;
-      
+
       .card {
         min-height: 200px;
-        
+
         .ayah-text {
           font-size: 18px;
         }
       }
     }
-    
+
     .text {
       font-size: 14px;
     }
     .primary-buttons {
       margin-bottom: 10%;
-      
+
       .siri-wave {
         top: -90px !important;
         width: 90% !important;
@@ -460,52 +474,45 @@ export const Container = styled.div`
         height: 80px;
       }
     }
-    
-    
   }
-  @media screen and (max-width: ${props => props.theme.breakpoints.sm }px) {
+  @media screen and (max-width: ${props => props.theme.breakpoints.sm}px) {
     padding-bottom: 3em;
-    
+
     .start-text {
       .title {
         font-size: 22px;
-      }  
+      }
       .text {
         font-weight: normal;
       }
     }
-    
+
     .card {
       min-height: 175px;
       .ayah-text {
         font-size: 16px;
       }
     }
-    
+
     .pill {
       padding: 0 !important;
       margin: 0 10px !important;
       height: 35px;
-      
+
       &.active {
         .contents {
-          display: none
+          display: none;
         }
       }
     }
-  }       
-  
-`
+  }
+`;
 
-
-const VoteButton = styled.button`
-
-`
-
+const VoteButton = styled.button``;
 
 export const ModalContent = styled.div`
   text-align: center !important;
-  
+
   .modal-title {
     color: #59b548;
   }
@@ -517,9 +524,9 @@ export const ModalContent = styled.div`
     line-height: 25px;
   }
   a {
-    color: #59b548
+    color: #59b548;
   }
-  @media screen and (max-width: ${props => props.theme.breakpoints.md}) {    
+  @media screen and (max-width: ${props => props.theme.breakpoints.md}) {
     img {
       width: 75px;
     }
