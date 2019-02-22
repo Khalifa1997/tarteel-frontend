@@ -1,14 +1,14 @@
-import {connect} from "react-redux";
-import {Dispatch} from "redux";
-import {ActionType} from "typesafe-actions";
+import { connect } from 'react-redux';
+import { Dispatch } from 'redux';
+import { ActionType } from 'typesafe-actions';
 
-import {fetchEvaluatorAyah} from "../api/evaluator";
-import Evaluator from "../pages/Evaluator";
-import AyahShape from "../shapes/AyahShape";
-import {setAyah, setNextAyah} from "../store/actions/evaluator";
-import ReduxState, {IProfile} from "../types/GlobalState";
+import { fetchEvaluatorAyah } from '../api/evaluator';
+import Evaluator from '../pages/Evaluator';
+import AyahShape from '../shapes/AyahShape';
+import { setAyah, setNextAyah } from '../store/actions/evaluator';
+import ReduxState, { IProfile } from '../types/GlobalState';
 import { injectIntl } from 'react-intl';
-import {increaseEvaluatedAyahs} from "../store/actions/profile";
+import { increaseEvaluatedAyahs } from '../store/actions/profile';
 
 interface IDispatchProps {
   setAyah(ayah: AyahShape): ActionType<typeof setAyah>;
@@ -22,16 +22,16 @@ interface IStateProps {
   profile: IProfile;
 }
 
-const mapDispatchToProps = (dispatch: Dispatch<ActionType<typeof setAyah>>): IDispatchProps => {
+const mapDispatchToProps = (
+  dispatch: Dispatch<ActionType<typeof setAyah>>
+): IDispatchProps => {
   return {
-    setAyah:
-      (ayah: AyahShape) => dispatch(setAyah(ayah)),
-    setNextAyah:
-      (ayah: AyahShape) => dispatch(setNextAyah(ayah)),
+    setAyah: (ayah: AyahShape) => dispatch(setAyah(ayah)),
+    setNextAyah: (ayah: AyahShape) => dispatch(setNextAyah(ayah)),
     increaseEvaluatedAyahs: () => {
-      return dispatch(increaseEvaluatedAyahs())
+      return dispatch(increaseEvaluatedAyahs());
     },
-  }
+  };
 };
 
 const mapStateToProps = (state: ReduxState): IStateProps => {
@@ -39,15 +39,19 @@ const mapStateToProps = (state: ReduxState): IStateProps => {
     currentAyah: state.evaluator.currentAyah,
     nextAyah: state.evaluator.nextAyah,
     profile: state.profile,
-  }
+  };
 };
 
 export const EvaluatorContainer = {
-  component: injectIntl(connect(mapStateToProps, mapDispatchToProps)(Evaluator)),
+  component: injectIntl(
+    connect(
+      mapStateToProps,
+      mapDispatchToProps
+    )(Evaluator)
+  ),
   loadData: (store: any, req: any) => {
-    return fetchEvaluatorAyah(req)
-      .then((ayah: AyahShape) => {
-        return store.dispatch(setAyah(ayah))
-      })
+    return fetchEvaluatorAyah(req).then((ayah: AyahShape) => {
+      return store.dispatch(setAyah(ayah));
+    });
   },
 };
