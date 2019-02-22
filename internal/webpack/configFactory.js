@@ -346,15 +346,14 @@ export default function webpackConfigFactory(buildOptions) {
         () =>
           new MiniCssExtractPlugin({
             filename: '[name]-[hash].css',
-            chunkFilename: "[id]-[hash].css",
+            chunkFilename: '[id]-[hash].css',
             optimization: {
               splitChunks: {
                 default: {
-                  chunks: 'all'
-                }
-              }
-            }
-
+                  chunks: 'all',
+                },
+              },
+            },
           })
       ),
 
