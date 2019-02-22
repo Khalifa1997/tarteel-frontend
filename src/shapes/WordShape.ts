@@ -1,5 +1,3 @@
-
-
 interface WordShape {
   arabic?: string;
   verseKey: string;

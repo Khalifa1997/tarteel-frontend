@@ -1,4 +1,3 @@
-
 interface TranslationShape {
   id: number;
   languageName?: string;
