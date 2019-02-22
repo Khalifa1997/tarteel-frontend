@@ -1,12 +1,15 @@
 import React from 'react';
 import asyncBootstrapper from 'react-async-bootstrapper';
-import { AsyncComponentProvider, createAsyncContext } from 'react-async-component';
-import { CookiesProvider }  from 'react-cookie';
+import {
+  AsyncComponentProvider,
+  createAsyncContext,
+} from 'react-async-component';
+import { CookiesProvider } from 'react-cookie';
 import { renderToStaticMarkup, renderToString } from 'react-dom/server';
 import Helmet from 'react-helmet';
 import { IntlProvider } from 'react-intl';
 import { Provider } from 'react-redux';
-import { matchRoutes } from "react-router-config"
+import { matchRoutes } from 'react-router-config';
 import { StaticRouter } from 'react-router-dom';
 import {
   ServerStyleSheet,
@@ -19,19 +22,21 @@ import getLocalMessages from '../../../helpers/setLocale';
 import configStore from '../../../store/index';
 import theme from '../../../theme';
 
-
 import App from '../../../App';
-import routes from "../../../routes";
+import routes from '../../../routes';
 import ServerHTML from './ServerHTML';
 
 import { log } from '../../../../internal/utils';
-import {loadSessionData} from "../../../helpers/get";
-import Fonts from "../../../fonts";
+import { loadSessionData } from '../../../helpers/get';
+import Fonts from '../../../fonts';
 
 /**
  * React application middleware, supports server side rendering.
  */
-export default function reactApplicationMiddleware(request: any, response: any) {
+export default function reactApplicationMiddleware(
+  request: any,
+  response: any
+) {
   // Ensure a nonce has been provided to us.
   // See the server/middleware/security.js for more info.
   if (typeof response.locals.nonce !== 'string') {
@@ -60,7 +65,6 @@ export default function reactApplicationMiddleware(request: any, response: any) 
   // Create a context for our AsyncComponentProvider.
   const asyncComponentsContext = createAsyncContext();
 
-
   // Create a context for <StaticRouter>, which will allow us to
   // query for the results of the render.
   const reactRouterContext: any = {};
@@ -68,13 +72,12 @@ export default function reactApplicationMiddleware(request: any, response: any) 
   const store = configStore(request.universalCookies);
   const sheet = new ServerStyleSheet();
 
-
   // Declare our React application.
   const app = (
     <StyleSheetManager sheet={sheet.instance}>
       <AsyncComponentProvider asyncContext={asyncComponentsContext}>
         <Provider store={store} key="provider">
-          <IntlProvider locale={"en"} messages={localMessages}>
+          <IntlProvider locale={'en'} messages={localMessages}>
             <ThemeProvider theme={theme}>
               <StaticRouter location={request.url} context={reactRouterContext}>
                 <CookiesProvider cookies={request.universalCookies}>
@@ -105,43 +108,43 @@ export default function reactApplicationMiddleware(request: any, response: any) 
   return Promise.all(promises)
     .then(() => loadSessionData(store, request))
     .then(() => {
-    return asyncBootstrapper(app)
-      .then(() => {
-        const appString = renderToString(app);
-        const styleTags = sheet.getStyleElement();
+      return asyncBootstrapper(app)
+        .then(() => {
+          const appString = renderToString(app);
+          const styleTags = sheet.getStyleElement();
 
-        // Generate the html response.
-        const html = renderToStaticMarkup(
-          <ServerHTML
-            reactAppString={appString}
-            nonce={nonce}
-            helmet={Helmet.rewind()}
-            asyncComponentsState={asyncComponentsContext.getState()}
-            reduxData={store.getState()}
-            styleTags={styleTags}
-          />,
-        );
+          // Generate the html response.
+          const html = renderToStaticMarkup(
+            <ServerHTML
+              reactAppString={appString}
+              nonce={nonce}
+              helmet={Helmet.rewind()}
+              asyncComponentsState={asyncComponentsContext.getState()}
+              reduxData={store.getState()}
+              styleTags={styleTags}
+            />
+          );
 
-        // Check if the router context contains a redirect, if so we need to set
-        // the specific status and redirect header and end the response.
-        if (reactRouterContext.url) {
-          response.status(302).setHeader('Location', reactRouterContext.url);
-          response.end();
-          return;
-        }
+          // Check if the router context contains a redirect, if so we need to set
+          // the specific status and redirect header and end the response.
+          if (reactRouterContext.url) {
+            response.status(302).setHeader('Location', reactRouterContext.url);
+            response.end();
+            return;
+          }
 
-        response.setHeader('Content-Type', 'text/html');
-        response
-          .status(
-            reactRouterContext.missed
-              ? // If the renderResult contains a "missed" match then we set a 404 code.
-              // Our App component will handle the rendering of an Error404 view.
-              404
-              : // Otherwise everything is all good and we send a 200 OK status.
-              200,
-          )
-          .send(`<!DOCTYPE html>${html}`);
-      })
-      .catch((error: any) => console.error(error));
-  });
+          response.setHeader('Content-Type', 'text/html');
+          response
+            .status(
+              reactRouterContext.missed
+                ? // If the renderResult contains a "missed" match then we set a 404 code.
+                  // Our App component will handle the rendering of an Error404 view.
+                  404
+                : // Otherwise everything is all good and we send a 200 OK status.
+                  200
+            )
+            .send(`<!DOCTYPE html>${html}`);
+        })
+        .catch((error: any) => console.error(error));
+    });
 }
