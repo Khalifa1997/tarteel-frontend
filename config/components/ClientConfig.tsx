@@ -10,7 +10,7 @@ const clientConfig = filterWithRules(
   // These are the rules used to filter the config.
   values.clientConfigFilter,
   // The config values to filter.
-  values,
+  values
 );
 
 const serializedClientConfig = serialize(clientConfig);
