@@ -1,7 +1,6 @@
 import React from 'react';
 import Select from 'react-select';
-import theme from "../theme";
-
+import theme from '../theme';
 
 const Container = (props: any) => {
   return (
@@ -17,7 +16,7 @@ const Container = (props: any) => {
         },
       })}
     />
-  )
-}
+  );
+};
 
 export default Container;

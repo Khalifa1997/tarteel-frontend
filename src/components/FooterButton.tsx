@@ -1,8 +1,8 @@
-import styled, {keyframes} from "styled-components";
-import Icon from "react-icons-kit";
-import React from "react";
-import {circleONotch} from 'react-icons-kit/fa/circleONotch'
-import fadeInUp from "react-animations/lib/fade-in-up";
+import styled, { keyframes } from 'styled-components';
+import Icon from 'react-icons-kit';
+import React from 'react';
+import { circleONotch } from 'react-icons-kit/fa/circleONotch';
+import fadeInUp from 'react-animations/lib/fade-in-up';
 
 interface IProps {
   afterLoadingMessage?: string;
@@ -16,9 +16,9 @@ interface IState {
 class FooterButton extends React.Component<IProps, IState> {
   state = {
     isJustLoaded: false,
-  }
+  };
   componentDidUpdate(prevProps: IProps) {
-    if (prevProps.isLoading && !this.props.isLoading ) {
+    if (prevProps.isLoading && !this.props.isLoading) {
       this.setState({
         isJustLoaded: true,
       });
@@ -26,32 +26,25 @@ class FooterButton extends React.Component<IProps, IState> {
         this.setState({
           isJustLoaded: false,
         });
-      }, 800)
+      }, 800);
     }
   }
   render() {
     return (
       <Container {...this.props}>
-        {
-          this.props.isLoading ?
-            <div className={'icon spin'}>
-              <Icon icon={circleONotch} size={20} />
-            </div>
-            :
-            this.state.isJustLoaded ?
-            <span className={'fadeup'}>
-              {
-                this.props.afterLoadingMessage
-              }
-            </span>
-              :
-                this.props.children
-        }
+        {this.props.isLoading ? (
+          <div className={'icon spin'}>
+            <Icon icon={circleONotch} size={20} />
+          </div>
+        ) : this.state.isJustLoaded ? (
+          <span className={'fadeup'}>{this.props.afterLoadingMessage}</span>
+        ) : (
+          this.props.children
+        )}
       </Container>
-    )
+    );
   }
 }
-
 
 const spin = keyframes`
   0% {transform:rotate(0deg);}
@@ -61,7 +54,6 @@ const spin = keyframes`
 
 const fadeUp = keyframes`${fadeInUp}`;
 
-
 const Container = styled.div`
   padding: 8px 3em;
   background-color: #5ec49e;
@@ -70,7 +62,7 @@ const Container = styled.div`
   cursor: pointer;
   min-width: 90px;
   text-align: center;
-  
+
   span {
     font-weight: bold;
     text-transform: uppercase;
@@ -85,10 +77,10 @@ const Container = styled.div`
   }
   .spin {
     svg {
-      animation: 800ms ${spin} infinite ;
+      animation: 800ms ${spin} infinite;
       transform-origin: center;
     }
   }
-`
+`;
 
 export default FooterButton;

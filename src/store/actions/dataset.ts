@@ -1,5 +1,8 @@
-import {createAction} from "typesafe-actions";
+import { createAction } from 'typesafe-actions';
 
-export const setDatasetRecordings = createAction('dataset/SET_SAMPLE', resolve => {
-  return (sampleList: string[]) => resolve(sampleList);
-});
+export const setDatasetRecordings = createAction(
+  'dataset/SET_SAMPLE',
+  resolve => {
+    return (sampleList: string[]) => resolve(sampleList);
+  }
+);

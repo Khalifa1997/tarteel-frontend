@@ -24,8 +24,8 @@ import { startRecording, stopRecording } from '../../helpers/recorder';
 import { toggleIsRecording } from '../../store/actions/status';
 import RecordingError from '../../components/RecordingError';
 import KEYS from '../../locale/keys';
-import T from "../../components/T";
-import logScreen from "../../helpers/logScreen";
+import T from '../../components/T';
+import logScreen from '../../helpers/logScreen';
 
 const cdnURL = config('cdnURL');
 
@@ -82,23 +82,23 @@ class Recognition extends React.Component<IProps, IState> {
     this.recognition.onend = () => null;
     this.recognition.stop();
   };
-  handleRecordingError = (e) => {
+  handleRecordingError = e => {
     console.log(e);
-  }
+  };
   handleStartRecording = () => {
     // resets the query string with new recordings
     this.setState({
-      query: ''
-    })
+      query: '',
+    });
     const recConfig = {
       onError: this.handleRecordingError,
     };
-     startRecording(recConfig);
+    startRecording(recConfig);
   };
   handleStopRecording = () => {
     stopRecording();
   };
-  handleRecognitionResult = (e) => {
+  handleRecognitionResult = e => {
     let interimTranscript = '';
     for (let i = e.resultIndex; i < e.results.length; ++i) {
       if (e.results[i].isFinal) {
@@ -143,20 +143,29 @@ class Recognition extends React.Component<IProps, IState> {
     if (event.error === 'no-speech') {
       this.showErrorMessage(
         <p>
-          <T id={KEYS.AYAH_RECOGNITION_NO_SPEECH_ERROR} values={{errorLink}} />
-        </p>,
+          <T
+            id={KEYS.AYAH_RECOGNITION_NO_SPEECH_ERROR}
+            values={{ errorLink }}
+          />
+        </p>
       );
     } else if (event.error === 'audio-capture') {
       this.showErrorMessage(
         <p>
-          <T id={KEYS.AYAH_RECOGNITION_AUDIO_CAPTURE_ERROR} values={{errorLink}} />
-        </p>,
+          <T
+            id={KEYS.AYAH_RECOGNITION_AUDIO_CAPTURE_ERROR}
+            values={{ errorLink }}
+          />
+        </p>
       );
     } else if (event.error === 'not-allowed') {
       this.showErrorMessage(
         <p>
-          <T id={KEYS.AYAH_RECOGNITION_MIC_PERMISSION_ERROR} values={{chromeLink}} />
-        </p>,
+          <T
+            id={KEYS.AYAH_RECOGNITION_MIC_PERMISSION_ERROR}
+            values={{ chromeLink }}
+          />
+        </p>
       );
     }
   };
@@ -289,7 +298,10 @@ class Recognition extends React.Component<IProps, IState> {
               </Link>
             </p>
             <p className={'iqra'}>
-              <T id={KEYS.AYAH_RECOGNITION_POWERED_BY} values={{ url: 'https://iqraapp.com/' }} />
+              <T
+                id={KEYS.AYAH_RECOGNITION_POWERED_BY}
+                values={{ url: 'https://iqraapp.com/' }}
+              />
             </p>
           </div>
         )}
@@ -312,8 +324,8 @@ const mapDispatchToProps = (dispatch): IDispatchProps => {
     setUnableToRecord: () => {
       return dispatch(setUnableToRecord());
     },
-  }
-}
+  };
+};
 
 export default injectIntl(
   withCookies(

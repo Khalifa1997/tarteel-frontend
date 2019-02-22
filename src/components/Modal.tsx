@@ -1,16 +1,16 @@
-import React, {CSSProperties} from 'react';
-import {Icon} from "react-icons-kit";
-import {close as closeIcon} from 'react-icons-kit/ionicons/close'
+import React, { CSSProperties } from 'react';
+import { Icon } from 'react-icons-kit';
+import { close as closeIcon } from 'react-icons-kit/ionicons/close';
 import ReactModal from 'react-modal';
 
-import ModalClose from "./ModalClose";
+import ModalClose from './ModalClose';
 
 interface IProps {
   handleCloseModal?(): void;
   isOpen: boolean;
   style?: CSSProperties;
   closable?: boolean;
-  [key:string]: any;
+  [key: string]: any;
 }
 
 class Modal extends React.Component<IProps> {
@@ -37,20 +37,16 @@ class Modal extends React.Component<IProps> {
           },
         }}
       >
-        {
-          this.props.closable ?
-            <ModalClose onClick={this.props.handleCloseModal}>
-              <div className="icon">
-                <Icon icon={closeIcon} size={15}/>
-              </div>
-            </ModalClose>
-            : null
-        }
-        {
-          this.props.children
-        }
+        {this.props.closable ? (
+          <ModalClose onClick={this.props.handleCloseModal}>
+            <div className="icon">
+              <Icon icon={closeIcon} size={15} />
+            </div>
+          </ModalClose>
+        ) : null}
+        {this.props.children}
       </ReactModal>
-    )
+    );
   }
 }
 

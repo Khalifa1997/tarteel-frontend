@@ -1,13 +1,19 @@
-import {withCookies} from "react-cookie";
-import {connect} from "react-redux";
-import {Dispatch} from "redux";
-import {ActionType} from "typesafe-actions";
+import { withCookies } from 'react-cookie';
+import { connect } from 'react-redux';
+import { Dispatch } from 'redux';
+import { ActionType } from 'typesafe-actions';
 
-import {fetchRandomAyah} from "../api/ayahs";
-import Main from "../pages/MainPage";
-import AyahShape from "../shapes/AyahShape";
-import {loadNextAyah, loadNextQueue, loadPreviousAyah, loadPrevQueue, setAyah} from "../store/actions/ayahs";
-import ReduxState, {IRouter, IStatus} from "../types/GlobalState";
+import { fetchRandomAyah } from '../api/ayahs';
+import Main from '../pages/MainPage';
+import AyahShape from '../shapes/AyahShape';
+import {
+  loadNextAyah,
+  loadNextQueue,
+  loadPreviousAyah,
+  loadPrevQueue,
+  setAyah,
+} from '../store/actions/ayahs';
+import ReduxState, { IRouter, IStatus } from '../types/GlobalState';
 
 interface IDispatchProps {
   setAyah(ayah: AyahShape): ActionType<typeof setAyah>;
@@ -25,10 +31,12 @@ interface IStateProps {
   router: IRouter;
 }
 
-const mapDispatchToProps = (dispatch: Dispatch<ActionType<typeof setAyah>>): IDispatchProps => {
+const mapDispatchToProps = (
+  dispatch: Dispatch<ActionType<typeof setAyah>>
+): IDispatchProps => {
   return {
     setAyah: (ayah: AyahShape) => {
-      return dispatch(setAyah(ayah))
+      return dispatch(setAyah(ayah));
     },
     loadNextAyah: (ayah?: AyahShape) => {
       return dispatch(loadNextAyah(ayah));
@@ -37,12 +45,12 @@ const mapDispatchToProps = (dispatch: Dispatch<ActionType<typeof setAyah>>): IDi
       return dispatch(loadPreviousAyah(ayah));
     },
     loadNextQueue: () => {
-      return dispatch(loadNextQueue())
+      return dispatch(loadNextQueue());
     },
     loadPrevQueue: () => {
-      return dispatch(loadPrevQueue())
+      return dispatch(loadPrevQueue());
     },
-  }
+  };
 };
 
 const mapStateToProps = (state: ReduxState): IStateProps => {
@@ -52,19 +60,23 @@ const mapStateToProps = (state: ReduxState): IStateProps => {
     passedOnBoarding: state.profile.passedOnBoarding,
     status: state.status,
     router: state.router,
-  }
+  };
 };
 
 export const MainPageContainer = {
-  component: withCookies(connect(mapStateToProps, mapDispatchToProps)(Main)),
+  component: withCookies(
+    connect(
+      mapStateToProps,
+      mapDispatchToProps
+    )(Main)
+  ),
   loadData: (store: any, req: any) => {
-    const lastAyah = req.universalCookies.get('lastAyah')
+    const lastAyah = req.universalCookies.get('lastAyah');
     if (lastAyah) {
       return Promise.resolve(store.dispatch(setAyah(lastAyah)));
     }
-    return fetchRandomAyah(req)
-      .then((ayah: AyahShape) => {
-        return store.dispatch(setAyah(ayah))
-      })
+    return fetchRandomAyah(req).then((ayah: AyahShape) => {
+      return store.dispatch(setAyah(ayah));
+    });
   },
 };

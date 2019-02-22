@@ -1,11 +1,11 @@
 import React from 'react';
-import styled from "styled-components";
-import { Auth } from 'aws-amplify'
+import styled from 'styled-components';
+import { Auth } from 'aws-amplify';
 
-import Input from "./Input";
-import FooterButton from './FooterButton'
-import NoteButton from './NoteButton'
-import FormErrorMessage from "./FormErrorMessage";
+import Input from './Input';
+import FooterButton from './FooterButton';
+import NoteButton from './NoteButton';
+import FormErrorMessage from './FormErrorMessage';
 import KEYS from '../locale/keys';
 import T from './T';
 
@@ -24,25 +24,25 @@ interface IState {
 }
 
 class SignupForm extends React.Component<IProps, IState> {
-  state  = {
+  state = {
     username: '',
     email: '',
     password: '',
     phoneNumber: '',
     errorMessage: '',
     isLoading: false,
-  }
+  };
   handleSignUp = () => {
     this.setState({ isLoading: true });
     const userData = {
       username: this.state.username,
       password: this.state.password,
       attributes: {
-        'email': this.state.email,
+        email: this.state.email,
         // 'phoneNumber': this.state.userData.phoneNumber,
       },
       validationData: [], // optional
-    }
+    };
     Auth.signUp(userData)
       .then(user => {
         console.log('registration succeed', user);
@@ -53,16 +53,16 @@ class SignupForm extends React.Component<IProps, IState> {
           errorMessage: e.message,
           isLoading: false,
         });
-      })
-  }
+      });
+  };
   handleInputChange = (e: any) => {
     // debounced input only accepts target doesn't accept currentTarget.
     const name: string = e.target.getAttribute('name');
     const value: any = e.target.value;
     this.setState({
       [name]: value,
-    })
-  }
+    });
+  };
   render() {
     return (
       <Container>
@@ -99,7 +99,7 @@ class SignupForm extends React.Component<IProps, IState> {
             onChange={this.handleInputChange}
             debounce={true}
           />
-          <FormErrorMessage message={this.state.errorMessage}/>
+          <FormErrorMessage message={this.state.errorMessage} />
           <FooterButton
             className={'submit'}
             isLoading={this.state.isLoading}
@@ -111,14 +111,11 @@ class SignupForm extends React.Component<IProps, IState> {
           </FooterButton>
         </div>
 
-
-        <NoteButton
-          className={'note-button'}
-          onClick={this.props.handleToggle} >
+        <NoteButton className={'note-button'} onClick={this.props.handleToggle}>
           <T id={KEYS.SIGNUP_REGISTER_MESSAGE} />
         </NoteButton>
       </Container>
-    )
+    );
   }
 }
 
@@ -147,6 +144,6 @@ const Container = styled.div`
     color: #485364;
     margin-top: 1em;
   }
-`
+`;
 
 export default SignupForm;

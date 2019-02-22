@@ -2,7 +2,7 @@ import { ActionType, getType } from 'typesafe-actions';
 
 import * as dataset from '../actions/dataset';
 import initState from '../initState';
-import {IDataset} from "../../types/GlobalState";
+import { IDataset } from '../../types/GlobalState';
 
 export type DatasetAction = ActionType<typeof dataset>;
 

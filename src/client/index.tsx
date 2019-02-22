@@ -4,11 +4,11 @@ import React from 'react';
 import asyncBootstrapper from 'react-async-bootstrapper';
 import { AsyncComponentProvider } from 'react-async-component';
 import { Cookies, CookiesProvider } from 'react-cookie';
-import ReactDOM, {hydrate} from 'react-dom';
+import ReactDOM, { hydrate } from 'react-dom';
 import { IntlProvider } from 'react-intl';
 import { Provider } from 'react-redux';
-import {BrowserRouter} from 'react-router-dom';
-import { ThemeProvider } from "styled-components"
+import { BrowserRouter } from 'react-router-dom';
+import { ThemeProvider } from 'styled-components';
 
 import './polyfills/index';
 
@@ -18,7 +18,7 @@ import getLocalMessages from '../helpers/setLocale';
 import configStore from '../store';
 import theme from '../theme';
 import ReactHotLoader from './components/ReactHotLoader';
-import ReactGA from "react-ga";
+import ReactGA from 'react-ga';
 import config from '../../config';
 
 // Get the DOM Element that will host our React application.
@@ -26,7 +26,7 @@ const container = document.querySelector('#app');
 
 window.ReactDOM = ReactDOM; // For chrome dev tool support
 
-const cookies = new Cookies(document.cookie)
+const cookies = new Cookies(document.cookie);
 
 window.clearCookies = () => {
   // reactCookie.remove('isFirstTime');
@@ -40,7 +40,7 @@ if (!__DEVELOPMENT__) {
 const fakeRequest = {
   universalCookies: cookies,
   query: {},
-}
+};
 
 // Does the user's browser support the HTML5 history API?
 // If the user's browser doesn't support the HTML5 history API then we
@@ -49,7 +49,8 @@ const supportsHistory = 'pushState' in window.history;
 
 // Get any rehydrateState for the async components.
 // eslint-disable-next-line no-underscore-dangle
-const asyncComponentsRehydrateState = window.__ASYNC_COMPONENTS_REHYDRATE_STATE__;
+const asyncComponentsRehydrateState =
+  window.__ASYNC_COMPONENTS_REHYDRATE_STATE__;
 
 const store = configStore(cookies);
 

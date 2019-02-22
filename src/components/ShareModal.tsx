@@ -15,18 +15,17 @@ import {
   WhatsappIcon,
   EmailIcon,
 } from 'react-share';
-import {ModalContent} from "../pages/Evaluator/styles";
-import Modal from "./Modal";
-import styled from "styled-components";
-import Icon from "react-icons-kit";
-import {ic_insert_link} from 'react-icons-kit/md/ic_insert_link'
-import {ic_content_copy} from 'react-icons-kit/md/ic_content_copy'
-import {ic_close} from 'react-icons-kit/md/ic_close'
+import { ModalContent } from '../pages/Evaluator/styles';
+import Modal from './Modal';
+import styled from 'styled-components';
+import Icon from 'react-icons-kit';
+import { ic_insert_link } from 'react-icons-kit/md/ic_insert_link';
+import { ic_content_copy } from 'react-icons-kit/md/ic_content_copy';
+import { ic_close } from 'react-icons-kit/md/ic_close';
 import copy from 'copy-to-clipboard';
-import {Tooltip} from 'react-tippy';
+import { Tooltip } from 'react-tippy';
 
-import 'react-tippy/dist/tippy.css'
-
+import 'react-tippy/dist/tippy.css';
 
 interface IProps {
   url: string;
@@ -40,13 +39,13 @@ class ShowModal extends React.Component<IProps> {
     this.props.handleCloseModal();
   };
   render() {
-    const {url, quote} = this.props;
+    const { url, quote } = this.props;
 
     return (
       <Modal
         isOpen={this.props.show}
         handleCloseModal={this.handleCloseModal}
-        style={{height: '35%', width: '50%'}}
+        style={{ height: '35%', width: '50%' }}
       >
         <Container>
           <div className={'close'} onClick={this.handleCloseModal}>
@@ -56,9 +55,7 @@ class ShowModal extends React.Component<IProps> {
             <span className={'icon'}>
               <Icon icon={ic_insert_link} size={20} />
             </span>
-            {
-              url
-            }
+            {url}
             <Tooltip
               // options
               title={'Copied!'}
@@ -66,7 +63,7 @@ class ShowModal extends React.Component<IProps> {
               trigger="click"
               duration={250}
             >
-              <span className={'copy'} onClick={() => copy(url) }>
+              <span className={'copy'} onClick={() => copy(url)}>
                 <Icon icon={ic_content_copy} size={20} />
               </span>
             </Tooltip>
@@ -96,7 +93,7 @@ class ShowModal extends React.Component<IProps> {
           </div>
         </Container>
       </Modal>
-    )
+    );
   }
 }
 
@@ -105,23 +102,23 @@ const Container = styled(ModalContent)`
   display: flex;
   flex-flow: column;
   justify-content: space-evenly;
-  
+
   .close {
     position: absolute;
     right: 10px;
     top: 10px;
     cursor: pointer;
   }
-  
+
   .url-input {
-    background-color: #EFEFEF;
-    border: 2px solid #C7C7C7;
+    background-color: #efefef;
+    border: 2px solid #c7c7c7;
     border-radius: 5px;
     padding: 8px 0;
-    position: relative;  
-    
+    position: relative;
+
     span {
-      background-color: #DEDEDE;
+      background-color: #dedede;
       height: 100%;
       padding: 0 10px;
       display: flex;
@@ -141,15 +138,15 @@ const Container = styled(ModalContent)`
       top: 0;
     }
   }
-  
+
   .share-buttons {
     display: flex;
-    
+
     .SocialMediaShareButton {
       margin: 0 5px;
       cursor: pointer;
     }
   }
-`
+`;
 
 export default ShowModal;

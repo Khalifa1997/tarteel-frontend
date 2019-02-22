@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const Container = styled.div`
   padding: 1em;
@@ -6,7 +6,7 @@ export const Container = styled.div`
   display: flex;
   flex-flow: column;
   box-sizing: border-box;
-  
+
   .content {
     position: relative;
     flex: 1;
@@ -16,7 +16,7 @@ export const Container = styled.div`
     width: 100%;
     position: relative;
   }
-  .background-logo{
+  .background-logo {
     position: absolute;
     left: 0;
     top: -10px;
@@ -30,11 +30,11 @@ export const Container = styled.div`
     text-align: center;
     color: #485364;
     margin: 5em 0;
-    
+
     h1 {
       font-size: 18pt;
     }
-    
+
     p {
       margin-top: 2em;
     }
@@ -43,7 +43,7 @@ export const Container = styled.div`
     text-align: center;
     display: flex;
     justify-content: center;
-    
+
     a {
       text-decoration: none;
       border: 2px solid #5fc49e;
@@ -57,7 +57,7 @@ export const Container = styled.div`
       display: flex;
       text-align: center;
       justify-content: center;
-      
+
       p {
         margin: 0;
         line-height: 28px;
@@ -74,26 +74,26 @@ export const Container = styled.div`
     justify-content: center;
     margin-top: 2em;
   }
-  
+
   @media screen and (max-width: ${props => props.theme.breakpoints.sm}px) {
     padding: 1em;
-    
+
     .content {
       display: flex;
       flex-flow: column;
       justify-content: center;
     }
-    
+
     .background-logo {
       width: 150%;
       left: -25%;
     }
-    
+
     .mobile-page-text {
       font-size: 16pt;
       padding: 0 1em;
       margin: 1em 0;
-       
+
       h1 {
         font-size: 1.2em;
       }
@@ -102,5 +102,4 @@ export const Container = styled.div`
       }
     }
   }
-`
-
+`;

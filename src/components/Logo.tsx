@@ -1,14 +1,13 @@
 import React from 'react';
-import {Link} from "react-router-dom";
+import { Link } from 'react-router-dom';
 import { Tooltip } from 'react-tippy';
 import Tippy from '@tippy.js/react';
-import styled from "styled-components";
+import styled from 'styled-components';
 
-import {connect} from "react-redux";
-import LogoImage from "../../public/logo-3x.png";
-import {commaFormatter} from "../helpers/utils";
-import ReduxState, {IProfile} from "../types/GlobalState";
-
+import { connect } from 'react-redux';
+import LogoImage from '../../public/logo-3x.png';
+import { commaFormatter } from '../helpers/utils';
+import ReduxState, { IProfile } from '../types/GlobalState';
 
 interface IOwnProps {
   counterText: string;
@@ -18,7 +17,7 @@ interface IStateProps {
   profile: IProfile;
 }
 
-type IProps = IStateProps & IOwnProps
+type IProps = IStateProps & IOwnProps;
 
 class Logo extends React.Component<IProps, never> {
   public render() {
@@ -27,34 +26,26 @@ class Logo extends React.Component<IProps, never> {
         <Link to="/">
           <img src={LogoImage} alt="Tarteel-logo" />
 
-            <Link to={'/about'}
-              data-balloon="Total Ayas Recited"
-              data-balloon-pos="down"
-              className="counter">
-              <Tippy
-                content="Total Evaluated Ayahs"
-                trigger="mouseenter"
-              >
-                <div className="evaluated">
-                  {
-                    commaFormatter(this.props.profile.evaluationsCount)
-                  }
-                </div>
-              </Tippy>
-              <Tippy
-                content="Total Recited Ayahs"
-                trigger="mouseenter"
-              >
-                <div className={'recited'}>
-                  /{
-                    commaFormatter(this.props.profile.recordingCount)
-                  }
-                </div>
-              </Tippy>
-            </Link>
+          <Link
+            to={'/about'}
+            data-balloon="Total Ayas Recited"
+            data-balloon-pos="down"
+            className="counter"
+          >
+            <Tippy content="Total Evaluated Ayahs" trigger="mouseenter">
+              <div className="evaluated">
+                {commaFormatter(this.props.profile.evaluationsCount)}
+              </div>
+            </Tippy>
+            <Tippy content="Total Recited Ayahs" trigger="mouseenter">
+              <div className={'recited'}>
+                /{commaFormatter(this.props.profile.recordingCount)}
+              </div>
+            </Tippy>
+          </Link>
         </Link>
       </Container>
-    )
+    );
   }
 }
 
@@ -93,12 +84,12 @@ const Container = styled.div`
       right: -10px;
     }
   }
-`
+`;
 
 const mapStateToProps = (state: ReduxState): IStateProps => {
   return {
     profile: state.profile,
-  }
-}
+  };
+};
 
 export default connect(mapStateToProps)(Logo);

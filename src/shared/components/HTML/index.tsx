@@ -12,11 +12,13 @@ function HTML(props) {
 
   return (
     <html {...htmlAttributes}>
-      <head>
-        {headerElements}
-      </head>
+      <head>{headerElements}</head>
       <body>
-        <div id="app" style={{minHeight: "100%"}} dangerouslySetInnerHTML={{ __html: appBodyString }} />
+        <div
+          id="app"
+          style={{ minHeight: '100%' }}
+          dangerouslySetInnerHTML={{ __html: appBodyString }}
+        />
         {bodyElements}
       </body>
     </html>

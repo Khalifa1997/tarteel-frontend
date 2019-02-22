@@ -1,12 +1,12 @@
-import React, {SFC} from 'react';
-import {withCookies} from 'react-cookie'
-import {connect} from "react-redux";
-import styled from "styled-components";
+import React, { SFC } from 'react';
+import { withCookies } from 'react-cookie';
+import { connect } from 'react-redux';
+import styled from 'styled-components';
 
 import LOCALE_KEYS from '../locale/keys';
-import {toggleIsContinuous} from "../store/actions/status";
-import ReduxState from "../types/GlobalState";
-import T from "./T";
+import { toggleIsContinuous } from '../store/actions/status';
+import ReduxState from '../types/GlobalState';
+import T from './T';
 
 interface IOwnProps {
   text: LOCALE_KEYS;
@@ -20,14 +20,13 @@ interface IDispatchProps {
   toggleIsContinuous(): void;
 }
 
-
-type IProps = IOwnProps & IDispatchProps & IStateProps
+type IProps = IOwnProps & IDispatchProps & IStateProps;
 
 class ToggleButton extends React.Component<IProps, never> {
   public toggle = () => {
-    this.props.cookies.set("continuous", !this.props.isContinuous)
-    this.props.toggleIsContinuous()
-  }
+    this.props.cookies.set('continuous', !this.props.isContinuous);
+    this.props.toggleIsContinuous();
+  };
   public render() {
     return (
       <Container onClick={this.toggle}>
@@ -36,15 +35,17 @@ class ToggleButton extends React.Component<IProps, never> {
           type="checkbox"
           id="continuous"
           checked={this.props.isContinuous}
-          onClick={(e) => {
-          e.stopPropagation()
-        }} className="tgl tgl-ios" />
+          onClick={e => {
+            e.stopPropagation();
+          }}
+          className="tgl tgl-ios"
+        />
         <label htmlFor="continuous" className="tgl-btn" />
         <button className="tgl-text small-arabic-text" disabled={true}>
           <T id={this.props.text} />
         </button>
       </Container>
-    )
+    );
   }
 }
 
@@ -64,10 +65,22 @@ const Container = styled.div`
   .tgl {
     display: none;
   }
-  .tgl, .tgl:after, .tgl:before, .tgl *, .tgl *:after, .tgl *:before, .tgl + .tgl-btn {
+  .tgl,
+  .tgl:after,
+  .tgl:before,
+  .tgl *,
+  .tgl *:after,
+  .tgl *:before,
+  .tgl + .tgl-btn {
     box-sizing: border-box;
   }
-  .tgl::selection, .tgl:after::selection, .tgl:before::selection, .tgl *::selection, .tgl *:after::selection, .tgl *:before::selection, .tgl + .tgl-btn::selection {
+  .tgl::selection,
+  .tgl:after::selection,
+  .tgl:before::selection,
+  .tgl *::selection,
+  .tgl *:after::selection,
+  .tgl *:before::selection,
+  .tgl + .tgl-btn::selection {
     background: none;
   }
   .tgl + .tgl-btn {
@@ -79,10 +92,11 @@ const Container = styled.div`
     cursor: pointer;
     user-select: none;
   }
-  .tgl + .tgl-btn:after, .tgl + .tgl-btn:before {
+  .tgl + .tgl-btn:after,
+  .tgl + .tgl-btn:before {
     position: relative;
     display: block;
-    content: "";
+    content: '';
     width: 20px;
     height: 20px;
   }
@@ -96,7 +110,7 @@ const Container = styled.div`
   .tgl:checked + .tgl-btn:after {
     left: 50%;
   }
-  
+
   .tgl-ios + .tgl-btn {
     background: #d5d5d5;
     border-radius: 2em;
@@ -106,7 +120,8 @@ const Container = styled.div`
   .tgl-ios + .tgl-btn:after {
     border-radius: 2em;
     background: #fbfbfb;
-    transition: left 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), padding 0.3s ease, margin 0.3s ease;
+    transition: left 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+      padding 0.3s ease, margin 0.3s ease;
     box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1);
   }
   .tgl-ios + .tgl-btn:hover:after {
@@ -119,7 +134,7 @@ const Container = styled.div`
     padding-right: 0.8em;
   }
   .tgl-ios:checked + .tgl-btn {
-    background: #5EC49E;
+    background: #5ec49e;
   }
   .tgl-ios:checked + .tgl-btn:active {
     box-shadow: none;
@@ -127,21 +142,25 @@ const Container = styled.div`
   .tgl-ios:checked + .tgl-btn:active:after {
     margin-left: -0.8em;
   }
-
-`
+`;
 
 const mapStateToProps = (state: ReduxState): IStateProps => {
   return {
     isContinuous: state.status.isContinuous,
-  }
-}
+  };
+};
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = dispatch => {
   return {
     toggleIsContinuous: () => {
-      dispatch(toggleIsContinuous())
+      dispatch(toggleIsContinuous());
     },
-  }
-}
+  };
+};
 
-export default withCookies(connect(mapStateToProps, mapDispatchToProps)(ToggleButton));
+export default withCookies(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(ToggleButton)
+);

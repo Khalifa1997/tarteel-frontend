@@ -1,4 +1,4 @@
-import surahs from "../api/surahs";
+import surahs from '../api/surahs';
 
 export const getNextAyah = (surah: number, ayah: number) => {
   const nextAyah = ayah + 1;
@@ -7,22 +7,21 @@ export const getNextAyah = (surah: number, ayah: number) => {
       return {
         nextSurah: 1,
         nextAyah: 1,
-      }
+      };
     } else {
       const nextSurah = Number(surah) + 1;
       return {
         nextSurah,
         nextAyah: 1,
-      }
+      };
     }
-  }
-  else {
+  } else {
     return {
       nextSurah: surah,
       nextAyah,
-    }
+    };
   }
-}
+};
 
 export const getPrevAyah = (surah: number, ayah: number) => {
   const prevAyah = ayah - 1;
@@ -31,23 +30,22 @@ export const getPrevAyah = (surah: number, ayah: number) => {
       return {
         prevSurah: 114,
         prevAyah: surahs[114].ayah,
-      }
+      };
     } else {
       const prevSurah = surah - 1;
       return {
         prevSurah,
         prevAyah: surahs[prevSurah].ayah,
-      }
+      };
     }
-  }
-  else {
+  } else {
     return {
       prevSurah: surah,
       prevAyah,
-    }
+    };
   }
-}
+};
 
 export const isCorrectAyah = (surah: number, ayah: number) => {
   return ayah > 0 && surahs[surah].ayah >= ayah;
-}
+};

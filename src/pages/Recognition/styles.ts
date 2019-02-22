@@ -65,7 +65,7 @@ export const Container = styled.div`
     }
   }
 
-  .splittable{
+  .splittable {
     br {
       display: none;
     }

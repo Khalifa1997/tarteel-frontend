@@ -3,26 +3,21 @@ import { batchedSubscribe } from 'redux-batched-subscribe';
 import { createLogger } from 'redux-logger';
 import thunk from 'redux-thunk';
 
-import initState from "./initState";
+import initState from './initState';
 import reducer from './reducers';
-
 
 const logger = createLogger({
   collapsed: true,
 });
 
-export default (cookies) => {
-
-  const middleWares = [
-    thunk,
-  ];
+export default cookies => {
+  const middleWares = [thunk];
 
   const enhancers = [
     // batchedSubscribe((notify: any) => {
     //   notify();
     // })
   ];
-
 
   if (__DEVELOPMENT__ && __CLIENT__) {
     middleWares.push(logger);
@@ -34,12 +29,14 @@ export default (cookies) => {
 
   const enhancer = compose(
     applyMiddleware(...middleWares),
-    ...enhancers,
-  )
+    ...enhancers
+  );
 
-  const initialState = __CLIENT__ ? window.__INITIAL_STATE__ : initState(cookies);
+  const initialState = __CLIENT__
+    ? window.__INITIAL_STATE__
+    : initState(cookies);
   if (!__SERVER__) {
     delete window.__INITIAL_STATE__;
   }
   return createStore(reducer, initialState, enhancer);
-}
+};

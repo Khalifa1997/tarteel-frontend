@@ -1,13 +1,13 @@
 import React from 'react';
-import Input from "./Input";
-import FooterButton from "./FooterButton";
-import styled from "styled-components";
-import FormErrorMessage from "./FormErrorMessage";
+import Input from './Input';
+import FooterButton from './FooterButton';
+import styled from 'styled-components';
+import FormErrorMessage from './FormErrorMessage';
 import KEYS from '../locale/keys';
-import T from "./T";
+import T from './T';
 
 interface IProps {
-    handleReset(username: string): Promise<void>;
+  handleReset(username: string): Promise<void>;
 }
 
 interface IState {
@@ -21,31 +21,32 @@ class ForgotPasswordForm extends React.Component<IProps, IState> {
     errorMessage: '',
     isLoading: false,
     username: '',
-  }
+  };
   handleReset = () => {
     this.setState({
       isLoading: true,
       errorMessage: '',
     });
-    this.props.handleReset(this.state.username)
+    this.props
+      .handleReset(this.state.username)
       .then(() => {
         this.setState({
           isLoading: false,
-        })
+        });
       })
-        .catch((e: string) => {
-          this.setState({
-            errorMessage: e,
-            isLoading: false,
-          });
-        })
-  }
+      .catch((e: string) => {
+        this.setState({
+          errorMessage: e,
+          isLoading: false,
+        });
+      });
+  };
   handleChange = (e: any) => {
     // debounced input only accepts target doesn't accept currentTarget.
     this.setState({
       [e.target.name]: e.target.value,
     });
-  }
+  };
   render() {
     const errorMessage = this.state.errorMessage ? 'Error' : '';
     return (
@@ -67,29 +68,28 @@ class ForgotPasswordForm extends React.Component<IProps, IState> {
             afterLoadingMessage={errorMessage}
             onClick={this.handleReset}
           >
-              <span>
-                <T id={KEYS.RESET_YOUR_PASSWORD_BUTTON} />
-              </span>
+            <span>
+              <T id={KEYS.RESET_YOUR_PASSWORD_BUTTON} />
+            </span>
           </FooterButton>
           <FormErrorMessage message={this.state.errorMessage} />
         </div>
       </Container>
-    )
+    );
   }
 }
 
 const Container = styled.div`
-
   h2 {
     text-align: center;
   }
   .form {
-  justify-content: center;
-  align-items: center;
-  display: flex;
-  flex-flow: column;
-  position: relative;
-  top: 2em;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    flex-flow: column;
+    position: relative;
+    top: 2em;
   }
 `;
 

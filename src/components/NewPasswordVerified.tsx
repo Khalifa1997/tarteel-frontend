@@ -1,8 +1,8 @@
 import React from 'react';
-import styled from "styled-components";
-import {checkmarkCircled} from 'react-icons-kit/ionicons/checkmarkCircled'
-import Icon from "react-icons-kit";
-import {Link} from "react-router-dom";
+import styled from 'styled-components';
+import { checkmarkCircled } from 'react-icons-kit/ionicons/checkmarkCircled';
+import Icon from 'react-icons-kit';
+import { Link } from 'react-router-dom';
 import { KEY } from 'redux-pack';
 import KEYS from '../locale/keys';
 import T from './T';
@@ -15,11 +15,11 @@ class NewPasswordVerified extends React.Component {
         <p>
           <T id={KEYS.NEW_PASSSWORD_VERIFY_LOGIN_MESSAGE} />
         </p>
-        <Link to={'/login'} >
+        <Link to={'/login'}>
           <T id={KEYS.NEW_PASSSWORD_VERIFY_LOGIN_BUTTON} />
         </Link>
       </Container>
-    )
+    );
   }
 }
 

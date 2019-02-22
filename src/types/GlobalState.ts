@@ -1,4 +1,4 @@
-import AyahShape from "../shapes/AyahShape";
+import AyahShape from '../shapes/AyahShape';
 
 interface ReduxState {
   ayahs: {
