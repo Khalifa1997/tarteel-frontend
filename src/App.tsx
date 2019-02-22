@@ -1,28 +1,28 @@
-import {History, Location} from "history";
-import React from "react";
-import {injectIntl} from 'react-intl'
-import {connect} from "react-redux";
-import {withRouter} from "react-router";
-import styled from "styled-components"
+import { History, Location } from 'history';
+import React from 'react';
+import { injectIntl } from 'react-intl';
+import { connect } from 'react-redux';
+import { withRouter } from 'react-router';
+import styled from 'styled-components';
 import { createGlobalStyle } from 'styled-components';
 
-import AppHelmet from "./components/AppHelmet";
-import CookiesBanner from "./components/CookiesBanner";
-import LanguagePicker from "./components/LanguagePicker";
-import Routes from "./components/Routes";
-import {setLocation} from "./store/actions/router";
+import AppHelmet from './components/AppHelmet';
+import CookiesBanner from './components/CookiesBanner';
+import LanguagePicker from './components/LanguagePicker';
+import Routes from './components/Routes';
+import { setLocation } from './store/actions/router';
 
 import './styles/index.scss';
 
-import Amplify from "aws-amplify";
-import AWSConfig from "./aws-exports";
+import Amplify from 'aws-amplify';
+import AWSConfig from './aws-exports';
 
-
-Amplify.configure(AWSConfig)
+Amplify.configure(AWSConfig);
 
 const GlobalStyle = createGlobalStyle`
   body {
-    background-color: ${(props: any) => props.path === '/evaluator' ? '#F4F3F2' : '#fff'};
+    background-color: ${(props: any) =>
+      props.path === '/evaluator' ? '#F4F3F2' : '#fff'};
   }
 `;
 
@@ -40,8 +40,8 @@ type IProps = IOwnProps & IDispatchProps;
 class App extends React.Component<IProps, never> {
   public componentDidMount() {
     this.props.history.listen((location, action) => {
-      this.props.setLocation(location)
-    })
+      this.props.setLocation(location);
+    });
   }
   public render() {
     return (
@@ -51,7 +51,7 @@ class App extends React.Component<IProps, never> {
         <Routes />
         {/*<CookiesBanner />*/}
       </Container>
-    )
+    );
   }
 }
 
@@ -63,26 +63,27 @@ const Container = styled.div`
   left: 0;
   max-width: 900px;
   margin: auto;
-  
+
   .rtl {
     direction: rtl;
   }
-  
+
   .text-center {
     text-align: center;
   }
-  
-`
+`;
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = dispatch => {
   return {
     setLocation: (location: Location) => {
-      dispatch(setLocation(location))
+      dispatch(setLocation(location));
     },
-  }
-}
+  };
+};
 
-export default withRouter(connect(
-  null,
-  mapDispatchToProps,
-)(injectIntl(App)));
+export default withRouter(
+  connect(
+    null,
+    mapDispatchToProps
+  )(injectIntl(App))
+);

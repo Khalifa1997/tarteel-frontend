@@ -8,10 +8,10 @@ const fonts = {
 
 export const colors = {
   white: '#ffffff',
-  whiteSmoke: "#f5f5f5",
+  whiteSmoke: '#f5f5f5',
   cream: '#c4bda1',
   tuatara: '#32312C',
-  gray: "#777",
+  gray: '#777',
   black: '#000000',
   brandPrimary: '#2CA4AB',
   linkColor: '#5fc49e',
@@ -19,7 +19,7 @@ export const colors = {
   textMuted: '#d1d0d0',
   textColor: '#939598',
   errorColor: '#ff0000',
-  brandHover: "#E0EAFC",
+  brandHover: '#E0EAFC',
 };
 
 const breakpoints = {
