@@ -13,7 +13,7 @@ const locales = {
   ar: 'العربية',
 };
 
-const API_URL = 'https://api.tarteel.io';
+const API_URL = 'https://apiv1.tarteel.io';
 
 const CDN_URL = 'https://d2sf46268wowyo.cloudfront.net';
 
