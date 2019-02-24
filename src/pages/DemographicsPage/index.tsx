@@ -143,7 +143,7 @@ class DemographicsPage extends React.Component<IProps, IState> {
       <Container>
         <Helmet>
           <title>
-            {intl.formatMessage({ id: KEYS.DEMOGRAPHICS_PAGE_TITLE })}
+            <T id={KEYS.DEMOGRAPHICS_PAGE_TITLE} />
           </title>
         </Helmet>
         <Navbar />
