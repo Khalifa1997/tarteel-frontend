@@ -26,10 +26,12 @@
     "test:coverage": "jest --coverage"
   },
   "lint-staged": {
-    "*.js": [
-      "prettier-eslint --write",
-      "git add"
-    ]
+    "linters": {
+      "*.{js,jsx,ts,tsx}": [
+        "prettier --write",
+        "git add"
+      ]
+    }
   },
   "repository": {
     "type": "git",
