@@ -1,7 +1,7 @@
 {
-  "name": "react-universall",
-  "version": "13.0.0",
-  "description": "A starter kit for universal react applications.",
+  "name": "Tarteel",
+  "version": "2.3",
+  "description": "Tarteel is an open-source project designed to help build digital tools to analyze the recitation of the Quran.",
   "main": "build/server/index.js",
   "engines": {
     "node": ">=6"
