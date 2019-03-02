@@ -95,6 +95,10 @@ const linksFactory: (props: any) => { [key: string]: ILink } = props => {
       textID: KEYS.CONTACT_US,
       href: '/contact_us',
     },
+    partners: {
+      textID: KEYS.PARTNERS_LINK_TEXT,
+      href: '/partners',
+    },
   };
 };
 
@@ -149,6 +153,7 @@ class NavMenu extends React.Component<IProps, IState> {
       'demographics',
       'subscribe',
       'mobile',
+      'partners',
       'dataset',
       'contact',
     ];

@@ -128,4 +128,11 @@ export default [
     path: '/dataset',
     ...DataSetContainer,
   },
+  {
+    path: '/partners',
+    component: asyncComponent({
+      resolve: () =>
+        import(/* webpackChunkName: "Partners" */ './pages/Partners'),
+    }),
+  },
 ];
