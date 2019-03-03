@@ -38,6 +38,7 @@ export default {
     [KEYS.MOBILE_APP_LINK_TEXT]: 'تطبيق الهاتف',
     [KEYS.EVALUATE_AYAHS]: 'تقييم آيات',
     [KEYS.GET_STARTED]: 'أبدأ الآن',
+    [KEYS.PREVIOUS_WORD]: 'السابقه',
 
     // AYAH PICKER
     [KEYS.AYAH_PICKER_TITLE]: 'اختر آية',

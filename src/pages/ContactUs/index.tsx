@@ -13,7 +13,6 @@ import FooterButton from '../../components/FooterButton';
 import T from '../../components/T';
 import KEYS from '../../locale/keys';
 import Select from '../../components/Select';
-import logScreen from '../../helpers/logScreen';
 
 const subjects: ISubject[] = [
   {
@@ -134,9 +133,6 @@ class ContactUs extends React.Component<IProps, IState> {
       });
     }
   };
-  componentDidMount() {
-    logScreen();
-  }
   render() {
     const { intl } = this.props;
     const rtl = this.props.cookies.get('currentLocale') === 'ar';

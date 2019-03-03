@@ -14,3 +14,17 @@ export const increaseStep = createAction('evaluator/INCREASE_STEP', resolve => {
 export const setNextAyah = createAction('evaluator/SET_NEXT_AYAH', resolve => {
   return (ayah: AyahShape) => resolve(humps.camelizeKeys(ayah));
 });
+
+export const setPreviousAyah = createAction(
+  'evaluator/SET_PREV_AYAH',
+  resolve => {
+    return (ayah: AyahShape) => resolve(ayah);
+  }
+);
+
+export default {
+  setAyah,
+  increaseStep,
+  setNextAyah,
+  setPreviousAyah,
+};

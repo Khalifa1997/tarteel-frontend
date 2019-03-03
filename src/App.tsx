@@ -16,6 +16,7 @@ import './styles/index.scss';
 
 import Amplify from 'aws-amplify';
 import AWSConfig from './aws-exports';
+import logScreen from './helpers/logScreen';
 
 Amplify.configure(AWSConfig);
 
@@ -39,15 +40,19 @@ type IProps = IOwnProps & IDispatchProps;
 
 class App extends React.Component<IProps, never> {
   public componentDidMount() {
+    // Registering the first page because it's won't be handled by the listener
+    logScreen();
+    // To dispatch a location change redux action every time the route changes.
     this.props.history.listen((location, action) => {
       this.props.setLocation(location);
+      logScreen();
     });
   }
   public render() {
     return (
       <Container>
         <GlobalStyle path={this.props.location.pathname} />
-        <AppHelmet />
+        <AppHelmet path={this.props.location.pathname} />
         <Routes />
         {/*<CookiesBanner />*/}
       </Container>

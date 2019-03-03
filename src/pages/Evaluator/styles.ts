@@ -3,11 +3,22 @@ import styled from 'styled-components';
 export const Container = styled.div`
   background-color: #f4f3f2;
   min-height: 100%;
-  padding: 1em;
+  padding: 16px;
   position: relative;
   display: flex;
   flex-flow: column;
   justify-content: space-between;
+  box-sizing: border-box;
+  
+  .container {
+    flex: 1;
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    overflow-y: hidden;
+    box-sizing: border-box;
+
+  }
 
   .pills {
     max-width: 10%;
@@ -91,7 +102,7 @@ export const Container = styled.div`
   }
 
   .start-text {
-    margin: 10px 0;
+    margin: 10px 0 20px 0;
 
     .title,
     .text {
@@ -100,23 +111,33 @@ export const Container = styled.div`
       font-weight: bold;
       margin-bottom: 10px;
     }
+    
+    a {
+      text-decoration: underline;
+      cursor: pointer;
+      color: ${props => props.theme.colors.linkColor}
+    }
   }
   .cards-and-pills {
     display: flex;
     flex-flow: row;
     justify-content: flex-end;
+    position: relative;
 
     .cards {
       flex: 1;
-      margin-top: 3em;
+      margin-top: 35px;
       max-width: 100%;
 
       .instruction {
         display: flex;
         justify-content: center;
-        margin-bottom: 10px;
         font-style: italic;
         color: #4a4a4a;
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        top: 10px;
 
         .icon {
           color: #78c1a0;
@@ -137,8 +158,8 @@ export const Container = styled.div`
         transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1),
           opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1);
         min-height: 250px;
-        margin-bottom: 2em;
-        padding: 0 1em;
+        margin-bottom: 32px;
+        padding: 0 16px;
 
         .ayah-text {
           direction: rtl;
@@ -155,7 +176,11 @@ export const Container = styled.div`
           span.p3 a {
             font-size: 5vmin;
           }
-
+          .ayah-loader {
+            height: 50px;
+            display: flex;
+            justify-content: center;
+          }
           .verse-number {
             font-family: 'Open Sans', sans-serif !important;
           }
@@ -177,18 +202,17 @@ export const Container = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 1em;
-    margin-bottom: 3em;
     position: relative;
 
     .siri-wave {
       position: absolute;
-      top: -75px;
+      top: -85px;
       left: 50%;
       bottom: 0;
       right: 0;
       width: 500px;
       transform: translateX(-50%);
+      overflow: hidden;
 
       canvas {
         mask-image: linear-gradient(
@@ -224,10 +248,13 @@ export const Container = styled.div`
     letter-spacing: 1px;
     z-index: 2;
     background: #fff;
-    transition: all 0.2s linear;
-    width: 130px;
-    height: 57px;
+    transition: all .2s linear;
+    //width: 130px;
+    //height: 57px;
+    width: 100px;
+    height: 46px;
     cursor: pointer;
+    box-shadow: 0 5px 10px rgba(204,204,204,0.3);
 
     svg {
       margin-right: 23px;
@@ -251,6 +278,34 @@ export const Container = styled.div`
         box-shadow: 0 5px 10px rgba(255, 79, 94, 0.6);
       }
     }
+    &.skip {
+      position: relative;
+      left: 15px;
+      justify-content: space-evenly;
+      
+      svg {
+        margin: 0;
+      }
+      &:hover {
+        color: initial;
+      }
+    }
+    &.previous {
+      position: relative;
+      right: 15px;
+      justify-content: space-evenly;
+      
+      svg {
+        margin: 0;
+      }
+      &:hover {
+        color: initial;
+      }
+    }
+    &.hidden {
+      opacity: 0;
+      cursor: normal;
+    }
     &:hover,
     &.active {
       color: #fff;
@@ -262,18 +317,20 @@ export const Container = styled.div`
   }
 
   .primary-button {
-    margin: 0 40px;
     position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
-
+    margin: 0 18px;
+    
     .background {
       position: absolute;
       margin: 0 auto;
       border-radius: 50%;
-      width: 109px;
-      height: 109px;
+      //width: 109px;
+      //height: 109px;
+      width: 80px;
+      height: 80px;
       filter: blur(7.6px);
       transition: opacity 0.2s linear;
       opacity: 0.5;
@@ -293,8 +350,10 @@ export const Container = styled.div`
       z-index: 2;
       border: none;
       border-radius: 50%;
-      width: 88px;
-      height: 88px;
+      //width: 88px;
+      //height: 88px;
+      width: 65px;
+      height: 65px;
       background: #fff;
 
       &:hover {
@@ -308,65 +367,6 @@ export const Container = styled.div`
     &:hover .background {
       opacity: 1 !important;
     }
-  }
-
-  .skip {
-    border: 2px solid lightgrey;
-    color: black;
-    transition: 0.25s linear;
-    border-radius: 50px;
-    display: flex;
-    flex-flow: row;
-    text-align: center;
-    justify-content: center;
-    align-items: center;
-    background: transparent;
-    position: absolute;
-    bottom: 25px;
-    right: 0px;
-    height: 45px;
-    width: 100px;
-
-    svg {
-      margin-left: 13px;
-      margin-right: 0;
-    }
-  }
-  .back-to-home {
-    border: 2px solid lightgrey;
-    color: black;
-    transition: 0.25s linear;
-    border-radius: 50px;
-    display: flex;
-    flex-flow: row-reverse;
-    text-align: center;
-    justify-content: center;
-    align-items: center;
-    background: transparent;
-    position: absolute;
-    bottom: 25px;
-    left: 0px;
-    text-decoration: none;
-    font-size: 14px;
-    text-transform: uppercase;
-    font-weight: 600;
-    letter-spacing: 1px;
-    height: 45px;
-    width: 100px;
-
-    svg {
-      margin-right: 5px;
-    }
-  }
-
-  .skip:hover,
-  .back-to-home:hover {
-    border: 2px solid #000;
-    color: #000;
-  }
-  .skip:hover svg g g,
-  .back-to-home:hover svg g g {
-    fill: #000;
   }
 
   @media screen and (max-width: ${props => props.theme.breakpoints.md}px) {
@@ -416,7 +416,7 @@ export const Container = styled.div`
 
     .cards {
       max-width: 100% !important;
-      margin-top: 1em;
+      margin-top: 16px;
 
       .card {
         min-height: 200px;
@@ -431,7 +431,6 @@ export const Container = styled.div`
       font-size: 14px;
     }
     .primary-buttons {
-      margin-bottom: 10%;
 
       .siri-wave {
         top: -90px !important;
@@ -439,44 +438,10 @@ export const Container = styled.div`
         overflow: hidden;
       }
     }
-    .skip {
-      bottom: 10px;
-      right: 20px;
-      height: 35px !important;
-      width: 85px !important;
-      font-size: 14px;
-    }
-    .back-to-home {
-      bottom: 10px;
-      left: 20px;
-      height: 35px !important;
-      width: 85px !important;
-      font-size: 14px;
-    }
-    .skip svg {
-      margin-left: 0;
-    }
-    .back-to-home svg {
-      margin-right: 0;
-    }
-    .vote-button {
-      width: 100px;
-      height: 46px;
-    }
-    .primary-button {
-      margin: 0 18px;
-      button {
-        width: 65px;
-        height: 65px;
-      }
-      .background {
-        width: 80px;
-        height: 80px;
-      }
-    }
+    
   }
   @media screen and (max-width: ${props => props.theme.breakpoints.sm}px) {
-    padding-bottom: 3em;
+    padding-bottom: 50px;
 
     .start-text {
       .title {
@@ -505,7 +470,75 @@ export const Container = styled.div`
         }
       }
     }
-  }
+    
+    .primary-button {
+      margin: 0 12px;
+     
+      .background {
+        width: 75px;
+        height: 75px;
+      }
+    }
+    .vote-button {
+      height: 50px;
+      width : 50px !important;
+     
+     /*  Reversing the styles to remove the left over hover effect on mobile.  */
+      &.yes {
+        box-shadow: 0 5px 10px rgba(89,203,183,.3);
+        
+        &:hover, &.active {
+          background: #fff;
+          box-shadow: 0 5px 10px rgba(89,203,183,.3);
+          color: #000;
+        }
+      }
+      
+      &.no {
+        box-shadow: 0 5px 10px rgba(255,79,94,.2);
+        
+        &:hover, &.active {
+          background: #fff;
+          box-shadow: 0 5px 10px rgba(255,79,94,.2);
+          color: #000;
+        }
+      }
+      
+      /* Replacing the :hover pseudo class with :active to be suitable for mobile.  */
+      &.yes {
+        box-shadow: 0 5px 10px rgba(89,203,183,.3);
+        
+        &:active, &.active {
+          background: #59cbb7;
+          box-shadow: 0 5px 10px rgba(89,203,183,.7);
+        }
+      }
+      &.no {
+        box-shadow: 0 5px 10px rgba(255,79,94,.2);
+        
+        &:active, &.active {
+          background: #ff4f5e;
+          box-shadow: 0 5px 10px rgba(255,79,94,.6);
+        }
+      }
+      
+      &.skip {
+        left: 8px;
+      }
+      &.previous {
+        right: 8px;
+      }
+      
+      svg {
+        margin: 0;
+      }
+      
+      span {
+        display: none;
+      }
+    }
+  }       
+  
 `;
 
 const VoteButton = styled.button``;
@@ -532,3 +565,48 @@ export const ModalContent = styled.div`
     }
   }
 `;
+
+export const HelpModalContent = styled.div`
+  flex: 1;
+  position: absolute;
+  overflow-y: scroll;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 20px 50px;
+  
+  .content {
+    margin-top: 25px;
+    height: 100%; 
+  }
+  .modal-title {
+    color: #59b548;
+    margin-bottom: 15px;
+  }
+  ul {
+    padding-left: 25px;
+  }
+  h4 {
+    margin-bottom: 15px;  
+  }
+  p {
+    line-height: 25px;
+  }
+  a {
+    color: #59b548;
+  }
+  @media screen and (max-width: ${props => props.theme.breakpoints.md}px) {
+    padding: 20px;
+    
+    .modal-title {
+      font-size: 18px;
+    }
+    
+    ul {
+      padding-left: 5px;
+    }
+  }
+`;
+
+

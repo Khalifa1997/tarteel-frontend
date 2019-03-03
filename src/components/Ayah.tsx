@@ -77,7 +77,7 @@ class Ayah extends React.Component<IProps, IState> {
   };
   renderAyahLoader = () => {
     return (
-      <ContentLoader height={42}>
+      <ContentLoader height={30} className={'ayah-loader'}>
         {/* Pure SVG */}
         <rect x="80" y="10" rx="3" ry="3" width="250" height="10" />
       </ContentLoader>
@@ -93,7 +93,7 @@ class Ayah extends React.Component<IProps, IState> {
     const locale = this.props.cookies.get('currentLocale') || 'en';
     return (
       <Container>
-        <div id="ayah-text">
+        <div className="ayah-text">
           {isFetchingAyah || !ayah.textSimple
             ? this.renderAyahLoader()
             : this.renderAyah()}
@@ -101,8 +101,11 @@ class Ayah extends React.Component<IProps, IState> {
         <div className="ayah-data">
           <div className="ayah-translit">
             <p className="translit-button" onClick={this.toggleTranslit}>
-              {this.state.showTranslit ? 'Hide' : 'Show'}{' '}
-              <T id={KEYS.AYAH_COMPONENT_TRANSLITERATION} />
+              {this.state.showTranslit ? (
+                <T id={KEYS.AYAH_HIDE_TRANSLITERATION} />
+              ) : (
+                <T id={KEYS.AYAH_SHOW_TRANSLITERATION} />
+              )}
             </p>
             {this.state.showTranslit ? (
               <p className="translit">{this.renderTransliteration()}</p>
@@ -147,8 +150,9 @@ const Container = styled.div`
   display: flex;
   flex-flow: column;
   justify-content: space-evenly;
+  width: 100%;
 
-  #ayah-text {
+  .ayah-text {
     //margin-top: 20px;
     direction: rtl !important;
     font-family: 'UthmanicHafs';
@@ -161,6 +165,10 @@ const Container = styled.div`
       span {
         -webkit-font-smoothing: antialiased;
       }
+    }
+
+    .ayah-loader {
+      height: 40px;
     }
   }
   .ayah-translit {

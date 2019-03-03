@@ -14,7 +14,7 @@ import { connect } from 'react-redux';
 import { fetchRandomAyah } from '../api/ayahs';
 import KEYS from '../locale/keys';
 import AyahShape from '../shapes/AyahShape';
-import { setAyah } from '../store/actions/ayahs';
+import { setAyah, toggleFetchingCurrentAyah } from '../store/actions/ayahs';
 import theme from '../theme';
 import ReduxState, { IProfile } from '../types/GlobalState';
 import T from './T';
@@ -26,6 +26,7 @@ interface IOwnProps {
 
 interface IDispatchProps {
   setAyah(ayah: AyahShape): void;
+  toggleFetchingCurrentAyah(): void;
 }
 
 interface IStateProps {
@@ -50,7 +51,7 @@ const linksFactory: (props: any) => { [key: string]: ILink } = props => {
   return {
     mobile: {
       textID: KEYS.MOBILE_APP_LINK_TEXT,
-      href: '/mobile_app',
+      href: '/mobile',
     },
     profile: {
       textID: KEYS.PROFILE_LINK_TEXT,
@@ -93,7 +94,7 @@ const linksFactory: (props: any) => { [key: string]: ILink } = props => {
     },
     contact: {
       textID: KEYS.CONTACT_US,
-      href: '/contact_us',
+      href: '/contact',
     },
     partners: {
       textID: KEYS.PARTNERS_LINK_TEXT,
@@ -114,8 +115,10 @@ class NavMenu extends React.Component<IProps, IState> {
     });
   };
   public handleRandomAyah = () => {
+    this.props.toggleFetchingCurrentAyah();
     fetchRandomAyah().then((ayah: AyahShape) => {
       this.props.setAyah(ayah);
+      this.props.toggleFetchingCurrentAyah();
     });
   };
   public renderItem = (item: ILink, className?: string) => {
@@ -371,6 +374,9 @@ const mapDispatchToProps = (dispatch): IDispatchProps => {
   return {
     setAyah: (ayah: AyahShape) => {
       dispatch(setAyah(ayah));
+    },
+    toggleFetchingCurrentAyah: () => {
+      dispatch(toggleFetchingCurrentAyah());
     },
   };
 };

@@ -69,11 +69,8 @@ app.use(
   express.static(pathResolve(appRootDir.get(), config('publicAssetsPath')))
 );
 
-app.get('*', (request, response, next) => {
-  if (
-    request.path === '/' &&
-    !getCookie(request.universalCookies, 'passedOnBoarding')
-  ) {
+app.get('/', (request, response, next) => {
+  if (!getCookie(request.universalCookies, 'passedOnBoarding')) {
     const queryString = Object.entries(request.query)
       .map(([key, val]) => `${key}=${val}`)
       .join('&');

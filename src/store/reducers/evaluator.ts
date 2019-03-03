@@ -23,6 +23,11 @@ export default (
         ...state,
         nextAyah: action.payload,
       };
+    case getType(evaluator.setPreviousAyah):
+      return {
+        ...state,
+        previousAyah: action.payload,
+      };
     case getType(evaluator.increaseStep):
       return {
         ...state,

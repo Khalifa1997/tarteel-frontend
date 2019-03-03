@@ -7,7 +7,6 @@ import Navbar from '../../components/Navbar';
 import VerifyPassword from '../../components/VerifyPassword';
 import ForgotPasswordForm from '../../components/ForgotPasswordForm';
 import NewPasswordVerified from '../../components/NewPasswordVerified';
-import logScreen from '../../helpers/logScreen';
 
 interface IProps {
   history: History;
@@ -54,9 +53,6 @@ class ForgotPassword extends React.Component<IProps, IState> {
       [e.target.name]: e.target.value,
     });
   };
-  componentDidMount() {
-    logScreen();
-  }
   render() {
     return (
       <Container>

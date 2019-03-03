@@ -4,7 +4,7 @@ import React from 'react';
 import Icon from 'react-icons-kit';
 import { play } from 'react-icons-kit/fa/play';
 import { stop } from 'react-icons-kit/fa/stop';
-import { chevronsLeft } from 'react-icons-kit/feather/chevronsLeft';
+import { skipBack } from 'react-icons-kit/feather/skipBack';
 import { skipForward } from 'react-icons-kit/feather/skipForward';
 import { thumbsDown } from 'react-icons-kit/feather/thumbsDown';
 import { thumbsUp } from 'react-icons-kit/feather/thumbsUp';
@@ -13,35 +13,52 @@ import { threeHorizontal } from 'react-icons-kit/entypo/threeHorizontal';
 import { ActionType } from 'typesafe-actions';
 import SiriWave from '../../../modified_modules/siriwave';
 import Helmet from 'react-helmet';
+import humps from 'humps';
+import ContentLoader from 'react-content-loader';
+import { InjectedIntl } from 'react-intl';
 
 import HandShakeImage from '../../../public/handshake-icon.png';
-import { fetchEvaluatorAyah, submitAyah } from '../../api/evaluator';
+import {
+  fetchEvaluatorAyah,
+  fetchSpecificEvaluatorAyah,
+  submitAyah,
+} from '../../api/evaluator';
 import Modal from '../../components/Modal';
 import Navbar from '../../components/Navbar';
 import { commaFormatter } from '../../helpers/utils';
 import { createAudioMeter } from '../../helpers/volume-meter';
 import AyahShape from '../../shapes/AyahShape';
 import WordShape from '../../shapes/WordShape';
-import { setAyah, setNextAyah } from '../../store/actions/evaluator';
+import {
+  setAyah,
+  setNextAyah,
+  setPreviousAyah,
+} from '../../store/actions/evaluator';
 import { increaseEvaluatedAyahs } from '../../store/actions/profile';
 import { WORD_TYPES } from '../../types';
 import { IProfile } from '../../types/GlobalState';
-import { Container, ModalContent } from './styles';
+import { Container, ModalContent, HelpModalContent } from './styles';
 import config from '../../../config';
 import T from '../../components/T';
 import KEYS from '../../locale/keys';
 import { fetchSpecificAyah } from '../../api/ayahs';
 import { getNextAyah } from '../../helpers/ayahs';
-import logScreen from '../../helpers/logScreen';
 
-const cdnURL = config('cdnURL');
+interface IOwnProps {
+  intl: InjectedIntl;
+}
 
-interface IProps {
-  currentAyah: AyahShape;
-  nextAyah: AyahShape;
+interface IDispatchProps {
   setAyah(ayah: AyahShape): ActionType<typeof setAyah>;
   setNextAyah(ayah: AyahShape): ActionType<typeof setNextAyah>;
+  setPreviousAyah(ayah: AyahShape): ActionType<typeof setPreviousAyah>;
   increaseEvaluatedAyahs(): ActionType<typeof increaseEvaluatedAyahs>;
+}
+
+interface IStateProps {
+  currentAyah: AyahShape;
+  nextAyah: AyahShape;
+  previousAyah: AyahShape;
   profile: IProfile;
 }
 
@@ -49,25 +66,35 @@ interface IState {
   played: boolean;
   isPlaying: boolean;
   showModal: boolean;
+  showHelpModal: boolean;
   pills: number[];
   currentStep: number;
   isLoading: boolean;
+  isBuffering: boolean;
 }
+
+type IProps = IOwnProps & IDispatchProps & IStateProps;
 
 class Evaluator extends React.Component<IProps, IState> {
   public audio: null | HTMLAudioElement;
+  nextAudio: HTMLAudioElement;
   public siriWave: null | HTMLElement;
+  siriWaveContainer: HTMLDivElement;
+  analyser: any;
 
   public state = {
     played: false,
     isPlaying: false,
     showModal: false,
+    showHelpModal: false,
     currentStep: 1,
     pills: new Array(5), //  ['wrong', 'skipped', ...],
     isLoading: false,
+    isBuffering: false,
   };
   public getNewAyah = () => {
     if (this.props.nextAyah.textSimple) {
+      this.props.setPreviousAyah(this.props.currentAyah);
       return this.props.setAyah(this.props.nextAyah);
     } else {
       return fetchEvaluatorAyah().then((ayah: AyahShape) => {
@@ -76,9 +103,62 @@ class Evaluator extends React.Component<IProps, IState> {
     }
   };
   public loadNextAyah = () => {
-    return fetchEvaluatorAyah().then((ayah: AyahShape) => {
-      this.props.setNextAyah(ayah);
-    });
+    const { chapterId: surah, verseNumber: ayah } = this.props.currentAyah;
+    const { nextSurah, nextAyah } = getNextAyah(surah, ayah);
+    return fetchSpecificEvaluatorAyah(nextSurah, nextAyah)
+      .then(this.handleUpcomingAyah)
+      .catch((e: Error | Response) => {
+        if (e.status === 500) {
+          console.log('reload Random Ayah');
+          fetchEvaluatorAyah().then(this.handleUpcomingAyah);
+        }
+      });
+  };
+  handleUpcomingAyah = async (fetchedAyah: AyahShape) => {
+    fetchedAyah = humps.camelizeKeys(fetchedAyah);
+    await this.props.setNextAyah(fetchedAyah);
+    this.preloadAudio(fetchedAyah.audioUrl);
+    this.preloadFont(fetchedAyah.words[0].className);
+  };
+  preloadAudio = (audioURL: string) => {
+    // audioURL = __DEVELOPMENT__ ? `http://localhost:8000${ audioURL }` : audioURL;
+    this.nextAudio = new Audio(audioURL);
+    this.registerAudioEvents(this.nextAudio);
+
+    const audioContext = new AudioContext();
+    const source = audioContext.createMediaElementSource(this.nextAudio);
+    this.nextAnalyser = audioContext.createAnalyser();
+    source.connect(this.nextAnalyser);
+    this.nextAnalyser.connect(audioContext.destination);
+  };
+  registerAudioEvents = audio => {
+    audio.preload = 'true';
+    audio.crossOrigin = 'anonymous';
+    audio.onloadedmetadata = () => {
+      console.log('Loaded...!');
+    };
+    audio.onended = this.handleAudioEnd;
+    audio.onerror = this.handleAudioEnd;
+    audio.onwaiting = () => {
+      this.setState({
+        isBuffering: true,
+      });
+    };
+    audio.onplaying = () => {
+      if (this.state.isBuffering) {
+        this.setState({
+          isBuffering: false,
+        });
+      }
+    };
+  };
+  preloadFont = async (fontName: string) => {
+    const font = new FontFace(
+      fontName,
+      `url('/public/fonts/ayahs/${fontName}.ttf') format('truetype')`
+    );
+    await font.load();
+    document.fonts.add(font);
   };
   public updatePills = (action: string) => {
     this.setState((state, props) => {
@@ -103,14 +183,10 @@ class Evaluator extends React.Component<IProps, IState> {
     await this.getNewAyah();
     this.loadNextAyah();
     this.audio.pause();
-    try {
-      this.audio.load();
-    } catch (e) {
-      console.log(e);
-    }
-    this.audio.load();
+    this.replaceAudioTags();
+    this.loadNextAyah();
     this.updatePills(action);
-    this.audio.dispatchEvent(new Event('ended'));
+    this.handleAudioEnd();
     this.handlePlay();
     this.setState({
       isLoading: false,
@@ -121,8 +197,26 @@ class Evaluator extends React.Component<IProps, IState> {
     //   })
     // }
   };
+  replaceAudioTags = () => {
+    this.audio = null;
+    this.analyser = null;
+    this.audio = this.nextAudio;
+    this.analyser = this.nextAnalyser;
+    this.audio.load();
+  };
   public handleSkip = () => {
-    this.handleAyahChange('skipped');
+    // this.handleAyahChange('skipped');
+    this.setState({
+      isLoading: true,
+    });
+    fetchEvaluatorAyah().then(async (ayah: AyahShape) => {
+      await this.props.setAyah(ayah);
+      this.initializeAudioPlayer();
+      this.loadNextAyah();
+      this.setState({
+        isLoading: false,
+      });
+    });
   };
   public handleWrongAyah = () => {
     // if  (this.state.played) { commnented because it's blocking the continuous mode
@@ -137,68 +231,152 @@ class Evaluator extends React.Component<IProps, IState> {
     // }
   };
   public handlePlay = () => {
-    const siriWave = this.startWave();
-    if (this.audio) {
-      this.audio.addEventListener('ended', () => {
-        this.setState({
-          isPlaying: false,
-        });
-        siriWave.stop();
-        if (this.siriWave.querySelector('canvas')) {
-          this.siriWave.querySelector('canvas').remove();
-        }
+    if (this.state.isBuffering) {
+      return;
+    }
+    this.siriWave = this.startWave();
+    if (!this.state.isPlaying) {
+      // Before Playing
+      this.audio.play();
+      this.setState({
+        isPlaying: true,
+        played: true,
       });
-      if (this.audio.paused) {
-        // Before Playing
-        this.audio.play();
-        this.setState({
-          isPlaying: true,
-          played: true,
-        });
-        this.siriWave.style.display = 'block';
-        siriWave.start();
-        this.startAnimating();
-      } else {
-        // While Playing...
-        this.audio.pause();
-        this.audio.dispatchEvent(new Event('ended'));
-      }
+      this.siriWaveContainer.style.display = 'block';
+      this.siriWave.start();
+      this.startAnimating();
+    } else {
+      // While Playing...
+      this.audio.pause();
+      this.handleAudioEnd();
     }
   };
   public startWave = () => {
     const siriWave = new SiriWave({
-      container: this.siriWave,
+      container: this.siriWaveContainer,
       width: 640,
       height: 200,
       style: 'ios9',
+      amplitude: 0.1,
     });
     return siriWave;
   };
-  public startAnimating = () => {
-    const audio_context = new AudioContext();
-    const input = audio_context.createMediaElementSource(
-      this.audio.cloneNode(true)
-    );
-    const meter = createAudioMeter(audio_context);
-    input.connect(meter);
+  public startAnimating = async () => {
+    this.drawLoop();
+  };
+  drawLoop = () => {
+    const fbcArray = new Uint8Array(this.analyser.frequencyBinCount);
+    this.analyser.getByteFrequencyData(fbcArray);
+    let barHeight = fbcArray[0] / 100;
+    barHeight = barHeight > 1.25 ? 1 : barHeight;
+    this.siriWave.setAmplitude(barHeight);
+    // console.log(barHeight);
+
+    this.drawFunction = window.requestAnimationFrame(this.drawLoop);
   };
   public handleCloseModal = () => {
     this.setState({ showModal: false });
   };
-  public componentDidMount() {
-    logScreen();
+  public handleCloseHelpModal = () => {
+    this.setState({ showHelpModal: false });
+  };
+  handleAudioEnd = () => {
+    this.setState({
+      isPlaying: false,
+      isBuffering: false,
+    });
+    this.siriWave.stop();
+    window.cancelAnimationFrame(this.drawFunction);
+    this.siriWaveContainer.innerHTML = '';
+  };
+  public async componentDidMount() {
     window.AudioContext = window.AudioContext || window.webkitAudioContext;
     if (!this.props.currentAyah.textSimple) {
-      this.getNewAyah();
+      this.setState({
+        isLoading: true,
+      });
+      await this.getNewAyah();
+      this.setState({
+        isLoading: false,
+      });
     }
+    this.loadNextAyah();
+    this.initializeAudioPlayer();
   }
+  initializeAudioPlayer = () => {
+    this.audio = new Audio(this.props.currentAyah.audioUrl);
+    this.registerAudioEvents(this.audio);
+
+    const audioContext = new AudioContext();
+    const source = audioContext.createMediaElementSource(this.audio);
+    this.analyser = audioContext.createAnalyser();
+    source.connect(this.analyser);
+    this.analyser.connect(audioContext.destination);
+  };
   handleOGImage = (): string => {
-    return cdnURL + '/og/evaluation_en.png';
+    return '/public/og/evaluation_en.png';
+  };
+  renderAyahLoader = () => {
+    return (
+      <ContentLoader height={30} className={'ayah-loader'}>
+        {/* Pure SVG */}
+        <rect x="80" y="10" rx="3" ry="3" width="250" height="10" />
+      </ContentLoader>
+    );
+  };
+  renderAyah = () => {
+    return this.props.currentAyah.words.map((word: WordShape) => {
+      const className = classNames({
+        [word.className]: true,
+        [word.charType]: true,
+      });
+      return (
+        <span className={className}>
+          <a
+            className={className}
+            dangerouslySetInnerHTML={{ __html: word.code }}
+          />
+          {word.charType === WORD_TYPES.CHAR_TYPE_WORD && (
+            <small style={{ letterSpacing: -15 }}>&nbsp;</small>
+          )}
+        </span>
+      );
+    });
+  };
+  handlePrevious = async () => {
+    this.setState({
+      isLoading: true,
+    });
+    await this.audio.pause();
+    this.props.setNextAyah(this.props.currentAyah);
+    this.preloadAudio(this.props.currentAyah.audioUrl);
+    await this.props.setAyah(this.props.previousAyah);
+    await this.initializeAudioPlayer();
+    this.audio.play();
+    this.setState({
+      isLoading: false,
+    });
+  };
+  showHelpModal = () => {
+    this.setState({
+      showHelpModal: true,
+    });
   };
   public render() {
     const { currentAyah, profile } = this.props;
-    const { isPlaying, played, isLoading, pills, currentStep } = this.state;
+    const {
+      isPlaying,
+      played,
+      isLoading,
+      isBuffering,
+      pills,
+      currentStep,
+    } = this.state;
     const ogTitle = this.props.intl.formatMessage({ id: KEYS.EVALUATE_AYAHS });
+    const audioURL = __DEVELOPMENT__
+      ? `http://localhost:8000${currentAyah.audioUrl}`
+      : currentAyah.audioUrl;
+    const disableButtons = !played;
     return (
       <Container>
         <Helmet>
@@ -211,7 +389,7 @@ class Evaluator extends React.Component<IProps, IState> {
             profile.evaluationsCount
           )}/${commaFormatter(profile.recordingCount)}`}
         />
-        <div id="container">
+        <div className="container">
           <div className="start-text">
             <h1 className="title">
               <T id={KEYS.EVALUATOR_TITLE_TEXT} />
@@ -222,9 +400,10 @@ class Evaluator extends React.Component<IProps, IState> {
               </p>
               <p>
                 <T id={KEYS.EVALUATOR_PARAGRAPH_2} />
-              </p>
-              <p>
-                <T id={KEYS.EVALUATOR_PARAGRAPH_3} />
+                &nbsp;
+                <a onClick={this.showHelpModal}>
+                  <T id={KEYS.EVALUATOR_PARAGRAPH_2_LINK_TEXT} />
+                </a>
               </p>
             </div>
           </div>
@@ -240,23 +419,9 @@ class Evaluator extends React.Component<IProps, IState> {
               {/* Start ayah-container */}
               <div className="card">
                 <div className="ayah-text">
-                  {currentAyah.words.map((word: WordShape) => {
-                    const className = classNames({
-                      [word.className]: true,
-                      [word.charType]: true,
-                    });
-                    return (
-                      <span className={className}>
-                        <a
-                          className={className}
-                          dangerouslySetInnerHTML={{ __html: word.code }}
-                        />
-                        {word.charType === WORD_TYPES.CHAR_TYPE_WORD && (
-                          <small style={{ letterSpacing: -15 }}>&nbsp;</small>
-                        )}
-                      </span>
-                    );
-                  })}
+                  {isLoading || !currentAyah.textSimple
+                    ? this.renderAyahLoader()
+                    : this.renderAyah()}
                 </div>
               </div>
               {/* End ayah-container */}
@@ -295,17 +460,23 @@ class Evaluator extends React.Component<IProps, IState> {
           </div>
         </div>
 
-        <audio ref={C => (this.audio = C)}>
-          <source src={currentAyah.audioUrl} type="audio/mp3" />
-        </audio>
-
         <div className="primary-buttons">
-          <div ref={C => (this.siriWave = C)} className={'siri-wave'} />
+          <div
+            ref={C => (this.siriWaveContainer = C)}
+            className={'siri-wave'}
+          />
+          <button
+            className="previous vote-button"
+            onClick={this.handlePrevious}
+          >
+            <Icon icon={skipBack} size={24} />
+            <T id={KEYS.PREVIOUS_WORD} />
+          </button>
           <button
             type="button"
             className="vote-button yes"
             onClick={this.handleRightAyah}
-            // disabled={!played}
+            // disabled={disableButtons}
           >
             <Icon icon={thumbsUp} size={24} />
             <span>
@@ -315,7 +486,13 @@ class Evaluator extends React.Component<IProps, IState> {
           <div className="primary-button play" onClick={this.handlePlay}>
             <button type="button">
               <Icon
-                icon={isLoading ? threeHorizontal : !isPlaying ? play : stop}
+                icon={
+                  isLoading || isBuffering
+                    ? threeHorizontal
+                    : !isPlaying
+                    ? play
+                    : stop
+                }
                 size={24}
               />
             </button>
@@ -325,37 +502,88 @@ class Evaluator extends React.Component<IProps, IState> {
             type="button"
             className="vote-button no"
             onClick={this.handleWrongAyah}
-            // disabled={!played}
+            // disabled={disableButtons}
           >
             <Icon icon={thumbsDown} size={24} />
             <span>
               <T id={KEYS.NO_WORD} />
             </span>
           </button>
+          <button
+            type="button"
+            className="vote-button skip"
+            onClick={this.handleSkip}
+          >
+            <T id={KEYS.SKIP_WORD} />
+            <Icon icon={skipForward} size={24} />
+          </button>
         </div>
 
-        <button
-          type="button"
-          className="skip vote-button"
-          onClick={this.handleSkip}
+        <Modal
+          isOpen={this.state.showHelpModal}
+          handleCloseModal={this.handleCloseHelpModal}
+          closable={true}
         >
-          <span>
-            <T id={KEYS.SKIP_WORD} />
-          </span>
-          <Icon icon={skipForward} size={24} />
-        </button>
-
-        <button
-          className="back-to-home vote-button"
-          onClick={() => {
-            this.props.history.push('/');
-          }}
-        >
-          <span>
-            <T id={KEYS.HOME_WORD} />
-          </span>
-          <Icon icon={chevronsLeft} size={24} />
-        </button>
+          <HelpModalContent>
+            <div className="content">
+              <h1 className="modal-title">Evaluation Instructions</h1>
+              Use the following examples as guidelines when deciding whether a
+              recitation is recorded correctly or incorrectly.
+              <br /> <br />
+              <h4>
+                Mark a recitation as{' '}
+                <span style={{ color: 'green' }}>correct</span> even if:
+              </h4>
+              <ul style={{ textAlign: 'left' }}>
+                <li>
+                  The reciter makes a mistake in how they pronounce a letter, or
+                  if he/she makes mistakes in harakaat (vowels).
+                </li>
+                <li> The reciter makes tajweed-related mistakes.</li>
+                <li>
+                  The reciter makes a major mistake, but then corrects himself
+                  or herself.
+                </li>
+                <li>
+                  The recitation includes noise or an out-of-place word before
+                  or after the verse.
+                </li>
+                <li> The reciter recites very slowly or very quickly.</li>
+                <li>
+                  The reciter omits <strong>up to a single word</strong> at the
+                  beginning or end of a verse. If he/she misses more than that,
+                  it should be marked as incorrect.
+                </li>
+              </ul>
+              <br />
+              <h4>
+                Mark a recitation as{' '}
+                <span style={{ color: 'red' }}>incorrect</span> if:
+              </h4>
+              <ul style={{ textAlign: 'left' }}>
+                <li> The recording is empty or is only background noise.</li>
+                <li> The wrong verse is recited.</li>
+                <li>
+                  The verse is recited so softly that you cannot hear the
+                  recitation (make sure your device volume is set properly!)
+                </li>
+                <li>
+                  Multiple verses are recited in the same recording, even if
+                  they include the correct verse.
+                </li>
+                <li>
+                  The reciter omits <strong>more than a single word</strong> at
+                  the beginning or end of a verse.
+                </li>
+              </ul>
+              <br />
+              The evaluator works best on your <strong>desktop/laptop</strong>,
+              as not all audio files play on mobile.
+              <br />
+              <br />
+            </div>
+          </HelpModalContent>
+        </Modal>
 
         <Modal
           isOpen={this.state.showModal}
@@ -375,16 +603,14 @@ class Evaluator extends React.Component<IProps, IState> {
             <p>
               <T id={KEYS.EVALUATOR_THANKS_FOR_HELPING_MESSAGE_2} />
               <b className="count">
-                {' '}
-                {this.props.profile.evaluationsCount}{' '}
-              </b>{' '}
+                {this.props.profile.evaluationsCount}
+              </b>
               <T id={KEYS.AYAHS_WORD} />.
             </p>
             <p>
               <T id={KEYS.EVALUATOR_THANKS_FOR_HELPING_MESSAGE_3} />
               <a href="/evaluator">
-                {' '}
-                <T id={KEYS.YES_WORD} />!{' '}
+                <T id={KEYS.YES_WORD} />!
               </a>
             </p>
           </ModalContent>

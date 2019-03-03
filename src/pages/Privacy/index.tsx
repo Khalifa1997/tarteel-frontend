@@ -2,12 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 import T from '../../components/T';
 import KEYS from '../../locale/keys';
-import logScreen from '../../helpers/logScreen';
 
 class Privacy extends React.Component {
-  componentDidMount() {
-    logScreen();
-  }
   public render() {
     return (
       <Container>

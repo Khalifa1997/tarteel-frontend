@@ -23,9 +23,9 @@ import { ic_insert_link } from 'react-icons-kit/md/ic_insert_link';
 import { ic_content_copy } from 'react-icons-kit/md/ic_content_copy';
 import { ic_close } from 'react-icons-kit/md/ic_close';
 import copy from 'copy-to-clipboard';
-import { Tooltip } from 'react-tippy';
-
-import 'react-tippy/dist/tippy.css';
+import Tippy from '@tippy.js/react';
+import { Instance } from 'tippy.js';
+import { isMobileOnly } from 'react-device-detect';
 
 interface IProps {
   url: string;
@@ -35,8 +35,15 @@ interface IProps {
 }
 
 class ShowModal extends React.Component<IProps> {
+  tooltip: Instance;
+
   handleCloseModal = () => {
     this.props.handleCloseModal();
+  };
+  handleCopy = () => {
+    copy(this.props.url);
+    this.tooltip.show();
+    setTimeout(this.tooltip.hide, 1500);
   };
   render() {
     const { url, quote } = this.props;
@@ -45,7 +52,7 @@ class ShowModal extends React.Component<IProps> {
       <Modal
         isOpen={this.props.show}
         handleCloseModal={this.handleCloseModal}
-        style={{ height: '35%', width: '50%' }}
+        style={styledModal}
       >
         <Container>
           <div className={'close'} onClick={this.handleCloseModal}>
@@ -56,39 +63,39 @@ class ShowModal extends React.Component<IProps> {
               <Icon icon={ic_insert_link} size={20} />
             </span>
             {url}
-            <Tooltip
-              // options
-              title={'Copied!'}
-              position="top"
-              trigger="click"
-              duration={250}
+            <Tippy
+              onCreate={(instance: Instance) => {
+                this.tooltip = instance;
+              }}
+              content={'Copied!'}
+              trigger={'manual'}
             >
-              <span className={'copy'} onClick={() => copy(url)}>
+              <span className={'copy'} onClick={this.handleCopy}>
                 <Icon icon={ic_content_copy} size={20} />
               </span>
-            </Tooltip>
+            </Tippy>
           </div>
           <div className="share-buttons">
             <FacebookShareButton quote={quote} url={url}>
-              <FacebookIcon size={50} round={true} />
+              <FacebookIcon size={isMobileOnly ? 25 : 50} round={true} />
             </FacebookShareButton>
             <TwitterShareButton quote={quote} url={url}>
-              <TwitterIcon size={50} round={true} />
+              <TwitterIcon size={isMobileOnly ? 25 : 50} round={true} />
             </TwitterShareButton>
             <GooglePlusShareButton quote={quote} url={url}>
-              <GooglePlusIcon size={50} round={true} />
+              <GooglePlusIcon size={isMobileOnly ? 25 : 50} round={true} />
             </GooglePlusShareButton>
             <LinkedinShareButton quote={quote} url={url}>
-              <LinkedinIcon size={50} round={true} />
+              <LinkedinIcon size={isMobileOnly ? 25 : 50} round={true} />
             </LinkedinShareButton>
             <WhatsappShareButton quote={quote} url={url}>
-              <WhatsappIcon size={50} round={true} />
+              <WhatsappIcon size={isMobileOnly ? 25 : 50} round={true} />
             </WhatsappShareButton>
             <VKShareButton quote={quote} url={url}>
-              <VKIcon size={50} round={true} />
+              <VKIcon size={isMobileOnly ? 25 : 50} round={true} />
             </VKShareButton>
             <EmailShareButton quote={quote} url={url}>
-              <EmailIcon size={50} round={true} />
+              <EmailIcon size={isMobileOnly ? 25 : 50} round={true} />
             </EmailShareButton>
           </div>
         </Container>
@@ -96,6 +103,13 @@ class ShowModal extends React.Component<IProps> {
     );
   }
 }
+
+const styledModal = {
+  height: '35%',
+  width: isMobileOnly ? '75%' : '50%',
+  left: isMobileOnly ? '20px' : '40px',
+  right: isMobileOnly ? '20px' : '40px',
+};
 
 const Container = styled(ModalContent)`
   height: 100%;

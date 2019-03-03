@@ -49,12 +49,13 @@ const initState: (cookies?: any) => ReduxState = cookies => {
       dailyCount: 0,
       userRecitedAyahs: 0,
       evaluationsCount: 0,
-      sessionKey: '',
+      sessionId: '',
       askForDemographics: false,
     },
     evaluator: {
       currentAyah: emptyAyah,
       nextAyah: emptyAyah,
+      previousAyah: emptyAyah,
     },
     recognition: {
       queryText: '',

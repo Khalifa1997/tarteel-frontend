@@ -18,7 +18,6 @@ import { updateDemographicData } from '../../store/actions/demographicData';
 import ReduxState, { IDemographics, IProfile } from '../../types/GlobalState';
 import { unsetAskForDemographics } from '../../store/actions/profile';
 import Select from '../../components/Select';
-import logScreen from '../../helpers/logScreen';
 
 const genderOptions = [
   {
@@ -124,9 +123,6 @@ class DemographicsPage extends React.Component<IProps, IState> {
       [key]: option.value,
     });
   };
-  componentDidMount() {
-    logScreen();
-  }
   render() {
     const { isSubmitting } = this.state;
     const askForPermissions = false;
@@ -138,13 +134,12 @@ class DemographicsPage extends React.Component<IProps, IState> {
       opt => opt.value === demographicData.qiraah
     )[0];
     const rtl = intl.messages.local === 'arabic' ? 'rtl' : '';
+    const pageTitle = intl.formatMessage({ id: KEYS.DEMOGRAPHICS_PAGE_TITLE });
 
     return (
       <Container>
         <Helmet>
-          <title>
-            <T id={KEYS.DEMOGRAPHICS_PAGE_TITLE} />
-          </title>
+          <title>{pageTitle}</title>
         </Helmet>
         <Navbar />
         <div className="content">

@@ -14,9 +14,6 @@ import { isCorrectAyah } from '../../helpers/ayahs';
 import { fetchRandomAyah, fetchSpecificAyah } from '../../api/ayahs';
 import { setAyah } from '../../store/actions/ayahs';
 import { ActionType } from 'typesafe-actions';
-import logScreen from '../../helpers/logScreen';
-
-const cdnURL = config('cdnURL');
 
 interface IDispatchProps {
   setAyah(ayah: AyahShape): ActionType<typeof setAyah>;
@@ -39,7 +36,7 @@ type IProps = IOwnProps & IDispatchProps;
 class Main extends React.Component<IProps, never> {
   handleOGImage = () => {
     const locale = this.props.cookies.get('currentLocale') || 'en';
-    return `${cdnURL}/og/main_${locale}.png`;
+    return `/public/og/main_${locale}.png`;
   };
   loadQueue = async () => {
     await this.props.loadNextAyah();
@@ -48,7 +45,6 @@ class Main extends React.Component<IProps, never> {
     await this.props.loadPrevQueue();
   };
   public async componentDidMount() {
-    logScreen();
     const { surah, ayah } = this.props.match.params;
     if (surah && ayah) {
       if (isCorrectAyah(surah, ayah)) {
@@ -82,8 +78,8 @@ class Main extends React.Component<IProps, never> {
     if (surah && ayah) {
       ogTitle =
         locale === 'ar'
-          ? `سورة ${surahs[surah].arabic} آيه ${ayah}  | ترتيل `
-          : `Surah ${surahs[surah].latin} Ayah ${ayah} | Tarteel`;
+          ? `سورة ${surahs[surah].arabic} آيه ${ayah} `
+          : `Surah ${surahs[surah].latin} Ayah ${ayah}`;
     }
     return (
       <Container>

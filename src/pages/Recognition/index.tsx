@@ -25,9 +25,6 @@ import { toggleIsRecording } from '../../store/actions/status';
 import RecordingError from '../../components/RecordingError';
 import KEYS from '../../locale/keys';
 import T from '../../components/T';
-import logScreen from '../../helpers/logScreen';
-
-const cdnURL = config('cdnURL');
 
 interface IOwnProps {
   history: History;
@@ -214,7 +211,6 @@ class Recognition extends React.Component<IProps, IState> {
       });
   };
   componentDidMount() {
-    logScreen();
     this.resetSearch();
     if (!Boolean(window.webkitSpeechRecognition)) {
       this.upgradeRequired();
@@ -225,7 +221,7 @@ class Recognition extends React.Component<IProps, IState> {
   };
   handleOGImage = () => {
     const locale = this.props.cookies.get('currentLocale') || 'en';
-    return `${cdnURL}/og/recognition_${locale}.png`;
+    return `/public/og/recognition_${locale}.png`;
   };
   componentWillUnmount() {
     if (this.recognition) {

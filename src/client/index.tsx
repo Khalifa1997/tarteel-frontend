@@ -28,10 +28,10 @@ window.ReactDOM = ReactDOM; // For chrome dev tool support
 
 const cookies = new Cookies(document.cookie);
 
-window.clearCookies = () => {
-  // reactCookie.remove('isFirstTime');
-  // cookies.remove('currentLocale');
-};
+// window.clearCookies = () => {
+// reactCookie.remove('isFirstTime');
+// cookies.remove('currentLocale');
+// };
 
 if (!__DEVELOPMENT__) {
   ReactGA.initialize(config('google.analytics.id'));
@@ -86,8 +86,19 @@ function renderApp(TheApp) {
   asyncBootstrapper(app).then(() => hydrate(app, container));
 }
 
+const loadInitialFonts = async () => {
+  const ProximaNova = new FontFace(
+    'Proxima Nova',
+    "url('/public/fonts/ProximaNova/Mark Simonson - Proxima Nova Alt Regular-webfont.ttf') format('truetype')"
+  );
+  await ProximaNova.load();
+  document.fonts.add(ProximaNova);
+};
+
 // Execute the first render of our app.
-renderApp(App);
+loadInitialFonts().then(() => {
+  renderApp(App);
+});
 
 // This registers our service worker for asset caching and offline support.
 // Keep this as the last item, just in case the code execution failed (thanks

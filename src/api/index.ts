@@ -1,5 +1,3 @@
-import cookie from 'cookie';
-
 import config from '../../config';
 import { backendRequestOptions } from '../helpers/cookie';
 import { IDemographics } from '../types/GlobalState';

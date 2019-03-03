@@ -1,17 +1,17 @@
-import React, {Component} from "react"
-import {InjectedIntl, injectIntl} from "react-intl"
+import React, { Component } from 'react';
+import { InjectedIntl, injectIntl } from 'react-intl';
 import classNames from 'classnames';
+import Helmet from 'react-helmet';
 
-import FooterButton from "../../components/FooterButton";
-import Navbar from "../../components/Navbar";
-import T from "../../components/T";
-import KEYS from "../../locale/keys";
-import {IUser} from "../../types/GlobalState";
-import {Container} from "./styles";
+import FooterButton from '../../components/FooterButton';
+import Navbar from '../../components/Navbar';
+import T from '../../components/T';
+import KEYS from '../../locale/keys';
+import { IUser } from '../../types/GlobalState';
+import { Container } from './styles';
 
-import {withCookies} from "react-cookie";
-import LogoImage from "../../../public/logo-3x.png";
-import logScreen from "../../helpers/logScreen";
+import { withCookies } from 'react-cookie';
+import LogoImage from '../../../public/logo-3x.png';
 
 interface IDispatchProps {
   setUsers(users: IUser[]): Promise<IUser[]>;
@@ -30,16 +30,14 @@ type IProps = IOwnProps & IDispatchProps & IStateProps;
 class WelcomePage extends Component<IProps, never> {
   public handleStart = () => {
     this.props.history.push('/');
-  }
-  componentDidMount() {
-    logScreen();
-  }
+  };
   public render() {
     const classes = classNames({
-      rtl: this.props.cookies.get('currentLocale') === 'ar';
-    })
+      rtl: this.props.cookies.get('currentLocale') === 'ar',
+    });
     return (
       <Container>
+        <Helmet titleTemplate={''} />
         <Navbar />
         <div className="content">
           <div className="banner">
@@ -83,7 +81,6 @@ class WelcomePage extends Component<IProps, never> {
       </Container>
     );
   }
-
 }
 
-export default injectIntl(withCookies(WelcomePage))
+export default injectIntl(withCookies(WelcomePage));

@@ -6,16 +6,12 @@ import Navbar from '../../components/Navbar';
 import { IDataset } from '../../types/GlobalState';
 import T from '../../components/T';
 import KEYS from '../../locale/keys';
-import logScreen from '../../helpers/logScreen';
 
 interface IProps {
   dataset: IDataset;
 }
 
 class DataSet extends React.Component<IProps, never> {
-  componentDidMount() {
-    logScreen();
-  }
   render() {
     return (
       <Container>

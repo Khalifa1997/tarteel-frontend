@@ -14,7 +14,6 @@ import KEYS from '../../locale/keys';
 import AyahShape from '../../shapes/AyahShape';
 import ReduxState from '../../types/GlobalState';
 import { Container } from './styles';
-import logScreen from '../../helpers/logScreen';
 
 interface IOwnProps {
   match: any;
@@ -86,9 +85,6 @@ class SurahPicker extends Component<IProps, IState> {
       searchText: e.currentTarget.value,
     });
   };
-  componentDidMount() {
-    logScreen();
-  }
   public render() {
     const { intl } = this.props;
     return (

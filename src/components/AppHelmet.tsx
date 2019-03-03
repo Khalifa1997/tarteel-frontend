@@ -1,10 +1,8 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import Helmet from 'react-helmet';
-import { defineMessages, injectIntl } from 'react-intl';
+import { defineMessages, injectIntl, InjectedIntl } from 'react-intl';
 
 import config from '../../config';
-
-const cdnURL = config('cdnURL');
 
 const messages = defineMessages({
   title: {
@@ -43,11 +41,19 @@ const keywords = [
   'Allah',
 ];
 
-const AppHelmet: React.SFC = ({ intl }) => {
+interface IProps {
+  intl: InjectedIntl;
+  path: string;
+  children?: ReactNode;
+}
+
+const AppHelmet: React.SFC = ({ intl, path }: IProps) => {
   const title = intl.formatMessage(messages.title);
   const description = intl.formatMessage(messages.description);
   const localName = intl.formatMessage(messages.localName);
-  let ogTitle: string;
+  let ogTitle: string = '';
+
+  // Making the og:title to be dynamic based on each page title.
   if (__SERVER__) {
     const helmet = Helmet.rewind();
     if (helmet.title.toString().match(/>.+</gi)) {
@@ -56,8 +62,6 @@ const AppHelmet: React.SFC = ({ intl }) => {
         .match(/>.+</gi)[0]
         .replace(/\<|\>/gi, '');
     }
-  } else {
-    // Nothing;
   }
 
   const tags = {
@@ -118,7 +122,7 @@ const AppHelmet: React.SFC = ({ intl }) => {
       },
       {
         property: 'og:image',
-        content: cdnURL + '/og/main_en.png',
+        content: '/public/og/main_en.png',
       },
       {
         property: 'og:locale',
@@ -138,7 +142,7 @@ const AppHelmet: React.SFC = ({ intl }) => {
       },
       {
         property: 'og:url',
-        content: 'https://tarteel.io',
+        content: `https://tarteel.io` + path,
       },
       {
         property: 'og:type',
@@ -158,7 +162,7 @@ const AppHelmet: React.SFC = ({ intl }) => {
       },
       {
         name: 'twitter:image',
-        content: cdnURL + '/og/main_en.png',
+        content: '/public/og/main_en.png',
       },
       {
         name: 'twitter:image:width',

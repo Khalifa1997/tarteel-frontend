@@ -9,16 +9,12 @@ import { sad } from 'react-icons-kit/icomoon/sad';
 import T from '../../components/T';
 import KEYS from '../../locale/keys';
 import Navbar from '../../components/Navbar';
-import logScreen from '../../helpers/logScreen';
 
 interface IProps {
   intl: InjectedIntl;
 }
 
 class AyahNotFound extends React.Component<IProps> {
-  componentDidMount() {
-    logScreen();
-  }
   public render() {
     const { intl } = this.props;
 

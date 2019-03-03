@@ -32,7 +32,7 @@ export default [
     }),
   },
   {
-    path: '/mobile_app',
+    path: '/mobile',
     component: asyncComponent({
       resolve: () =>
         import(/* webpackChunkName: "MobileAppPage" */ './pages/MobileAppPage'),
@@ -118,7 +118,7 @@ export default [
     }),
   },
   {
-    path: '/contact_us',
+    path: '/contact',
     component: asyncComponent({
       resolve: () =>
         import(/* webpackChunkName: "ContactUs" */ './pages/ContactUs'),

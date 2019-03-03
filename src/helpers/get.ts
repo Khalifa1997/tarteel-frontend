@@ -28,6 +28,8 @@ export const getLocalStorage = async (store: any) => {
 export const loadSessionData = (store: any, request) => {
   return fetchSessionData(request)
     .then((profile: Partial<IProfile>) => {
+      // Setting the sessionid cookie manually guarantee that all tha page has it.
+      request.universalCookies.set('sessionid', profile['session_id']);
       return store.dispatch(setFetchedProfile(profile));
     })
     .catch(e => {});

@@ -49,6 +49,7 @@ const EN: Shape = {
     [KEYS.EVALUATE_AYAHS]: 'Evaluate Ayahs',
     [KEYS.GET_STARTED]: 'Get Started',
     [KEYS.PARTNERS_LINK_TEXT]: 'Partners',
+    [KEYS.PREVIOUS_WORD]: 'Prev',
 
     // AYAH PICKER
     [KEYS.AYAH_PICKER_TITLE]: 'Pick an Ayah',
@@ -133,7 +134,8 @@ const EN: Shape = {
     // AYAH COMPONENT
     [KEYS.AYAH_NOT_FOUND_PAGE_TEXT]: 'Not A Correct Ayah Index',
     [KEYS.PICK_DIFFERENT_AYAH]: 'Pick Different Ayah',
-    [KEYS.AYAH_COMPONENT_TRANSLITERATION]: 'Transliteration',
+    [KEYS.AYAH_SHOW_TRANSLITERATION]: "Show Transliteration",
+    [KEYS.AYAH_HIDE_TRANSLITERATION]: "Hide Transliteration",
     [KEYS.AYAH_COMPONENT_LOADING_MESSAGE]:
       'Loading ayah... (if an ayah does not show up, try clicking "next ayah")',
     [KEYS.AYAHS_RECITED]: 'Ayahs recited',
@@ -298,10 +300,8 @@ const EN: Shape = {
     [KEYS.EVALUATOR_TITLE_TEXT]: 'Listen and Evaluate',
     [KEYS.EVALUATOR_PARAGRAPH_1]:
       'Is the correct verse being recited in this recording?',
-    [KEYS.EVALUATOR_PARAGRAPH_2]:
-      "If so (don't worry about <em>tajweed</em>, background noise, or minor mistakes), click YES.",
-    [KEYS.EVALUATOR_PARAGRAPH_3]:
-      'If the wrong verse (or no verse) is recited, click NO.',
+    [KEYS.EVALUATOR_PARAGRAPH_2]: '(Don\'t worry about minor mistakes, <em>tajweed</em>, background noise, or even an omitted word.)',
+    [KEYS.EVALUATOR_PARAGRAPH_2_LINK_TEXT]: 'See more help',
     [KEYS.EVALUATOR_CLICK_TO_HEAR_TEXT]: 'to hear the sentence.',
     [KEYS.EVALUATOR_THANKS_FOR_HELPING_MESSAGE_1]:
       'Thanks for helping us evaluating the recited ayahs.',

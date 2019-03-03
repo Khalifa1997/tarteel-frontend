@@ -159,7 +159,7 @@ class Footer extends React.Component<IProps, IState> {
       record.surahNum,
       record.ayahNum,
       record.hashString,
-      this.props.currentAyah.sessionId,
+      this.props.profile.sessionId,
       this.props.status.isContinuous
     ).then((res: Response) => {
       if (res.status === 201) {

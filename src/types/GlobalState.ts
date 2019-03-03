@@ -34,7 +34,7 @@ export interface IProfile {
   dailyCount: number;
   evaluationsCount: number;
   userRecitedAyahs: number;
-  sessionKey: string;
+  sessionId: string;
   askForDemographics: boolean;
 }
 
@@ -52,6 +52,7 @@ export interface IDemographics {
 interface IEvaluator {
   currentAyah: AyahShape;
   nextAyah: AyahShape;
+  previousAyah: AyahShape;
 }
 
 export interface ISearchAyah {

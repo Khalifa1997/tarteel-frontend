@@ -1,7 +1,7 @@
 import config from '../../config';
 import { backendRequestOptions } from '../helpers/cookie';
 
-const API_URL = __DEVELOPMENT__ ? 'http://localhost:8000' : config('apiURL');
+const API_URL = config('apiURL');
 
 export const fetchEvaluatorAyah = (req?: any) => {
   const options = __SERVER__
@@ -19,14 +19,13 @@ export const submitAyah = (evaluation: string, recordingId: number) => {
     recording_id: recordingId,
     evaluation,
   };
-  console.log(ayah);
-  fetch(`${API_URL}/api/v2/evaluator/`, {
+  fetch(`${API_URL}/api/v2/submit_evaluation`, {
     method: 'POST',
+    body: JSON.stringify({ ayah }),
     headers: {
       'Content-Type': 'application/json',
     },
     credentials: 'include',
-    body: JSON.stringify({ ayah }),
   })
     .then(res => {
       if (res.status === 201) {
@@ -36,4 +35,28 @@ export const submitAyah = (evaluation: string, recordingId: number) => {
     .catch(e => {
       console.log(e.message);
     });
+};
+
+export const fetchSpecificEvaluatorAyah = (surah: number, ayah: number) => {
+  const options = {
+    method: 'POST',
+    body: JSON.stringify({
+      surah,
+      ayah,
+    }),
+    headers: {
+      'Content-Type': 'application/json',
+      Accept: 'application/json',
+    },
+    credentials: 'include',
+  };
+  return fetch(`${API_URL}/api/v2/evaluator/?format=json`, options).then(
+    (res: Response) => {
+      if (res.status !== 200) {
+        return Promise.reject(res);
+      } else {
+        return res.json();
+      }
+    }
+  );
 };
