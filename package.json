@@ -1,6 +1,6 @@
 {
   "name": "Tarteel",
-  "version": "2.3",
+  "version": "2.3.1",
   "description": "Tarteel is an open-source project designed to help build digital tools to analyze the recitation of the Quran.",
   "main": "build/server/index.js",
   "engines": {
