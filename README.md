@@ -55,10 +55,10 @@ If you want to start contributing to any of the Tarteel projects, please [contac
 
 To create a PR, branch off `master` and include your name and the feature name following this pattern: `yourname/feature_name`
 
-## 💸 Donate:
+## 💸 Donate
 You can contribute to our server costs, marketing and other expenses. If you're interested in donating, please [contact us](https://tarteel.io/contact)!
 
-## 😇 Sharing Tarteel:
+## 😇 Sharing Tarteel
 You'll be contributing to our mission in many ways by sharing tarteel: getting more recordings, PR, and potentially getting donations + volunteers. Feel free to share it on your personal timeline or in different groups / email lists.
 
 ## 🛣 License
