@@ -142,7 +142,7 @@ const AppHelmet: React.SFC = ({ intl, path }: IProps) => {
       },
       {
         property: 'og:url',
-        content: `https://tarteel.io` + path,
+        content: process.env.WEBSITE_URL + path,
       },
       {
         property: 'og:type',
@@ -187,7 +187,7 @@ const AppHelmet: React.SFC = ({ intl, path }: IProps) => {
       ...Object.keys(config('locales')).map(key => ({
         rel: 'alternate',
         hrefLang: key,
-        href: `https://tarteel.io?lang=${key}`,
+        href: `${process.env.WEBSITE_URL}?lang=${key}`,
       })),
     ],
     /* SEO: https://developers.google.com/structured-data/slsb-overview#markup_examples */
@@ -206,7 +206,7 @@ const AppHelmet: React.SFC = ({ intl, path }: IProps) => {
             "@type": "WebSite",
             "name": "Tarteel",
             "alternateName": "Tarteel.io",
-            "url": "https://tarteel.io",
+            "url": ${process.env.WEBSITE_URL},
           }`,
       },
       {
@@ -214,7 +214,7 @@ const AppHelmet: React.SFC = ({ intl, path }: IProps) => {
         innerHTML: `{
             "@context": "http://schema.org",
             "@type": "Organization",
-            "url": "https://tarteel.io",
+            "url": ${process.env.WEBSITE_URL},
             "logo": "https://d2sf46268wowyo.cloudfront.net/logo-3x.png"
           }`,
       },

@@ -3,6 +3,9 @@
   "version": 1,
 
   "env": {
-    "IQRA_API_KEY": "@iqra_api_key"
-  }
+    "IQRA_API_KEY": "@iqra_api_key",
+    "API_URL": "https://apiv1.tarteel.io",
+    "WEBSITE_URL": "https://tarteel.io"
+  },
+  "alias": ["www.tarteel.io"]
 }

@@ -1,7 +1,7 @@
 import config from '../../config';
 import { backendRequestOptions } from '../helpers/cookie';
 
-const API_URL = __DEVELOPMENT__ ? 'http://localhost:8000' : config('apiURL');
+const API_URL = config('apiURL');
 
 export const fetchRandomAyah = (req?: any) => {
   const options = __SERVER__

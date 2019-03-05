@@ -2,7 +2,7 @@ import config from '../../config';
 import { backendRequestOptions } from '../helpers/cookie';
 import { IDemographics } from '../types/GlobalState';
 
-const API_URL = __DEVELOPMENT__ ? 'http://localhost:8000' : config('apiURL');
+const API_URL = config('apiURL');
 
 export const submitDemographics = (data: IDemographics) => {
   return fetch(`${API_URL}/api/demographics/`, {

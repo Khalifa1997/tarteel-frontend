@@ -13,8 +13,6 @@ const locales = {
   ar: 'العربية',
 };
 
-const API_URL = 'https://apiv1.tarteel.io';
-
 const CDN_URL = 'https://d2sf46268wowyo.cloudfront.net';
 
 // All these configurations would only be readable on only the server bundle,
@@ -46,6 +44,7 @@ const values = {
     androidAppLink: true,
     IOSAppLink: true,
     apiURL: true,
+    websiteURL: true,
     cdnURL: true,
     iqraApiKey: true,
     google: true,
@@ -63,7 +62,9 @@ const values = {
   // The port on which the server should run.
   port: EnvVars.number('PORT', 3000),
 
-  apiURL: API_URL,
+  apiURL: EnvVars.string('API_URL', 'http://localhost:8000'),
+
+  websiteURL: EnvVars.string('WEBSITE_URL', 'https://tarteel.io'),
 
   cdnURL: CDN_URL,
 

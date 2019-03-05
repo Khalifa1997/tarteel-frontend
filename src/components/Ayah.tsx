@@ -3,6 +3,7 @@ import React from 'react';
 import ContentLoader from 'react-content-loader';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import { withCookies } from 'react-cookie';
 
 import KEYS from '../locale/keys';
 import AyahShape from '../shapes/AyahShape';
@@ -10,9 +11,9 @@ import WordShape from '../shapes/WordShape';
 import { WORD_TYPES } from '../types';
 import T from './T';
 import ShareModal from '../components/ShareModal';
+import config from '../../config';
 
 import * as shareIcon from '../../public/share-icon.png';
-import { withCookies } from 'react-cookie';
 
 interface IProps {
   ayah: AyahShape;
@@ -91,6 +92,8 @@ class Ayah extends React.Component<IProps, IState> {
   render() {
     const { ayah, isFetchingAyah } = this.props;
     const locale = this.props.cookies.get('currentLocale') || 'en';
+    const WEBSITE_URL = config('websiteURL');
+
     return (
       <Container>
         <div className="ayah-text">
@@ -126,7 +129,7 @@ class Ayah extends React.Component<IProps, IState> {
         <ShareModal
           show={this.state.showShareModal}
           quote={``}
-          url={`https://tarteel.io/ayah/${ayah.chapterId}/${ayah.verseNumber}${
+          url={`${WEBSITE_URL}/ayah/${ayah.chapterId}/${ayah.verseNumber}${
             locale === 'ar' ? '/?lang=ar' : ''
           }`}
           handleCloseModal={() => {
