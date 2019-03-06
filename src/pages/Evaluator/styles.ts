@@ -14,7 +14,7 @@ export const Container = styled.div`
     flex: 1;
     display: flex;
     flex-flow: column;
-    justify-content: center;
+    justify-content: space-around;
     overflow-y: hidden;
     box-sizing: border-box;
 
@@ -203,6 +203,7 @@ export const Container = styled.div`
     justify-content: center;
     align-items: center;
     position: relative;
+    margin-bottom: 25px;
 
     .siri-wave {
       position: absolute;
