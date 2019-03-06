@@ -37,12 +37,17 @@ export const submitAyah = (evaluation: string, recordingId: number) => {
     });
 };
 
-export const fetchSpecificEvaluatorAyah = (surah: number, ayah: number) => {
+export const fetchSpecificEvaluatorAyah = (
+  surah: number,
+  ayah: number,
+  recordingId: number
+) => {
   const options = {
     method: 'POST',
     body: JSON.stringify({
-      surah,
-      ayah,
+      recording_id: recordingId,
+      // surah,
+      // ayah,
     }),
     headers: {
       'Content-Type': 'application/json',

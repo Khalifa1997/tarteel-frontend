@@ -14,11 +14,11 @@ import { setLocation } from './store/actions/router';
 
 import './styles/index.scss';
 
-import Amplify from 'aws-amplify';
-import AWSConfig from './aws-exports';
+// import Amplify from 'aws-amplify';
+// import AWSConfig from './aws-exports';
 import logScreen from './helpers/logScreen';
 
-Amplify.configure(AWSConfig);
+// Amplify.configure(AWSConfig);
 
 const GlobalStyle = createGlobalStyle`
   body {
