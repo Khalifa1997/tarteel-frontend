@@ -50,6 +50,7 @@ const EN: Shape = {
     [KEYS.GET_STARTED]: 'Get Started',
     [KEYS.PARTNERS_LINK_TEXT]: 'Partners',
     [KEYS.PREVIOUS_WORD]: 'Prev',
+    [KEYS.DONATE_LINK_TEXT]: 'Donate',
 
     // AYAH PICKER
     [KEYS.AYAH_PICKER_TITLE]: 'Pick an Ayah',
