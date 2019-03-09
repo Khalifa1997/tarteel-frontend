@@ -103,9 +103,13 @@ class Evaluator extends React.Component<IProps, IState> {
     }
   };
   public loadNextAyah = () => {
-    const { chapterId: surah, verseNumber: ayah } = this.props.currentAyah;
+    const {
+      chapterId: surah,
+      verseNumber: ayah,
+      recordingId,
+    } = this.props.currentAyah;
     const { nextSurah, nextAyah } = getNextAyah(surah, ayah);
-    return fetchSpecificEvaluatorAyah(nextSurah, nextAyah)
+    return fetchSpecificEvaluatorAyah(nextSurah, nextAyah, recordingId + 1)
       .then(this.handleUpcomingAyah)
       .catch((e: Error | Response) => {
         if (e.status === 500) {
@@ -602,9 +606,7 @@ class Evaluator extends React.Component<IProps, IState> {
             </p>
             <p>
               <T id={KEYS.EVALUATOR_THANKS_FOR_HELPING_MESSAGE_2} />
-              <b className="count">
-                {this.props.profile.evaluationsCount}
-              </b>
+              <b className="count">{this.props.profile.evaluationsCount}</b>
               <T id={KEYS.AYAHS_WORD} />.
             </p>
             <p>
