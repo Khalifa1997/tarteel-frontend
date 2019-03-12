@@ -100,6 +100,10 @@ const linksFactory: (props: any) => { [key: string]: ILink } = props => {
       textID: KEYS.PARTNERS_LINK_TEXT,
       href: '/partners',
     },
+    donate: {
+      textID: KEYS.DONATE_LINK_TEXT,
+      href: '/donate',
+    },
   };
 };
 
@@ -157,6 +161,7 @@ class NavMenu extends React.Component<IProps, IState> {
       'subscribe',
       'mobile',
       'partners',
+      'donate',
       'dataset',
       'contact',
     ];

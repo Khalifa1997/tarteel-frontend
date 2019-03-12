@@ -135,4 +135,10 @@ export default [
         import(/* webpackChunkName: "Partners" */ './pages/Partners'),
     }),
   },
+  {
+    path: '/donate',
+    component: asyncComponent({
+      resolve: () => import(/* webpackChunkName: "Donate" */ './pages/Donate'),
+    }),
+  },
 ];
