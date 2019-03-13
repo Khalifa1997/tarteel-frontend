@@ -12,7 +12,7 @@
     "build": "ts-node -T -O '{\"module\": \"commonjs\"}' --transpileOnly internal/scripts/build -- --optimize",
     "build:dev": "ts-node -O '{\"module\": \"commonjs\"}' --transpileOnly internal/scripts/build",
     "clean": "cross-env ts-node -O '{\"module\": \"commonjs\"}' --transpileOnly internal/scripts/clean",
-    "deploy": "now -A $NOW_CONFIG_PATH alias $(now -A $NOW_CONFIG_PATH)",
+    "deploy": "now -A $NOW_CONFIG_PATH --token $NOW_TOKEN alias $(now -A $NOW_CONFIG_PATH --token $NOW_TOKEN)",
     "deploy:staging": "NOW_CONFIG_PATH=staging.now.json npm run deploy ",
     "deploy:prod": "NOW_CONFIG_PATH=now.json npm run deploy ",
     "dev": "cross-env DEPLOYMENT=development ts-node -O '{\"module\": \"commonjs\"}' --transpileOnly internal/development",
