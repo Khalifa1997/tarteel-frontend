@@ -289,7 +289,9 @@ class Evaluator extends React.Component<IProps, IState> {
       isPlaying: false,
       isBuffering: false,
     });
-    this.siriWave.stop();
+    if (this.siriWave) {
+      this.siriWave.stop();
+    }
     window.cancelAnimationFrame(this.drawFunction);
     this.siriWaveContainer.innerHTML = '';
   };
