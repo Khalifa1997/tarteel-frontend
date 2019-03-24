@@ -199,8 +199,8 @@ class Recognition extends React.Component<IProps, IState> {
   componentDidMount() {
     this.resetSearch();
 
-    // this.socket = io("https://tarteel-voice.now.sh/");
-    this.socket = io("http://localhost:5000/");
+    this.socket = io("https://tarteel-voice.now.sh/");
+    // this.socket = io("http://localhost:5000/");
 
     this.socket.on('foundResults', this.handleResults);
     this.socket.on('loading', this.setLoading);
@@ -231,9 +231,6 @@ class Recognition extends React.Component<IProps, IState> {
           <meta name={'twitter:image'} content={this.handleOGImage()} />
         </Helmet>
         <Navbar />
-        <button onClick={this.handleStopRecording}>
-          Stop
-        </button>
         {this.state.showErrorMessage && (
           <RecordingError
             message={this.state.errorMessage}
