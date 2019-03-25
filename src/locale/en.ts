@@ -29,6 +29,9 @@ const EN: Shape = {
     [KEYS.YES_WORD]: 'Yes',
     [KEYS.NO_WORD]: 'No',
     [KEYS.SKIP_WORD]: 'Skip',
+    [KEYS.SUBMIT_WORD]: 'Submit',
+    [KEYS.SAVE_WORD]: 'Save',
+    [KEYS.SAVED_WORD]: 'Saved',
     [KEYS.THANK_YOU_MESSAGE]: 'Thank you!',
     [KEYS.USERS_LIST_TITLE]: 'Users List',
     [KEYS.AYAH_WORD]: 'Ayah',
@@ -73,6 +76,8 @@ const EN: Shape = {
       'With your help, we have reached a total of',
     [KEYS.DEMOGRAPHIC_PAGE_FIRST_PARAGRAPH_2]:
       "recordings. That's great, but at Tarteel, we're also committed to making sure that our recordings reflect recitations by both women and men and from the different ethnicities and ages that make up the Muslim ummah.",
+    [KEYS.DEMOGRAPHIC_PAGE_FIRST_PARAGRAPH_3]:
+      "Sharing your demographic info helps us tailor the machine learning models to provide a considerably greater accuracy for Tarteel.",
     [KEYS.DEMOGRAPHIC_PAGE_SECOND_PARAGRAPH]:
       "Help us assess how well we're doing by telling us a little bit about yourself...",
 
@@ -105,6 +110,7 @@ const EN: Shape = {
     [KEYS.SUBSCRIBE_PAGE_HELP_US_MESSAGE_1]:
       'You can also help us reach our goal by sharing the Tarteel 50,000 challenge',
     [KEYS.SUBSCRIBE_PAGE_HELP_US_MESSAGE_2]: 'with your friends and family!',
+    [KEYS.SUBSCRIBE_PAGE_RECEIVE_MESSAGE]: 'Receive email updates about Tarteel. You can unsubscribe at any time',
 
     // DATASET
     [KEYS.TARTEEL_DATASET_LINK_TEXT]: 'Tarteel datasets',
@@ -296,6 +302,8 @@ const EN: Shape = {
     [KEYS.PROFILE_OLDER_RECITATIONS]: 'Older Recitations',
     [KEYS.PROFILE_OLDER_RECITATIONS_PARAGRAPH_MESSAGE]:
       'These are the verses more than a week ago. Click on a verse to listen to its recording.',
+    [KEYS.PROFILE_NOTE_MESSAGE]: 'Not visible on your public profile',
+    [KEYS.PROFILE_SHARE_MESSAGE]: 'Share your profile',
 
     // EVALUATOR PAGE
     [KEYS.EVALUATOR_TITLE_TEXT]: 'Listen and Evaluate',

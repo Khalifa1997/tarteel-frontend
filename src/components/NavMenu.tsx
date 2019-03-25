@@ -157,8 +157,6 @@ class NavMenu extends React.Component<IProps, IState> {
     let mobileLinks = [
       'profile',
       'recognition',
-      'demographics',
-      'subscribe',
       'mobile',
       'partners',
       'donate',
@@ -312,6 +310,7 @@ const Container = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
+    cursor: pointer;
 
     svg {
       height: 21px;

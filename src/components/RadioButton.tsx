@@ -30,10 +30,12 @@ class RadioButton extends React.Component<IProps, never> {
   public componentDidMount() {
     const activeOne = this.ref.querySelector('li.active');
     try {
-      this.ref.querySelector('.foreground').style.left =
-        activeOne.offsetLeft + 'px';
-      this.ref.querySelector('.foreground').style.width =
-        activeOne.offsetWidth + 'px';
+      if (this.ref.querySelector('.foreground')) {
+        this.ref.querySelector('.foreground').style.left =
+          activeOne.offsetLeft + 'px';
+        this.ref.querySelector('.foreground').style.width =
+          activeOne.offsetWidth + 'px';
+      }
     } catch (e) {
       console.log(e.message);
     }
@@ -43,7 +45,7 @@ class RadioButton extends React.Component<IProps, never> {
     return (
       <Container>
         <ul ref={C => (this.ref = C)}>
-          <span className={'foreground'} />
+          {currentValue.length > 1 ? (<span className={'foreground'} />) : null}
           {this.props.options.map((option: IOption) => {
             return (
               <li
@@ -100,7 +102,13 @@ const Container = styled.div`
       flex-basis: 0;
       cursor: pointer;
       color: #475166;
-
+      border-right: 1px solid lightgray;
+      &:hover {
+        background: lightgray;
+      }
+      &:last-child {
+        border-right: 0;
+      }
       &.active ~ &:hover {
         background-color: #f5f5f8;
         color: #475166;

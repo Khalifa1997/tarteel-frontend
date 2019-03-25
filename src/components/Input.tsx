@@ -18,7 +18,7 @@ class Input extends React.Component<IProps, never> {
     });
     return (
       <Container className={classes}>
-        <label>{this.props.label} :</label>
+        <label>{this.props.label} {this.props.label && ':'}</label>
         {this.props.debounce ? (
           <DebounceInput
             minLength={0}
@@ -49,12 +49,12 @@ const Container = styled.div`
   }
   input,
   textarea {
-    height: 30px;
+    height: 38px !important;
     border-radius: 5px;
-    border: 2px solid lightgray;
+    border: 1px solid rgb(204, 204, 204) !important;
     display: block;
     margin-bottom: 1em;
-    padding: 0 10px;
+    padding: 5px 10px !important;
     width: 300px;
     font-size: 14px;
 
