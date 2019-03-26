@@ -88,6 +88,9 @@ class Recognition extends React.Component<IProps, IState> {
       console.log(results);
     } else {
       this.handleStartRecording();
+      this.setState({
+        isLoading: false,
+      })
     }
   }
   handleStopRecording = () => {
@@ -164,32 +167,6 @@ class Recognition extends React.Component<IProps, IState> {
         partialQuery: '',
       };
     });
-    // fetch('https://api.iqraapp.com/api/v3.0/search', {
-      // method: 'POST',
-      // headers: {
-        // Accept: 'application/json',
-        // 'Content-Type': 'application/json',
-      // },
-      // body: JSON.stringify({
-        // arabicText: query,
-        // translation: 'en-hilali',
-        // apikey: config('iqraApiKey'),
-      // }),
-    // })
-      // .then(res => res.json())
-      // .then(json => {
-        // this.setState({
-          // isLoading: false,
-        // });
-        // this.props.setRecognitionResults(json.result);
-        // if (json.result.matches.length) {
-          // this.stopRecognition();
-          // this.props.history.push('/recognition/results');
-          // console.log(json.result);
-        // } else {
-          // this.recognition.start();
-        // }
-      // });
   };
   setLoading = (isLoading: boolean) => {
     this.setState({
@@ -199,11 +176,12 @@ class Recognition extends React.Component<IProps, IState> {
   componentDidMount() {
     this.resetSearch();
 
-    this.socket = io("https://tarteel-voice.now.sh/");
-    // this.socket = io("http://localhost:5000/");
+    const speechServerURL = __DEVELOPMENT__ ? "http://localhost:5000/" : "https://tarteel-voice.now.sh/"
+    this.socket = io(speechServerURL);
 
     this.socket.on('foundResults', this.handleResults);
     this.socket.on('loading', this.setLoading);
+    this.socket.on('endStream', this.handleStopRecording);
 
     this.AudioStreamer = new AudioStreamer(this.socket);
   }

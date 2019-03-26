@@ -1,3 +1,5 @@
+import { stopRecording } from "../../helpers/recorder";
+
 // Stream Audio
 let bufferSize = 2048
 let AudioContext
@@ -13,10 +15,6 @@ const constraints = {
 };
 
 class AudioStreamer {
-  /*
-  * @param {function} onData Callback to run on data each time it's received
-  * @param {function} onError Callback to run on an error if one is emitted.
-  */
   constructor(socket) {
     this.socket = socket;
 
@@ -28,6 +26,10 @@ class AudioStreamer {
 
   }
   initRecording(onData, onError) {
+    /*
+    * @param {function} onData Callback to run on data each time it's received
+    * @param {function} onError Callback to run on an error if one is emitted.
+    */
     this.socket.emit('startStream'); // init this.socket Google Speech Connection
     AudioContext = window.AudioContext || window.webkitAudioContext;
     context = new AudioContext();
@@ -52,7 +54,7 @@ class AudioStreamer {
             }
           });
     } catch (e) {
-      onError();
+      onError(e);
     }
 
 
@@ -74,6 +76,7 @@ class AudioStreamer {
       // We don't want to emit another end stream event
       this.closeAll();
     });
+
   }
 
   stopRecording() {
@@ -88,6 +91,7 @@ class AudioStreamer {
     */
     const left = e.inputBuffer.getChannelData(0);
     const left16 = this.convertFloat32ToInt16(left);
+    console.log('left: ', left16);
     this.socket.emit('binaryAudioData', left16);
   }
   convertFloat32ToInt16(buffer) {
@@ -98,14 +102,11 @@ class AudioStreamer {
     * @param {object} buffer Buffer being converted
     */
     let l = buffer.length;
-    let buf = new Int16Array(l / 3);
-
+    const buf = new Int16Array(l);
     while (l--) {
-      if (l % 3 === 0) {
-        buf[l / 3] = buffer[l] * 0xFFFF;
-      }
+      buf[l] = Math.min(1, buffer[l])*0x7FFF;
     }
-    return buf.buffer
+    return buf.buffer;
   }
   closeAll() {
     /*
