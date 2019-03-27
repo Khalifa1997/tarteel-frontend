@@ -177,7 +177,8 @@ class Recognition extends React.Component<IProps, IState> {
     this.resetSearch();
 
     const speechServerURL = __DEVELOPMENT__ ? "http://localhost:5000/" : "https://tarteel-voice.now.sh/"
-    this.socket = io(speechServerURL);
+    window.socket = io(speechServerURL);
+    this.socket = window.socket;
 
     this.socket.on('foundResults', this.handleResults);
     this.socket.on('loading', this.setLoading);

@@ -91,7 +91,6 @@ class AudioStreamer {
     */
     const left = e.inputBuffer.getChannelData(0);
     const left16 = this.convertFloat32ToInt16(left);
-    console.log('left: ', left16);
     this.socket.emit('binaryAudioData', left16);
   }
   convertFloat32ToInt16(buffer) {
