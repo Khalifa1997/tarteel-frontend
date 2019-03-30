@@ -5,17 +5,30 @@ export const Container = styled.div`
   color: #485364;
 
   .content {
-    width: 65%;
+    width: 80%;
     margin: auto;
     margin-top: 2em;
+
+    .share-profile-link {
+      color: ${props => props.theme.colors.linkColor};
+      text-align: right;
+      display: block;
+      cursor: pointer;
+    }
 
     a {
       text-decoration: underline;
     }
-  }
-  h1 {
-    margin-bottom: 1em;
-    font-weight: 500;
+
+    .profile-info {
+      h1 {
+        font-size: 20px;
+      }
+      p {
+        color: rgb(119, 119, 119);
+        margin: 1em 0px;
+      }
+    }
   }
   .profile-link {
     display: flex;
@@ -72,6 +85,10 @@ export const Container = styled.div`
     color: white;
   }
 
+  .rotate {
+    transform: rotate(-90deg);
+  }
+
   @media screen and (max-width: ${props => props.theme.breakpoints.sm}px) {
     padding: 1em;
 
@@ -84,6 +101,22 @@ export const Container = styled.div`
           padding: 1em 3em;
         }
       }
+    }
+  }
+`;
+
+export const Boxed = styled.div`
+  border: 1px solid ${props => props.theme.colors.gray};
+  padding: 1em;
+  margin: 1em auto;
+  border-radius: 0.5em;
+
+  img {
+    float: right;
+    cursor: pointer;
+    opacity: 0.6;
+    &:hover {
+      opacity: 1;
     }
   }
 `;

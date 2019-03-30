@@ -36,6 +36,7 @@ class Partners extends React.Component<IProps> {
             paragraph={KEYS.PARTNERS_PARAGRAPH}
             width={45}
             align={'center'}
+            paragraphGray
           />
           <FlexGird>
             <Row>
