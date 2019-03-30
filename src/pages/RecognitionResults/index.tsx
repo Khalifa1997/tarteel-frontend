@@ -40,8 +40,8 @@ class RecognitionResults extends React.Component<IProps> {
       ayahNum: ayah.ayahNum,
       surahNum: ayah.surahNum,
       queryText: this.props.recognition.queryText,
-    })
-  }
+    });
+  };
   render() {
     return (
       <Container>

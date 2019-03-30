@@ -19,7 +19,7 @@ import Subscribe from '../../components/Subscribe';
 import Note from '../../components/Note';
 import downArrow from '../../../public/images/icons/svg/down-arrow.svg';
 
-interface IDispatchProps { }
+interface IDispatchProps {}
 
 interface IOwnProps {
   intl: InjectedIntl;
@@ -49,8 +49,8 @@ class ProfilePage extends Component<IProps, IState> {
     showShareModal: false,
   };
   toggleMenu = (toggleSection: string) => {
-    this.setState( state => ({ [toggleSection]: !state[toggleSection] }))
-  }
+    this.setState(state => ({ [toggleSection]: !state[toggleSection] }));
+  };
   handleShareProfile = () => {
     this.setState({
       showShareModal: true,
@@ -138,15 +138,17 @@ class ProfilePage extends Component<IProps, IState> {
             />
             <Headline
               headtag={KEYS.DEMOGRAPHIC_INFO_LINK_TEXT}
-              paragraph={openDemographics ? KEYS.DEMOGRAPHIC_PAGE_FIRST_PARAGRAPH_3 : null}
+              paragraph={
+                openDemographics
+                  ? KEYS.DEMOGRAPHIC_PAGE_FIRST_PARAGRAPH_3
+                  : null
+              }
               headtagSize={20}
               width={85}
               align={'left'}
               paragraphGray
             />
-            {openDemographics &&
-              <Demographics />
-            }
+            {openDemographics && <Demographics />}
           </Boxed>
         </div>
         <div className="content">
@@ -166,15 +168,15 @@ class ProfilePage extends Component<IProps, IState> {
             />
             <Headline
               headtag={KEYS.SUBSCRIBE_PAGE_TEMPLATE_TITLE}
-              paragraph={openSubscribe ? KEYS.SUBSCRIBE_PAGE_RECEIVE_MESSAGE : null}
+              paragraph={
+                openSubscribe ? KEYS.SUBSCRIBE_PAGE_RECEIVE_MESSAGE : null
+              }
               headtagSize={23}
               width={85}
               align={'left'}
               paragraphGray
             />
-            {openSubscribe &&
-              <Subscribe />
-            }
+            {openSubscribe && <Subscribe />}
           </Boxed>
         </div>
         <div className="content">

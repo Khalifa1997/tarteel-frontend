@@ -18,7 +18,9 @@ class Input extends React.Component<IProps, never> {
     });
     return (
       <Container className={classes}>
-        <label>{this.props.label} {this.props.label && ':'}</label>
+        <label>
+          {this.props.label} {this.props.label && ':'}
+        </label>
         {this.props.debounce ? (
           <DebounceInput
             minLength={0}

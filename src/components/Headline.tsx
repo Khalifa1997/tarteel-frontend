@@ -10,20 +10,38 @@ interface IProps {
   headtagSize: number;
   paragraph: string;
   paragraphSize: number;
-  paragraphGray: any,
+  paragraphGray: any;
   width: number;
 }
 
 const Headline = (props: IProps) => {
-  const { align, paragraph, headtag, width, headtagSize, paragraphSize, paragraphGray } = props;
+  const {
+    align,
+    paragraph,
+    headtag,
+    width,
+    headtagSize,
+    paragraphSize,
+    paragraphGray,
+  } = props;
   return (
-    <HeadlineContainer align={align} width={width} paragraphSize={paragraphSize} headtagSize={headtagSize} paragraphGray={paragraphGray}>
-      {headtag && <h1>
-        <T id={headtag} />
-      </h1>}
-      {paragraph && <p>
-        <T id={paragraph} />
-      </p>}
+    <HeadlineContainer
+      align={align}
+      width={width}
+      paragraphSize={paragraphSize}
+      headtagSize={headtagSize}
+      paragraphGray={paragraphGray}
+    >
+      {headtag && (
+        <h1>
+          <T id={headtag} />
+        </h1>
+      )}
+      {paragraph && (
+        <p>
+          <T id={paragraph} />
+        </p>
+      )}
     </HeadlineContainer>
   );
 };
@@ -33,14 +51,17 @@ const HeadlineContainer = styled.div`
   max-width: ${props => props.width}%;
   h1 {
     span {
-      font-size: ${props => props.headtagSize ? props.headtagSize + 'px' : 'inherit'};
+      font-size: ${props =>
+        props.headtagSize ? props.headtagSize + 'px' : 'inherit'};
     }
   }
   p {
     margin: 1em 0;
-    color: ${props => props.paragraphGray ? props.theme.colors.gray : 'unset'};
+    color: ${props =>
+      props.paragraphGray ? props.theme.colors.gray : 'unset'};
     span {
-      font-size: ${props => props.paragraphSize ? props.paragraphSize + 'px' : 'inherit'};
+      font-size: ${props =>
+        props.paragraphSize ? props.paragraphSize + 'px' : 'inherit'};
     }
   }
   a {

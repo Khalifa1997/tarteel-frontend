@@ -81,9 +81,12 @@ class Recognition extends React.Component<IProps, IState> {
       isRecording: true,
     });
 
-    this.AudioStreamer.initRecording(this.handleData, this.handleRecordingError);
+    this.AudioStreamer.initRecording(
+      this.handleData,
+      this.handleRecordingError
+    );
   };
-  handleResults = (results) => {
+  handleResults = results => {
     if (results.matches.length) {
       this.handleStopRecording();
       this.props.setRecognitionResults(results);
@@ -93,20 +96,22 @@ class Recognition extends React.Component<IProps, IState> {
       this.handleStartRecording();
       this.setState({
         isLoading: false,
-      })
+      });
     }
-  }
+  };
   handleStopRecording = () => {
     this.setState({
       isRecording: false,
     });
     this.AudioStreamer.stopRecording();
   };
-  handleData = (data) => {
+  handleData = data => {
     let interimTranscript = '';
     if (data.results[0].isFinal) {
       console.log('Final word');
-      this.handleSearch(this.state.query + ' ' + data.results[0].alternatives[0].transcript);
+      this.handleSearch(
+        this.state.query + ' ' + data.results[0].alternatives[0].transcript
+      );
     } else {
       interimTranscript += data.results[0].alternatives[0].transcript;
     }
@@ -174,12 +179,14 @@ class Recognition extends React.Component<IProps, IState> {
   setLoading = (isLoading: boolean) => {
     this.setState({
       isLoading,
-    })
-  }
+    });
+  };
   componentDidMount() {
     this.resetSearch();
 
-    const speechServerURL = __DEVELOPMENT__ ? "http://localhost:5000/" : "https://tarteel-voice.now.sh/"
+    const speechServerURL = __DEVELOPMENT__
+      ? 'http://localhost:5000/'
+      : 'https://tarteel-voice.now.sh/';
     window.socket = io(speechServerURL);
     this.socket = window.socket;
 
@@ -300,7 +307,7 @@ export default injectIntl(
   withCookies(
     connect(
       mapStateToProps,
-      mapDispatchToProps,
+      mapDispatchToProps
     )(Recognition)
   )
 );

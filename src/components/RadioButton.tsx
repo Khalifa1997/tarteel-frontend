@@ -45,7 +45,7 @@ class RadioButton extends React.Component<IProps, never> {
     return (
       <Container>
         <ul ref={C => (this.ref = C)}>
-          {currentValue.length > 1 ? (<span className={'foreground'} />) : null}
+          {currentValue.length > 1 ? <span className={'foreground'} /> : null}
           {this.props.options.map((option: IOption) => {
             return (
               <li
