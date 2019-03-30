@@ -141,4 +141,10 @@ export default [
       resolve: () => import(/* webpackChunkName: "Donate" */ './pages/Donate'),
     }),
   },
+  {
+    path: '/transcribe',
+    component: asyncComponent({
+      resolve: () => import(/* webpackChunkName: "Transcribe" */ './pages/Transcribe'),
+    }),
+  },
 ];

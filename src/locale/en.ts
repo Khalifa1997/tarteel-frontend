@@ -349,6 +349,9 @@ const EN: Shape = {
     [KEYS.CONTRIBUTOR_14]:
       'Moin Nadeem, junior at MIT studying computer science',
     [KEYS.CONTRIBUTOR_15]: 'Moumen Soliman, Front End Software Engineer',
+
+    // TRANSCRIBE
+    [KEYS.TRANSCRIBE]: 'Transcribe'
   },
 };
 
