@@ -68,6 +68,9 @@ class Recognition extends React.Component<IProps, IState> {
     }
   };
   handleRecordingError = e => {
+    this.setState({
+      showErrorMessage: true,
+    });
     this.handleStopRecording();
     console.log(e);
   };
@@ -267,6 +270,13 @@ class Recognition extends React.Component<IProps, IState> {
             </p>
           </div>
         )}
+        {this.state.showErrorMessage ? (
+          <RecordingError
+            onClose={() => {
+              this.setState({ showErrorMessage: false });
+            }}
+          />
+        ) : null}
       </Container>
     );
   }

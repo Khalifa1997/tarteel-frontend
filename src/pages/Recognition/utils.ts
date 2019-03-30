@@ -1,4 +1,3 @@
-import { stopRecording } from "../../helpers/recorder";
 
 // Stream Audio
 let bufferSize = 2048
