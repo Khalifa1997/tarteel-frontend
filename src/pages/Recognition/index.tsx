@@ -108,10 +108,7 @@ class Recognition extends React.Component<IProps, IState> {
   handleData = data => {
     let interimTranscript = '';
     if (data.results[0].isFinal) {
-      console.log('Final word');
-      this.handleSearch(
-        this.state.query + ' ' + data.results[0].alternatives[0].transcript
-      );
+      this.handleSearch()
     } else {
       interimTranscript += data.results[0].alternatives[0].transcript;
     }
@@ -125,55 +122,10 @@ class Recognition extends React.Component<IProps, IState> {
       errorMessage: message,
     });
   };
-  handleRecognitionError = event => {
-    this.handleStopRecording();
-    const errorLink = '//support.google.com/websearch/answer/2940021';
-    const chromeLink = '//support.google.com/chrome/answer/2693767';
-    if (event.error === 'no-speech') {
-      this.showErrorMessage(
-        <p>
-          <T
-            id={KEYS.AYAH_RECOGNITION_NO_SPEECH_ERROR}
-            values={{ errorLink }}
-          />
-        </p>
-      );
-    } else if (event.error === 'audio-capture') {
-      this.showErrorMessage(
-        <p>
-          <T
-            id={KEYS.AYAH_RECOGNITION_AUDIO_CAPTURE_ERROR}
-            values={{ errorLink }}
-          />
-        </p>
-      );
-    } else if (event.error === 'not-allowed') {
-      this.showErrorMessage(
-        <p>
-          <T
-            id={KEYS.AYAH_RECOGNITION_MIC_PERMISSION_ERROR}
-            values={{ chromeLink }}
-          />
-        </p>
-      );
-    }
-  };
-  resetSearch = () => {
-    this.setState({
-      query: '',
-    });
-  };
-  handleSearch = (query: string) => {
+  handleSearch = () => {
     this.handleStopRecording();
     this.setState({
       isLoading: true,
-    });
-    query = query.trim();
-    this.setState(state => {
-      return {
-        query,
-        partialQuery: '',
-      };
     });
   };
   setLoading = (isLoading: boolean) => {
@@ -182,8 +134,6 @@ class Recognition extends React.Component<IProps, IState> {
     });
   };
   componentDidMount() {
-    this.resetSearch();
-
     const speechServerURL = __DEVELOPMENT__
       ? 'http://localhost:5000/'
       : 'https://tarteel-voice.now.sh/';
