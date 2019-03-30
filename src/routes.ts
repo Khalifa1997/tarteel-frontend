@@ -141,4 +141,10 @@ export default [
       resolve: () => import(/* webpackChunkName: "Donate" */ './pages/Donate'),
     }),
   },
+  {
+    path: '/follow-along',
+    component: asyncComponent({
+      resolve: () => import(/* webpackChunkName: "Donate" */ './pages/FollowAlong'),
+    }),
+  },
 ];
