@@ -25,6 +25,9 @@ import { toggleIsRecording } from '../../store/actions/status';
 import RecordingError from '../../components/RecordingError';
 import KEYS from '../../locale/keys';
 import T from '../../components/T';
+import expandIcon from '../../../public/images/icons/svg/expand.svg';
+import collapseIcon from '../../../public/images/icons/svg/collapse.svg';
+import settingsIcon from '../../../public/images/icons/svg/settings.svg';
 
 interface IOwnProps {
   history: History;
@@ -261,7 +264,31 @@ class Recognition extends React.Component<IProps, IState> {
             <div className="ayah-info">
               <span className="surah-name">Surah Al-Tawbah</span>{' '}
               <span className="ayah-number">Ayah 108</span>
+              <img className="icon fullscreen-icon" src={expandIcon} />
+              <img className="icon " src={settingsIcon} />
             </div>
+            <div className="ayah-display">Lorem ipsum</div>
+            <div>
+              Take, [O, Muhammad], from their wealth a charity by which you
+              purify them and cause them increase, and invoke [ Allah 's
+              blessings] upon them. Indeed, your invocations are reassurance for
+              them. And Allah is Hearing and Knowing.
+            </div>
+            <RecordingButton
+              className={`mic ${classnames}`}
+              onClick={this.handleRecordingButton}
+            >
+              {this.state.isLoading ? (
+                <div className={'icon spin'}>
+                  <Icon icon={circleONotch} size={20} />
+                </div>
+              ) : !this.state.isRecording ? (
+                <Icon icon={micA} size={30} />
+              ) : (
+                <Icon icon={stop} size={30} />
+              )}
+            </RecordingButton>
+            <div>tarteel.io/donate</div>
           </div>
         )}
       </Container>
