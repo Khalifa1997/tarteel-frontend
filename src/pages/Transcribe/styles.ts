@@ -36,7 +36,6 @@ export const Container = styled.div`
     a {
       color: ${props => props.theme.colors.linkColor};
     }
-
     .status {
       color: #848484;
       font-size: 18px;
@@ -74,12 +73,34 @@ export const Container = styled.div`
   .fullscreen-enabled {
     background: white;
     padding: 50px;
+
+    .logo-image {
+      display: inherit;
+    }
+    .ayah-info {
+      padding-left: inherit;
+    }
   }
-  .ayah-info {
+  .header-container {
     font-size: 22px;
     width: 100%;
   }
+  .header-logo {
+    display: inline-block;
+    float: left;
+    width: 68px;
+  }
 
+  .logo-image {
+    display: none;
+    width: 60px;
+  }
+
+  .ayah-info {
+    display: inline-block;
+    padding-left: 68px;
+    padding-top: 17px;
+  }
   .surah-name {
   }
 
@@ -87,6 +108,11 @@ export const Container = styled.div`
     color: #969696;
   }
 
+  .icons-container {
+    padding-top: 23px;
+    display: inline-block;
+    float: right;
+  }
   .icon {
     width: 19px;
     float: right;
@@ -103,6 +129,20 @@ export const Container = styled.div`
     width: 21px;
   }
 
+  .ayah-display {
+    max-width: 1300px;
+    font-size: 36px;
+    min-height: 30%;
+    display: flex;
+    align-items: center;
+  }
+  .transalations-display {
+    max-width: 1300px;
+    font-size: 25px;
+    min-height: 30%;
+    display: flex;
+    align-items: center;
+  }
   @media screen and (max-width: ${props => props.theme.breakpoints.sm}px) {
     .fullscreen {
       .splittable {

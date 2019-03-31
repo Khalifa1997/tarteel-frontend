@@ -29,6 +29,7 @@ import expandIcon from '../../../public/images/icons/svg/expand.svg';
 import collapseIcon from '../../../public/images/icons/svg/collapse.svg';
 import settingsIcon from '../../../public/images/icons/svg/settings.svg';
 import Fullscreen from 'react-full-screen';
+import LogoImage from '../../../public/logo-3x.png';
 
 interface IOwnProps {
   history: History;
@@ -274,9 +275,15 @@ class Recognition extends React.Component<IProps, IState> {
             enabled={this.state.fullScreen}
             onChange={fullScreen => this.setState({ fullScreen })}
           >
+            <div className="header-container">
+              <div className="header-logo">
+                <img className="logo-image" src={LogoImage} alt="Tarteel-logo" />
+              </div>
               <div className="ayah-info">
                 <span className="surah-name">Surah Al-Tawbah</span>{' '}
                 <span className="ayah-number">Ayah 108</span>
+              </div>
+              <div className="icons-container">
                 <img
                   className="icon fullscreen-icon"
                   src={this.state.fullScreen ? collapseIcon : expandIcon}
@@ -284,28 +291,29 @@ class Recognition extends React.Component<IProps, IState> {
                 />
                 <img className="icon " src={settingsIcon} />
               </div>
-              <div className="ayah-display">Lorem ipsum</div>
-              <div>
-                Take, [O, Muhammad], from their wealth a charity by which you
-                purify them and cause them increase, and invoke [ Allah 's
-                blessings] upon them. Indeed, your invocations are reassurance
-                for them. And Allah is Hearing and Knowing.
-              </div>
-              <RecordingButton
-                className={`mic ${classnames}`}
-                onClick={this.handleRecordingButton}
-              >
-                {this.state.isLoading ? (
-                  <div className={'icon spin'}>
-                    <Icon icon={circleONotch} size={20} />
-                  </div>
-                ) : !this.state.isRecording ? (
-                  <Icon icon={micA} size={30} />
-                ) : (
-                  <Icon icon={stop} size={30} />
-                )}
-              </RecordingButton>
-              <div>tarteel.io/donate</div>
+            </div>
+              <div className="ayah-display">خُذْ مِنْ أَمْوَالِهِمْ صَدَقَةً تُطَهِّرُهُمْ وَتُزَكِّيهِم بِهَا وَصَلِّ عَلَيْهِمْ ۖ إِنَّ صَلَاتَكَ سَكَنٌ لَّهُمْ ۗ وَاللَّهُ سَمِيعٌ عَلِيمٌ</div>
+            <div className="transalations-display">
+              Take, [O, Muhammad], from their wealth a charity by which you
+              purify them and cause them increase, and invoke [ Allah 's
+              blessings] upon them. Indeed, your invocations are reassurance for
+              them. And Allah is Hearing and Knowing.
+            </div>
+            <RecordingButton
+              className={`mic ${classnames}`}
+              onClick={this.handleRecordingButton}
+            >
+              {this.state.isLoading ? (
+                <div className={'icon spin'}>
+                  <Icon icon={circleONotch} size={20} />
+                </div>
+              ) : !this.state.isRecording ? (
+                <Icon icon={micA} size={30} />
+              ) : (
+                <Icon icon={stop} size={30} />
+              )}
+            </RecordingButton>
+            <div>tarteel.io/donate</div>
           </Fullscreen>
         )}
       </Container>
