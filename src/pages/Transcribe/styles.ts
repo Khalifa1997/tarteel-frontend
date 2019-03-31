@@ -152,9 +152,12 @@ export const Container = styled.div`
           line-height: 1.6;
         }
       }
-      .iqra {
-        right: 10px;
+      .ayah-info {
+        padding-left: 0px;
       }
+    }
+    .fullscreen-enabled {
+      padding: 10px;
     }
   }
 `;
