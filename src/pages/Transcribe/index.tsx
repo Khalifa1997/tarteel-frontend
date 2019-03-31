@@ -28,6 +28,7 @@ import T from '../../components/T';
 import expandIcon from '../../../public/images/icons/svg/expand.svg';
 import collapseIcon from '../../../public/images/icons/svg/collapse.svg';
 import settingsIcon from '../../../public/images/icons/svg/settings.svg';
+import Fullscreen from 'react-full-screen';
 
 interface IOwnProps {
   history: History;
@@ -41,6 +42,7 @@ interface IState {
   isLoading: boolean;
   showErrorMessage: boolean;
   errorMessage: JSX.Element;
+  fullScreen: boolean;
 }
 
 interface IStateProps {
@@ -64,7 +66,9 @@ class Recognition extends React.Component<IProps, IState> {
     isLoading: false,
     showErrorMessage: false,
     errorMessage: '',
+    fullScreen: false,
   };
+
   handleRecordingButton = () => {
     if (this.state.isLoading) {
       return;
@@ -232,6 +236,12 @@ class Recognition extends React.Component<IProps, IState> {
       this.handleStopRecording();
     }
   }
+
+  toggleFullscreen = () => {
+    this.setState({
+      fullScreen: !this.state.fullScreen,
+    });
+  };
   render() {
     const classnames = classNames({
       recording: this.state.isRecording,
@@ -260,36 +270,43 @@ class Recognition extends React.Component<IProps, IState> {
             <T id={KEYS.AYAH_RECOGNITION_UPDATE_REQUIRED} />
           </h3>
         ) : (
-          <div className={'content'}>
-            <div className="ayah-info">
-              <span className="surah-name">Surah Al-Tawbah</span>{' '}
-              <span className="ayah-number">Ayah 108</span>
-              <img className="icon fullscreen-icon" src={expandIcon} />
-              <img className="icon " src={settingsIcon} />
-            </div>
-            <div className="ayah-display">Lorem ipsum</div>
-            <div>
-              Take, [O, Muhammad], from their wealth a charity by which you
-              purify them and cause them increase, and invoke [ Allah 's
-              blessings] upon them. Indeed, your invocations are reassurance for
-              them. And Allah is Hearing and Knowing.
-            </div>
-            <RecordingButton
-              className={`mic ${classnames}`}
-              onClick={this.handleRecordingButton}
-            >
-              {this.state.isLoading ? (
-                <div className={'icon spin'}>
-                  <Icon icon={circleONotch} size={20} />
-                </div>
-              ) : !this.state.isRecording ? (
-                <Icon icon={micA} size={30} />
-              ) : (
-                <Icon icon={stop} size={30} />
-              )}
-            </RecordingButton>
-            <div>tarteel.io/donate</div>
-          </div>
+          <Fullscreen
+            enabled={this.state.fullScreen}
+            onChange={fullScreen => this.setState({ fullScreen })}
+          >
+              <div className="ayah-info">
+                <span className="surah-name">Surah Al-Tawbah</span>{' '}
+                <span className="ayah-number">Ayah 108</span>
+                <img
+                  className="icon fullscreen-icon"
+                  src={this.state.fullScreen ? collapseIcon : expandIcon}
+                  onClick={this.toggleFullscreen}
+                />
+                <img className="icon " src={settingsIcon} />
+              </div>
+              <div className="ayah-display">Lorem ipsum</div>
+              <div>
+                Take, [O, Muhammad], from their wealth a charity by which you
+                purify them and cause them increase, and invoke [ Allah 's
+                blessings] upon them. Indeed, your invocations are reassurance
+                for them. And Allah is Hearing and Knowing.
+              </div>
+              <RecordingButton
+                className={`mic ${classnames}`}
+                onClick={this.handleRecordingButton}
+              >
+                {this.state.isLoading ? (
+                  <div className={'icon spin'}>
+                    <Icon icon={circleONotch} size={20} />
+                  </div>
+                ) : !this.state.isRecording ? (
+                  <Icon icon={micA} size={30} />
+                ) : (
+                  <Icon icon={stop} size={30} />
+                )}
+              </RecordingButton>
+              <div>tarteel.io/donate</div>
+          </Fullscreen>
         )}
       </Container>
     );

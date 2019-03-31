@@ -197,6 +197,7 @@
     "react-dom": "16.4.2",
     "react-flags": "^0.1.17",
     "react-flags-select": "^1.1.10",
+    "react-full-screen": "0.2.4",
     "react-ga": "2.5.7",
     "react-helmet": "5.2.0",
     "react-hot-loader": "3.1.3",
