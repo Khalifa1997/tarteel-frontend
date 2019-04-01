@@ -20,7 +20,8 @@ import { setRecognitionResults } from '../../store/actions/recognition';
 import RecordingError from '../../components/RecordingError';
 import KEYS from '../../locale/keys';
 import T from '../../components/T';
-import AudioStreamer from './utils';
+import AudioStreamer from '../../helpers/AudioStreamer';
+import config from '../../../config';
 
 interface IOwnProps {
   history: History;
@@ -34,10 +35,6 @@ interface IState {
   isLoading: boolean;
   showErrorMessage: boolean;
   errorMessage: JSX.Element;
-}
-
-interface IStateProps {
-  canRecord: boolean;
 }
 
 interface IDispatchProps {
@@ -72,7 +69,7 @@ class Recognition extends React.Component<IProps, IState> {
       showErrorMessage: true,
     });
     this.handleStopRecording();
-    console.log(e);
+    // console.log(e);
   };
   handleStartRecording = () => {
     // resets the query string with new recordings
@@ -91,7 +88,7 @@ class Recognition extends React.Component<IProps, IState> {
       this.handleStopRecording();
       this.props.setRecognitionResults(results);
       this.props.history.push('/recognition/results');
-      console.log(results);
+      // console.log(results);
     } else {
       this.handleStartRecording();
       this.setState({
@@ -108,7 +105,7 @@ class Recognition extends React.Component<IProps, IState> {
   handleData = data => {
     let interimTranscript = '';
     if (data.results[0].isFinal) {
-      this.handleSearch()
+      this.handleSearch();
     } else {
       interimTranscript += data.results[0].alternatives[0].transcript;
     }
@@ -134,9 +131,7 @@ class Recognition extends React.Component<IProps, IState> {
     });
   };
   componentDidMount() {
-    const speechServerURL = __DEVELOPMENT__
-      ? 'http://localhost:5000/'
-      : 'https://tarteel-voice.now.sh/';
+    const speechServerURL = config('voiceServerURL');
     window.socket = io(speechServerURL);
     this.socket = window.socket;
 
@@ -170,63 +165,49 @@ class Recognition extends React.Component<IProps, IState> {
           <meta name={'twitter:image'} content={this.handleOGImage()} />
         </Helmet>
         <Navbar />
-        {this.state.showErrorMessage && (
-          <RecordingError
-            message={this.state.errorMessage}
-            onClose={() => {
-              this.setState({ showErrorMessage: false });
-            }}
-          />
-        )}
-        {!this.props.canRecord ? (
-          <h3 className={'not-supported'}>
-            <T id={KEYS.AYAH_RECOGNITION_UPDATE_REQUIRED} />
-          </h3>
-        ) : (
-          <div className={'content'}>
-            <div>
-              <h2>
-                <T id={KEYS.AYAH_RECOGNITION} />
-              </h2>
-              <p className={'status'}>
-                <T id={KEYS.AYAH_RECOGNITION_RECOGNITION_MESSAGE} />
-              </p>
-            </div>
-            <div className="words">
-              <span className={'query'}>{this.state.query}</span>
-              &nbsp;
-              <span className="partial-query">{this.state.partialQuery}</span>
-            </div>
-            <RecordingButton
-              className={`mic ${classnames}`}
-              onClick={this.handleRecordingButton}
-            >
-              {this.state.isLoading ? (
-                <div className={'icon spin'}>
-                  <Icon icon={circleONotch} size={20} />
-                </div>
-              ) : !this.state.isRecording ? (
-                <Icon icon={micA} size={30} />
-              ) : (
-                <Icon icon={stop} size={30} />
-              )}
-            </RecordingButton>
-            <p className={'splittable'}>
-              <T id={KEYS.AYAH_RECOGNITION_IMPROVE_ACCURACY} />
-              &nbsp;
-              <br />
-              <Link to={'/'}>
-                <T id={KEYS.AYAH_RECOGNITION_CONTRIBUTE} />
-              </Link>
-            </p>
-            <p className={'iqra'}>
-              <T
-                id={KEYS.AYAH_RECOGNITION_POWERED_BY}
-                values={{ url: 'https://iqraapp.com/' }}
-              />
+        <div className={'content'}>
+          <div>
+            <h2>
+              <T id={KEYS.AYAH_RECOGNITION} />
+            </h2>
+            <p className={'status'}>
+              <T id={KEYS.AYAH_RECOGNITION_RECOGNITION_MESSAGE} />
             </p>
           </div>
-        )}
+          <div className="words">
+            <span className={'query'}>{this.state.query}</span>
+            &nbsp;
+            <span className="partial-query">{this.state.partialQuery}</span>
+          </div>
+          <RecordingButton
+            className={`mic ${classnames}`}
+            onClick={this.handleRecordingButton}
+          >
+            {this.state.isLoading ? (
+              <div className={'icon spin'}>
+                <Icon icon={circleONotch} size={20} />
+              </div>
+            ) : !this.state.isRecording ? (
+              <Icon icon={micA} size={30} />
+            ) : (
+              <Icon icon={stop} size={30} />
+            )}
+          </RecordingButton>
+          <p className={'splittable'}>
+            <T id={KEYS.AYAH_RECOGNITION_IMPROVE_ACCURACY} />
+            &nbsp;
+            <br />
+            <Link to={'/'}>
+              <T id={KEYS.AYAH_RECOGNITION_CONTRIBUTE} />
+            </Link>
+          </p>
+          <p className={'iqra'}>
+            <T
+              id={KEYS.AYAH_RECOGNITION_POWERED_BY}
+              values={{ url: 'https://iqraapp.com/' }}
+            />
+          </p>
+        </div>
         {this.state.showErrorMessage ? (
           <RecordingError
             onClose={() => {
@@ -239,12 +220,6 @@ class Recognition extends React.Component<IProps, IState> {
   }
 }
 
-const mapStateToProps = (state: ReduxState): IStateProps => {
-  return {
-    canRecord: state.recognition.canRecord,
-  };
-};
-
 const mapDispatchToProps = (dispatch): IDispatchProps => {
   return {
     setRecognitionResults: (result: any) => {
@@ -256,7 +231,7 @@ const mapDispatchToProps = (dispatch): IDispatchProps => {
 export default injectIntl(
   withCookies(
     connect(
-      mapStateToProps,
+      null,
       mapDispatchToProps
     )(Recognition)
   )

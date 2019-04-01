@@ -253,7 +253,7 @@ const EN: Shape = {
 
     // RECORDING ERROR
     [KEYS.RECORDING_ERROR_MESSAGE_1]:
-      "It doesn't look like you have microphone permissions enabled. Get a better experience on mobile!",
+      "It doesn't look like you have microphone permissions enabled. Get a better experience on our mobile app or try a different browser!",
     [KEYS.RECORDING_ERROR_MESSAGE_2]:
       'To upload recordings, please enable microphone access, or use a different browser.',
 
@@ -277,8 +277,6 @@ const EN: Shape = {
       'Tap on the mic below and start recording to find the ayah with the closest match.',
     [KEYS.AYAH_RECOGNITION_IMPROVE_ACCURACY]: 'Want to improve Accuracy?',
     [KEYS.AYAH_RECOGNITION_CONTRIBUTE]: 'Contribute your recording',
-    [KEYS.AYAH_RECOGNITION_UPDATE_REQUIRED]:
-      "Thank you for trying to use Tarteel Ayah Recognition. Unfortunately, Ayah recognition is not supported by this browser. Switch to <a href='//www.google.com/chrome'>Chrome</a> to use it.",
     [KEYS.AYAH_RECOGNITION_MIC_PERMISSION_ERROR]:
       "Permission to use microphone is blocked. To fix, please \n <a target='_blank' href={chromeLink}> change your settings here</a>.",
     [KEYS.AYAH_RECOGNITION_AUDIO_CAPTURE_ERROR]:

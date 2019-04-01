@@ -103,7 +103,7 @@ const Container = styled.div`
       cursor: pointer;
       color: #475166;
       border-right: 1px solid lightgray;
-      &:hover {
+      &:hover:not(.active) {
         background: lightgray;
       }
       &:last-child {

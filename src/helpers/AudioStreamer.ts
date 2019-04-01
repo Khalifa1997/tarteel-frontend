@@ -57,11 +57,11 @@ class AudioStreamer {
 
     // Bind the data handler callback
     this.socket.on('speechData', data => {
-      console.log(
-        data.results[0] && data.results[0].alternatives[0]
-          ? `Transcription: ${data.results[0].alternatives[0].transcript}\n`
-          : `\n\nReached transcription time limit, press Ctrl+C\n`
-      );
+      // console.log(
+      //   data.results[0] && data.results[0].alternatives[0]
+      //     ? `Transcription: ${data.results[0].alternatives[0].transcript}\n`
+      //     : `\n\nReached transcription time limit, press Ctrl+C\n`
+      // );
 
       if (onData) {
         onData(data);
