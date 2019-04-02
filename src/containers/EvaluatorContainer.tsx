@@ -5,7 +5,11 @@ import { ActionType } from 'typesafe-actions';
 import { fetchEvaluatorAyah } from '../api/evaluator';
 import Evaluator from '../pages/Evaluator';
 import AyahShape from '../shapes/AyahShape';
-import evaluatorActions, { setAyah, setNextAyah, setPreviousAyah } from '../store/actions/evaluator';
+import evaluatorActions, {
+  setAyah,
+  setNextAyah,
+  setPreviousAyah,
+} from '../store/actions/evaluator';
 import ReduxState, { IProfile } from '../types/GlobalState';
 import { injectIntl } from 'react-intl';
 import { increaseEvaluatedAyahs } from '../store/actions/profile';
@@ -25,13 +29,15 @@ interface IStateProps {
 }
 
 const mapDispatchToProps = (
-  dispatch: Dispatch<ActionType<typeof evaluatorActions | typeof increaseEvaluatedAyahs>>
+  dispatch: Dispatch<
+    ActionType<typeof evaluatorActions | typeof increaseEvaluatedAyahs>
+  >
 ): IDispatchProps => {
   return {
     setAyah: (ayah: AyahShape) => dispatch(setAyah(ayah)),
     setNextAyah: (ayah: AyahShape) => dispatch(setNextAyah(ayah)),
     setPreviousAyah(ayah: AyahShape): ActionType<typeof setPreviousAyah> {
-      return dispatch(setPreviousAyah(ayah))
+      return dispatch(setPreviousAyah(ayah));
     },
     increaseEvaluatedAyahs: () => {
       return dispatch(increaseEvaluatedAyahs());

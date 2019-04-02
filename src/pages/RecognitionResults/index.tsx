@@ -32,6 +32,16 @@ interface IOwnProps {
 type IProps = IStateProps & IOwnProps & IOwnProps;
 
 class RecognitionResults extends React.Component<IProps> {
+  componentDidMount() {
+    this.socket = window.socket;
+  }
+  handleAyahClick = (ayah: IRecognitionAyah) => {
+    this.socket.emit('upload', {
+      ayahNum: ayah.ayahNum,
+      surahNum: ayah.surahNum,
+      queryText: this.props.recognition.queryText,
+    });
+  };
   render() {
     return (
       <Container>
@@ -55,6 +65,7 @@ class RecognitionResults extends React.Component<IProps> {
                     {...ayah}
                     key={i}
                     to={`/ayah/${ayah.surahNum}/${ayah.ayahNum}`}
+                    onClick={() => this.handleAyahClick(ayah)}
                   >
                     <p>{ayah.arabicSurahName}</p>
                     <p>{ayah.translationSurahName}</p>
