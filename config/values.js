@@ -49,6 +49,7 @@ const values = {
     cdnURL: true,
     iqraApiKey: true,
     google: true,
+    voiceServerURL: true,
     // sentryClient: true,
   },
 
@@ -71,7 +72,9 @@ const values = {
 
   IOSAppLink: 'https://apple.co/2KWJ74U',
 
-  iqraApiKey: EnvVars.string('IQRA_API_KEY', ''),
+  voiceServerURL: EnvVars.string('VOICE_SERVER_URL'),
+
+  iqraApiKey: EnvVars.string('IQRA_API_KEY'),
 
   objective: 50000,
 

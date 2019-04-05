@@ -18,11 +18,6 @@ export default (
         ...state,
         ...action.payload,
       };
-    case getType(recognition.setUnableToRecord):
-      return {
-        ...state,
-        canRecord: false,
-      };
     default:
       return state;
   }

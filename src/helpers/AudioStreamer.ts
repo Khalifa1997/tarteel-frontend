@@ -13,8 +13,9 @@ const constraints = {
 };
 
 class AudioStreamer {
-  constructor(socket) {
+  constructor(socket, options) {
     this.socket = socket;
+    this.options = options;
 
     this.initRecording = this.initRecording.bind(this);
     this.stopRecording = this.stopRecording.bind(this);
@@ -24,10 +25,10 @@ class AudioStreamer {
   }
   initRecording(onData, onError) {
     /*
-    * @param {function} onData Callback to run on data each time it's received
-    * @param {function} onError Callback to run on an error if one is emitted.
-    */
-    this.socket.emit('startStream'); // init this.socket Google Speech Connection
+     * @param {function} onData Callback to run on data each time it's received
+     * @param {function} onError Callback to run on an error if one is emitted.
+     */
+    this.socket.emit('startStream', this.options); // init this.socket Google Speech Connection
     AudioContext = window.AudioContext || window.webkitAudioContext;
     context = new AudioContext();
     processor = context.createScriptProcessor(bufferSize, 1, 1);
@@ -57,11 +58,11 @@ class AudioStreamer {
 
     // Bind the data handler callback
     this.socket.on('speechData', data => {
-      console.log(
-        data.results[0] && data.results[0].alternatives[0]
-          ? `Transcription: ${data.results[0].alternatives[0].transcript}\n`
-          : `\n\nReached transcription time limit, press Ctrl+C\n`
-      );
+      // console.log(
+      //   data.results[0] && data.results[0].alternatives[0]
+      //     ? `Transcription: ${data.results[0].alternatives[0].transcript}\n`
+      //     : `\n\nReached transcription time limit, press Ctrl+C\n`
+      // );
 
       if (onData) {
         onData(data);
@@ -83,21 +84,21 @@ class AudioStreamer {
   }
   microphoneProcess(e) {
     /*
-    * Processes microphone data into a data stream
-    *
-    * @param {object} e Input from the microphone
-    */
+     * Processes microphone data into a data stream
+     *
+     * @param {object} e Input from the microphone
+     */
     const left = e.inputBuffer.getChannelData(0);
     const left16 = this.convertFloat32ToInt16(left);
     this.socket.emit('binaryAudioData', left16);
   }
   convertFloat32ToInt16(buffer) {
     /*
-    * Converts a buffer from float32 to int16. Necessary for streaming.
-    * sampleRateHertz of 1600.
-    *
-    * @param {object} buffer Buffer being converted
-    */
+     * Converts a buffer from float32 to int16. Necessary for streaming.
+     * sampleRateHertz of 1600.
+     *
+     * @param {object} buffer Buffer being converted
+     */
     let l = buffer.length;
     const buf = new Int16Array(l);
     while (l--) {
@@ -107,8 +108,8 @@ class AudioStreamer {
   }
   closeAll() {
     /*
-    * Stops recording and closes everything down. Runs on error or on stop.
-    */
+     * Stops recording and closes everything down. Runs on error or on stop.
+     */
     // Clear the listeners (prevents issue if opening and closing repeatedly)
     this.socket.off('speechData');
     this.socket.off('streamError');

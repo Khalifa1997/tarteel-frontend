@@ -87,6 +87,7 @@
     "@types/redux-pack": "0.1.4",
     "@types/serialize-javascript": "1.5.0",
     "@types/serve-favicon": "2.2.30",
+    "@types/socket.io-client": "1.4.32",
     "@types/styled-components": "4.1.6",
     "app-module-path": "1.0.2",
     "app-root-dir": "1.0.2",

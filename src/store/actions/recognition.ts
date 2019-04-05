@@ -7,10 +7,3 @@ export const setRecognitionResults = createAction(
     return (result: any) => resolve(humps.camelizeKeys(result));
   }
 );
-
-export const setUnableToRecord = createAction(
-  'recognition/SET_UNABLE_RECORD',
-  resolve => {
-    return () => resolve();
-  }
-);

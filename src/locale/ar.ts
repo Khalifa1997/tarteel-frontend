@@ -154,8 +154,6 @@ export default {
     [KEYS.AYAH_RECOGNITION_IMPROVE_ACCURACY]:
       'تريد المساعده في تطوير البرنامج ؟',
     [KEYS.AYAH_RECOGNITION_CONTRIBUTE]: 'شارك تسجيل الآيه بصوتك',
-    [KEYS.AYAH_RECOGNITION_UPDATE_REQUIRED]:
-      "شكراً لإستعمالك ترتيل للأسف هذا المتصفح لا يدعم التشغيل قم بتطوير  <a href='//www.google.com/chrome\\'>كروم</a>  للإصدار ٢٥ أو أكثر.",
     [KEYS.AYAH_RECOGNITION_MIC_PERMISSION_ERROR]:
       "لايوجد أذن لإستخدام الميكروفون لحل هذه المشكله من فضلك غير إعدادات الصوت لديك <a target='_blank' href={chromeLink}> من هنا</a>.",
     [KEYS.AYAH_RECOGNITION_AUDIO_CAPTURE_ERROR]:

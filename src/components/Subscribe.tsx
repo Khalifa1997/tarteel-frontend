@@ -9,13 +9,13 @@ import styled from 'styled-components';
 import Input from './Input';
 import FooterButton from './FooterButton';
 
-interface IDispatchProps { }
+interface IDispatchProps {}
 
 interface IOwnProps {
   intl: InjectedIntl;
 }
 
-interface IStateProps { }
+interface IStateProps {}
 
 interface IState {
   email: string;
@@ -32,13 +32,16 @@ class Subscribe extends Component<IProps, IState> {
 
   handleChange = (e: any) => {
     this.setState({ [e.target.name]: e.target.value });
-  }
+  };
 
   subscribePerofile = () => {
     setCookie('isSubscribed', true, { path: '/' });
-    window.open("https://tarteel.us19.list-manage.com/subscribe/post?u=ab8add36046818c66a55a4f9c&amp;id=4015afc1f5", "_blank");
+    window.open(
+      'https://tarteel.us19.list-manage.com/subscribe/post?u=ab8add36046818c66a55a4f9c&amp;id=4015afc1f5',
+      '_blank'
+    );
     this.setState({ isSubscribed: true });
-  }
+  };
 
   render() {
     const recordingCount = 0;
@@ -103,98 +106,98 @@ class Subscribe extends Component<IProps, IState> {
 }
 
 const Container = styled.div`
-    .subtitle {
-      margin: 2em 0;
-    }
-    #mc_embed_signup form {
-      text-align: center;
-      padding: 0;
-      margin: 0;
-    }
-    #mc_embed_signup {
-      #mc_embed_signup_scroll {
-        justify-content: left;
-        display: flex;
-        flex-flow: row;
-      }
-    }
-    footer {
-      margin: 2em 0;
-    }
-    .form {
-      text-align: center;
-      margin-top: 3em;
-      margin-left: 2em;
-      width: 100%;
-    }
-    .form-row {
+  .subtitle {
+    margin: 2em 0;
+  }
+  #mc_embed_signup form {
+    text-align: center;
+    padding: 0;
+    margin: 0;
+  }
+  #mc_embed_signup {
+    #mc_embed_signup_scroll {
+      justify-content: left;
       display: flex;
       flex-flow: row;
-      justify-content: space-between;
-      align-items: center;
-      margin: 2em 0;
     }
-    .footer {
-      margin-top: 3em;
-      display: flex;
-      flex-flow: column;
-      justify-content: center;
-      align-items: center;
-      button {
-        background: none;
-      }
-      .saved,
-      .skip {
-        margin-top: 1em;
-      }
-      .saved {
-        text-align: right;
-        width: 100%;
-      }
-      .icon {
-        color: white;
-      }
+  }
+  footer {
+    margin: 2em 0;
+  }
+  .form {
+    text-align: center;
+    margin-top: 3em;
+    margin-left: 2em;
+    width: 100%;
+  }
+  .form-row {
+    display: flex;
+    flex-flow: row;
+    justify-content: space-between;
+    align-items: center;
+    margin: 2em 0;
+  }
+  .footer {
+    margin-top: 3em;
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    align-items: center;
+    button {
+      background: none;
     }
-    #share {
-      margin-top: 2em;
-
-      .resp-sharing-button__link {
-        display: inline-block;
-        text-decoration: none;
-        color: #fff;
-        margin: 0.5em;
-      }
-
-      .resp-sharing-button {
-        border-radius: 5px;
-        transition: 25ms ease-out;
-        padding: 0.5em 0.75em;
-      }
-
-      .resp-sharing-button--twitter {
-        background-color: #55acee;
-      }
-
-      .resp-sharing-button--twitter:hover {
-        background-color: #2795e9;
-      }
-
-      .resp-sharing-button--facebook {
-        background-color: #3b5998;
-      }
-
-      .resp-sharing-button--facebook:hover {
-        background-color: #2d4373;
-      }
-
-      .resp-sharing-button--linkedin {
-        background-color: #0077b5;
-      }
-
-      .resp-sharing-button--linkedin:hover {
-        background-color: #046293;
-      }
+    .saved,
+    .skip {
+      margin-top: 1em;
     }
+    .saved {
+      text-align: right;
+      width: 100%;
+    }
+    .icon {
+      color: white;
+    }
+  }
+  #share {
+    margin-top: 2em;
+
+    .resp-sharing-button__link {
+      display: inline-block;
+      text-decoration: none;
+      color: #fff;
+      margin: 0.5em;
+    }
+
+    .resp-sharing-button {
+      border-radius: 5px;
+      transition: 25ms ease-out;
+      padding: 0.5em 0.75em;
+    }
+
+    .resp-sharing-button--twitter {
+      background-color: #55acee;
+    }
+
+    .resp-sharing-button--twitter:hover {
+      background-color: #2795e9;
+    }
+
+    .resp-sharing-button--facebook {
+      background-color: #3b5998;
+    }
+
+    .resp-sharing-button--facebook:hover {
+      background-color: #2d4373;
+    }
+
+    .resp-sharing-button--linkedin {
+      background-color: #0077b5;
+    }
+
+    .resp-sharing-button--linkedin:hover {
+      background-color: #046293;
+    }
+  }
   @media screen and (max-width: ${props => props.theme.breakpoints.sm}px) {
     .content {
       width: 100%;

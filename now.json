@@ -3,6 +3,7 @@
   "version": 1,
 
   "env": {
-    "IQRA_API_KEY": "@iqra_api_key"
+    "IQRA_API_KEY": "@iqra_api_key",
+    "VOICE_SERVER_URL": "@voice_server_url"
   }
 }

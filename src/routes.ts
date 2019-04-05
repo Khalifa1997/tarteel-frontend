@@ -142,9 +142,10 @@ export default [
     }),
   },
   {
-    path: '/follow-along',
+    path: '/transcribe',
     component: asyncComponent({
-      resolve: () => import(/* webpackChunkName: "Donate" */ './pages/FollowAlong'),
+      resolve: () =>
+        import(/* webpackChunkName: "Donate" */ './pages/Transcribe'),
     }),
   },
 ];

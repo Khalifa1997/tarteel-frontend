@@ -23,8 +23,9 @@ const Note = (props: IProps) => {
 
 const NoteContainer = styled.div`
   text-align: ${props => props.align};
-  color: ${props => props.grey ? props.theme.colors.gray : props.theme.colors.black};
-  font-size: ${props => props.fontSize ? props.fontSize : '10'}px;
+  color: ${props =>
+    props.grey ? props.theme.colors.gray : props.theme.colors.black};
+  font-size: ${props => (props.fontSize ? props.fontSize : '10')}px;
 `;
 
 export default Note;

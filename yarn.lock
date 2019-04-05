@@ -823,6 +823,11 @@
     "@types/express-serve-static-core" "*"
     "@types/mime" "*"
 
+"@types/socket.io-client@1.4.32":
+  version "1.4.32"
+  resolved "https://registry.yarnpkg.com/@types/socket.io-client/-/socket.io-client-1.4.32.tgz#988a65a0386c274b1c22a55377fab6a30789ac14"
+  integrity sha512-Vs55Kq8F+OWvy1RLA31rT+cAyemzgm0EWNeax6BWF8H7QiiOYMJIdcwSDdm5LVgfEkoepsWkS+40+WNb7BUMbg==
+
 "@types/styled-components@4.1.6":
   version "4.1.6"
   resolved "https://registry.yarnpkg.com/@types/styled-components/-/styled-components-4.1.6.tgz#9aa1d47dbc6bae540083869bcc6c639c6e9af0fe"
@@ -13169,6 +13174,11 @@ setprototypeof@1.1.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/setprototypeof/-/setprototypeof-1.1.0.tgz#d0bd85536887b6fe7c0d818cb962d9d91c54e656"
   integrity sha512-BvE/TwpZX4FXExxOxZyRGQQv651MSwmWKZGqvmPcRIjDqWub67kTKuIMx43cZZrS/cBBzwBcNDWoFxt2XEFIpQ==
+
+sfmediastream@1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/sfmediastream/-/sfmediastream-1.0.0.tgz#fc7c7833d92f87a5e67d256edaf01b5be21eed7a"
+  integrity sha512-gnfyc8aBzDs7T7Q7+3/pR6EjatfKrJvxF9GD5ZgvbergZ/9HLvcxvN76T5UU+r5kWRbWCXJaMZyiUXenEQyQDg==
 
 sha.js@2.2.6:
   version "2.2.6"

@@ -119,7 +119,7 @@ class Demographics extends React.Component<IProps, IState> {
       this.props.unsetAskForDemographics();
       this.setState({
         isSubmitting: false,
-        isSaved: true
+        isSaved: true,
       });
     });
   };
@@ -196,22 +196,23 @@ class Demographics extends React.Component<IProps, IState> {
           </div>
 
           <div className={'footer'}>
-            {!isSaved ? ( <>
-            <FooterButton
-              onClick={this.submitDemographics}
-              isLoading={isSubmitting}
-              afterLoadingMessage={'Saved !'}
-            >
-              <T id={KEYS.SAVE_WORD} />
-            </FooterButton>
-            </>) : (
-            <>
-              <NoteButton
-                className={'saved'}
-              >
-                <T id={KEYS.SAVED_WORD} />
-              </NoteButton>
-            </>)}
+            {!isSaved ? (
+              <>
+                <FooterButton
+                  onClick={this.submitDemographics}
+                  isLoading={isSubmitting}
+                  afterLoadingMessage={'Saved !'}
+                >
+                  <T id={KEYS.SAVE_WORD} />
+                </FooterButton>
+              </>
+            ) : (
+              <>
+                <NoteButton className={'saved'}>
+                  <T id={KEYS.SAVED_WORD} />
+                </NoteButton>
+              </>
+            )}
           </div>
         </div>
       </Container>
