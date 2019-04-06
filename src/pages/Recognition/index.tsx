@@ -41,7 +41,7 @@ interface IDispatchProps {
   setRecognitionResults(result: any): void;
 }
 
-type IProps = IOwnProps & IDispatchProps & IStateProps;
+type IProps = IOwnProps & IDispatchProps;
 
 class Recognition extends React.Component<IProps, IState> {
   AudioStreamer: any;

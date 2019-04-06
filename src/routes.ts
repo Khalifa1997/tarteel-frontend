@@ -53,7 +53,7 @@ export default [
     }),
   },
   {
-    path: '/profile/:sessionKey',
+    path: '/profile/:sessionId',
     component: asyncComponent({
       resolve: () =>
         import(/* webpackChunkName: "ProfilePage" */ './pages/ProfilePage'),
