@@ -13,8 +13,9 @@ const constraints = {
 };
 
 class AudioStreamer {
-  constructor(socket) {
+  constructor(socket, options) {
     this.socket = socket;
+    this.options = options;
 
     this.initRecording = this.initRecording.bind(this);
     this.stopRecording = this.stopRecording.bind(this);
@@ -27,7 +28,7 @@ class AudioStreamer {
      * @param {function} onData Callback to run on data each time it's received
      * @param {function} onError Callback to run on an error if one is emitted.
      */
-    this.socket.emit('startStream'); // init this.socket Google Speech Connection
+    this.socket.emit('startStream', this.options); // init this.socket Google Speech Connection
     AudioContext = window.AudioContext || window.webkitAudioContext;
     context = new AudioContext();
     processor = context.createScriptProcessor(bufferSize, 1, 1);
