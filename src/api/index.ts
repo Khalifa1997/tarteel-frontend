@@ -22,8 +22,8 @@ export const fetchAboutData = () => {
   }).then(res => res.json());
 };
 
-export const fetchProfileData = (sessionKey: string) => {
-  return fetch(`${API_URL}/api/profile/${sessionKey}?format=json`, {
+export const fetchProfileData = (sessionId: string) => {
+  return fetch(`${API_URL}/api/profile/${sessionId}?format=json`, {
     credentials: 'include',
   }).then(res => res.json());
 };
