@@ -68,6 +68,14 @@ class Recognition extends React.Component<IProps, IState> {
     showErrorMessage: false,
     errorMessage: '',
     fullScreen: false,
+    // todo: replace placeholders
+    surahNumber: 42,
+    surahName: 'Al-Tawbah',
+    ayahNumber: 108,
+    ayahText: 'Lorem ipsum',
+    secondaryText:
+      "Take, [O, Muhammad], from their wealth a charity by which you purify them and cause them increase, and invoke [ Allah 's blessings] upon them. Indeed, your invocations are reassurance for them. And Allah is Hearing and Knowing.",
+    tertiaryText: null, //text for the optional third paragraph
   };
 
   handleRecordingButton = () => {
@@ -277,11 +285,17 @@ class Recognition extends React.Component<IProps, IState> {
           >
             <div className="header-container">
               <div className="header-logo">
-                <img className="logo-image" src={LogoImage} alt="Tarteel-logo" />
+                <img
+                  className="logo-image"
+                  src={LogoImage}
+                  alt="Tarteel-logo"
+                />
               </div>
               <div className="ayah-info">
-                <span className="surah-name">Surah Al-Tawbah</span>{' '}
-                <span className="ayah-number">Ayah 108</span>
+                <span className="surah-name">Surah {this.state.surahName}</span>{' '}
+                <span className="ayah-number">
+                  Ayah {this.state.ayahNumber}
+                </span>
               </div>
               <div className="icons-container">
                 <img
@@ -292,12 +306,9 @@ class Recognition extends React.Component<IProps, IState> {
                 <img className="icon " src={settingsIcon} />
               </div>
             </div>
-              <div className="ayah-display">خُذْ مِنْ أَمْوَالِهِمْ صَدَقَةً تُطَهِّرُهُمْ وَتُزَكِّيهِم بِهَا وَصَلِّ عَلَيْهِمْ ۖ إِنَّ صَلَاتَكَ سَكَنٌ لَّهُمْ ۗ وَاللَّهُ سَمِيعٌ عَلِيمٌ</div>
+            <div className="ayah-display">{this.state.ayahText}</div>
             <div className="transalations-display">
-              Take, [O, Muhammad], from their wealth a charity by which you
-              purify them and cause them increase, and invoke [ Allah 's
-              blessings] upon them. Indeed, your invocations are reassurance for
-              them. And Allah is Hearing and Knowing.
+              {this.state.secondaryText}
             </div>
             <RecordingButton
               className={`mic ${classnames}`}
@@ -313,7 +324,9 @@ class Recognition extends React.Component<IProps, IState> {
                 <Icon icon={stop} size={30} />
               )}
             </RecordingButton>
-            <div>tarteel.io/donate</div>
+            <div>
+              <a className="donate-link" href="https://tarteel.io/donate">tarteel.io/donate</a>
+            </div>
           </Fullscreen>
         )}
       </Container>

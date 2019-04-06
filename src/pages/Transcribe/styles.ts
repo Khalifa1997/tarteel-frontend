@@ -36,6 +36,14 @@ export const Container = styled.div`
            a {
              color: ${props => props.theme.colors.linkColor};
            }
+
+           .donate-link {
+             color: ${props => props.theme.colors.black};
+             &:hover {
+               text-decoration: underline;
+             }
+           }
+
            .status {
              color: #848484;
              font-size: 18px;
