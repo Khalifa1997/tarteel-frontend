@@ -57,8 +57,8 @@ class ProfilePage extends Component<IProps, IState> {
     });
   };
   public async componentDidMount() {
-    const sessionKey = this.props.match.params.sessionKey;
-    const data = humps.camelizeKeys(await fetchProfileData(sessionKey));
+    const sessionId = this.props.match.params.sessionId;
+    const data = humps.camelizeKeys(await fetchProfileData(sessionId));
     this.setState({ data });
 
     // Importing this here is to avoid `window is not defined` error on the server while SSR
@@ -109,7 +109,7 @@ class ProfilePage extends Component<IProps, IState> {
   public render() {
     const { openDemographics, openSubscribe } = this.state;
     const { recentDict, oldDict } = this.state.data;
-    const { sessionKey, userRecitedAyahs } = this.props.profile;
+    const { sessionId, userRecitedAyahs } = this.props.profile;
     return (
       <Container>
         <Helmet>
@@ -194,15 +194,15 @@ class ProfilePage extends Component<IProps, IState> {
                 ) : null}
                 <T
                   id={KEYS.PROFILE_SEE_STATISTICS_MESSAGE}
-                  values={{ sessionKey }}
+                  values={{ sessionId }}
                 />
               </p>
               <p>
                 <div className="profile-link">
                   <div className="link">
-                    <a href={`https://www.tarteel.io/profile/${sessionKey}`}>
+                    <a href={`https://www.tarteel.io/profile/${sessionId}`}>
                       <div className="select">
-                        https://www.tarteel.io/profile/{sessionKey}
+                        https://www.tarteel.io/profile/{sessionId}
                       </div>
                     </a>
                   </div>
@@ -298,7 +298,7 @@ class ProfilePage extends Component<IProps, IState> {
         <ShareModal
           show={this.state.showShareModal}
           quote={``}
-          url={`https://www.tarteel.io/profile/${sessionKey}`}
+          url={`https://www.tarteel.io/profile/${sessionId}`}
           handleCloseModal={() => {
             this.setState({ showShareModal: false });
           }}

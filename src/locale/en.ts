@@ -293,7 +293,7 @@ const EN: Shape = {
     [KEYS.PROFILE_TOTAL_OF_VERSES_HAS_BEEN_RECITED]:
       'You have recited a total of <strong>{userRecitedAyahs}</strong> verses.',
     [KEYS.PROFILE_SEE_STATISTICS_MESSAGE]:
-      'This information is based only on sessions recorded using this particular device and browser, and may not show up if you clear your cache or use a different browser. If you\'d like to see these statistics on a different device or <a href = {`https://facebook.com/sharer/sharer.php?u=https://www.tarteel.io/profile/${sessionKey}`} target="_blank" aria- label=""> share </a> these statistics, please use the following permalink:',
+      'This information is based only on sessions recorded using this particular device and browser, and may not show up if you clear your cache or use a different browser. If you\'d like to see these statistics on a different device or <a href = {`https://facebook.com/sharer/sharer.php?u=https://www.tarteel.io/profile/${sessionId}`} target="_blank" aria- label=""> share </a> these statistics, please use the following permalink:',
     [KEYS.PROFILE_WEEKLY_ACTIVITY]: 'Your Weekly Activity',
     [KEYS.PROFILE_VERSES_RECITED_LAST_WEEK]: 'Verses Recited Last Week',
     [KEYS.PROFILE_VERSES_RECITED_PARAGRAPH_MESSAGE]:
