@@ -41,7 +41,7 @@ interface IDispatchProps {
   setRecognitionResults(result: any): void;
 }
 
-type IProps = IOwnProps & IDispatchProps & IStateProps;
+type IProps = IOwnProps & IDispatchProps;
 
 class Recognition extends React.Component<IProps, IState> {
   AudioStreamer: any;
@@ -139,7 +139,11 @@ class Recognition extends React.Component<IProps, IState> {
     this.socket.on('loading', this.setLoading);
     this.socket.on('endStream', this.handleStopRecording);
 
-    this.AudioStreamer = new AudioStreamer(this.socket);
+    const options = {
+      type: 'recognition',
+    };
+
+    this.AudioStreamer = new AudioStreamer(this.socket, options);
   }
   handleOGImage = () => {
     const locale = this.props.cookies.get('currentLocale') || 'en';
