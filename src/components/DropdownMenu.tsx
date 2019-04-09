@@ -1,12 +1,23 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Icon } from 'react-icons-kit';
-import { navicon } from 'react-icons-kit/fa/navicon';
 import styled, { keyframes } from 'styled-components';
-import { withRouter, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import T from './T';
+
+/**
+ * DropdownMenu Component:
+ * Pass Links as array prop
+ * Pass function to specific link as prop
+ * Pass icon as prop
+ * Checker if showRoute is the same pathname or not
+ **/
 
 interface IProps {
-  afterLoadingMessage?: string;
-  isLoading?: boolean;
+  links: any;
+  icon?: any;
+  currentRoute?: string;
+  passedFunction?: any;
+  passedFunctionRouteName?: string;
 }
 
 interface IState {
@@ -18,37 +29,44 @@ class DropdownMenu extends React.Component<IProps, IState> {
     showMenu: false,
   };
 
+  toggleDropdownMenu = () => {
+    this.setState(state => ({ showMenu: !state.showMenu }));
+  };
+
   render() {
     const { showMenu } = this.state;
+    const { links, icon, passedFunction, passedFunctionRouteName } = this.props;
     return (
       <Container>
         <div>
-          <div className="settings" onClick={() => {
-            this.setState({ showMenu: !showMenu })
-          }}>
-            <Icon icon={navicon} size={25} />
+          <div className="settings" onClick={() => this.toggleDropdownMenu()}>
+            <Icon icon={icon} size={25} />
           </div>
-          {
-            showMenu
-              ? (
-                  <div className="settings-menu">
-                    <div className="list">
-                      <LinkContainer>
-                        <Link
-                          to={'/'}
-                        >
-                          <div className="text">
-                            Menu item 1
-                          </div>
-                        </Link>
-                      </LinkContainer>
-                    </div>
-                  </div>
-              )
-              : (
-                null
-              )
-          }
+          {showMenu ? (
+            <div className="settings-menu">
+              <ul className="list">
+                <LinkContainer>
+                  {links.map(link => (
+                    <li
+                      className="list-item"
+                      onClick={
+                        link.name === passedFunctionRouteName
+                          ? passedFunction
+                          : null
+                      }
+                    >
+                      <Link to={link.href} className="text">
+                        {link.badgeText ? (
+                          <span className={'badge-text'}>{link.badgeText}</span>
+                        ) : null}
+                        <T id={link.textID} />
+                      </Link>
+                    </li>
+                  ))}
+                </LinkContainer>
+              </ul>
+            </div>
+          ) : null}
         </div>
       </Container>
     );
@@ -57,6 +75,14 @@ class DropdownMenu extends React.Component<IProps, IState> {
 
 const LinkContainer = styled.div`
   margin: 0 10px;
+
+  .badge-text {
+    position: absolute;
+    font-size: 13px;
+    color: ${props => props.theme.colors.linkColor};
+    right: 8px;
+    top: -13px;
+  }
   a {
     color: ${props => props.theme.colors.tuatara};
     text-decoration: none;
@@ -66,7 +92,6 @@ const LinkContainer = styled.div`
       .text {
         display: inline-block;
         position: relative;
-
         &:before {
           content: '';
           width: 7px;
@@ -77,18 +102,6 @@ const LinkContainer = styled.div`
           right: -5px;
           top: 3px;
         }
-      }
-    }
-
-    &.badge {
-      position: relative;
-      display: block;
-      .badge-text {
-        position: absolute;
-        font-size: 13px;
-        color: ${props => props.theme.colors.linkColor};
-        right: 8px;
-        top: -13px;
       }
     }
 
@@ -114,19 +127,6 @@ const Container = styled.div`
   display: flex;
   justify-content: center;
 
-  > a {
-    color: ${props => props.theme.colors.tuatara};
-    text-decoration: none;
-    margin: 0 10px;
-    transition: 0.25s;
-    display: flex;
-    align-items: center;
-    font-size: 14px;
-
-    &.active, &:hover {
-      color: ${props => props.theme.colors.linkColor};
-    }
-  }
   > .list {
     margin: 0 10px;
     position: relative;
@@ -138,7 +138,6 @@ const Container = styled.div`
     height: 100%;
     box-sizing: border-box;
     cursor: pointer;
-
     a {
       &.active {
         color: ${props => props.theme.colors.linkColor};
@@ -158,11 +157,13 @@ const Container = styled.div`
   }
   .settings-menu {
     position: absolute;
+    right: 0;
     top: 100%;
+    margin-top: 5px;
     min-width: 150px;
     background-color: #fff;
     border-radius: 3px;
-    box-shadow: 0 0 5px rgba(0,0,0,0.2);
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
     text-align: center;
     z-index: 20;
     animation: ${fadeInUp} 0.25s linear;
@@ -174,21 +175,26 @@ const Container = styled.div`
 
       > div {
         margin: 0;
+        li {
+          list-style: none;
+        }
       }
       .list-item {
+        position: relative;
         line-height: 35px;
         transition: background 200ms;
         margin: 0;
         font-size: 14px;
+        text-transform: capitalize;
 
-        &.active, &:hover {
-          background-color: #E0EAFC;
+        &.active,
+        &:hover {
+          background-color: #e0eafc;
           color: ${props => props.theme.colors.linkColor};
         }
       }
     }
   }
-
 
   @media screen and (max-width: ${props => props.theme.breakpoints.sm}px) {
     position: static;
@@ -203,6 +209,7 @@ const Container = styled.div`
           padding: 1em 0;
         }
       }
+    }
   }
 `;
 
