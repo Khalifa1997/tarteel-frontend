@@ -253,7 +253,7 @@ const EN: Shape = {
 
     // RECORDING ERROR
     [KEYS.RECORDING_ERROR_MESSAGE_1]:
-      "It doesn't look like you have microphone permissions enabled. Get a better experience on our mobile app or try a different browser!",
+      "It doesn't look like you have microphone permissions enabled. Switch to another browser or try the mobile app: ",
     [KEYS.RECORDING_ERROR_MESSAGE_2]:
       'To upload recordings, please enable microphone access, or use a different browser.',
 
@@ -351,6 +351,9 @@ const EN: Shape = {
       'Moin Nadeem, junior at MIT studying computer science',
     [KEYS.CONTRIBUTOR_15]: 'Moumen Soliman, Front End Software Engineer',
   },
+
+  // TRANSCRIBE
+  [KEYS.TRANSCRIBE]: 'Transcribe',
 };
 
 export default EN;

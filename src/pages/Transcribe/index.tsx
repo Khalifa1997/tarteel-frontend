@@ -1,4 +1,4 @@
-import React, { Ref } from 'react';
+import React from 'react';
 import { Icon } from 'react-icons-kit';
 import { circleONotch } from 'react-icons-kit/fa/circleONotch';
 import { micA } from 'react-icons-kit/ionicons/micA';
@@ -6,6 +6,10 @@ import { stop } from 'react-icons-kit/fa/stop';
 import classNames from 'classnames';
 import io from 'socket.io-client';
 import humps from 'humps';
+import Fullscreen from 'react-full-screen';
+import Helmet from 'react-helmet';
+import { injectIntl, InjectedIntl } from 'react-intl';
+import { withCookies } from 'react-cookie';
 
 import { Container } from './styles';
 import Navbar from '../../components/Navbar';
@@ -16,6 +20,11 @@ import { WORD_TYPES } from '../../types';
 import KEYS from '../../locale/keys';
 import T from '../../components/T';
 import WordShape from '../../shapes/WordShape';
+import RecordingError from '../../components/RecordingError';
+import expandIcon from '../../../public/images/icons/svg/expand.svg';
+import collapseIcon from '../../../public/images/icons/svg/collapse.svg';
+import settingsIcon from '../../../public/images/icons/svg/settings.svg';
+import LogoImage from '../../../public/logo-3x.png';
 
 const testingSurah = [
   {
@@ -386,12 +395,15 @@ const testingSurah = [
   },
 ];
 
-interface IProps {}
+interface IProps {
+  intl: InjectedIntl;
+}
 
 interface IState {
   isRecording: boolean;
   isLoading: boolean;
   showErrorMessage: boolean;
+  fullScreen: boolean;
 }
 
 class Transcribe extends React.Component<IProps, IState> {
@@ -402,6 +414,15 @@ class Transcribe extends React.Component<IProps, IState> {
     isRecording: false,
     showErrorMessage: false,
     currentAyah: 0,
+    fullScreen: false,
+    // todo: replace placeholders
+    surahNumber: 42,
+    surahName: 'Al-Tawbah',
+    ayahNumber: 108,
+    ayahText: 'Lorem ipsum',
+    secondaryText:
+      "Take, [O, Muhammad], from their wealth a charity by which you purify them and cause them increase, and invoke [ Allah 's blessings] upon them. Indeed, your invocations are reassurance for them. And Allah is Hearing and Knowing.",
+    tertiaryText: null, //text for the optional third paragraph
   };
   handleRecordingButton = () => {
     if (this.state.isLoading) {
@@ -454,6 +475,15 @@ class Transcribe extends React.Component<IProps, IState> {
       isLoading,
     });
   };
+  toggleFullscreen = () => {
+    this.setState({
+      fullScreen: !this.state.fullScreen,
+    });
+  };
+  handleOGImage = () => {
+    const locale = this.props.cookies.get('currentLocale') || 'en';
+    return `/public/og/recognition_${locale}.png`;
+  };
   renderAyah = () => {
     return (
       testingSurah[this.state.currentAyah].words.map((word: WordShape, i) => {
@@ -481,11 +511,12 @@ class Transcribe extends React.Component<IProps, IState> {
     );
   };
   drawMatch = result => {
-    const wordsList = document.querySelector('.ayah .text').children;
+    console.log(result);
+    const wordsList = document.querySelector('.ayah-display').children;
     wordsList[result.index].classList.add('active');
   };
   revertColor = () => {
-    const wordsList = document.querySelector('.ayah .text').children;
+    const wordsList = document.querySelector('.ayah-display').children;
     Array.from(wordsList).forEach(element => {
       element.classList.remove('active');
     });
@@ -495,6 +526,10 @@ class Transcribe extends React.Component<IProps, IState> {
     this.setState(state => ({
       currentAyah: state.currentAyah + 1,
     }));
+    this.socket.emit(
+      'setCurrentAyah',
+      testingSurah[this.state.currentAyah].text_simple
+    );
   };
   componentDidMount() {
     const speechServerURL = config('voiceServerURL');
@@ -525,8 +560,16 @@ class Transcribe extends React.Component<IProps, IState> {
     const classnames = classNames({
       recording: this.state.isRecording,
     });
+    const ogTitle = this.props.intl.formatMessage({
+      id: KEYS.TRANSCRIBE,
+    });
     return (
       <Container>
+        <Helmet>
+          <title>{ogTitle}</title>
+          <meta property={'og:image'} content={this.handleOGImage()} />
+          <meta name={'twitter:image'} content={this.handleOGImage()} />
+        </Helmet>
         <Navbar />
         {this.state.showErrorMessage ? (
           <RecordingError
@@ -536,34 +579,61 @@ class Transcribe extends React.Component<IProps, IState> {
           />
         ) : null}
         <div className={'content'}>
-          <div className={'ayah'}>
-            <div className="text" ref={C => (this.ayahText = C)}>
-              {this.renderAyah()}
-            </div>
-            <div className="words">
-              <span className={'query'}>{this.state.query}</span>
-              &nbsp;
-              <span className="partial-query">{this.state.partialQuery}</span>
-            </div>
-          </div>
-          <RecordingButton
-            className={`mic ${classnames}`}
-            onClick={this.handleRecordingButton}
+          <Fullscreen
+            enabled={this.state.fullScreen}
+            onChange={fullScreen => this.setState({ fullScreen })}
           >
-            {this.state.isLoading ? (
-              <div className={'icon spin'}>
-                <Icon icon={circleONotch} size={20} />
+            <div className="header-container">
+              <div className="header-logo">
+                <img
+                  className="logo-image"
+                  src={LogoImage}
+                  alt="Tarteel-logo"
+                />
               </div>
-            ) : !this.state.isRecording ? (
-              <Icon icon={micA} size={30} />
-            ) : (
-              <Icon icon={stop} size={30} />
-            )}
-          </RecordingButton>
+              <div className="ayah-info">
+                <span className="surah-name">Surah {this.state.surahName}</span>{' '}
+                <span className="ayah-number">
+                  Ayah {this.state.ayahNumber}
+                </span>
+              </div>
+              <div className="icons-container">
+                <img
+                  className="icon fullscreen-icon"
+                  src={this.state.fullScreen ? collapseIcon : expandIcon}
+                  onClick={this.toggleFullscreen}
+                />
+                <img className="icon " src={settingsIcon} />
+              </div>
+            </div>
+            <div className="ayah-display">{this.renderAyah()}</div>
+            <div className="transalations-display">
+              {this.state.secondaryText}
+            </div>
+            <RecordingButton
+              className={`mic ${classnames}`}
+              onClick={this.handleRecordingButton}
+            >
+              {this.state.isLoading ? (
+                <div className={'icon spin'}>
+                  <Icon icon={circleONotch} size={20} />
+                </div>
+              ) : !this.state.isRecording ? (
+                <Icon icon={micA} size={30} />
+              ) : (
+                <Icon icon={stop} size={30} />
+              )}
+            </RecordingButton>
+            <div>
+              <a className="donate-link" href="https://tarteel.io/donate">
+                tarteel.io/donate
+              </a>
+            </div>
+          </Fullscreen>
         </div>
       </Container>
     );
   }
 }
 
-export default Transcribe;
+export default injectIntl(withCookies(Transcribe));
