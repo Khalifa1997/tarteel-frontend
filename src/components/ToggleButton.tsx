@@ -1,46 +1,32 @@
-import React, { SFC } from 'react';
-import { withCookies } from 'react-cookie';
-import { connect } from 'react-redux';
+import React from 'react';
 import styled from 'styled-components';
 
 import LOCALE_KEYS from '../locale/keys';
-import { toggleIsContinuous } from '../store/actions/status';
-import ReduxState from '../types/GlobalState';
 import T from './T';
 
 interface IOwnProps {
   text: LOCALE_KEYS;
+  checked: boolean;
 }
 
-interface IStateProps {
-  isContinuous: boolean;
-}
-
-interface IDispatchProps {
-  toggleIsContinuous(): void;
-}
-
-type IProps = IOwnProps & IDispatchProps & IStateProps;
+type IProps = IOwnProps;
 
 class ToggleButton extends React.Component<IProps, never> {
-  public toggle = () => {
-    this.props.cookies.set('continuous', !this.props.isContinuous);
-    this.props.toggleIsContinuous();
-  };
   public render() {
     return (
-      <Container onClick={this.toggle}>
+      <Container>
         <span />
         <input
           type="checkbox"
-          id="continuous"
-          checked={this.props.isContinuous}
+          id="toggle-button"
+          checked={this.props.checked}
           onClick={e => {
+            !this.props.checked;
             e.stopPropagation();
           }}
           className="tgl tgl-ios"
         />
-        <label htmlFor="continuous" className="tgl-btn" />
+        <label htmlFor="toggle-button" className="tgl-btn" />
         <button className="tgl-text small-arabic-text" disabled={true}>
           <T id={this.props.text} />
         </button>
@@ -144,23 +130,4 @@ const Container = styled.div`
   }
 `;
 
-const mapStateToProps = (state: ReduxState): IStateProps => {
-  return {
-    isContinuous: state.status.isContinuous,
-  };
-};
-
-const mapDispatchToProps = dispatch => {
-  return {
-    toggleIsContinuous: () => {
-      dispatch(toggleIsContinuous());
-    },
-  };
-};
-
-export default withCookies(
-  connect(
-    mapStateToProps,
-    mapDispatchToProps
-  )(ToggleButton)
-);
+export default ToggleButton;

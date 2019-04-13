@@ -41,6 +41,7 @@ import {
 import {
   toggleDoneRecording,
   toggleIsRecording,
+  toggleIsContinuous,
 } from '../store/actions/status';
 import ReduxState, { IProfile, IStatus } from '../types/GlobalState';
 import FooterButton from './FooterButton';
@@ -58,6 +59,7 @@ interface IOwnProps {
 }
 
 interface IDispatchPros {
+  toggleIsContinuous(): void;
   toggleIsRecording(): void;
   toggleDoneRecording(): void;
   increaseRecitedAyahs(): void;
@@ -76,6 +78,7 @@ interface IDispatchPros {
 }
 
 interface IStateProps {
+  isContinuous: boolean;
   status: IStatus;
   profile: IProfile;
   currentAyah: AyahShape;
@@ -98,6 +101,10 @@ class Footer extends React.Component<IProps, IState> {
     showErrorMessage: false,
     showGetStarted:
       Boolean(this.props.isAyahPage) && !this.props.profile.passedOnBoarding,
+  };
+  public toggle = () => {
+    this.props.cookies.set('continuous', !this.props.status.isContinuous);
+    this.props.toggleIsContinuous();
   };
   public setPreviousAyah = async () => {
     const { verseNumber: ayah, chapterId: surah } = this.props.currentAyah;
@@ -327,7 +334,12 @@ class Footer extends React.Component<IProps, IState> {
           </div>
         </div>
         {!showGetStarted && !isDoneRecording && !isRecording ? (
-          <ToggleButton text={KEYS.CONTINUOUS_MODE_NOTE_TEXT} />
+          <div onClick={this.toggle}>
+            <ToggleButton
+              checked={isContinuous}
+              text={KEYS.CONTINUOUS_MODE_NOTE_TEXT}
+            />
+          </div>
         ) : null}
         {showGetStarted ? (
           <FooterButton
@@ -436,6 +448,7 @@ const Container = styled.div`
 
 const mapStateToProps = (state: ReduxState): IStateProps => {
   return {
+    isContinuous: state.status.isContinuous,
     status: state.status,
     profile: state.profile,
     currentAyah: state.ayahs.currentAyah,
@@ -447,6 +460,9 @@ const mapStateToProps = (state: ReduxState): IStateProps => {
 
 const mapDispatchToProps = (dispatch): IDispatchPros => {
   return {
+    toggleIsContinuous: () => {
+      dispatch(toggleIsContinuous());
+    },
     toggleIsRecording: () => {
       dispatch(toggleIsRecording());
     },
