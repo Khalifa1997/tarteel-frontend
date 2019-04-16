@@ -21,7 +21,6 @@ class ToggleButton extends React.Component<IProps, never> {
           id="toggle-button"
           checked={this.props.checked}
           onClick={e => {
-            !this.props.checked;
             e.stopPropagation();
           }}
           className="tgl tgl-ios"

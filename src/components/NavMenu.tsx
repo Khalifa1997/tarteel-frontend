@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Children } from 'react';
 import { withCookies } from 'react-cookie';
 import { navicon } from 'react-icons-kit/fa/navicon';
 import { InjectedIntl, injectIntl } from 'react-intl';
@@ -28,25 +28,32 @@ interface IStateProps {
 }
 
 interface IState {
-  showDropdown: boolean;
+  mobileToggle: boolean;
+  donateToggle: boolean;
 }
 
 type IProps = IDispatchProps & IStateProps & IOwnProps;
 
-const navLinks = (props: any) => {
-  return {
-    items: [
+class NavMenu extends React.Component<IProps, IState> {
+  state = {
+    navLinks: [
       {
         name: 'profile',
         textID: KEYS.PROFILE_LINK_TEXT,
-        href: `/profile/${props.profile.sessionId}`,
+        href: `/profile/${this.props.profile.sessionId}`,
+      },
+      {
+        name: 'Mobile',
+        textID: KEYS.MOBILE_APP_LINK_TEXT,
+      },
+      {
+        name: 'donate',
+        textID: KEYS.DONATE_LINK_TEXT,
       },
       {
         name: 'randomAyah',
         textID: KEYS.RANDOM_AYAH_LINK_TEXT,
-        href: '',
-        onClick: props.randomAyah,
-        showRoute: '/',
+        passFunction: this.handleRandomAyah.bind(this),
       },
       {
         name: 'recognition',
@@ -81,21 +88,19 @@ const navLinks = (props: any) => {
       },
     ],
   };
-};
 
-class NavMenu extends React.Component<IProps, IState> {
-  public handleRandomAyah = () => {
+  public handleRandomAyah() {
     this.props.toggleFetchingCurrentAyah();
     fetchRandomAyah().then((ayah: AyahShape) => {
       this.props.setAyah(ayah);
       this.props.toggleFetchingCurrentAyah();
     });
-  };
+  }
+
   public render() {
-    const links = navLinks({
-      profile: this.props.profile,
-    });
-    const currentLocale = this.props.cookies.get('currentLocale') || 'en';
+    const { navLinks } = this.state;
+    const { cookies } = this.props;
+    const currentLocale = cookies.get('currentLocale') || 'en';
     const urlLocale = currentLocale === 'en' ? 'ar' : 'en';
 
     return (
@@ -104,13 +109,7 @@ class NavMenu extends React.Component<IProps, IState> {
           {currentLocale === 'en' ? 'العربية' : 'English'}
         </a>
         <div className="icon-container">
-          <DropdownMenu
-            links={...links.items}
-            icon={navicon}
-            currentRoute={this.props.location.pathname}
-            passedFunction={this.handleRandomAyah}
-            passedFunctionRouteName={'randomAyah'}
-          />
+          <DropdownMenu links={navLinks} icon={navicon} />
         </div>
       </Container>
     );

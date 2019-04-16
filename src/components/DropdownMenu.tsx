@@ -2,7 +2,9 @@ import React from 'react';
 import { Icon } from 'react-icons-kit';
 import styled, { keyframes } from 'styled-components';
 import { Link } from 'react-router-dom';
+
 import T from './T';
+import ToggleButton from './ToggleButton';
 
 /**
  * DropdownMenu Component:
@@ -15,9 +17,6 @@ import T from './T';
 interface IProps {
   links: any;
   icon?: any;
-  currentRoute?: string;
-  passedFunction?: any;
-  passedFunctionRouteName?: string;
 }
 
 interface IState {
@@ -35,12 +34,13 @@ class DropdownMenu extends React.Component<IProps, IState> {
 
   render() {
     const { showMenu } = this.state;
-    const { links, icon, passedFunction, passedFunctionRouteName } = this.props;
+    const { links, icon } = this.props;
+
     return (
       <Container>
         <div>
           <div className="settings" onClick={() => this.toggleDropdownMenu()}>
-            <Icon icon={icon} size={25} />
+            {icon && <Icon icon={icon} size={25} />}
           </div>
           {showMenu ? (
             <div className="settings-menu">
@@ -49,18 +49,31 @@ class DropdownMenu extends React.Component<IProps, IState> {
                   {links.map(link => (
                     <li
                       className="list-item"
-                      onClick={
-                        link.name === passedFunctionRouteName
-                          ? passedFunction
-                          : null
-                      }
+                      onClick={link.passFunction ? link.passFunction : null}
                     >
-                      <Link to={link.href} className="text">
-                        {link.badgeText ? (
+                      <div className="text">
+                        {link.badgeText && (
                           <span className={'badge-text'}>{link.badgeText}</span>
-                        ) : null}
-                        <T id={link.textID} />
-                      </Link>
+                        )}
+                        {link.toggle ? (
+                          <ToggleButton
+                            checked={link.toggleID}
+                            text={link.textID}
+                          />
+                        ) : link.href ? (
+                          <Link to={link.href ? link.href : null}>
+                            <T id={link.textID} />
+                          </Link>
+                        ) : (
+                          <T id={link.textID} />
+                        )}
+                        {link.subNavLinks && (
+                          <DropdownMenu
+                            icon={icon}
+                            links={...link.subNavLinks}
+                          />
+                        )}
+                      </div>
                     </li>
                   ))}
                 </LinkContainer>
@@ -78,33 +91,15 @@ const LinkContainer = styled.div`
 
   .badge-text {
     position: absolute;
-    font-size: 13px;
+    font-size: 11px;
     color: ${props => props.theme.colors.linkColor};
     right: 8px;
-    top: -13px;
+    top: -10px;
   }
   a {
     color: ${props => props.theme.colors.tuatara};
     text-decoration: none;
     transition: 0.25s;
-
-    &.busy {
-      .text {
-        display: inline-block;
-        position: relative;
-        &:before {
-          content: '';
-          width: 7px;
-          height: 7px;
-          border-radius: 50%;
-          background-color: ${props => props.theme.colors.linkColor};
-          position: absolute;
-          right: -5px;
-          top: 3px;
-        }
-      }
-    }
-
     &:hover {
       color: ${props => props.theme.colors.linkColor};
     }
@@ -186,7 +181,10 @@ const Container = styled.div`
         margin: 0;
         font-size: 14px;
         text-transform: capitalize;
-
+        .text {
+          display: flex;
+          justify-content: space-around;
+        }
         &.active,
         &:hover {
           background-color: #e0eafc;
