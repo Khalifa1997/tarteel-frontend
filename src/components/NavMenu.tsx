@@ -38,17 +38,24 @@ class NavMenu extends React.Component<IProps, IState> {
   state = {
     navLinks: [
       {
+        name: 'home',
+        textID: KEYS.HOME_WORD,
+        href: `/`,
+      },
+      {
+        name: 'About',
+        textID: KEYS.ABOUT_LINK_TEXT,
+        href: '/about'
+      },
+      {
         name: 'profile',
         textID: KEYS.PROFILE_LINK_TEXT,
         href: `/profile/${this.props.profile.sessionId}`,
       },
       {
-        name: 'Mobile',
-        textID: KEYS.MOBILE_APP_LINK_TEXT,
-      },
-      {
-        name: 'donate',
-        textID: KEYS.DONATE_LINK_TEXT,
+        name: 'Evaluator',
+        textID: KEYS.EVALUATE_AYAHS,
+        href: '/evaluator'
       },
       {
         name: 'randomAyah',
