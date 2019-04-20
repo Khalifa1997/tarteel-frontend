@@ -27,14 +27,9 @@ interface IStateProps {
   profile: IProfile;
 }
 
-interface IState {
-  mobileToggle: boolean;
-  donateToggle: boolean;
-}
-
 type IProps = IDispatchProps & IStateProps & IOwnProps;
 
-class NavMenu extends React.Component<IProps, IState> {
+class NavMenu extends React.Component<IProps> {
   state = {
     navLinks: [
       {
