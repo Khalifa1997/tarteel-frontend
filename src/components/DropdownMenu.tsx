@@ -8,10 +8,12 @@ import ToggleButton from './ToggleButton';
 
 /**
  * DropdownMenu Component:
- * Pass Links as array prop
- * Pass function to specific link as prop
- * Pass icon as prop
- * Checker if showRoute is the same pathname or not
+ * Array.passFunction to add functions
+ * Array.badgeText to add badge text
+ * Array.toggleID to add toggle
+ * Array.textID to add text by using localization
+ * Array.href to add href
+ * Array.subNavLinks for new DropDown Menu related to item
  **/
 
 interface IProps {
@@ -55,7 +57,7 @@ class DropdownMenu extends React.Component<IProps, IState> {
                         {link.badgeText && (
                           <span className={'badge-text'}>{link.badgeText}</span>
                         )}
-                        {link.toggle ? (
+                        {link.toggleID ? (
                           <ToggleButton
                             checked={link.toggleID}
                             text={link.textID}
