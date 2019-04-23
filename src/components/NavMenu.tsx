@@ -53,11 +53,6 @@ class NavMenu extends React.Component<IProps> {
         href: '/evaluator'
       },
       {
-        name: 'randomAyah',
-        textID: KEYS.RANDOM_AYAH_LINK_TEXT,
-        passFunction: this.handleRandomAyah.bind(this),
-      },
-      {
         name: 'recognition',
         textID: KEYS.AYAH_RECOGNITION,
         href: '/recognition',
