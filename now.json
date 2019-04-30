@@ -1,6 +1,6 @@
 {
   "name": "Tarteel-frontend",
-  "version": 1,
+  "version": 2,
 
   "env": {
     "IQRA_API_KEY": "@iqra_api_key",
