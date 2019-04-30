@@ -171,9 +171,6 @@ class Recognition extends React.Component<IProps, IState> {
         <Navbar />
         <div className={'content'}>
           <div>
-            <h2>
-              <T id={KEYS.AYAH_RECOGNITION} />
-            </h2>
             <p className={'status'}>
               <T id={KEYS.AYAH_RECOGNITION_RECOGNITION_MESSAGE} />
             </p>
@@ -201,7 +198,7 @@ class Recognition extends React.Component<IProps, IState> {
             <T id={KEYS.AYAH_RECOGNITION_IMPROVE_ACCURACY} />
             &nbsp;
             <br />
-            <Link to={'/'}>
+            <Link to={'/contribute'}>
               <T id={KEYS.AYAH_RECOGNITION_CONTRIBUTE} />
             </Link>
           </p>
