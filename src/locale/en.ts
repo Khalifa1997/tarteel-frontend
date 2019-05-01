@@ -17,7 +17,7 @@ const EN: Shape = {
     [KEYS.LOCAL_NATIVENAME]: 'English',
     [KEYS.LOCAL_SELECTLABEL]: 'Language',
     [KEYS.SETTING_TITLE]: 'Settings',
-    [KEYS.LOCAL_TITLE]: 'Tarteel - 50,000 Ayahs Challenge',
+    [KEYS.LOCAL_TITLE]: 'Tarteel -  AI for Quran recitation correction',
     [KEYS.LOCAL_DESCRIPTION]:
       'Tarteel is an open-source project designed to help build digital tools to analyze the recitation of the Quran. Given the important place of reciting the Quran in the lives of Muslims, it is important to build software tools that can help ordinary Muslims recite the Quran with greater accuracy and appreciation.',
     [KEYS.LOCAL_NAME]: 'Tarteel',
