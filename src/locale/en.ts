@@ -26,6 +26,7 @@ const EN: Shape = {
     // COMMON & GENERAL
     [KEYS.HOME_WORD]: 'Home',
     [KEYS.CLICK_WORD]: 'Click',
+    [KEYS.CONTRIBUTE_WORD]: 'Contribute',
     [KEYS.YES_WORD]: 'Yes',
     [KEYS.NO_WORD]: 'No',
     [KEYS.SKIP_WORD]: 'Skip',

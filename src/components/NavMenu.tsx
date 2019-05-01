@@ -65,6 +65,10 @@ const linksFactory: (props: any) => { [key: string]: ILink } = props => {
       textID: KEYS.HOME_WORD,
       href: '/',
     },
+    contribute: {
+      textID: KEYS.CONTRIBUTE_WORD,
+      href: '/contribute',
+    },
     randomAyah: {
       textID: KEYS.RANDOM_AYAH_LINK_TEXT,
       href: '',
@@ -152,7 +156,7 @@ class NavMenu extends React.Component<IProps, IState> {
     let navbarLinks = [
       'home', 'about', 'evaluator',
       'profile',
-      'recognition',
+      'contribute',
       'mobile',
       'partners',
       'donate',

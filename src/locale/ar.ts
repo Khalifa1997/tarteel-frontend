@@ -20,6 +20,7 @@ export default {
     // COMMON & GENERAL
     [KEYS.HOME_WORD]: 'الرئيسية',
     [KEYS.CLICK_WORD]: 'أضغط',
+    [KEYS.CONTRIBUTE_WORD]: 'المساهمة',
     [KEYS.YES_WORD]: 'نعم',
     [KEYS.NO_WORD]: 'لا',
     [KEYS.SKIP_WORD]: 'تخطى',
