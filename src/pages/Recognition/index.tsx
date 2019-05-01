@@ -145,10 +145,7 @@ class Recognition extends React.Component<IProps, IState> {
 
     this.AudioStreamer = new AudioStreamer(this.socket, options);
   }
-  handleOGImage = () => {
-    const locale = this.props.cookies.get('currentLocale') || 'en';
-    return `/public/og/recognition_${locale}.png`;
-  };
+
   componentWillUnmount() {
     if (this.state.isRecording) {
       this.handleStopRecording();
@@ -158,16 +155,8 @@ class Recognition extends React.Component<IProps, IState> {
     const classnames = classNames({
       recording: this.state.isRecording,
     });
-    const ogTitle = this.props.intl.formatMessage({
-      id: KEYS.AYAH_RECOGNITION,
-    });
     return (
       <Container>
-        <Helmet>
-          <title>{ogTitle}</title>
-          <meta property={'og:image'} content={this.handleOGImage()} />
-          <meta name={'twitter:image'} content={this.handleOGImage()} />
-        </Helmet>
         <Navbar />
         <div className={'content'}>
           <div>
