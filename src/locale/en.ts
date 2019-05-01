@@ -49,7 +49,7 @@ const EN: Shape = {
     [KEYS.ABOUT_LINK_TEXT]: 'About',
     [KEYS.YOUR_RECITATIONS]: 'Your Recitations',
     [KEYS.PROFILE_LINK_TEXT]: 'My Profile',
-    [KEYS.MOBILE_APP_LINK_TEXT]: 'Mobile',
+    [KEYS.MOBILE_APP_LINK_TEXT]: 'Mobile App',
     [KEYS.EVALUATE_AYAHS]: 'Evaluate Ayahs',
     [KEYS.GET_STARTED]: 'Get Started',
     [KEYS.PARTNERS_LINK_TEXT]: 'Partners',
