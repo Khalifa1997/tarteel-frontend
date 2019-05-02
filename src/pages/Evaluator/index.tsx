@@ -378,7 +378,7 @@ class Evaluator extends React.Component<IProps, IState> {
       pills,
       currentStep,
     } = this.state;
-    const ogTitle = this.props.intl.formatMessage({ id: KEYS.EVALUATE_AYAHS });
+    const ogTitle = this.props.intl.formatMessage({ id: KEYS.EVALUATE_AYAHS_PAGE_TITLE });
     const audioURL = __DEVELOPMENT__
       ? `http://localhost:8000${currentAyah.audioUrl}`
       : currentAyah.audioUrl;

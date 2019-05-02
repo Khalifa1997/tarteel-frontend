@@ -47,7 +47,6 @@ const values = {
     IOSAppLink: true,
     apiURL: true,
     cdnURL: true,
-    iqraApiKey: true,
     google: true,
     voiceServerURL: true,
     // sentryClient: true,
@@ -72,9 +71,7 @@ const values = {
 
   IOSAppLink: 'https://apple.co/2KWJ74U',
 
-  voiceServerURL: EnvVars.string('VOICE_SERVER_URL'),
-
-  iqraApiKey: EnvVars.string('IQRA_API_KEY'),
+  voiceServerURL: 'https://tarteel-voice.now.sh/',
 
   objective: 50000,
 
