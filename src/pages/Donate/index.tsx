@@ -25,7 +25,7 @@ class Donate extends React.Component<IProps> {
     return (
       <Container>
         <Helmet>
-          <title>{intl.formatMessage({ id: KEYS.DONATE_LINK_TEXT })}</title>
+          <title>{intl.formatMessage({ id: KEYS.DONATE_PAGE_TITLE })}</title>
           <meta
             property={'og:description'}
             content={

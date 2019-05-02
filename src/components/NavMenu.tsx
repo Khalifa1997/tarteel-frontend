@@ -88,7 +88,7 @@ const linksFactory: (props: any) => { [key: string]: ILink } = props => {
       href: '/subscribe',
     },
     dataset: {
-      textID: 'Tarteel datasets',
+      textID: KEYS.TARTEEL_DATASET_LINK_TEXT],
       href: '/dataset',
     },
     contact: {
