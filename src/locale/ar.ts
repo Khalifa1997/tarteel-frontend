@@ -12,7 +12,7 @@ export default {
     [KEYS.LOCAL_NATIVENAME]: 'العربية',
     [KEYS.LOCAL_SELECTLABEL]: 'اللغة',
     [KEYS.SETTING_TITLE]: 'خيارات',
-    [KEYS.LOCAL_TITLE]: 'ترتيل -برنامج تصحيح تلاوة القران',
+    [KEYS.LOCAL_TITLE]: 'ترتيل - برنامج تصحيح تلاوة القران',
     [KEYS.LOCAL_DESCRIPTION]:
       'ترتيل هو مشروع مفتوح المصدر صُمم للمساعده في بناء برامج لتحليل قراءة القرآن. بالنظر لأهمية تلاوة القرآن في حياة المسلمين ، من المهم بناء أدوات برمجية يمكن أن تساعد المسلمين العاديين على قراءة القرآن بشكل أكثر دقة.',
     [KEYS.LOCAL_NAME]: 'ترتيل',
@@ -152,9 +152,8 @@ export default {
       "بواسطة <a href={url} target='_blank'>إقرأ</a>",
     [KEYS.AYAH_RECOGNITION_RECOGNITION_MESSAGE]:
       'إبدأ بالضغط علي زر الميكروفون وأبدأ بالتسجيل لتجد الآيه الأقرب.',
-    [KEYS.AYAH_RECOGNITION_IMPROVE_ACCURACY]:
-      'تريد المساعده في تطوير البرنامج ؟',
-    [KEYS.AYAH_RECOGNITION_CONTRIBUTE]: 'شارك تسجيل الآيه بصوتك',
+    [KEYS.AYAH_RECOGNITION_IMPROVE_ACCURACY]: 'تريد أن ترى خاصية تصحيح التلاوة؟',
+    [KEYS.AYAH_RECOGNITION_CONTRIBUTE]: 'ساهم بصوتك',
     [KEYS.AYAH_RECOGNITION_MIC_PERMISSION_ERROR]:
       "لايوجد أذن لإستخدام الميكروفون لحل هذه المشكله من فضلك غير إعدادات الصوت لديك <a target='_blank' href={chromeLink}> من هنا</a>.",
     [KEYS.AYAH_RECOGNITION_AUDIO_CAPTURE_ERROR]:

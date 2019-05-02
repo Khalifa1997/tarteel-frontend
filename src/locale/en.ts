@@ -276,7 +276,7 @@ const EN: Shape = {
       "Powered by <a href={url} target='_blank'>Iqra</a>",
     [KEYS.AYAH_RECOGNITION_RECOGNITION_MESSAGE]:
       'Tap on the mic below and start recording to find the ayah with the closest match.',
-    [KEYS.AYAH_RECOGNITION_IMPROVE_ACCURACY]: 'Want to improve Accuracy?',
+    [KEYS.AYAH_RECOGNITION_IMPROVE_ACCURACY]: 'Want to see recitation correction?',
     [KEYS.AYAH_RECOGNITION_CONTRIBUTE]: 'Contribute your recording',
     [KEYS.AYAH_RECOGNITION_MIC_PERMISSION_ERROR]:
       "Permission to use microphone is blocked. To fix, please \n <a target='_blank' href={chromeLink}> change your settings here</a>.",
