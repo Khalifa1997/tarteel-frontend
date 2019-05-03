@@ -66,7 +66,7 @@ const AppHelmet: React.SFC = ({ intl, path }: IProps) => {
 
   const tags = {
     title,
-    titleTemplate: `%s | ${localName}`,
+    titleTemplate: `%s`,
     meta: [
       {
         charset: 'utf-8',

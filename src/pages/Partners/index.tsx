@@ -27,7 +27,7 @@ class Partners extends React.Component<IProps> {
     return (
       <Container>
         <Helmet>
-          <title>{intl.formatMessage({ id: KEYS.PARTNERS_LINK_TEXT })}</title>
+          <title>{intl.formatMessage({ id: KEYS.PARTNERS_PAGE_TITLE })}</title>
         </Helmet>
         <Navbar />
         <div className="content">

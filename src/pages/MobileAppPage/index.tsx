@@ -44,7 +44,7 @@ class MobileAppPage extends Component<IProps, never> {
           </div>
           <div className="mobile-page-text">
             <h1>
-              <T id={KEYS.MOBILE_PAGE_TITLE} />
+              <T id={KEYS.MOBILE_KEYWORD} />
             </h1>
             <p className="large-arabic-text">
               <T id={KEYS.MOBILE_PAGE_PARAGRAPH} />
