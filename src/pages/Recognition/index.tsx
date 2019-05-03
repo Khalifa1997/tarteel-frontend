@@ -69,7 +69,6 @@ class Recognition extends React.Component<IProps, IState> {
       showErrorMessage: true,
     });
     this.handleStopRecording();
-    // console.log(e);
   };
   handleStartRecording = () => {
     // resets the query string with new recordings
@@ -88,7 +87,6 @@ class Recognition extends React.Component<IProps, IState> {
       this.handleStopRecording();
       this.props.setRecognitionResults(results);
       this.props.history.push('/recognition/results');
-      // console.log(results);
     } else {
       this.handleStartRecording();
       this.setState({

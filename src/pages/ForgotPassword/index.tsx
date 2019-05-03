@@ -43,7 +43,6 @@ class ForgotPassword extends React.Component<IProps, IState> {
           showVerification: false,
           showVerified: true,
         });
-        console.log('changed');
       })
       .catch(err => console.log('err: ', err));
   };

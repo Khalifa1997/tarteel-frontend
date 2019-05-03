@@ -69,7 +69,6 @@ class LoginForm extends React.Component<IProps, IState> {
         Auth.setupTOTP(user);
       } else {
         // The user directly signs in
-        console.log(user);
         this.setState({ isLoading: false });
       }
     } catch (err) {

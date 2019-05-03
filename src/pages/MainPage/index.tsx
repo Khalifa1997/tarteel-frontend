@@ -44,7 +44,6 @@ class Main extends React.Component<IProps, never> {
     let ogTitle = this.props.intl.formatMessage({
       id: KEYS.CONTRIBUTE_PAGE_TITLE,
     });
-    console.log('ogTitle is', ogTitle);
     if (surah && ayah) {
       ogTitle =
         locale === 'ar'
