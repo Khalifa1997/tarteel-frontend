@@ -511,7 +511,6 @@ class Transcribe extends React.Component<IProps, IState> {
     );
   };
   drawMatch = result => {
-    console.log(result);
     const wordsList = document.querySelector('.ayah-display').children;
     wordsList[result.index].classList.add('active');
   };

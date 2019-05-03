@@ -12,7 +12,6 @@ export const fetchRandomAyah = (req?: any) => {
   return fetch(`${API_URL}/api/get_ayah/?format=json`, options)
     .then(res => res.json())
     .then(json => {
-      // console.log(json);
       return json;
     });
 };

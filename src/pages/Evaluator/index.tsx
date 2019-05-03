@@ -113,7 +113,6 @@ class Evaluator extends React.Component<IProps, IState> {
       .then(this.handleUpcomingAyah)
       .catch((e: Error | Response) => {
         if (e.status === 500) {
-          console.log('reload Random Ayah');
           fetchEvaluatorAyah().then(this.handleUpcomingAyah);
         }
       });
@@ -138,9 +137,7 @@ class Evaluator extends React.Component<IProps, IState> {
   registerAudioEvents = audio => {
     audio.preload = 'true';
     audio.crossOrigin = 'anonymous';
-    audio.onloadedmetadata = () => {
-      console.log('Loaded...!');
-    };
+    audio.onloadedmetadata = () => {};
     audio.onended = this.handleAudioEnd;
     audio.onerror = this.handleAudioEnd;
     audio.onwaiting = () => {
@@ -168,7 +165,6 @@ class Evaluator extends React.Component<IProps, IState> {
     this.setState((state, props) => {
       const newPills = state.pills;
       newPills[state.currentStep - 1] = action;
-      console.log(newPills);
       return {
         pills: newPills,
       };
@@ -274,7 +270,6 @@ class Evaluator extends React.Component<IProps, IState> {
     let barHeight = fbcArray[0] / 100;
     barHeight = barHeight > 1.25 ? 1 : barHeight;
     this.siriWave.setAmplitude(barHeight);
-    // console.log(barHeight);
 
     this.drawFunction = window.requestAnimationFrame(this.drawLoop);
   };
@@ -378,7 +373,9 @@ class Evaluator extends React.Component<IProps, IState> {
       pills,
       currentStep,
     } = this.state;
-    const ogTitle = this.props.intl.formatMessage({ id: KEYS.EVALUATE_AYAHS_PAGE_TITLE });
+    const ogTitle = this.props.intl.formatMessage({
+      id: KEYS.EVALUATE_AYAHS_PAGE_TITLE,
+    });
     const audioURL = __DEVELOPMENT__
       ? `http://localhost:8000${currentAyah.audioUrl}`
       : currentAyah.audioUrl;

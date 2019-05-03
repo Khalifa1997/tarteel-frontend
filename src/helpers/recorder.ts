@@ -57,13 +57,8 @@ export async function startRecording(props?: any) {
     if (!audio_context) {
       audio_context = new AudioContext();
     }
-    console.log('Audio context set up.');
-    console.log(
-      'navigator.getUserMedia ' +
-        (navigator.getUserMedia ? 'available.' : 'not present!')
-    );
   } catch (e) {
-    console.log('No web audio support in this browser!');
+    console.log('No web audio support in this browser! ', e.message);
   }
 
   try {
