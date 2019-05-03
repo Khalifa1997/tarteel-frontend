@@ -19,7 +19,7 @@ const EN: Shape = {
     [KEYS.SETTING_TITLE]: 'Settings',
     [KEYS.LOCAL_TITLE]: 'Tarteel -  AI for Quran recitation correction',
     [KEYS.LOCAL_DESCRIPTION]:
-      'Tarteel is an open-source project designed to help build digital tools to analyze the recitation of the Quran. Given the important place of reciting the Quran in the lives of Muslims, it is important to build software tools that can help ordinary Muslims recite the Quran with greater accuracy and appreciation.',
+      'Identify the ayah you’re reciting, voice search the Quran and find the translation. Try the demo on our website with a tap or download our mobile app to use it on the go.',
     [KEYS.LOCAL_NAME]: 'Tarteel',
     [KEYS.CURRENT_APPLICATION_VERSION]: 'Tarteel version 1.0',
 
