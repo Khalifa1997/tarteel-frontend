@@ -19,7 +19,7 @@ const EN: Shape = {
     [KEYS.SETTING_TITLE]: 'Settings',
     [KEYS.LOCAL_TITLE]: 'Tarteel -  AI for Quran recitation correction',
     [KEYS.LOCAL_DESCRIPTION]:
-      'Tarteel is an open-source project designed to help build digital tools to analyze the recitation of the Quran. Given the important place of reciting the Quran in the lives of Muslims, it is important to build software tools that can help ordinary Muslims recite the Quran with greater accuracy and appreciation.',
+      'Identify the ayah you’re reciting, voice search the Quran and find the translation. Try the demo on our website with a tap or download our mobile app to use it on the go.',
     [KEYS.LOCAL_NAME]: 'Tarteel',
     [KEYS.CURRENT_APPLICATION_VERSION]: 'Tarteel version 1.0',
 
@@ -258,7 +258,7 @@ const EN: Shape = {
 
     // RECORDING ERROR
     [KEYS.RECORDING_ERROR_MESSAGE_1]:
-      "It doesn't look like you have microphone permissions enabled. Get a better experience on our mobile app or try a different browser!",
+      "It doesn't look like you have microphone permissions enabled. Switch to another browser or try the mobile app: ",
     [KEYS.RECORDING_ERROR_MESSAGE_2]:
       'To upload recordings, please enable microphone access, or use a different browser.',
 
@@ -364,6 +364,9 @@ const EN: Shape = {
       'Moin Nadeem, junior at MIT studying computer science',
     [KEYS.CONTRIBUTOR_15]: 'Moumen Soliman, Front End Software Engineer',
   },
+
+  // TRANSCRIBE
+  [KEYS.TRANSCRIBE]: 'Transcribe',
 };
 
 export default EN;
