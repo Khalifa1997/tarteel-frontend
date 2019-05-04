@@ -47,7 +47,10 @@ export function stopRecording() {
 }
 
 export async function startRecording(props?: any) {
-  const { onError } = props;
+  let onError = null;
+  if (props && props.onError){
+    onError = props.onError;
+  }
   try {
     // webkit shim.
     window.AudioContext = window.AudioContext || window.webkitAudioContext;
@@ -69,10 +72,12 @@ export async function startRecording(props?: any) {
       })
       .catch(e => {
         if (e) {
+          console.log(e)
           onError();
         }
       });
   } catch (e) {
+    console.log(e)
     onError();
   }
 }
