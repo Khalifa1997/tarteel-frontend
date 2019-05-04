@@ -238,10 +238,8 @@ class Footer extends React.Component<IProps, IState> {
     });
   };
   handleGetStarted = () => {
-    this.setState({
-      showGetStarted: true,
-    });
-  };
+    this.props.history.push('/');
+    };
   public render() {
     const { isRecording, isDoneRecording, isContinuous } = this.props.status;
     const { showErrorMessage, showGetStarted } = this.state;

@@ -12,7 +12,7 @@ export default {
     [KEYS.LOCAL_NATIVENAME]: 'العربية',
     [KEYS.LOCAL_SELECTLABEL]: 'اللغة',
     [KEYS.SETTING_TITLE]: 'خيارات',
-    [KEYS.LOCAL_TITLE]: 'ترتيل - تحدي ٥٠ ألف آيه',
+    [KEYS.LOCAL_TITLE]: 'ترتيل - برنامج تصحيح تلاوة القران',
     [KEYS.LOCAL_DESCRIPTION]:
       'ترتيل هو مشروع مفتوح المصدر صُمم للمساعده في بناء برامج لتحليل قراءة القرآن. بالنظر لأهمية تلاوة القرآن في حياة المسلمين ، من المهم بناء أدوات برمجية يمكن أن تساعد المسلمين العاديين على قراءة القرآن بشكل أكثر دقة.',
     [KEYS.LOCAL_NAME]: 'ترتيل',
@@ -20,6 +20,7 @@ export default {
     // COMMON & GENERAL
     [KEYS.HOME_WORD]: 'الرئيسية',
     [KEYS.CLICK_WORD]: 'أضغط',
+    [KEYS.CONTRIBUTE_WORD]: 'المساهمة',
     [KEYS.YES_WORD]: 'نعم',
     [KEYS.NO_WORD]: 'لا',
     [KEYS.SKIP_WORD]: 'تخطى',
@@ -38,7 +39,9 @@ export default {
     [KEYS.MOBILE_APP_LINK_TEXT]: 'تطبيق الهاتف',
     [KEYS.EVALUATE_AYAHS]: 'تقييم آيات',
     [KEYS.GET_STARTED]: 'أبدأ الآن',
+    [KEYS.PARTNERS_LINK_TEXT]: 'الشركاء',
     [KEYS.PREVIOUS_WORD]: 'السابقه',
+    [KEYS.DONATE_LINK_TEXT]: 'التبرع النقدي',
 
     // AYAH PICKER
     [KEYS.AYAH_PICKER_TITLE]: 'اختر آية',
@@ -119,7 +122,7 @@ export default {
       'أكشاك المسجد التي تتبع الإمام وتعرض ترجمة الآية',
 
     // MOBILE PAGE
-    [KEYS.MOBILE_PAGE_TITLE]: 'حمل تطبيق ترتيل',
+    [KEYS.MOBILE_PAGE_TITLE]: 'حمل تطبيق الهاتف | ترتيل ',
     [KEYS.MOBILE_PAGE_PARAGRAPH]:
       'حمل تطبيق ترتيل علي هاتفك واجعل وقت فراغك مفيد و مليئ بالثواب',
 
@@ -132,7 +135,7 @@ export default {
     [KEYS.MESSAGE_TEXTAREA_LABEL]: 'الرساله',
 
     // LANDING
-    [KEYS.LANDING_GREETING_MESSAGE]: 'سلام !',
+    [KEYS.LANDING_GREETING_MESSAGE]: 'السلام عليكم',
     [KEYS.LANDING_FIRST_PARAGRAPH]:
       "أهلاً بك في تحدي ترتيل 50,000 ، شكراً لمساعدتنا في بناء أول مجموعة بيانات عامة مفتوحة المصدر في العالم لتلاوات القرآن من قبل أشخاص عاديين مثلي ومثلك. <a href='/about'>اقرأ المزيد</a> ",
     [KEYS.LANDING_SECOND_PARAGRAPH_TITLE]: 'كيف يعمل ؟',
@@ -152,8 +155,8 @@ export default {
     [KEYS.AYAH_RECOGNITION_RECOGNITION_MESSAGE]:
       'إبدأ بالضغط علي زر الميكروفون وأبدأ بالتسجيل لتجد الآيه الأقرب.',
     [KEYS.AYAH_RECOGNITION_IMPROVE_ACCURACY]:
-      'تريد المساعده في تطوير البرنامج ؟',
-    [KEYS.AYAH_RECOGNITION_CONTRIBUTE]: 'شارك تسجيل الآيه بصوتك',
+      'تريد أن ترى خاصية تصحيح التلاوة؟',
+    [KEYS.AYAH_RECOGNITION_CONTRIBUTE]: 'ساهم بصوتك',
     [KEYS.AYAH_RECOGNITION_MIC_PERMISSION_ERROR]:
       "لايوجد أذن لإستخدام الميكروفون لحل هذه المشكله من فضلك غير إعدادات الصوت لديك <a target='_blank' href={chromeLink}> من هنا</a>.",
     [KEYS.AYAH_RECOGNITION_AUDIO_CAPTURE_ERROR]:
@@ -163,10 +166,38 @@ export default {
     [KEYS.AYAH_RECOGNITION_RESULTS]: 'نتيجه',
     [KEYS.AYAH_RECOGNITION_NEW_SEARCH]: 'بحث جديد',
 
+    // EVALUATE AYAHS
+    [KEYS.EVALUATE_AYAHS_PAGE_TITLE]: 'ساهم بتقويم الأيات | ترتيل',
+
+    // CONTRIBUTE PAGE
+    [KEYS.CONTRIBUTE_PAGE_TITLE]: 'ساهم بتسجيل صوتك | ترتيل',
+
+    // PARTNERS PAGE
+    [KEYS.PARTNERS_PAGE_TITLE]: 'الشركاء | ترتيل',
+    [KEYS.PARTNERS_PARAGRAPH]:
+      "We have proudly partnered with these orgs to further mission of Tarteel. If you're interested in partenering with us, <a href='/contact'>get in touch</a>!",
+
+    // DATASET
+    [KEYS.TARTEEL_DATASET_PAGE_TITLE]: 'Download the 25k dataset | Tarteel',
+    [KEYS.TARTEEL_DATASET_LINK_TEXT]: 'مجموعة البيانات',
+    [KEYS.DATASET_DOWNLOAD_TEXT]: 'Download the Tarteel Dataset',
+    [KEYS.DATASET_DOWNLOAD_PARAGRAPH]:
+      'The full dataset is available in CSV format. Audio files can be downloaded from the accompanying URLs in the CSV.',
+    [KEYS.DATASET_DOWNLOAD_DETAILS]:
+      '(.csv, 5.6 MB) -- approximately 25,000 recordings without evaluations.',
+    [KEYS.DATASET_DOWNLOAD_SAMPLE_RECORDINGS_TEXT]:
+      'Download Sample Recordings',
+    [KEYS.DATASET_DOWNLOAD_SAMPLE_RECORDINGS_PARAGRAPH]:
+      'Here are some sample audio files that have been submitted by Tarteel users:',
+
     // CONTACT US
     [KEYS.CONTACT_US]: 'تواصل معنا',
+    [KEYS.CONTACT_US_PAGE_TITLE]: 'تواصل معنا| ترتيل',
     [KEYS.CONTACT_US_SEND]: 'إرسال',
     [KEYS.CONTACT_US_BUTTON_TEXT]: 'تواصل معنا',
+
+    // DONATE PAGE
+    [KEYS.DONATE_PAGE_TITLE]: 'التبرع النقدي | ترتيل',
 
     // CONTRIBUTORS
     [KEYS.CONTRIBUTOR_1]: 'أبوبكر عابد ، طالب دكتوراه - جامعة ستانفورد',
