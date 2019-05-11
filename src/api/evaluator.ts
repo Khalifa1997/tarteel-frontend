@@ -38,16 +38,16 @@ export const submitAyah = (evaluation: string, recordingId: number) => {
 };
 
 export const fetchSpecificEvaluatorAyah = (
-  surah: number,
-  ayah: number,
-  recordingId: number
+  surahNum: number,
+  ayahNum: number,
+  recordingId: number,
 ) => {
   const options = {
     method: 'POST',
     body: JSON.stringify({
       recording_id: recordingId,
-      // surah,
-      // ayah,
+      surah: surahNum,
+      ayah: ayahNum,
     }),
     headers: {
       'Content-Type': 'application/json',

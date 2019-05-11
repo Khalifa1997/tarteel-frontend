@@ -28,7 +28,7 @@ function registerEnvFile() {
     // Is there an environment config file at the app root?
     // This always takes preference.
     // e.g. /projects/react-universally/.env
-    // path.resolve(appRootDir.get(), envFile),
+    path.resolve(appRootDir.get(), envFile),
     // Is there an environment config file at the app root for our target
     // environment name?
     // e.g. /projects/react-universally/.env.staging
