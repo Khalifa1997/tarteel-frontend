@@ -279,7 +279,7 @@ const EN: Shape = {
     [KEYS.AYAH_RECOGNITION_POWERED_BY]:
       "Powered by <a href={url} target='_blank'>Iqra</a>",
     [KEYS.AYAH_RECOGNITION_RECOGNITION_MESSAGE]:
-      'Tap on the mic below and start recording to find the ayah with the closest match.',
+      'Voice search the Quran by reciting a verse or part of a verse.',
     [KEYS.AYAH_RECOGNITION_IMPROVE_ACCURACY]:
       'Want to see recitation correction?',
     [KEYS.AYAH_RECOGNITION_CONTRIBUTE]: 'Contribute your recording',
