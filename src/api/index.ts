@@ -5,7 +5,7 @@ import { IDemographics } from '../types/GlobalState';
 const API_URL = __DEVELOPMENT__ ? 'http://localhost:8000' : config('apiURL');
 
 export const submitDemographics = (data: IDemographics) => {
-  return fetch(`${API_URL}/api/demographics/`, {
+  return fetch(`${API_URL}/v1/demographics/`, {
     method: 'POST',
     body: JSON.stringify(data),
     headers: {
@@ -17,13 +17,13 @@ export const submitDemographics = (data: IDemographics) => {
 };
 
 export const fetchAboutData = () => {
-  return fetch(`${API_URL}/api/about?format=json`, {
+  return fetch(`${API_URL}/v1/about/?format=json`, {
     credentials: 'include',
   }).then(res => res.json());
 };
 
 export const fetchProfileData = (sessionId: string) => {
-  return fetch(`${API_URL}/api/profile/${sessionId}?format=json`, {
+  return fetch(`${API_URL}/v1/profile/${sessionId}?format=json`, {
     credentials: 'include',
   }).then(res => res.json());
 };
@@ -34,7 +34,7 @@ export const fetchSessionData = (req?: any) => {
     : {
         credentials: 'include',
       };
-  return fetch(`${API_URL}/api/index/?format=json`, options).then(res =>
+  return fetch(`${API_URL}/v1/index/?format=json`, options).then(res =>
     res.json()
   );
 };
@@ -45,7 +45,7 @@ export const getDatasetRecordings = (req?: any) => {
     : {
         credentials: 'include',
       };
-  return fetch(`${API_URL}/api/download-audio/?format=json`, options).then(
+  return fetch(`${API_URL}/download-audio/?format=json`, options).then(
     res => res.json()
   );
 };

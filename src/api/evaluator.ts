@@ -9,7 +9,7 @@ export const fetchEvaluatorAyah = (req?: any) => {
     : {
         credentials: 'include',
       };
-  return fetch(`${API_URL}/api/v2/evaluator/?format=json`, options).then(
+  return fetch(`${API_URL}/v1/evaluator/?format=json`, options).then(
     (res: Response) => res.json()
   );
 };
@@ -19,7 +19,7 @@ export const submitAyah = (evaluation: string, recordingId: number) => {
     recording_id: recordingId,
     evaluation,
   };
-  fetch(`${API_URL}/api/v2/submit_evaluation`, {
+  fetch(`${API_URL}/v1/submit_evaluation`, {
     method: 'POST',
     body: JSON.stringify({ ayah }),
     headers: {
@@ -55,7 +55,7 @@ export const fetchSpecificEvaluatorAyah = (
     },
     credentials: 'include',
   };
-  return fetch(`${API_URL}/api/v2/evaluator/?format=json`, options).then(
+  return fetch(`${API_URL}/v1/evaluator/?format=json`, options).then(
     (res: Response) => {
       if (res.status !== 200) {
         return Promise.reject(res);

@@ -9,7 +9,7 @@ export const fetchRandomAyah = (req?: any) => {
     : {
         credentials: 'include',
       };
-  return fetch(`${API_URL}/api/get_ayah/?format=json`, options)
+  return fetch(`${API_URL}/v1/get_ayah/?format=json`, options)
     .then(res => res.json())
     .then(json => {
       return json;
@@ -29,7 +29,7 @@ export const fetchSpecificAyah = (surah: number, ayah: number) => {
     },
     credentials: 'include',
   };
-  return fetch(`${API_URL}/api/get_ayah/?format=json`, options).then(res =>
+  return fetch(`${API_URL}/v1/get_ayah/?format=json`, options).then(res =>
     res.json()
   );
 };
@@ -53,7 +53,7 @@ export const sendRecording = (
   body.append('session_id', sessionId);
   body.append('recitation_mode', recitationMode);
 
-  return fetch(`${API_URL}/api/recordings/`, {
+  return fetch(`${API_URL}/v1/recordings/`, {
     method: 'POST',
     body,
     credentials: 'include',
@@ -61,7 +61,7 @@ export const sendRecording = (
 };
 
 export const fetchSurah = (num: number) => {
-  return fetch(`${API_URL}/api/surah/${num}/?format=json`).then(res =>
+  return fetch(`${API_URL}/v1/surah/${num}/?format=json`).then(res =>
     res.json()
   );
 };
