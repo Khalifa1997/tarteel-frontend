@@ -116,6 +116,8 @@ export default {
     [KEYS.ABOUT_PAGE_FOURTH_PARAGRAPH_TITLE]: 'كيف يمكنني أن أقدم المساعدة؟',
     [KEYS.ABOUT_PAGE_FOURTH_PARAGRAPH_TEXT]:
       "ترتيل هو مشروع مفتوح المصدر يتم تطويره من قبل المطورين المهتمين بالعمل علي ترتيل .إذا كنت ترغب في المساهمة ، يرجي مراجعة : <a href='https://github.com/Tarteel-io/tarteel.io'>https://github.com/Tarteel-io/tarteel.io</a>",
+    [KEYS.ABOUT_PAGE_LAST_PARAGRAPH_TITLE]: 'اين يمكنني أن أجد المزيد من المعلومات عن ترتيل؟',
+    [KEYS.ABOUT_PAGE_LAST_PARAGRAPH_TEXT]: 'للمزيد من المعلومات, يمكنك قراءة <a href='https://drive.google.com/open?id=17RpnWAbmmkl3iPM9awSNsf4S_2Mk_pKd' target='_blank'>المستند التقني</a>',
     [KEYS.FIELDS_OF_USE_FIRST_ITEM]: 'أدوات تصحيح تلقائي لأخطاء التلاوة',
     [KEYS.FIELDS_OF_USE_SECOND_ITEM]: 'أدوات تعليم التجويد في نفس السياق',
     [KEYS.FIELDS_OF_USE_THIRD_ITEM]:
