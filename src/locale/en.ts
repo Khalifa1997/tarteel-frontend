@@ -185,7 +185,7 @@ const EN: Shape = {
     [KEYS.ABOUT_PAGE_LAST_PARAGRAPH_TITLE]:
       'Where can I learn more about Tarteel?',
     [KEYS.ABOUT_PAGE_LAST_PARAGRAPH_TEXT]:
-      "For more information, please check out our <a href='https://api.tarteel.io/static/docs/white-paper.pdf' target='_blank'>white paper</a>.",
+      "For more information, please check out our <a href='https://drive.google.com/open?id=17RpnWAbmmkl3iPM9awSNsf4S_2Mk_pKd' target='_blank'>white paper</a>.",
     [KEYS.FIELDS_OF_USE_FIRST_ITEM]:
       'Hifz helping tools that automatically correct mistakes',
     [KEYS.FIELDS_OF_USE_SECOND_ITEM]:
