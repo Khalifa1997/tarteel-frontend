@@ -342,31 +342,19 @@ const EN: Shape = {
     [KEYS.DONATE_PAGE_TITLE]: 'Donate | Tarteel',
 
     // CONTRIBUTORS
-    [KEYS.CONTRIBUTOR_1]: 'Abubakar Abid, PhD student at Stanford University',
-    [KEYS.CONTRIBUTOR_2]: 'Ali Abid, software engineer at Google',
-    [KEYS.CONTRIBUTOR_3]: 'Ali Abdalla, mechanical engineer at Tesla',
-    [KEYS.CONTRIBUTOR_4]:
-      'Abdellatif Abdelfattah, software engineer at Twitter',
-    [KEYS.CONTRIBUTOR_5]: 'BaHaa Jr., software engineering student at HTI',
-    [KEYS.CONTRIBUTOR_6]: 'Hamzah Khan, software engineer at Uber ATG',
-    [KEYS.CONTRIBUTOR_7]:
-      'Areeba Abid, biomedical engineering student at Georgia Tech',
-    [KEYS.CONTRIBUTOR_8]:
-      'Anas Abou Allaban, roboticist and undergraduate at Northeastern University',
-    [KEYS.CONTRIBUTOR_9]: 'Abdulrahman Alfozan, software engineer at Facebook',
-    [KEYS.CONTRIBUTOR_10]:
-      'Mohammad Siddiqui, 4th Year undergraduate student at UCLA.',
-    [KEYS.CONTRIBUTOR_11]: 'Ali Emara, iOS Software Engineer at Adobe',
-    [KEYS.CONTRIBUTOR_12]: 'Haider Ahmad, recent Duke University grad',
-    [KEYS.CONTRIBUTOR_13]:
-      'Marwa Abdulhai, computer science undergraduate at MIT',
-    [KEYS.CONTRIBUTOR_14]:
-      'Moin Nadeem, junior at MIT studying computer science',
-    [KEYS.CONTRIBUTOR_15]: 'Moumen Soliman, Front End Software Engineer',
-  },
+    [KEYS.CONTRIBUTOR_1]: 'Abdellatif Abdelfattah, software engineer at Twitter',
+    [KEYS.CONTRIBUTOR_2]: 'Anas Abou Allaban, roboticist from Northeastern University',
+    [KEYS.CONTRIBUTOR_3]: 'Hamzah Khan, software engineer at Uber ATG',
+    [KEYS.CONTRIBUTOR_4]: 'Areeba Abid, biomedical engineering student at Georgia Tech',
+    [KEYS.CONTRIBUTOR_5]: 'Abdulrahman Alfozan, software engineer at Facebook',
+    [KEYS.CONTRIBUTOR_6]: 'Mohammad Siddiqui, 4th Year undergraduate student at UCLA.',
+    [KEYS.CONTRIBUTOR_7]: 'Haider Ahmad, recent Duke University grad',
+    [KEYS.CONTRIBUTOR_8]: 'Marwa Abdulhai, computer science undergraduate at MIT',
+    [KEYS.CONTRIBUTOR_9]: 'Moumen Soliman, Front End Software Engineer',
 
-  // TRANSCRIBE
-  [KEYS.TRANSCRIBE]: 'Transcribe',
+    // TRANSCRIBE
+    [KEYS.TRANSCRIBE]: 'Transcribe',
+  },
 };
 
 export default EN;
