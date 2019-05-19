@@ -67,9 +67,10 @@ const values = {
 
   cdnURL: CDN_URL,
 
-  androidAppLink: 'http://bit.ly/2Owlhio',
+  androidAppLink:
+    'https://play.google.com/store/apps/details?id=com.mmmoussa.iqra',
 
-  IOSAppLink: 'https://apple.co/2KWJ74U',
+  IOSAppLink: 'https://itunes.apple.com/us/app/iqra/id1391009396',
 
   voiceServerURL: 'https://tarteel-voice.now.sh/',
 
