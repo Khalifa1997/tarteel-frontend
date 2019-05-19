@@ -1,8 +1,10 @@
-import config from '../../config';
 import { backendRequestOptions } from '../helpers/cookie';
 import { IDemographics } from '../types/GlobalState';
+import { getApiURL } from '../helpers/utils';
 
-const API_URL = __DEVELOPMENT__ ? 'http://localhost:8000' : config('apiURL');
+
+const API_URL: string = getApiURL();
+
 
 export const submitDemographics = (data: IDemographics) => {
   /**

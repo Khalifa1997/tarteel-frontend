@@ -1,7 +1,9 @@
-import config from '../../config';
 import { backendRequestOptions } from '../helpers/cookie';
+import { getApiURL } from '../helpers/utils';
 
-const API_URL = __DEVELOPMENT__ ? 'http://localhost:8000' : config('apiURL');
+
+const API_URL: string = getApiURL();
+
 
 export const fetchEvaluatorAyah = (req?: any) => {
   const options = __SERVER__ ?

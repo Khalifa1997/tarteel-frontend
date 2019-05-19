@@ -1,16 +1,9 @@
-import config from '../../config';
 import { backendRequestOptions } from '../helpers/cookie';
+import { getApiURL } from '../helpers/utils';
 
-// The API URL is defined based on the environment:
-// 1. Local dev     2. Staging (now.sh)     3. Production
-let API_URL: string;
-if (__DEVELOPMENT__) {
-  API_URL = 'http://localhost:8000';
-} else if (window.location.href.indexOf("now.sh") > -1) {
-  API_URL = config('apiDevURL');
-} else {
-  API_URL = config('apiURL');
-}
+
+const API_URL: string = getApiURL();
+
 
 export const fetchRandomAyah = (req?: any) => {
   const options = __SERVER__
@@ -39,7 +32,7 @@ export const fetchSpecificAyah = (surah: number, ayah: number) => {
     credentials: 'include',
   };
   return fetch(`${API_URL}/v1/get_ayah/?format=json`, options).then(res =>
-    res.json()
+    res.json(),
   );
 };
 
