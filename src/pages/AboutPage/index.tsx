@@ -322,24 +322,6 @@ class About extends Component<IProps, IState> {
                 <li className="large-arabic-text">
                   <T id={KEYS.CONTRIBUTOR_9} />
                 </li>
-                <li className="large-arabic-text">
-                  <T id={KEYS.CONTRIBUTOR_10} />
-                </li>
-                <li className="large-arabic-text">
-                  <T id={KEYS.CONTRIBUTOR_11} />
-                </li>
-                <li className="large-arabic-text">
-                  <T id={KEYS.CONTRIBUTOR_12} />
-                </li>
-                <li className="large-arabic-text">
-                  <T id={KEYS.CONTRIBUTOR_13} />
-                </li>
-                <li className="large-arabic-text">
-                  <T id={KEYS.CONTRIBUTOR_14} />
-                </li>
-                <li className="large-arabic-text">
-                  <T id={KEYS.CONTRIBUTOR_15} />
-                </li>
               </ul>
               <h2 className={rtl}>
                 <T id={KEYS.ABOUT_PAGE_FOURTH_PARAGRAPH_TITLE} />
