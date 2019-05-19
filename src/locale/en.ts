@@ -17,7 +17,7 @@ const EN: Shape = {
     [KEYS.LOCAL_NATIVENAME]: 'English',
     [KEYS.LOCAL_SELECTLABEL]: 'Language',
     [KEYS.SETTING_TITLE]: 'Settings',
-    [KEYS.LOCAL_TITLE]: 'Tarteel -  AI for Quran recitation correction',
+    [KEYS.LOCAL_TITLE]: 'Tarteel -  AI for Perfecting Quran Recitation',
     [KEYS.LOCAL_DESCRIPTION]:
       'Identify the ayah you’re reciting, voice search the Quran and find the translation. Try the demo on our website with a tap or download our mobile app to use it on the go.',
     [KEYS.LOCAL_NAME]: 'Tarteel',
@@ -52,7 +52,7 @@ const EN: Shape = {
     [KEYS.MOBILE_APP_LINK_TEXT]: 'Mobile App',
     [KEYS.EVALUATE_AYAHS]: 'Evaluate Ayahs',
     [KEYS.EVALUATE_AYAHS_PAGE_TITLE]: 'Evaluate Ayahs | Tarteel',
-    [KEYS.GET_STARTED]: 'Get Started',
+    [KEYS.GET_STARTED]: 'Recite again',
     [KEYS.PARTNERS_LINK_TEXT]: 'Partners',
     [KEYS.PREVIOUS_WORD]: 'Prev',
     [KEYS.DONATE_LINK_TEXT]: 'Donate',
