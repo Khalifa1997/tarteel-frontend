@@ -114,7 +114,12 @@ class Demographics extends React.Component<IProps, IState> {
   ];
   submitDemographics = () => {
     this.setState({ isSubmitting: true });
-    submitDemographics(this.props.demographicData).then(() => {
+    const demographicRequestBody = {
+      ...this.props.demographicData,
+      'session_id': this.props.profile.sessionId,
+      'platform': window.navigator.userAgent,
+    };
+    submitDemographics(demographicRequestBody).then(() => {
       setDemographicData(this.props.demographicData);
       this.props.unsetAskForDemographics();
       this.setState({

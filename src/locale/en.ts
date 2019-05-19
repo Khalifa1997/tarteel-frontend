@@ -1,11 +1,10 @@
 import KEYS from './keys';
-import React from 'react';
 
-interface Shape {
+interface IShape {
   messages: { [key: string]: string };
 }
 
-const EN: Shape = {
+const EN: IShape = {
   messages: {
     // LANGUAGE
     local: 'english',

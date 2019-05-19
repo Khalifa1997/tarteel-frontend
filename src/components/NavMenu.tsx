@@ -88,7 +88,7 @@ const linksFactory: (props: any) => { [key: string]: ILink } = props => {
       href: '/subscribe',
     },
     dataset: {
-      textID: KEYS.TARTEEL_DATASET_LINK_TEXT],
+      textID: KEYS.TARTEEL_DATASET_LINK_TEXT,
       href: '/dataset',
     },
     contact: {
@@ -124,7 +124,7 @@ class NavMenu extends React.Component<IProps, IState> {
       this.props.toggleFetchingCurrentAyah();
     });
   };
-  public renderItem = (item: ILink, className?: string) => {
+  public renderItem = (item: ILink, index: number,  className?: string) => {
     const classNames = classnames({
       active: item.href === this.props.location.pathname,
       busy: item.busy,
@@ -132,7 +132,7 @@ class NavMenu extends React.Component<IProps, IState> {
       [className]: className,
     });
     return (
-      <LinkContainer>
+      <LinkContainer key={index}>
         <Link
           to={item.href}
           onClick={() => {
@@ -190,8 +190,8 @@ class NavMenu extends React.Component<IProps, IState> {
               }}
             >
               <div className="list">
-                {Object.keys(pick(links, navbarLinks)).map((key: string) => {
-                  return this.renderItem(links[key], 'list-item');
+                {Object.keys(pick(links, navbarLinks)).map((key: string, i: number) => {
+                  return this.renderItem(links[key], i, 'list-item');
                 })}
               </div>
             </OutsideClickHandler>

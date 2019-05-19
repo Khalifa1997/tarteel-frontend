@@ -5,7 +5,14 @@ import { IDemographics } from '../types/GlobalState';
 const API_URL = __DEVELOPMENT__ ? 'http://localhost:8000' : config('apiURL');
 
 export const submitDemographics = (data: IDemographics) => {
-  return fetch(`${API_URL}/v1/demographics/`, {
+  /**
+   * Posts a demographic to the database. Checks to make sure the response is
+   * valid (201) as well.
+   *
+   * @param data - Custom {@link IDemographics | demographic} type.
+   * @returns Response to the 'v1/demographic/ URL
+   */
+  return fetch(`${API_URL}/v1/demographic/`, {
     method: 'POST',
     body: JSON.stringify(data),
     headers: {
@@ -13,6 +20,11 @@ export const submitDemographics = (data: IDemographics) => {
       Accept: 'application/json',
     },
     credentials: 'include',
+  }).then(response => {
+    if (response.status !== 201) {
+      console.log(`Unable to create a demographic! 
+      Instead of 201, received ${response.status} with response:\n ${response.body}`)
+    }
   });
 };
 
@@ -34,9 +46,8 @@ export const fetchSessionData = (req?: any) => {
     : {
         credentials: 'include',
       };
-  return fetch(`${API_URL}/v1/index/?format=json`, options).then(res =>
-    res.json()
-  );
+  return fetch(`${API_URL}/v1/index/?format=json`, options).then(
+    res => res.json());
 };
 
 export const getDatasetRecordings = (req?: any) => {
