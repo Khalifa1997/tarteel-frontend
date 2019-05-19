@@ -11,6 +11,16 @@ interface IProps {
 }
 
 class Donate extends React.Component<IProps> {
+  redirectToLaunchgood() {
+    // temporary hack to direct the donations page to launch
+    // TODO: @ananas remove after Ramadan
+    setTimeout(function() {
+      if (window) {
+        window.location.href = 'https://launchgood.com/tarteel';
+      }
+    }, 2000);
+  }
+
   componentDidMount() {
     const script = document.createElement('script');
 
@@ -41,14 +51,16 @@ class Donate extends React.Component<IProps> {
         </Helmet>
         <Navbar />
         <div className="content">
-          <iframe
+          {/* <iframe
             src="https://donorbox.org/embed/seed-funding-donations?show_content=true"
             width="100%"
             name="donorbox"
             frameBorder="0"
             scrolling="no"
             allowpaymentrequest
-          />
+          /> */}
+          We're redirecting you to our new dontations page...
+          {this.redirectToLaunchgood()}
         </div>
       </Container>
     );
