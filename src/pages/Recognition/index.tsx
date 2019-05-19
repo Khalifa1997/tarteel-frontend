@@ -189,7 +189,6 @@ class Recognition extends React.Component<IProps, IState> {
               <T id={KEYS.AYAH_RECOGNITION_CONTRIBUTE} />
             </Link>
           </p>
-          <p className={'iqra'} />
         </div>
         {this.state.showErrorMessage ? (
           <RecordingError

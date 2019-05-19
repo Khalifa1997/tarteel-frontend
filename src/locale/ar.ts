@@ -38,7 +38,7 @@ export default {
     [KEYS.PROFILE_LINK_TEXT]: 'حسابي',
     [KEYS.MOBILE_APP_LINK_TEXT]: 'تطبيق الهاتف',
     [KEYS.EVALUATE_AYAHS]: 'تقييم آيات',
-    [KEYS.GET_STARTED]: 'أبدأ الآن',
+    [KEYS.GET_STARTED]: 'سجل مرة أخرى',
     [KEYS.PARTNERS_LINK_TEXT]: 'الشركاء',
     [KEYS.PREVIOUS_WORD]: 'السابقه',
     [KEYS.DONATE_LINK_TEXT]: 'التبرع النقدي',
