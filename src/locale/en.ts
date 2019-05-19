@@ -17,7 +17,7 @@ const EN: Shape = {
     [KEYS.LOCAL_NATIVENAME]: 'English',
     [KEYS.LOCAL_SELECTLABEL]: 'Language',
     [KEYS.SETTING_TITLE]: 'Settings',
-    [KEYS.LOCAL_TITLE]: 'Tarteel -  AI for Quran recitation correction',
+    [KEYS.LOCAL_TITLE]: 'Tarteel -  AI for Quran recitation perfection',
     [KEYS.LOCAL_DESCRIPTION]:
       'Identify the ayah you’re reciting, voice search the Quran and find the translation. Try the demo on our website with a tap or download our mobile app to use it on the go.',
     [KEYS.LOCAL_NAME]: 'Tarteel',
