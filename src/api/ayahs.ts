@@ -1,7 +1,16 @@
 import config from '../../config';
 import { backendRequestOptions } from '../helpers/cookie';
 
-const API_URL = __DEVELOPMENT__ ? 'http://localhost:8000' : config('apiURL');
+// The API URL is defined based on the environment:
+// 1. Local dev     2. Staging (now.sh)     3. Production
+let API_URL: string;
+if (__DEVELOPMENT__) {
+  API_URL = 'http://localhost:8000';
+} else if (window.location.href.indexOf("now.sh") > -1) {
+  API_URL = config('apiDevURL');
+} else {
+  API_URL = config('apiURL');
+}
 
 export const fetchRandomAyah = (req?: any) => {
   const options = __SERVER__
@@ -41,7 +50,7 @@ export const sendRecording = (
   ayah: number,
   hash: string,
   sessionId: string,
-  isContinuous: boolean
+  isContinuous: boolean,
 ): Promise<Response> => {
   const recitationMode = isContinuous ? 'continuous' : 'discrete';
   const body = new FormData();
@@ -62,6 +71,6 @@ export const sendRecording = (
 
 export const fetchSurah = (num: number) => {
   return fetch(`${API_URL}/v1/surah/${num}/?format=json`).then(res =>
-    res.json()
+    res.json(),
   );
 };
