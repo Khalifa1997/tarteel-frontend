@@ -38,7 +38,6 @@ export const Container = styled.div`
     }
 
     .status {
-      color: #848484;
       font-size: 18px;
       max-width: 600px;
     }
@@ -66,6 +65,7 @@ export const Container = styled.div`
   }
 
   .splittable {
+    color: #353535;
     br {
       display: none;
     }

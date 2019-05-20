@@ -12,7 +12,7 @@ interface IProps {
 
 class Donate extends React.Component<IProps> {
   redirectToLaunchgood() {
-    // temporary hack to direct the donations page to launch
+    // temporary hack to direct the donations page to launchgood
     // TODO: @ananas remove after Ramadan
     setTimeout(function() {
       if (window) {

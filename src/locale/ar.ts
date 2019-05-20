@@ -38,7 +38,7 @@ export default {
     [KEYS.PROFILE_LINK_TEXT]: 'حسابي',
     [KEYS.MOBILE_APP_LINK_TEXT]: 'تطبيق الهاتف',
     [KEYS.EVALUATE_AYAHS]: 'تقييم آيات',
-    [KEYS.GET_STARTED]: 'أبدأ الآن',
+    [KEYS.GET_STARTED]: 'سجل مرة أخرى',
     [KEYS.PARTNERS_LINK_TEXT]: 'الشركاء',
     [KEYS.PREVIOUS_WORD]: 'السابقه',
     [KEYS.DONATE_LINK_TEXT]: 'التبرع النقدي',
@@ -116,6 +116,11 @@ export default {
     [KEYS.ABOUT_PAGE_FOURTH_PARAGRAPH_TITLE]: 'كيف يمكنني أن أقدم المساعدة؟',
     [KEYS.ABOUT_PAGE_FOURTH_PARAGRAPH_TEXT]:
       "ترتيل هو مشروع مفتوح المصدر يتم تطويره من قبل المطورين المهتمين بالعمل علي ترتيل .إذا كنت ترغب في المساهمة ، يرجي مراجعة : <a href='https://github.com/Tarteel-io/tarteel.io'>https://github.com/Tarteel-io/tarteel.io</a>",
+    [KEYS.ABOUT_PAGE_LAST_PARAGRAPH_TITLE]: 'اين يمكنني أن أجد المزيد من المعلومات عن ترتيل؟',
+    [KEYS.ABOUT_PAGE_LAST_PARAGRAPH_TEXT]: 'للمزيد من المعلومات, يمكنك قراءة\n' +
+    '<a href=\'https://drive.google.com/open?id=17RpnWAbmmkl3iPM9awSNsf4S_2Mk_pKd\'>\n' +
+    '  المستند التقني\n' +
+    '</a>',
     [KEYS.FIELDS_OF_USE_FIRST_ITEM]: 'أدوات تصحيح تلقائي لأخطاء التلاوة',
     [KEYS.FIELDS_OF_USE_SECOND_ITEM]: 'أدوات تعليم التجويد في نفس السياق',
     [KEYS.FIELDS_OF_USE_THIRD_ITEM]:
@@ -200,14 +205,15 @@ export default {
     [KEYS.DONATE_PAGE_TITLE]: 'التبرع النقدي | ترتيل',
 
     // CONTRIBUTORS
-    [KEYS.CONTRIBUTOR_1]: 'أبوبكر عابد ، طالب دكتوراه - جامعة ستانفورد',
-    [KEYS.CONTRIBUTOR_2]: 'علي عابد ، مهندس برمجيات - جوجل',
-    [KEYS.CONTRIBUTOR_3]: 'علي عبدالله ، مهندس ميكانيكا - تيسلا',
-    [KEYS.CONTRIBUTOR_4]: 'عبد اللطيف عبد الفتاح ، مهندس برمجيات - تويتر',
-    [KEYS.CONTRIBUTOR_5]: 'أحمد بهاء ، طالب هندسة برمجيات',
-    [KEYS.CONTRIBUTOR_6]: 'حمزه خان ، مهندس برمجيات - أوبر',
-    [KEYS.CONTRIBUTOR_7]:
+    [KEYS.CONTRIBUTOR_1]: 'عبد اللطيف عبد الفتاح ، مهندس برمجيات - تويتر',
+    [KEYS.CONTRIBUTOR_2]: 'أحمد بهاء ، طالب هندسة برمجيات',
+    [KEYS.CONTRIBUTOR_3]: 'حمزه خان ، مهندس برمجيات - أوبر',
+    [KEYS.CONTRIBUTOR_4]:
       'عريبه عابد ، طالبة هندسة الطب الحيوي -  معهد جورجيا للتكنولوجيا',
-    [KEYS.CONTRIBUTOR_8]: 'عبدالرحمن الفوزان ، مهندس برمجيات - فيسبوك',
+    [KEYS.CONTRIBUTOR_5]: 'عبدالرحمن الفوزان ، مهندس برمجيات - فيسبوك',
+    [KEYS.CONTRIBUTOR_6]: 'محمد صديقي ، طالب في السنة الرابعة بجامعة كاليفورنيا',
+    [KEYS.CONTRIBUTOR_7]: 'حيدر أحمد ، خريج جامعة ديوك',
+    [KEYS.CONTRIBUTOR_8]: 'مروة عبد الحي ، طالبة علوم الحاسوب في معهد ماساتشوستس للتكنولوجيا',
+    [KEYS.CONTRIBUTOR_9]: 'مؤمن سليمان ، مهندس برمجيات الواجهة الأمامية',
   },
 };
