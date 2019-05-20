@@ -1,7 +1,9 @@
-import config from '../../config';
 import { backendRequestOptions } from '../helpers/cookie';
+import { getApiURL } from '../helpers/utils';
 
-const API_URL = __DEVELOPMENT__ ? 'http://localhost:8000' : config('apiURL');
+
+const API_URL: string = getApiURL();
+
 
 export const fetchRandomAyah = (req?: any) => {
   const options = __SERVER__
@@ -9,7 +11,7 @@ export const fetchRandomAyah = (req?: any) => {
     : {
         credentials: 'include',
       };
-  return fetch(`${API_URL}/api/get_ayah/?format=json`, options)
+  return fetch(`${API_URL}/v1/get_ayah/?format=json`, options)
     .then(res => res.json())
     .then(json => {
       return json;
@@ -29,8 +31,8 @@ export const fetchSpecificAyah = (surah: number, ayah: number) => {
     },
     credentials: 'include',
   };
-  return fetch(`${API_URL}/api/get_ayah/?format=json`, options).then(res =>
-    res.json()
+  return fetch(`${API_URL}/v1/get_ayah/?format=json`, options).then(res =>
+    res.json(),
   );
 };
 
@@ -41,7 +43,7 @@ export const sendRecording = (
   ayah: number,
   hash: string,
   sessionId: string,
-  isContinuous: boolean
+  isContinuous: boolean,
 ): Promise<Response> => {
   const recitationMode = isContinuous ? 'continuous' : 'discrete';
   const body = new FormData();
@@ -53,7 +55,7 @@ export const sendRecording = (
   body.append('session_id', sessionId);
   body.append('recitation_mode', recitationMode);
 
-  return fetch(`${API_URL}/api/recordings/`, {
+  return fetch(`${API_URL}/v1/recordings/`, {
     method: 'POST',
     body,
     credentials: 'include',
@@ -61,7 +63,7 @@ export const sendRecording = (
 };
 
 export const fetchSurah = (num: number) => {
-  return fetch(`${API_URL}/api/surah/${num}/?format=json`).then(res =>
-    res.json()
+  return fetch(`${API_URL}/v1/surah/${num}/?format=json`).then(res =>
+    res.json(),
   );
 };

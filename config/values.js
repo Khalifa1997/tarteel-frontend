@@ -14,7 +14,7 @@ const locales = {
 };
 
 const API_URL = 'https://apiv1.tarteel.io';
-
+const API_DEV_URL = 'https://api-dev.tarteel.io';
 const CDN_URL = 'https://d2sf46268wowyo.cloudfront.net';
 
 // All these configurations would only be readable on only the server bundle,
@@ -46,6 +46,7 @@ const values = {
     androidAppLink: true,
     IOSAppLink: true,
     apiURL: true,
+    apiDevURL: true,
     cdnURL: true,
     google: true,
     voiceServerURL: true,
@@ -64,6 +65,8 @@ const values = {
   port: EnvVars.number('PORT', 3000),
 
   apiURL: API_URL,
+
+  apiDevURL: API_DEV_URL,
 
   cdnURL: CDN_URL,
 

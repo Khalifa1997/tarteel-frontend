@@ -49,6 +49,7 @@ class RadioButton extends React.Component<IProps, never> {
           {this.props.options.map((option: IOption) => {
             return (
               <li
+                key={option.text}
                 className={currentValue === option.value ? 'active' : ''}
                 onClick={e => this.handleChange(e, option)}
               >
