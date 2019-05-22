@@ -7,7 +7,7 @@ import {
 import config from '../../config';
 import LOCALE_KEYS from '../locale/keys';
 
-interface Props {
+interface IProps {
   id: LOCALE_KEYS;
   values?: { [key: string]: string };
   children?: (...formattedMessage: Array<string | JSX.Element>) => ReactNode;
@@ -15,12 +15,12 @@ interface Props {
 
 const { en } = config('localeMessages');
 
-const T: React.SFC<Props> = ({
+const T: React.SFC<IProps> = ({
   id,
   values,
   children,
   ...rest
-}: Props & InjectedIntlProps) => {
+}: IProps & InjectedIntlProps) => {
   return (
     <FormattedHTMLMessage
       id={id}

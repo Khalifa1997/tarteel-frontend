@@ -1,9 +1,7 @@
 import { backendRequestOptions } from '../helpers/cookie';
 import { getApiURL } from '../helpers/utils';
 
-
 const API_URL: string = getApiURL();
-
 
 export const fetchRandomAyah = (req?: any) => {
   const options = __SERVER__
@@ -32,7 +30,7 @@ export const fetchSpecificAyah = (surah: number, ayah: number) => {
     credentials: 'include',
   };
   return fetch(`${API_URL}/v1/get_ayah/?format=json`, options).then(res =>
-    res.json(),
+    res.json()
   );
 };
 
@@ -43,7 +41,7 @@ export const sendRecording = (
   ayah: number,
   hash: string,
   sessionId: string,
-  isContinuous: boolean,
+  isContinuous: boolean
 ): Promise<Response> => {
   const recitationMode = isContinuous ? 'continuous' : 'discrete';
   const body = new FormData();
@@ -64,6 +62,6 @@ export const sendRecording = (
 
 export const fetchSurah = (num: number) => {
   return fetch(`${API_URL}/v1/surah/${num}/?format=json`).then(res =>
-    res.json(),
+    res.json()
   );
 };

@@ -460,7 +460,7 @@ class Transcribe extends React.Component<IProps, IState> {
     });
     this.AudioStreamer.initRecording(
       this.handleData,
-      this.handleRecordingError,
+      this.handleRecordingError
     );
   };
   handleSearch = () => {};

@@ -124,7 +124,7 @@ class NavMenu extends React.Component<IProps, IState> {
       this.props.toggleFetchingCurrentAyah();
     });
   };
-  public renderItem = (item: ILink, index: number,  className?: string) => {
+  public renderItem = (item: ILink, index: number, className?: string) => {
     const classNames = classnames({
       active: item.href === this.props.location.pathname,
       busy: item.busy,
@@ -154,7 +154,9 @@ class NavMenu extends React.Component<IProps, IState> {
   public render() {
     const isHome = this.props.location.pathname === '/';
     let navbarLinks = [
-      'home', 'about', 'evaluator',
+      'home',
+      'about',
+      'evaluator',
       'profile',
       'contribute',
       'mobile',
@@ -190,9 +192,11 @@ class NavMenu extends React.Component<IProps, IState> {
               }}
             >
               <div className="list">
-                {Object.keys(pick(links, navbarLinks)).map((key: string, i: number) => {
-                  return this.renderItem(links[key], i, 'list-item');
-                })}
+                {Object.keys(pick(links, navbarLinks)).map(
+                  (key: string, i: number) => {
+                    return this.renderItem(links[key], i, 'list-item');
+                  }
+                )}
               </div>
             </OutsideClickHandler>
           </div>

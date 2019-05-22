@@ -298,7 +298,7 @@ const EN: IShape = {
     [KEYS.PROFILE_TOTAL_OF_VERSES_HAS_BEEN_RECITED]:
       'You have recited a total of <strong>{userRecitedAyahs}</strong> verses.',
     [KEYS.PROFILE_SEE_STATISTICS_MESSAGE]:
-      'This information is based only on sessions recorded using this particular device and browser, and may not show up if you clear your cache or use a different browser. If you\'d like to see these statistics on a different device or <a href = {`https://facebook.com/sharer/sharer.php?u=https://www.tarteel.io/profile/${sessionId}`} target="_blank" aria- label=""> share </a> these statistics, please use the following permalink:',
+      'This information is based only on sessions recorded using this particular device and browser, and may not show up if you clear your cache or use a different browser. If you\'d like to see these statistics on a different device or <a href = `https://facebook.com/sharer/sharer.php?u=https://www.tarteel.io/profile/${sessionId}` target="_blank" aria-label=""> share</a> these statistics, please use the following permalink:',
     [KEYS.PROFILE_WEEKLY_ACTIVITY]: 'Your Weekly Activity',
     [KEYS.PROFILE_VERSES_RECITED_LAST_WEEK]: 'Verses Recited Last Week',
     [KEYS.PROFILE_VERSES_RECITED_PARAGRAPH_MESSAGE]:
@@ -341,14 +341,19 @@ const EN: IShape = {
     [KEYS.DONATE_PAGE_TITLE]: 'Donate | Tarteel',
 
     // CONTRIBUTORS
-    [KEYS.CONTRIBUTOR_1]: 'Abdellatif Abdelfattah, software engineer at Twitter',
-    [KEYS.CONTRIBUTOR_2]: 'Anas Abou Allaban, roboticist from Northeastern University',
+    [KEYS.CONTRIBUTOR_1]:
+      'Abdellatif Abdelfattah, software engineer at Twitter',
+    [KEYS.CONTRIBUTOR_2]:
+      'Anas Abou Allaban, roboticist from Northeastern University',
     [KEYS.CONTRIBUTOR_3]: 'Hamzah Khan, software engineer at Uber ATG',
-    [KEYS.CONTRIBUTOR_4]: 'Areeba Abid, biomedical engineering student at Georgia Tech',
+    [KEYS.CONTRIBUTOR_4]:
+      'Areeba Abid, biomedical engineering student at Georgia Tech',
     [KEYS.CONTRIBUTOR_5]: 'Abdulrahman Alfozan, software engineer at Facebook',
-    [KEYS.CONTRIBUTOR_6]: 'Mohammad Siddiqui, 4th Year undergraduate student at UCLA.',
+    [KEYS.CONTRIBUTOR_6]:
+      'Mohammad Siddiqui, 4th Year undergraduate student at UCLA.',
     [KEYS.CONTRIBUTOR_7]: 'Haider Ahmad, recent Duke University grad',
-    [KEYS.CONTRIBUTOR_8]: 'Marwa Abdulhai, computer science undergraduate at MIT',
+    [KEYS.CONTRIBUTOR_8]:
+      'Marwa Abdulhai, computer science undergraduate at MIT',
     [KEYS.CONTRIBUTOR_9]: 'Moumen Soliman, Front End Software Engineer',
 
     // TRANSCRIBE
