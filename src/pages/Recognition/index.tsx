@@ -214,7 +214,7 @@ export default injectIntl(
   withCookies(
     connect(
       null,
-      mapDispatchToProps,
-    )(Recognition),
-  ),
+      mapDispatchToProps
+    )(Recognition)
+  )
 );

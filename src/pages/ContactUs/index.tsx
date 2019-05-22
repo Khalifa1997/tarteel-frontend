@@ -139,7 +139,9 @@ class ContactUs extends React.Component<IProps, IState> {
     return (
       <Container>
         <Helmet>
-          <title>{intl.formatMessage({ id: KEYS.CONTACT_US_PAGE_TITLE })}</title>
+          <title>
+            {intl.formatMessage({ id: KEYS.CONTACT_US_PAGE_TITLE })}
+          </title>
         </Helmet>
         <Navbar />
         <div className="content">

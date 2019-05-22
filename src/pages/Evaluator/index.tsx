@@ -21,7 +21,7 @@ import HandShakeImage from '../../../public/handshake-icon.png';
 import {
   fetchEvaluatorAyah,
   fetchSpecificEvaluatorAyah,
-  submitAyah,
+  submitEvaluation,
 } from '../../api/evaluator';
 import Modal from '../../components/Modal';
 import Navbar from '../../components/Navbar';
@@ -102,14 +102,16 @@ class Evaluator extends React.Component<IProps, IState> {
       });
     }
   };
+  /**
+   * Prepare the next ayah for the evaluator.
+   * If it can't get the next ayah then it returns a random ayah.
+   * TODO: Change so that if there's no more ayah's to evaluate, it goes to some other state.
+   * Backend will send {"detail": No more unevaluated recordings!} if no more recordings.
+   */
   public loadNextAyah = () => {
-    const {
-      chapterId: surah,
-      verseNumber: ayah,
-      recordingId,
-    } = this.props.currentAyah;
-    const { nextSurah, nextAyah } = getNextAyah(surah, ayah);
-    return fetchSpecificEvaluatorAyah(nextSurah, nextAyah, recordingId + 1)
+    const { surah, number, recordingId } = this.props.currentAyah;
+    const { nextSurah, nextAyah } = getNextAyah(surah, number);
+    return fetchSpecificEvaluatorAyah(nextSurah, nextAyah)
       .then(this.handleUpcomingAyah)
       .catch((e: Error | Response) => {
         if (e.status === 500) {
@@ -218,16 +220,31 @@ class Evaluator extends React.Component<IProps, IState> {
       });
     });
   };
+  // TODO: Change evaluation to boolean.
+  /** Update state and submit. */
   public handleWrongAyah = () => {
     // if  (this.state.played) { commnented because it's blocking the continuous mode
     this.handleAyahChange('wrong');
-    submitAyah('incorrect', this.props.currentAyah.recordingId);
+    const evaluationRequest: object = {
+      evaluation: 'incorrect',
+      associated_recording: this.props.currentAyah.recordingId,
+      session_id: this.props.profile.sessionId,
+      platform: window.navigator.userAgent,
+    };
+    submitEvaluation(evaluationRequest);
     // }
   };
+  /** Update state and submit. */
   public handleRightAyah = () => {
     // if (this.state.played) { commnented because it's blocking the continuous mode
     this.handleAyahChange('right');
-    submitAyah('correct', this.props.currentAyah.recordingId);
+    const evaluationRequest: object = {
+      evaluation: 'correct',
+      associated_recording: this.props.currentAyah.recordingId,
+      session_id: this.props.profile.sessionId,
+      platform: window.navigator.userAgent,
+    };
+    submitEvaluation(evaluationRequest);
     // }
   };
   public handlePlay = () => {
@@ -325,24 +342,27 @@ class Evaluator extends React.Component<IProps, IState> {
       </ContentLoader>
     );
   };
+  /** Render's each ayah using the special Uthmani CSS based on class. */
   renderAyah = () => {
-    return this.props.currentAyah.words.map((word: WordShape) => {
-      const className = classNames({
-        [word.className]: true,
-        [word.charType]: true,
-      });
-      return (
-        <span className={className}>
-          <a
-            className={className}
-            dangerouslySetInnerHTML={{ __html: word.code }}
-          />
-          {word.charType === WORD_TYPES.CHAR_TYPE_WORD && (
-            <small style={{ letterSpacing: -15 }}>&nbsp;</small>
-          )}
-        </span>
-      );
-    });
+    return this.props.currentAyah.words.map(
+      (word: WordShape, index: number) => {
+        const className = classNames({
+          [word.className]: true,
+          [word.charType]: true,
+        });
+        return (
+          <span key={index} className={className}>
+            <a
+              className={className}
+              dangerouslySetInnerHTML={{ __html: word.code }}
+            />
+            {word.charType === WORD_TYPES.CHAR_TYPE_WORD && (
+              <small style={{ letterSpacing: -15 }}>&nbsp;</small>
+            )}
+          </span>
+        );
+      }
+    );
   };
   handlePrevious = async () => {
     this.setState({

@@ -116,8 +116,8 @@ class DemographicsPage extends React.Component<IProps, IState> {
     this.setState({ isSubmitting: true });
     const demographicRequestBody = {
       ...this.props.demographicData,
-      'session_id': this.props.profile.sessionId,
-      'platform': window.navigator.userAgent,
+      session_id: this.props.profile.sessionId,
+      platform: window.navigator.userAgent,
     };
     submitDemographics(demographicRequestBody).then(() => {
       setDemographicData(this.props.demographicData);
@@ -316,5 +316,5 @@ const mapDispatchToProps = (dispatch): IDispatchProps => {
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps,
+  mapDispatchToProps
 )(injectIntl(DemographicsPage));

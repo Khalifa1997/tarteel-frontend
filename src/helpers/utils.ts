@@ -1,4 +1,4 @@
-import config from "../../config";
+import config from '../../config';
 
 export const commaFormatter = (num: number) => Number(num).toLocaleString();
 
@@ -9,7 +9,7 @@ export const kFormatter = (num: number) => {
 export const getApiURL = () => {
   if (__DEVELOPMENT__) {
     return 'http://localhost:8000';
-  } else if (window.location.href.indexOf("now.sh") > -1) {
+  } else if (window.location.href.indexOf('now.sh') > -1) {
     return config('apiDevURL');
   } else {
     return config('apiURL');

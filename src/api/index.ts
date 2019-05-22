@@ -2,9 +2,7 @@ import { backendRequestOptions } from '../helpers/cookie';
 import { IDemographics } from '../types/GlobalState';
 import { getApiURL } from '../helpers/utils';
 
-
 const API_URL: string = getApiURL();
-
 
 export const submitDemographics = (data: IDemographics) => {
   /**
@@ -25,7 +23,9 @@ export const submitDemographics = (data: IDemographics) => {
   }).then(response => {
     if (response.status !== 201) {
       console.log(`Unable to create a demographic! 
-      Instead of 201, received ${response.status} with response:\n ${response.body}`)
+      Instead of 201, received ${response.status} with response:\n ${
+        response.body
+      }`);
     }
   });
 };
@@ -37,8 +37,9 @@ export const fetchAboutData = () => {
 };
 
 export const fetchProfileData = (sessionId: string) => {
-  return fetch(`${API_URL}/v1/profile/${sessionId}?format=json`, {
+  return fetch(`${API_URL}/v1/profile/${sessionId}/?format=json`, {
     credentials: 'include',
+    mode: 'cors',
   }).then(res => res.json());
 };
 
@@ -48,8 +49,9 @@ export const fetchSessionData = (req?: any) => {
     : {
         credentials: 'include',
       };
-  return fetch(`${API_URL}/v1/index/?format=json`, options).then(
-    res => res.json());
+  return fetch(`${API_URL}/v1/index/?format=json`, options).then(res =>
+    res.json()
+  );
 };
 
 export const getDatasetRecordings = (req?: any) => {
@@ -58,7 +60,7 @@ export const getDatasetRecordings = (req?: any) => {
     : {
         credentials: 'include',
       };
-  return fetch(`${API_URL}/download-audio/?format=json`, options).then(
-    res => res.json()
+  return fetch(`${API_URL}/v1/download-audio/?format=json`, options).then(res =>
+    res.json()
   );
 };

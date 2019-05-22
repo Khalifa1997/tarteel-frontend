@@ -48,7 +48,7 @@ export function stopRecording() {
 
 export async function startRecording(props?: any) {
   let onError = null;
-  if (props && props.onError){
+  if (props && props.onError) {
     onError = props.onError;
   }
   try {
@@ -72,12 +72,12 @@ export async function startRecording(props?: any) {
       })
       .catch(e => {
         if (e) {
-          console.log(e)
+          console.log(e);
           onError();
         }
       });
   } catch (e) {
-    console.log(e)
+    console.log(e);
     onError();
   }
 }

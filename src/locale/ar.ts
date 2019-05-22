@@ -116,11 +116,13 @@ export default {
     [KEYS.ABOUT_PAGE_FOURTH_PARAGRAPH_TITLE]: 'كيف يمكنني أن أقدم المساعدة؟',
     [KEYS.ABOUT_PAGE_FOURTH_PARAGRAPH_TEXT]:
       "ترتيل هو مشروع مفتوح المصدر يتم تطويره من قبل المطورين المهتمين بالعمل علي ترتيل .إذا كنت ترغب في المساهمة ، يرجي مراجعة : <a href='https://github.com/Tarteel-io/tarteel.io'>https://github.com/Tarteel-io/tarteel.io</a>",
-    [KEYS.ABOUT_PAGE_LAST_PARAGRAPH_TITLE]: 'اين يمكنني أن أجد المزيد من المعلومات عن ترتيل؟',
-    [KEYS.ABOUT_PAGE_LAST_PARAGRAPH_TEXT]: 'للمزيد من المعلومات, يمكنك قراءة\n' +
-    '<a href=\'https://drive.google.com/open?id=17RpnWAbmmkl3iPM9awSNsf4S_2Mk_pKd\'>\n' +
-    '  المستند التقني\n' +
-    '</a>',
+    [KEYS.ABOUT_PAGE_LAST_PARAGRAPH_TITLE]:
+      'اين يمكنني أن أجد المزيد من المعلومات عن ترتيل؟',
+    [KEYS.ABOUT_PAGE_LAST_PARAGRAPH_TEXT]:
+      'للمزيد من المعلومات, يمكنك قراءة\n' +
+      "<a href='https://drive.google.com/open?id=17RpnWAbmmkl3iPM9awSNsf4S_2Mk_pKd'>\n" +
+      '  المستند التقني\n' +
+      '</a>',
     [KEYS.FIELDS_OF_USE_FIRST_ITEM]: 'أدوات تصحيح تلقائي لأخطاء التلاوة',
     [KEYS.FIELDS_OF_USE_SECOND_ITEM]: 'أدوات تعليم التجويد في نفس السياق',
     [KEYS.FIELDS_OF_USE_THIRD_ITEM]:
@@ -211,9 +213,11 @@ export default {
     [KEYS.CONTRIBUTOR_4]:
       'عريبه عابد ، طالبة هندسة الطب الحيوي -  معهد جورجيا للتكنولوجيا',
     [KEYS.CONTRIBUTOR_5]: 'عبدالرحمن الفوزان ، مهندس برمجيات - فيسبوك',
-    [KEYS.CONTRIBUTOR_6]: 'محمد صديقي ، طالب في السنة الرابعة بجامعة كاليفورنيا',
+    [KEYS.CONTRIBUTOR_6]:
+      'محمد صديقي ، طالب في السنة الرابعة بجامعة كاليفورنيا',
     [KEYS.CONTRIBUTOR_7]: 'حيدر أحمد ، خريج جامعة ديوك',
-    [KEYS.CONTRIBUTOR_8]: 'مروة عبد الحي ، طالبة علوم الحاسوب في معهد ماساتشوستس للتكنولوجيا',
+    [KEYS.CONTRIBUTOR_8]:
+      'مروة عبد الحي ، طالبة علوم الحاسوب في معهد ماساتشوستس للتكنولوجيا',
     [KEYS.CONTRIBUTOR_9]: 'مؤمن سليمان ، مهندس برمجيات الواجهة الأمامية',
   },
 };
