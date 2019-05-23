@@ -1,5 +1,5 @@
 import { backendRequestOptions } from '../helpers/cookie';
-import { getApiURL } from '../helpers/utils';
+import { getApiURL } from '../client/utils/apiUtils';
 
 const API_URL: string = getApiURL();
 

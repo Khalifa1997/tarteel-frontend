@@ -28,7 +28,7 @@ const values = {
   // with our client bundle.
   clientConfigFilter: {
     // This is here as an example showing that you can expose variables
-    // that were potentially provivded by the environment
+    // that were potentially provided by the environment
     welcomeMessage: true,
     // We only need to expose the enabled flag of the service worker.
     serviceWorker: {
@@ -65,8 +65,8 @@ const values = {
   port: EnvVars.number('PORT', 3000),
 
   apiURL: API_URL,
-
   apiDevURL: API_DEV_URL,
+  deployIsProd: false,
 
   cdnURL: CDN_URL,
 

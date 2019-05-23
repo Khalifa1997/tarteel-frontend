@@ -1,6 +1,6 @@
 import { backendRequestOptions } from '../helpers/cookie';
 import { IDemographics } from '../types/GlobalState';
-import { getApiURL } from '../helpers/utils';
+import { getApiURL } from '../client/utils/apiUtils';
 
 const API_URL: string = getApiURL();
 
