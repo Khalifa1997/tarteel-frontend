@@ -2,7 +2,7 @@ import surahs from '../api/surahs';
 
 export const getNextAyah = (surah: number, ayah: number) => {
   const nextAyah = ayah + 1;
-  if (surahs[surah].ayah == nextAyah - 1) {
+  if (surahs[surah].ayah === nextAyah - 1) {
     if (surah === 114 && ayah === 6) {
       return {
         nextSurah: 1,

@@ -77,7 +77,7 @@ const values = {
 
   voiceServerURL: 'https://tarteel-voice.now.sh/',
 
-  objective: 50000,
+  objective: 100000,
 
   fontsURL: '/public',
 

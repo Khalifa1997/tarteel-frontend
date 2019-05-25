@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Tooltip } from 'react-tippy';
 import Tippy from '@tippy.js/react';
 import styled from 'styled-components';
 
@@ -20,29 +19,29 @@ interface IStateProps {
 type IProps = IStateProps & IOwnProps;
 
 class Logo extends React.Component<IProps, never> {
+  /** Renders the logo in the top left corner with total evaluated/recited ayahs. */
   public render() {
     return (
       <Container>
         <Link to="/">
           <img src={LogoImage} alt="Tarteel-logo" />
-
-          <Link
-            to={'/about'}
-            data-balloon="Total Ayas Recited"
-            data-balloon-pos="down"
-            className="counter"
-          >
-            <Tippy content="Total Evaluated Ayahs" trigger="mouseenter">
-              <div className="evaluated">
-                {commaFormatter(this.props.profile.evaluationsCount)}
-              </div>
-            </Tippy>
-            <Tippy content="Total Recited Ayahs" trigger="mouseenter">
-              <div className={'recited'}>
-                /{commaFormatter(this.props.profile.recordingCount)}
-              </div>
-            </Tippy>
-          </Link>
+        </Link>
+        <Link
+          to={'/about'}
+          data-balloon="Total Ayas Recited"
+          data-balloon-pos="down"
+          className="counter"
+        >
+          <Tippy content="Total Evaluated Ayahs" trigger="mouseenter">
+            <div className="evaluated">
+              {commaFormatter(this.props.profile.evaluationsCount)}
+            </div>
+          </Tippy>
+          <Tippy content="Total Recited Ayahs" trigger="mouseenter">
+            <div className={'recited'}>
+              /{commaFormatter(this.props.profile.recordingCount)}
+            </div>
+          </Tippy>
         </Link>
       </Container>
     );

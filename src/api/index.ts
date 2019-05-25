@@ -31,16 +31,22 @@ export const submitDemographics = (data: IDemographics) => {
 };
 
 export const fetchAboutData = () => {
-  return fetch(`${API_URL}/v1/about/?format=json`, {
+  /** Load the about page data from the backend. */
+  const options = {
     credentials: 'include',
-  }).then(res => res.json());
+  };
+  return fetch(`${API_URL}/v1/about/?format=json`, options)
+    .then(res => res.json());
 };
 
 export const fetchProfileData = (sessionId: string) => {
-  return fetch(`${API_URL}/v1/profile/${sessionId}/?format=json`, {
+  /** Get the profile data for a specific session id/user. */
+  const options = {
     credentials: 'include',
     mode: 'cors',
-  }).then(res => res.json());
+  };
+  return fetch(`${API_URL}/v1/profile/${sessionId}/?format=json`, options)
+    .then(res => res.json());
 };
 
 export const fetchSessionData = (req?: any) => {
@@ -49,9 +55,8 @@ export const fetchSessionData = (req?: any) => {
     : {
         credentials: 'include',
       };
-  return fetch(`${API_URL}/v1/index/?format=json`, options).then(res =>
-    res.json()
-  );
+  return fetch(`${API_URL}/v1/index/?format=json`, options)
+    .then(res => res.json());
 };
 
 export const getDatasetRecordings = (req?: any) => {
@@ -60,7 +65,6 @@ export const getDatasetRecordings = (req?: any) => {
     : {
         credentials: 'include',
       };
-  return fetch(`${API_URL}/v1/download-audio/?format=json`, options).then(res =>
-    res.json()
-  );
+  return fetch(`${API_URL}/v1/download-audio/?format=json`, options)
+    .then(res => res.json());
 };

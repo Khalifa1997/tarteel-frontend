@@ -9,39 +9,48 @@ export const fetchRandomAyah = (req?: any) => {
     : {
         credentials: 'include',
       };
-  return fetch(`${API_URL}/v1/get_ayah/?format=json`, options)
-    .then(res => res.json())
+  return fetch(`${API_URL}/v1/quran/ayah/random/`, options)
+    .then(res =>res.json())
     .then(json => {
+      // Rename b/c ayah shape takes chapterId and verseNumber instead of
+      // surah and number
+      const oldChapterId = 'chapter_id';
+      const newChapterId = 'surah';
+      const oldVerseNumber = 'verse_number';
+      const newVerseNumber = 'number';
+      json[oldChapterId] = json[newChapterId];
+      json[oldVerseNumber] = json[newVerseNumber];
       return json;
     });
 };
 
 export const fetchSpecificAyah = (surah: number, ayah: number) => {
   const options = {
-    method: 'POST',
-    body: JSON.stringify({
-      surah,
-      ayah,
-    }),
-    headers: {
-      'Content-Type': 'application/json',
-      Accept: 'application/json',
-    },
     credentials: 'include',
   };
-  return fetch(`${API_URL}/v1/get_ayah/?format=json`, options).then(res =>
-    res.json()
-  );
+  return fetch(`${API_URL}/v1/quran/ayah/?ayah=${ayah}&surah=${surah}`, options)
+    .then(res => res.json())
+    .then(json => {
+      // Rename b/c ayah shape takes chapterId and verseNumber instead of
+      // surah and number
+      const OLD_CHAPTER_ID = 'chapter_id';
+      const NEW_CHAPTER_ID = 'surah';
+      const OLD_VERSE_NUMBER = 'verse_number';
+      const NEW_VERSE_NUMBER = 'number';
+      json[OLD_CHAPTER_ID] = json[NEW_CHAPTER_ID];
+      json[OLD_VERSE_NUMBER] = json[NEW_VERSE_NUMBER];
+      return json;
+    });
 };
 
-// Uploading the recording file after each recitation.
+/** Upload the recording file after each recitation. */
 export const sendRecording = (
   audio: any,
   surah: number,
   ayah: number,
   hash: string,
   sessionId: string,
-  isContinuous: boolean
+  isContinuous: boolean,
 ): Promise<Response> => {
   const recitationMode = isContinuous ? 'continuous' : 'discrete';
   const body = new FormData();
@@ -61,7 +70,6 @@ export const sendRecording = (
 };
 
 export const fetchSurah = (num: number) => {
-  return fetch(`${API_URL}/v1/surah/${num}/?format=json`).then(res =>
-    res.json()
-  );
+  return fetch(`${API_URL}/v1/surah/${num}/?format=json`)
+    .then(res => res.json());
 };
