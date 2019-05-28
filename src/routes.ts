@@ -7,8 +7,15 @@ import { DataSetContainer } from './containers/DataSetContainer';
 export default [
   {
     path: '/',
-    ...MainPageContainer,
+    component: asyncComponent({
+      resolve: () =>
+        import(/* webpackChunkName: "Recognition" */ './pages/Recognition'),
+    }),
     exact: true,
+  },
+  {
+    path: '/contribute',
+    ...MainPageContainer,
   },
   {
     path: '/surah/:num',
@@ -53,7 +60,7 @@ export default [
     }),
   },
   {
-    path: '/profile/:sessionKey',
+    path: '/profile/:sessionId',
     component: asyncComponent({
       resolve: () =>
         import(/* webpackChunkName: "ProfilePage" */ './pages/ProfilePage'),

@@ -47,7 +47,10 @@ export function stopRecording() {
 }
 
 export async function startRecording(props?: any) {
-  const { onError } = props;
+  let onError = null;
+  if (props && props.onError) {
+    onError = props.onError;
+  }
   try {
     // webkit shim.
     window.AudioContext = window.AudioContext || window.webkitAudioContext;
@@ -57,13 +60,8 @@ export async function startRecording(props?: any) {
     if (!audio_context) {
       audio_context = new AudioContext();
     }
-    console.log('Audio context set up.');
-    console.log(
-      'navigator.getUserMedia ' +
-        (navigator.getUserMedia ? 'available.' : 'not present!')
-    );
   } catch (e) {
-    console.log('No web audio support in this browser!');
+    console.log('No web audio support in this browser! ', e.message);
   }
 
   try {
@@ -74,10 +72,12 @@ export async function startRecording(props?: any) {
       })
       .catch(e => {
         if (e) {
+          console.log(e);
           onError();
         }
       });
   } catch (e) {
+    console.log(e);
     onError();
   }
 }

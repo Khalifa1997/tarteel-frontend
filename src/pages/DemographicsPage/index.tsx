@@ -79,6 +79,10 @@ interface IState {
 }
 
 class DemographicsPage extends React.Component<IProps, IState> {
+  /**
+   * Demographics Component only, not page.
+   * TODO: Remove demographics component and rename class to Demographics.
+   */
   state = {
     isSubmitting: false,
   };
@@ -110,7 +114,12 @@ class DemographicsPage extends React.Component<IProps, IState> {
   ];
   submitDemographics = () => {
     this.setState({ isSubmitting: true });
-    submitDemographics(this.props.demographicData).then(() => {
+    const demographicRequestBody = {
+      ...this.props.demographicData,
+      session_id: this.props.profile.sessionId,
+      platform: window.navigator.userAgent,
+    };
+    submitDemographics(demographicRequestBody).then(() => {
       setDemographicData(this.props.demographicData);
       this.props.unsetAskForDemographics();
       this.setState({
@@ -118,7 +127,7 @@ class DemographicsPage extends React.Component<IProps, IState> {
       });
     });
   };
-  handleChange = (key, option) => {
+  handleChange = (key: string, option) => {
     this.props.updateDemographics({
       [key]: option.value,
     });

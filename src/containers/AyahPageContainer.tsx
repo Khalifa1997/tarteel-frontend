@@ -70,7 +70,7 @@ export const AyahPageContainer = {
   component: withCookies(
     connect(
       mapStateToProps,
-      mapDispatchToProps
+      mapDispatchToProps,
     )(props => <Main isAyahPage={true} {...props} />)
   ),
   loadData: (store: any, req: any, res: any) => {

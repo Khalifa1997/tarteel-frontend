@@ -114,12 +114,17 @@ class Demographics extends React.Component<IProps, IState> {
   ];
   submitDemographics = () => {
     this.setState({ isSubmitting: true });
-    submitDemographics(this.props.demographicData).then(() => {
+    const demographicRequestBody = {
+      ...this.props.demographicData,
+      session_id: this.props.profile.sessionId,
+      platform: window.navigator.userAgent,
+    };
+    submitDemographics(demographicRequestBody).then(() => {
       setDemographicData(this.props.demographicData);
       this.props.unsetAskForDemographics();
       this.setState({
         isSubmitting: false,
-        isSaved: true
+        isSaved: true,
       });
     });
   };
@@ -196,22 +201,23 @@ class Demographics extends React.Component<IProps, IState> {
           </div>
 
           <div className={'footer'}>
-            {!isSaved ? ( <>
-            <FooterButton
-              onClick={this.submitDemographics}
-              isLoading={isSubmitting}
-              afterLoadingMessage={'Saved !'}
-            >
-              <T id={KEYS.SAVE_WORD} />
-            </FooterButton>
-            </>) : (
-            <>
-              <NoteButton
-                className={'saved'}
-              >
-                <T id={KEYS.SAVED_WORD} />
-              </NoteButton>
-            </>)}
+            {!isSaved ? (
+              <>
+                <FooterButton
+                  onClick={this.submitDemographics}
+                  isLoading={isSubmitting}
+                  afterLoadingMessage={'Saved !'}
+                >
+                  <T id={KEYS.SAVE_WORD} />
+                </FooterButton>
+              </>
+            ) : (
+              <>
+                <NoteButton className={'saved'}>
+                  <T id={KEYS.SAVED_WORD} />
+                </NoteButton>
+              </>
+            )}
           </div>
         </div>
       </Container>

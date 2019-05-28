@@ -55,7 +55,7 @@ const linksFactory: (props: any) => { [key: string]: ILink } = props => {
     },
     profile: {
       textID: KEYS.PROFILE_LINK_TEXT,
-      href: `/profile/${props.profile.sessionKey}`,
+      href: `/profile/${props.profile.sessionId}`,
     },
     evaluator: {
       textID: KEYS.EVALUATE_AYAHS,
@@ -64,6 +64,10 @@ const linksFactory: (props: any) => { [key: string]: ILink } = props => {
     home: {
       textID: KEYS.HOME_WORD,
       href: '/',
+    },
+    contribute: {
+      textID: KEYS.CONTRIBUTE_WORD,
+      href: '/contribute',
     },
     randomAyah: {
       textID: KEYS.RANDOM_AYAH_LINK_TEXT,
@@ -84,13 +88,8 @@ const linksFactory: (props: any) => { [key: string]: ILink } = props => {
       href: '/subscribe',
     },
     dataset: {
-      textID: 'Tarteel datasets',
+      textID: KEYS.TARTEEL_DATASET_LINK_TEXT,
       href: '/dataset',
-    },
-    recognition: {
-      textID: KEYS.AYAH_RECOGNITION,
-      href: '/recognition',
-      badgeText: 'BETA',
     },
     contact: {
       textID: KEYS.CONTACT_US,
@@ -125,7 +124,7 @@ class NavMenu extends React.Component<IProps, IState> {
       this.props.toggleFetchingCurrentAyah();
     });
   };
-  public renderItem = (item: ILink, className?: string) => {
+  public renderItem = (item: ILink, index: number, className?: string) => {
     const classNames = classnames({
       active: item.href === this.props.location.pathname,
       busy: item.busy,
@@ -133,7 +132,7 @@ class NavMenu extends React.Component<IProps, IState> {
       [className]: className,
     });
     return (
-      <LinkContainer>
+      <LinkContainer key={index}>
         <Link
           to={item.href}
           onClick={() => {
@@ -154,23 +153,19 @@ class NavMenu extends React.Component<IProps, IState> {
   };
   public render() {
     const isHome = this.props.location.pathname === '/';
-    let mobileLinks = [
+    let navbarLinks = [
+      'home',
+      'about',
+      'evaluator',
       'profile',
-      'recognition',
+      'contribute',
       'mobile',
       'partners',
       'donate',
       'dataset',
       'contact',
     ];
-    if (isMobileOnly) {
-      mobileLinks = ['home', 'about', 'evaluator'].concat(mobileLinks);
-    }
-    if (isHome) {
-      mobileLinks.unshift(...['randomAyah']);
-    }
     const links = linksFactory({
-      randomAyah: this.handleRandomAyah,
       profile: this.props.profile,
     });
     const currentLocale = this.props.cookies.get('currentLocale') || 'en';
@@ -178,13 +173,6 @@ class NavMenu extends React.Component<IProps, IState> {
 
     return (
       <Container>
-        <BrowserView viewClassName="list">
-          {Object.keys(pick(links, ['home', 'about', 'evaluator'])).map(
-            (key: string) => {
-              return this.renderItem(links[key]);
-            }
-          )}
-        </BrowserView>
         <a href={`?lang=${urlLocale}`}>
           {currentLocale === 'en' ? 'العربية' : 'English'}
         </a>
@@ -205,9 +193,11 @@ class NavMenu extends React.Component<IProps, IState> {
               }}
             >
               <div className="list">
-                {Object.keys(pick(links, mobileLinks)).map((key: string) => {
-                  return this.renderItem(links[key], 'list-item');
-                })}
+                {Object.keys(pick(links, navbarLinks)).map(
+                  (key: string, i: number) => {
+                    return this.renderItem(links[key], i, 'list-item');
+                  }
+                )}
               </div>
             </OutsideClickHandler>
           </Dropdown>

@@ -31,6 +31,7 @@ declare module 'siriwave/dist/siriwave.min';
 declare module 'react-animations/*';
 declare module 'react-device-detect';
 declare module 'react-notifications-component';
+declare module 'sfmediastream';
 declare module 'i';
 declare module '*.png';
 declare module '*.jpg';

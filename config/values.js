@@ -14,7 +14,7 @@ const locales = {
 };
 
 const API_URL = 'https://apiv1.tarteel.io';
-
+const API_DEV_URL = 'https://api-dev.tarteel.io';
 const CDN_URL = 'https://d2sf46268wowyo.cloudfront.net';
 
 // All these configurations would only be readable on only the server bundle,
@@ -28,7 +28,7 @@ const values = {
   // with our client bundle.
   clientConfigFilter: {
     // This is here as an example showing that you can expose variables
-    // that were potentially provivded by the environment
+    // that were potentially provided by the environment
     welcomeMessage: true,
     // We only need to expose the enabled flag of the service worker.
     serviceWorker: {
@@ -46,9 +46,10 @@ const values = {
     androidAppLink: true,
     IOSAppLink: true,
     apiURL: true,
+    apiDevURL: true,
     cdnURL: true,
-    iqraApiKey: true,
     google: true,
+    voiceServerURL: true,
     // sentryClient: true,
   },
 
@@ -64,16 +65,19 @@ const values = {
   port: EnvVars.number('PORT', 3000),
 
   apiURL: API_URL,
+  apiDevURL: API_DEV_URL,
+  deployIsProd: false,
 
   cdnURL: CDN_URL,
 
-  androidAppLink: 'http://bit.ly/2Owlhio',
+  androidAppLink:
+    'https://play.google.com/store/apps/details?id=com.mmmoussa.iqra',
 
-  IOSAppLink: 'https://apple.co/2KWJ74U',
+  IOSAppLink: 'https://itunes.apple.com/us/app/iqra/id1391009396',
 
-  iqraApiKey: EnvVars.string('IQRA_API_KEY', ''),
+  voiceServerURL: 'https://tarteel-voice.now.sh/',
 
-  objective: 50000,
+  objective: 100000,
 
   fontsURL: '/public',
 
@@ -241,7 +245,7 @@ const values = {
       // specify the inclusion of additional modules below.
       devVendorDLL: {
         // Enabled?
-        enabled: true,
+        enabled: false, //TODO: @ananas, re-enable devVendorDLL
 
         // Specify any dependencies that you would like to include in the
         // Vendor DLL.

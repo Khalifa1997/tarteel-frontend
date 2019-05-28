@@ -45,10 +45,11 @@ class RadioButton extends React.Component<IProps, never> {
     return (
       <Container>
         <ul ref={C => (this.ref = C)}>
-          {currentValue.length > 1 ? (<span className={'foreground'} />) : null}
+          {currentValue.length > 1 ? <span className={'foreground'} /> : null}
           {this.props.options.map((option: IOption) => {
             return (
               <li
+                key={option.text}
                 className={currentValue === option.value ? 'active' : ''}
                 onClick={e => this.handleChange(e, option)}
               >
@@ -103,7 +104,7 @@ const Container = styled.div`
       cursor: pointer;
       color: #475166;
       border-right: 1px solid lightgray;
-      &:hover {
+      &:hover:not(.active) {
         background: lightgray;
       }
       &:last-child {

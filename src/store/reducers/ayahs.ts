@@ -15,7 +15,7 @@ export const INITIAL_STATE = initState().ayahs;
 
 export default (
   state: ReduxState['ayahs'] = INITIAL_STATE,
-  action: AyahsAction
+  action: AyahsAction,
 ) => {
   switch (action.type) {
     case getType(ayahs.setAyah):

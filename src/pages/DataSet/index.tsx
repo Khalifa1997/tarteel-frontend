@@ -1,20 +1,30 @@
 import React from 'react';
+import { Helmet } from 'react-helmet';
 
 import config from '../../../config';
 import { Container } from './styles';
 import Navbar from '../../components/Navbar';
+import { InjectedIntl, injectIntl } from 'react-intl';
 import { IDataset } from '../../types/GlobalState';
 import T from '../../components/T';
 import KEYS from '../../locale/keys';
 
 interface IProps {
   dataset: IDataset;
+  intl: InjectedIntl;
 }
 
 class DataSet extends React.Component<IProps, never> {
   render() {
+    const { intl } = this.props;
+
     return (
       <Container>
+        <Helmet>
+          <title>
+            {intl.formatMessage({ id: KEYS.TARTEEL_DATASET_PAGE_TITLE })}
+          </title>
+        </Helmet>
         <Navbar />
         <div className="content">
           <h1>
@@ -53,4 +63,4 @@ class DataSet extends React.Component<IProps, never> {
   }
 }
 
-export default DataSet;
+export default injectIntl(DataSet);

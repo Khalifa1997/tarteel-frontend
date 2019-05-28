@@ -19,7 +19,7 @@ import Subscribe from '../../components/Subscribe';
 import Note from '../../components/Note';
 import downArrow from '../../../public/images/icons/svg/down-arrow.svg';
 
-interface IDispatchProps { }
+interface IDispatchProps {}
 
 interface IOwnProps {
   intl: InjectedIntl;
@@ -49,16 +49,16 @@ class ProfilePage extends Component<IProps, IState> {
     showShareModal: false,
   };
   toggleMenu = (toggleSection: string) => {
-    this.setState( state => ({ [toggleSection]: !state[toggleSection] }))
-  }
+    this.setState(state => ({ [toggleSection]: !state[toggleSection] }));
+  };
   handleShareProfile = () => {
     this.setState({
       showShareModal: true,
     });
   };
   public async componentDidMount() {
-    const sessionKey = this.props.match.params.sessionKey;
-    const data = humps.camelizeKeys(await fetchProfileData(sessionKey));
+    const sessionId = this.props.match.params.sessionId;
+    const data = humps.camelizeKeys(await fetchProfileData(sessionId));
     this.setState({ data });
 
     // Importing this here is to avoid `window is not defined` error on the server while SSR
@@ -109,7 +109,7 @@ class ProfilePage extends Component<IProps, IState> {
   public render() {
     const { openDemographics, openSubscribe } = this.state;
     const { recentDict, oldDict } = this.state.data;
-    const { sessionKey, userRecitedAyahs } = this.props.profile;
+    const { sessionId, userRecitedAyahs } = this.props.profile;
     return (
       <Container>
         <Helmet>
@@ -138,15 +138,17 @@ class ProfilePage extends Component<IProps, IState> {
             />
             <Headline
               headtag={KEYS.DEMOGRAPHIC_INFO_LINK_TEXT}
-              paragraph={openDemographics ? KEYS.DEMOGRAPHIC_PAGE_FIRST_PARAGRAPH_3 : null}
+              paragraph={
+                openDemographics
+                  ? KEYS.DEMOGRAPHIC_PAGE_FIRST_PARAGRAPH_3
+                  : null
+              }
               headtagSize={20}
               width={85}
               align={'left'}
               paragraphGray
             />
-            {openDemographics &&
-              <Demographics />
-            }
+            {openDemographics && <Demographics />}
           </Boxed>
         </div>
         <div className="content">
@@ -166,15 +168,15 @@ class ProfilePage extends Component<IProps, IState> {
             />
             <Headline
               headtag={KEYS.SUBSCRIBE_PAGE_TEMPLATE_TITLE}
-              paragraph={openSubscribe ? KEYS.SUBSCRIBE_PAGE_RECEIVE_MESSAGE : null}
+              paragraph={
+                openSubscribe ? KEYS.SUBSCRIBE_PAGE_RECEIVE_MESSAGE : null
+              }
               headtagSize={23}
               width={85}
               align={'left'}
               paragraphGray
             />
-            {openSubscribe &&
-              <Subscribe />
-            }
+            {openSubscribe && <Subscribe />}
           </Boxed>
         </div>
         <div className="content">
@@ -192,15 +194,15 @@ class ProfilePage extends Component<IProps, IState> {
                 ) : null}
                 <T
                   id={KEYS.PROFILE_SEE_STATISTICS_MESSAGE}
-                  values={{ sessionKey }}
+                  values={{ sessionId }}
                 />
               </p>
               <p>
                 <div className="profile-link">
                   <div className="link">
-                    <a href={`https://www.tarteel.io/profile/${sessionKey}`}>
+                    <a href={`https://www.tarteel.io/profile/${sessionId}`}>
                       <div className="select">
-                        https://www.tarteel.io/profile/{sessionKey}
+                        https://www.tarteel.io/profile/{sessionId}
                       </div>
                     </a>
                   </div>
@@ -296,7 +298,7 @@ class ProfilePage extends Component<IProps, IState> {
         <ShareModal
           show={this.state.showShareModal}
           quote={``}
-          url={`https://www.tarteel.io/profile/${sessionKey}`}
+          url={`https://www.tarteel.io/profile/${sessionId}`}
           handleCloseModal={() => {
             this.setState({ showShareModal: false });
           }}

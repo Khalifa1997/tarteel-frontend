@@ -10,18 +10,13 @@ export const INITIAL_STATE = initState().recognition;
 
 export default (
   state: IRecognition = INITIAL_STATE,
-  action: RecognitionAction
+  action: RecognitionAction,
 ) => {
   switch (action.type) {
     case getType(recognition.setRecognitionResults):
       return {
         ...state,
         ...action.payload,
-      };
-    case getType(recognition.setUnableToRecord):
-      return {
-        ...state,
-        canRecord: false,
       };
     default:
       return state;

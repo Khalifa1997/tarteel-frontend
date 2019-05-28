@@ -9,7 +9,7 @@ export const Container = styled.div`
   flex-flow: column;
   justify-content: space-between;
   box-sizing: border-box;
-  
+
   .container {
     flex: 1;
     display: flex;
@@ -17,7 +17,6 @@ export const Container = styled.div`
     justify-content: space-around;
     overflow-y: hidden;
     box-sizing: border-box;
-
   }
 
   .pills {
@@ -111,11 +110,11 @@ export const Container = styled.div`
       font-weight: bold;
       margin-bottom: 10px;
     }
-    
+
     a {
       text-decoration: underline;
       cursor: pointer;
-      color: ${props => props.theme.colors.linkColor}
+      color: ${props => props.theme.colors.linkColor};
     }
   }
   .cards-and-pills {
@@ -249,13 +248,13 @@ export const Container = styled.div`
     letter-spacing: 1px;
     z-index: 2;
     background: #fff;
-    transition: all .2s linear;
+    transition: all 0.2s linear;
     //width: 130px;
     //height: 57px;
     width: 100px;
     height: 46px;
     cursor: pointer;
-    box-shadow: 0 5px 10px rgba(204,204,204,0.3);
+    box-shadow: 0 5px 10px rgba(204, 204, 204, 0.3);
 
     svg {
       margin-right: 23px;
@@ -283,7 +282,7 @@ export const Container = styled.div`
       position: relative;
       left: 15px;
       justify-content: space-evenly;
-      
+
       svg {
         margin: 0;
       }
@@ -295,7 +294,7 @@ export const Container = styled.div`
       position: relative;
       right: 15px;
       justify-content: space-evenly;
-      
+
       svg {
         margin: 0;
       }
@@ -323,7 +322,7 @@ export const Container = styled.div`
     justify-content: center;
     align-items: center;
     margin: 0 18px;
-    
+
     .background {
       position: absolute;
       margin: 0 auto;
@@ -432,14 +431,12 @@ export const Container = styled.div`
       font-size: 14px;
     }
     .primary-buttons {
-
       .siri-wave {
         top: -90px !important;
         width: 90% !important;
         overflow: hidden;
       }
     }
-    
   }
   @media screen and (max-width: ${props => props.theme.breakpoints.sm}px) {
     padding-bottom: 50px;
@@ -471,10 +468,10 @@ export const Container = styled.div`
         }
       }
     }
-    
+
     .primary-button {
       margin: 0 12px;
-     
+
       .background {
         width: 75px;
         height: 75px;
@@ -482,64 +479,67 @@ export const Container = styled.div`
     }
     .vote-button {
       height: 50px;
-      width : 50px !important;
-     
-     /*  Reversing the styles to remove the left over hover effect on mobile.  */
+      width: 50px !important;
+
+      /*  Reversing the styles to remove the left over hover effect on mobile.  */
       &.yes {
-        box-shadow: 0 5px 10px rgba(89,203,183,.3);
-        
-        &:hover, &.active {
+        box-shadow: 0 5px 10px rgba(89, 203, 183, 0.3);
+
+        &:hover,
+        &.active {
           background: #fff;
-          box-shadow: 0 5px 10px rgba(89,203,183,.3);
+          box-shadow: 0 5px 10px rgba(89, 203, 183, 0.3);
           color: #000;
         }
       }
-      
+
       &.no {
-        box-shadow: 0 5px 10px rgba(255,79,94,.2);
-        
-        &:hover, &.active {
+        box-shadow: 0 5px 10px rgba(255, 79, 94, 0.2);
+
+        &:hover,
+        &.active {
           background: #fff;
-          box-shadow: 0 5px 10px rgba(255,79,94,.2);
+          box-shadow: 0 5px 10px rgba(255, 79, 94, 0.2);
           color: #000;
         }
       }
-      
+
       /* Replacing the :hover pseudo class with :active to be suitable for mobile.  */
       &.yes {
-        box-shadow: 0 5px 10px rgba(89,203,183,.3);
-        
-        &:active, &.active {
+        box-shadow: 0 5px 10px rgba(89, 203, 183, 0.3);
+
+        &:active,
+        &.active {
           background: #59cbb7;
-          box-shadow: 0 5px 10px rgba(89,203,183,.7);
+          box-shadow: 0 5px 10px rgba(89, 203, 183, 0.7);
         }
       }
       &.no {
-        box-shadow: 0 5px 10px rgba(255,79,94,.2);
-        
-        &:active, &.active {
+        box-shadow: 0 5px 10px rgba(255, 79, 94, 0.2);
+
+        &:active,
+        &.active {
           background: #ff4f5e;
-          box-shadow: 0 5px 10px rgba(255,79,94,.6);
+          box-shadow: 0 5px 10px rgba(255, 79, 94, 0.6);
         }
       }
-      
+
       &.skip {
         left: 8px;
       }
       &.previous {
         right: 8px;
       }
-      
+
       svg {
         margin: 0;
       }
-      
+
       span {
         display: none;
       }
     }
-  }       
-  
+  }
 `;
 
 const VoteButton = styled.button``;
@@ -576,10 +576,10 @@ export const HelpModalContent = styled.div`
   left: 0;
   right: 0;
   padding: 20px 50px;
-  
+
   .content {
     margin-top: 25px;
-    height: 100%; 
+    height: 100%;
   }
   .modal-title {
     color: #59b548;
@@ -589,7 +589,7 @@ export const HelpModalContent = styled.div`
     padding-left: 25px;
   }
   h4 {
-    margin-bottom: 15px;  
+    margin-bottom: 15px;
   }
   p {
     line-height: 25px;
@@ -599,15 +599,13 @@ export const HelpModalContent = styled.div`
   }
   @media screen and (max-width: ${props => props.theme.breakpoints.md}px) {
     padding: 20px;
-    
+
     .modal-title {
       font-size: 18px;
     }
-    
+
     ul {
       padding-left: 5px;
     }
   }
 `;
-
-

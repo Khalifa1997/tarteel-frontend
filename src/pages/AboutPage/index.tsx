@@ -35,11 +35,14 @@ class About extends Component<IProps, IState> {
     data: {},
   };
   async componentDidMount() {
+    // Get the data from the backend.
     const data = humps.camelizeKeys(await fetchAboutData());
     this.setState({ data });
 
     const recitedAyahs = this.state.data.recordingCount;
     const counter = document.querySelector('.progress-counter');
+
+    // Progress bar circle for collected ayah goal with total ayahs so far
     const bar = new ProgressBar.Circle(counter, {
       color: '#aaa',
       // This has to be the same size as the maximum width to
@@ -57,7 +60,7 @@ class About extends Component<IProps, IState> {
       step: (state, circle) => {
         circle.path.setAttribute('stroke', state.color);
         circle.path.setAttribute('stroke-width', state.width);
-        // var value = Math.round(circle.value() * 50000);
+        // Change config('objective') to determine total number of ayahs to achieve
         const value = Math.round(
           (circle.value() * recitedAyahs * config('objective')) / recitedAyahs
         );
@@ -73,6 +76,7 @@ class About extends Component<IProps, IState> {
     const animate_value = recitedAyahs / config('objective');
     bar.animate(animate_value); // Number from 0.0 to 1.0
 
+    // Chart for gender doughnut (D'oh)
     const genderCTX = document.getElementById('gender_chart').getContext('2d');
     const backgroundColors2 = ['#8e5ea2', '#3e95cd'];
     const backgroundColors6 = [
@@ -83,7 +87,6 @@ class About extends Component<IProps, IState> {
       '#c45850',
       '#8888aa',
     ];
-
     const genderChart = new Chart(genderCTX, {
       // The type of chart we want to create
       type: 'doughnut',
@@ -109,6 +112,7 @@ class About extends Component<IProps, IState> {
       },
     });
 
+    // Age bar chart
     const ageCTX = document.getElementById('age_chart').getContext('2d');
     const ageChart = new Chart(ageCTX, {
       // The type of chart we want to create
@@ -321,24 +325,6 @@ class About extends Component<IProps, IState> {
                 </li>
                 <li className="large-arabic-text">
                   <T id={KEYS.CONTRIBUTOR_9} />
-                </li>
-                <li className="large-arabic-text">
-                  <T id={KEYS.CONTRIBUTOR_10} />
-                </li>
-                <li className="large-arabic-text">
-                  <T id={KEYS.CONTRIBUTOR_11} />
-                </li>
-                <li className="large-arabic-text">
-                  <T id={KEYS.CONTRIBUTOR_12} />
-                </li>
-                <li className="large-arabic-text">
-                  <T id={KEYS.CONTRIBUTOR_13} />
-                </li>
-                <li className="large-arabic-text">
-                  <T id={KEYS.CONTRIBUTOR_14} />
-                </li>
-                <li className="large-arabic-text">
-                  <T id={KEYS.CONTRIBUTOR_15} />
                 </li>
               </ul>
               <h2 className={rtl}>

@@ -10,6 +10,7 @@ export const backendRequestOptions = (request: any) => {
       Cookie: cookieString,
     },
     credentials: 'include',
+    mode: 'cors',
   };
 };
 

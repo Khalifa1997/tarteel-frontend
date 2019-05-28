@@ -1,11 +1,13 @@
 import React from 'react';
 import { Helmet } from 'react-helmet';
+import { InjectedIntl, injectIntl } from 'react-intl';
 import ReactGA from 'react-ga';
 
 import Ayah from '../../components/Ayah';
 import Footer from '../../components/Footer';
 import Navbar from '../../components/Navbar';
 import { IStatus } from '../../types/GlobalState';
+import KEYS from '../../locale/keys';
 import AyahShape from '../../shapes/AyahShape';
 import { Container } from './styles';
 import config from '../../../config';
@@ -29,11 +31,52 @@ interface IOwnProps {
   passedOnBoarding: boolean;
   status: IStatus;
   isAyahPage?: boolean;
+  intl: InjectedIntl;
 }
 
 type IProps = IOwnProps & IDispatchProps;
 
 class Main extends React.Component<IProps, never> {
+  getOGComponent = () => {
+    const { surah, ayah } = this.props.match.params;
+    const locale = this.props.cookies.get('currentLocale') || 'en';
+
+    let ogTitle = this.props.intl.formatMessage({
+      id: KEYS.CONTRIBUTE_PAGE_TITLE,
+    });
+    if (surah && ayah) {
+      ogTitle =
+        locale === 'ar'
+          ? `سورة ${surahs[surah].arabic} آيه ${ayah} `
+          : `Surah ${surahs[surah].latin} Ayah ${ayah}`;
+
+      return (
+        <Helmet titleTemplate={''}>
+          {surah &&
+            ayah && [
+              <title>{ogTitle}</title>,
+              <meta
+                property={'og:description'}
+                content={this.props.currentAyah.textSimple}
+              />,
+              <meta
+                name={'twitter:description'}
+                content={this.props.currentAyah.textSimple}
+              />,
+            ]}
+          <meta property={'og:image'} content={this.handleOGImage()} />
+          <meta name={'twitter:image'} content={this.handleOGImage()} />
+        </Helmet>
+      );
+    } else {
+      return (
+        <Helmet>
+          <title>{ogTitle}</title>
+        </Helmet>
+      );
+    }
+  };
+
   handleOGImage = () => {
     const locale = this.props.cookies.get('currentLocale') || 'en';
     return `/public/og/main_${locale}.png`;
@@ -72,33 +115,10 @@ class Main extends React.Component<IProps, never> {
     });
   };
   public render() {
-    const { surah, ayah } = this.props.match.params;
-    const locale = this.props.cookies.get('currentLocale') || 'en';
-    let ogTitle;
-    if (surah && ayah) {
-      ogTitle =
-        locale === 'ar'
-          ? `سورة ${surahs[surah].arabic} آيه ${ayah} `
-          : `Surah ${surahs[surah].latin} Ayah ${ayah}`;
-    }
+    const OGComponent = this.getOGComponent();
     return (
       <Container>
-        <Helmet titleTemplate={''}>
-          {surah &&
-            ayah && [
-              <title>{ogTitle}</title>,
-              <meta
-                property={'og:description'}
-                content={this.props.currentAyah.textSimple}
-              />,
-              <meta
-                name={'twitter:description'}
-                content={this.props.currentAyah.textSimple}
-              />,
-            ]}
-          <meta property={'og:image'} content={this.handleOGImage()} />
-          <meta name={'twitter:image'} content={this.handleOGImage()} />
-        </Helmet>
+        {OGComponent}
         <Navbar withBullets={true} />
         <div className={'content'}>
           <Ayah
@@ -112,4 +132,4 @@ class Main extends React.Component<IProps, never> {
   }
 }
 
-export default Main;
+export default injectIntl(Main);

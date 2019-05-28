@@ -52,13 +52,13 @@ class Ayah extends React.Component<IProps, IState> {
   };
   renderAyah = () => {
     return (
-      this.props.ayah.words.map((word: WordShape) => {
+      this.props.ayah.words.map((word: WordShape, index: number) => {
         const className = classNames({
           [word.className]: true,
           [word.charType]: true,
         });
         return (
-          <span>
+          <span key={index}>
             <a
               className={className}
               dangerouslySetInnerHTML={{ __html: word.code }}

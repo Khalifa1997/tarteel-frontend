@@ -66,7 +66,7 @@ const AppHelmet: React.SFC = ({ intl, path }: IProps) => {
 
   const tags = {
     title,
-    titleTemplate: `%s | ${localName}`,
+    titleTemplate: `%s`,
     meta: [
       {
         charset: 'utf-8',
@@ -122,7 +122,7 @@ const AppHelmet: React.SFC = ({ intl, path }: IProps) => {
       },
       {
         property: 'og:image',
-        content: '/public/og/main_en.png',
+        content: 'http://www.tarteel.io/public/og/main_en.png',
       },
       {
         property: 'og:locale',
@@ -142,7 +142,7 @@ const AppHelmet: React.SFC = ({ intl, path }: IProps) => {
       },
       {
         property: 'og:url',
-        content: `https://tarteel.io` + path,
+        content: `https://www.tarteel.io` + path,
       },
       {
         property: 'og:type',
@@ -162,7 +162,7 @@ const AppHelmet: React.SFC = ({ intl, path }: IProps) => {
       },
       {
         name: 'twitter:image',
-        content: '/public/og/main_en.png',
+        content: 'http://www.tarteel.io/public/og/main_en.png',
       },
       {
         name: 'twitter:image:width',
@@ -187,7 +187,7 @@ const AppHelmet: React.SFC = ({ intl, path }: IProps) => {
       ...Object.keys(config('locales')).map(key => ({
         rel: 'alternate',
         hrefLang: key,
-        href: `https://tarteel.io?lang=${key}`,
+        href: `https://www.tarteel.io?lang=${key}`,
       })),
     ],
     /* SEO: https://developers.google.com/structured-data/slsb-overview#markup_examples */
@@ -206,7 +206,7 @@ const AppHelmet: React.SFC = ({ intl, path }: IProps) => {
             "@type": "WebSite",
             "name": "Tarteel",
             "alternateName": "Tarteel.io",
-            "url": "https://tarteel.io",
+            "url": "https://www.tarteel.io",
           }`,
       },
       {
@@ -214,7 +214,7 @@ const AppHelmet: React.SFC = ({ intl, path }: IProps) => {
         innerHTML: `{
             "@context": "http://schema.org",
             "@type": "Organization",
-            "url": "https://tarteel.io",
+            "url": "https://www.tarteel.io",
             "logo": "https://d2sf46268wowyo.cloudfront.net/logo-3x.png"
           }`,
       },

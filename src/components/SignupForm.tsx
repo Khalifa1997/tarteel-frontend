@@ -45,7 +45,6 @@ class SignupForm extends React.Component<IProps, IState> {
     };
     Auth.signUp(userData)
       .then(user => {
-        console.log('registration succeed', user);
         this.setState({ isLoading: false });
       })
       .catch((e: Error) => {
