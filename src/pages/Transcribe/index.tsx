@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import classNames from 'classnames';
 import { Icon } from 'react-icons-kit';
 import { History } from 'history';
@@ -10,18 +9,14 @@ import { micA } from 'react-icons-kit/ionicons/micA';
 import { stop } from 'react-icons-kit/fa/stop';
 import { injectIntl, InjectedIntl } from 'react-intl';
 
+import AudioStreamer from '../../helpers/AudioStreamer';
 import RecordingButton from '../../components/RecordingButton';
 import Navbar from '../../components/Navbar';
 import { Container } from './styles';
 import { connect } from 'react-redux';
 import ReduxState from '../../types/GlobalState';
-import {
-  setRecognitionResults,
-  setUnableToRecord,
-} from '../../store/actions/recognition';
+import { setRecognitionResults } from '../../store/actions/recognition';
 import config from '../../../config';
-import { startRecording, stopRecording } from '../../helpers/recorder';
-import { toggleIsRecording } from '../../store/actions/status';
 import RecordingError from '../../components/RecordingError';
 import KEYS from '../../locale/keys';
 import T from '../../components/T';
@@ -30,10 +25,13 @@ import collapseIcon from '../../../public/images/icons/svg/collapse.svg';
 import settingsIcon from '../../../public/images/icons/svg/settings.svg';
 import Fullscreen from 'react-full-screen';
 import LogoImage from '../../../public/logo-3x.png';
+import io from "socket.io-client";
+import Socket = SocketIOClient.Socket;
 
 interface IOwnProps {
   history: History;
   intl: InjectedIntl;
+  voiceServer: string;
 }
 
 interface IState {
@@ -57,8 +55,9 @@ interface IDispatchProps {
 
 type IProps = IOwnProps & IDispatchProps & IStateProps;
 
-class Recognition extends React.Component<IProps, IState> {
-  recognition: SpeechRecognition;
+class Transcribe extends React.Component<IProps, IState> {
+  AudioStreamer: any;
+  socket: Socket;
 
   state = {
     isRecording: false,
@@ -75,81 +74,63 @@ class Recognition extends React.Component<IProps, IState> {
     ayahText: 'Lorem ipsum',
     secondaryText:
       "Take, [O, Muhammad], from their wealth a charity by which you purify them and cause them increase, and invoke [ Allah 's blessings] upon them. Indeed, your invocations are reassurance for them. And Allah is Hearing and Knowing.",
-    tertiaryText: null, //text for the optional third paragraph
+    tertiaryText: null, // text for the optional third paragraph
   };
 
-  handleRecordingButton = () => {
-    if (this.state.isLoading) {
-      return;
-    } else if (this.state.isRecording) {
-      this.stopRecognition();
-      this.handleStopRecording();
-    } else {
-      this.startRecognition();
-    }
-  };
-  stopRecognition = () => {
-    this.setState({
-      isRecording: false,
-    });
-    this.recognition.onend = () => null;
-    this.recognition.stop();
-  };
-  handleRecordingError = e => {
-    console.log(e);
-  };
-  handleStartRecording = () => {
-    // resets the query string with new recordings
-    this.setState({
-      query: '',
-    });
-    const recConfig = {
-      onError: this.handleRecordingError,
-    };
-    startRecording(recConfig);
-  };
-  handleStopRecording = () => {
-    stopRecording();
-  };
-  handleRecognitionResult = e => {
-    let interimTranscript = '';
-    for (let i = e.resultIndex; i < e.results.length; ++i) {
-      if (e.results[i].isFinal) {
-        this.handleSearch(this.state.query + ' ' + e.results[i][0].transcript);
-      } else {
-        interimTranscript += e.results[i][0].transcript;
-      }
-    }
-    this.setState(() => {
-      return {
-        partialQuery: interimTranscript,
-      };
-    });
-  };
-  startRecognition = () => {
-    this.setState({
-      isRecording: true,
-    });
-    this.recognition = new webkitSpeechRecognition();
-    this.recognition.lang = 'ar-AE';
-    this.recognition.continuous = false;
-    this.recognition.interimResults = true;
 
-    this.recognition.addEventListener('result', this.handleRecognitionResult);
-    this.recognition.onerror = this.handleRecognitionError;
-    this.recognition.onend = this.recognition.start;
-
-    this.handleStartRecording();
-    this.recognition.start();
-  };
   showErrorMessage = (message: JSX.Element) => {
     this.setState({
       showErrorMessage: true,
       errorMessage: message,
     });
   };
-  handleRecognitionError = event => {
-    this.stopRecognition();
+  
+  handleRecordingError = (e: string) => {
+    /** Print the recording error. TODO: Activate modal */
+    console.log(e);
+  };
+
+  handleData = (data: any) => {
+    let interimTranscript = '';
+    for (let i = data.resultIndex; i < data.results.length; ++i) {
+      // TODO: Is this necessary for transcribe? Set state here
+      if (data.results[i].isFinal) {
+        interimTranscript = this.state.query + ' ' + data.results[i][0].transcript;
+      } else {
+        interimTranscript += data.results[i][0].transcript;
+      }
+    }
+    this.setState({
+      partialQuery: interimTranscript,
+    });
+  };
+
+  handleStartRecording = () => {
+    this.setState({
+      query: '',
+      isRecording: true,
+    });
+    this.AudioStreamer.initRecording(this.handleData, this.handleRecordingError);
+  };
+
+  handleStopRecording = () => {
+    this.AudioStreamer.stopRecording();
+    this.setState({
+      isRecording: false,
+    });
+  };
+
+  handleRecordingButton = () => {
+    if (this.state.isLoading) {
+      return;
+    } else if (this.state.isRecording) {
+      this.handleStopRecording();
+    } else {
+      this.handleStartRecording();
+    }
+  };
+
+  handleRecognitionError = (event: any) => {
     this.handleStopRecording();
     const errorLink = '//support.google.com/websearch/answer/2940021';
     const chromeLink = '//support.google.com/chrome/answer/2693767';
@@ -160,7 +141,7 @@ class Recognition extends React.Component<IProps, IState> {
             id={KEYS.AYAH_RECOGNITION_NO_SPEECH_ERROR}
             values={{ errorLink }}
           />
-        </p>
+        </p>,
       );
     } else if (event.error === 'audio-capture') {
       this.showErrorMessage(
@@ -169,7 +150,7 @@ class Recognition extends React.Component<IProps, IState> {
             id={KEYS.AYAH_RECOGNITION_AUDIO_CAPTURE_ERROR}
             values={{ errorLink }}
           />
-        </p>
+        </p>,
       );
     } else if (event.error === 'not-allowed') {
       this.showErrorMessage(
@@ -178,60 +159,10 @@ class Recognition extends React.Component<IProps, IState> {
             id={KEYS.AYAH_RECOGNITION_MIC_PERMISSION_ERROR}
             values={{ chromeLink }}
           />
-        </p>
+        </p>,
       );
     }
   };
-  resetSearch = () => {
-    this.setState({
-      query: '',
-    });
-  };
-  handleSearch = (query: string) => {
-    this.recognition.stop();
-    this.setState({
-      isLoading: true,
-    });
-    query = query.trim();
-    this.setState(state => {
-      return {
-        query,
-        partialQuery: '',
-      };
-    });
-    fetch('https://api.iqraapp.com/api/v3.0/search', {
-      method: 'POST',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        arabicText: query,
-        translation: 'en-hilali',
-        apikey: config('iqraApiKey'),
-      }),
-    })
-      .then(res => res.json())
-      .then(json => {
-        this.setState({
-          isLoading: false,
-        });
-        this.props.setRecognitionResults(json.result);
-        if (json.result.matches.length) {
-          this.stopRecognition();
-          this.props.history.push('/recognition/results');
-          console.log(json.result);
-        } else {
-          this.recognition.start();
-        }
-      });
-  };
-  componentDidMount() {
-    this.resetSearch();
-    if (!Boolean(window.webkitSpeechRecognition)) {
-      this.upgradeRequired();
-    }
-  }
   upgradeRequired = () => {
     this.props.setUnableToRecord();
   };
@@ -239,18 +170,42 @@ class Recognition extends React.Component<IProps, IState> {
     const locale = this.props.cookies.get('currentLocale') || 'en';
     return `/public/og/recognition_${locale}.png`;
   };
-  componentWillUnmount() {
-    if (this.recognition) {
-      this.recognition.stop();
-      this.handleStopRecording();
-    }
-  }
-
   toggleFullscreen = () => {
     this.setState({
       fullScreen: !this.state.fullScreen,
     });
   };
+  componentDidMount() {
+    /** Setup sockets and audio streamer. */
+    this.setState({
+      query: '',
+    });
+
+    // remove?
+    if (!Boolean(window.webkitSpeechRecognition)) {
+      this.upgradeRequired();
+    }
+
+    const speechServerURL = config('voiceServerURL');
+    this.socket = io(speechServerURL);
+    // Partial/Final Transcripts from Google (TODO)
+    this.socket.on('speechResult', this.handleResults);
+    // Returns, surah/ayah number with word (TODO)
+    this.socket.on('ayahFound', this.ayahFound);
+    // Update the state of read ayahs (TODO)
+    this.socket.on('matchFound', this.updateAyah);
+    this.socket.on('streamError', this.handleRecognitionError);
+    this.socket.on('endStream', this.handleStopRecording);
+
+    const options = {
+      type: 'recognition',
+    };
+
+    this.AudioStreamer = new AudioStreamer(this.socket, options);
+  }
+  componentWillUnmount() {
+    this.handleStopRecording();
+  }
   render() {
     const classnames = classNames({
       recording: this.state.isRecording,
@@ -334,6 +289,7 @@ class Recognition extends React.Component<IProps, IState> {
   }
 }
 
+
 const mapStateToProps = (state: ReduxState): IStateProps => {
   return {
     canRecord: state.recognition.canRecord,
@@ -355,7 +311,7 @@ export default injectIntl(
   withCookies(
     connect(
       mapStateToProps,
-      mapDispatchToProps
-    )(Recognition)
-  )
+      mapDispatchToProps,
+    )(Transcribe),
+  ),
 );

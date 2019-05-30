@@ -71,8 +71,12 @@ export interface IRecognition {
   queryText: string;
   suggestions: [];
   matchedTerms: string[];
-  matches: any[];
+  matches: object[];
   canRecord: boolean;
+}
+export interface IRecognitionRequest {
+  arabicText: string;
+  translation: string;
 }
 
 export default ReduxState;

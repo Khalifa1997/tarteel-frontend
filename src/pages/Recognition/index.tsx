@@ -4,7 +4,6 @@ import classNames from 'classnames';
 import { Icon } from 'react-icons-kit';
 import { History } from 'history';
 import { circleONotch } from 'react-icons-kit/fa/circleONotch';
-import Helmet from 'react-helmet';
 import { withCookies } from 'react-cookie';
 import { micA } from 'react-icons-kit/ionicons/micA';
 import { stop } from 'react-icons-kit/fa/stop';
@@ -15,7 +14,6 @@ import RecordingButton from '../../components/RecordingButton';
 import Navbar from '../../components/Navbar';
 import { Container } from './styles';
 import { connect } from 'react-redux';
-import ReduxState from '../../types/GlobalState';
 import { setRecognitionResults } from '../../store/actions/recognition';
 import RecordingError from '../../components/RecordingError';
 import KEYS from '../../locale/keys';
@@ -79,7 +77,7 @@ class Recognition extends React.Component<IProps, IState> {
 
     this.AudioStreamer.initRecording(
       this.handleData,
-      this.handleRecordingError
+      this.handleRecordingError,
     );
   };
   handleResults = results => {

@@ -1,5 +1,8 @@
+import io from "socket.io-client";
+import Socket = SocketIOClient.Socket;
+
 // Stream Audio
-let bufferSize = 2048;
+const bufferSize = 2048;
 let AudioContext;
 let context;
 let processor;
@@ -13,7 +16,10 @@ const constraints = {
 };
 
 class AudioStreamer {
-  constructor(socket, options) {
+  socket: Socket;
+  options: object;
+
+  constructor(socket: Socket, options: object) {
     this.socket = socket;
     this.options = options;
 
@@ -71,7 +77,7 @@ class AudioStreamer {
 
     this.socket.on('streamError', (error: Error) => {
       if (onError) {
-        onError('error');
+        onError('Stream Error');
       }
       // We don't want to emit another end stream event
       this.closeAll();

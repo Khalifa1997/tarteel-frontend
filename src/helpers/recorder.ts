@@ -2,7 +2,7 @@ import Recorder from 'recorder-js';
 
 import { createAudioMeter } from './volume-meter';
 
-let audio_context: any;
+let audioContext: any;
 export let recorder: any;
 let audioStream: any;
 let meter: any;
@@ -22,8 +22,8 @@ function drawLoop() {
 
 function startUserMedia(stream: any) {
   audioStream = stream;
-  meter = createAudioMeter(audio_context);
-  recorder = new Recorder(audio_context);
+  meter = createAudioMeter(audioContext);
+  recorder = new Recorder(audioContext);
   recorder.init(stream);
   recorder.realAudioInput.connect(meter);
   drawLoop();
@@ -47,18 +47,20 @@ export function stopRecording() {
 }
 
 export async function startRecording(props?: any) {
-  let onError = null;
+  // Default error handler
+  let onError = (e: string) => console.log(e);
   if (props && props.onError) {
     onError = props.onError;
   }
+
   try {
     // webkit shim.
     window.AudioContext = window.AudioContext || window.webkitAudioContext;
     navigator.getUserMedia =
       navigator.getUserMedia || navigator.webkitGetUserMedia;
     window.URL = window.URL || window.webkitURL;
-    if (!audio_context) {
-      audio_context = new AudioContext();
+    if (!audioContext) {
+      audioContext = new AudioContext();
     }
   } catch (e) {
     console.log('No web audio support in this browser! ', e.message);
@@ -72,12 +74,10 @@ export async function startRecording(props?: any) {
       })
       .catch(e => {
         if (e) {
-          console.log(e);
-          onError();
+          onError(e);
         }
       });
   } catch (e) {
-    console.log(e);
-    onError();
+    onError(e);
   }
 }
