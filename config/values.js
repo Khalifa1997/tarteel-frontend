@@ -245,7 +245,7 @@ const values = {
       // specify the inclusion of additional modules below.
       devVendorDLL: {
         // Enabled?
-        enabled: false, //TODO: @ananas, re-enable devVendorDLL
+        enabled: true,
 
         // Specify any dependencies that you would like to include in the
         // Vendor DLL.
