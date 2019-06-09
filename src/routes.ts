@@ -145,13 +145,15 @@ export default [
   {
     path: '/donate',
     component: asyncComponent({
-      resolve: () => import(/* webpackChunkName: "Donate" */ './pages/Donate'),
+      resolve: () =>
+        import(/* webpackChunkName: "Donate" */ './pages/Donate'),
     }),
   },
   {
     path: '/transcribe',
     component: asyncComponent({
-      resolve: () => import(/* webpackChunkName: "Transcribe" */ './pages/Transcribe'),
+      resolve: () =>
+        import(/* webpackChunkName: "Transcribe" */ './pages/Transcribe'),
     }),
   },
 ];
