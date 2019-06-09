@@ -4,43 +4,21 @@ import { getApiURL } from '../client/utils/apiUtils';
 const API_URL: string = getApiURL();
 
 export const fetchRandomAyah = (req?: any) => {
-  const options = __SERVER__
+  const options: any = __SERVER__
     ? backendRequestOptions(req)
     : {
         credentials: 'include',
       };
   return fetch(`${API_URL}/v1/quran/ayah/random/`, options)
-    .then(res =>res.json())
-    .then(json => {
-      // Rename b/c ayah shape takes chapterId and verseNumber instead of
-      // surah and number
-      const oldChapterId = 'chapter_id';
-      const newChapterId = 'surah';
-      const oldVerseNumber = 'verse_number';
-      const newVerseNumber = 'number';
-      json[oldChapterId] = json[newChapterId];
-      json[oldVerseNumber] = json[newVerseNumber];
-      return json;
-    });
+    .then((res: any) =>res.json())
 };
 
 export const fetchSpecificAyah = (surah: number, ayah: number) => {
-  const options = {
+  const options: any = {
     credentials: 'include',
   };
-  return fetch(`${API_URL}/v1/quran/ayah/?ayah=${ayah}&surah=${surah}`, options)
-    .then(res => res.json())
-    .then(json => {
-      // Rename b/c ayah shape takes chapterId and verseNumber instead of
-      // surah and number
-      const OLD_CHAPTER_ID = 'chapter_id';
-      const NEW_CHAPTER_ID = 'surah';
-      const OLD_VERSE_NUMBER = 'verse_number';
-      const NEW_VERSE_NUMBER = 'number';
-      json[OLD_CHAPTER_ID] = json[NEW_CHAPTER_ID];
-      json[OLD_VERSE_NUMBER] = json[NEW_VERSE_NUMBER];
-      return json;
-    });
+  return fetch(`${API_URL}/v1/quran/${surah}/${ayah}/`, options)
+    .then((res: any) => res.json())
 };
 
 /** Upload the recording file after each recitation. */

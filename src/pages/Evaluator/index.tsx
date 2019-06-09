@@ -109,8 +109,8 @@ class Evaluator extends React.Component<IProps, IState> {
    * Backend will send {"detail": No more unevaluated recordings!} if no more recordings.
    */
   public loadNextAyah = () => {
-    const { surah, number, recordingId } = this.props.currentAyah;
-    const { nextSurah, nextAyah } = getNextAyah(surah, number);
+    const { chapterId, verseNumber } = this.props.currentAyah;
+    const { nextSurah, nextAyah } = getNextAyah(chapterId, verseNumber);
     return fetchSpecificEvaluatorAyah(nextSurah, nextAyah)
       .then(this.handleUpcomingAyah)
       .catch((e: Error | Response) => {
