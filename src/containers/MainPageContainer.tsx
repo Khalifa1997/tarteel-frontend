@@ -67,8 +67,8 @@ export const MainPageContainer = {
   component: withCookies(
     connect(
       mapStateToProps,
-      mapDispatchToProps
-    )(Main)
+      mapDispatchToProps,
+    )(Main),
   ),
   loadData: (store: any, req: any) => {
     const lastAyah = req.universalCookies.get('lastAyah');
