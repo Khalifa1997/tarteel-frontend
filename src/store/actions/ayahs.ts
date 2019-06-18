@@ -4,19 +4,19 @@ import { createAction } from 'typesafe-actions';
 import { fetchSpecificAyah } from '../../api/ayahs';
 import { getNextAyah, getPrevAyah } from '../../helpers/ayahs';
 import { setCookie } from '../../helpers/cookie';
-import AyahShape from '../../shapes/AyahShape';
+import IAyahShape from '../../shapes/IAyahShape';
 import { nextAyahAction, prevAyahAction } from '../../types/actions';
 import ReduxState, { ISearchAyah } from '../../types/GlobalState';
 
 export const setAyah = createAction('ayahs/SET', resolve => {
-  return (ayah: AyahShape) => {
+  return (ayah: IAyahShape) => {
     setCookie('lastAyah', ayah, { path: '/' });
     return resolve(humps.camelizeKeys(ayah));
   };
 });
 
 export const unShiftNextAyah = createAction('ayahs/UNSHIFT_NEXT', resolve => {
-  return (ayah: AyahShape) => resolve(humps.camelizeKeys(ayah));
+  return (ayah: IAyahShape) => resolve(humps.camelizeKeys(ayah));
 });
 
 export const shiftNextAyah = createAction('ayahs/SHIFT_NEXT_AYAH', resolve => {
@@ -34,7 +34,7 @@ export const clearNextAyah = createAction('ayahs/CLEAR_NEXT_AYAH', resolve => {
 export const unShiftPrevAyah = createAction(
   'ayahs/UNSHIFT_PREVIOUS',
   resolve => {
-    return (ayah: AyahShape) => resolve(humps.camelizeKeys(ayah));
+    return (ayah: IAyahShape) => resolve(humps.camelizeKeys(ayah));
   }
 );
 
@@ -61,14 +61,14 @@ export const setSurah = createAction('ayahs/SET_SURAH', resolve => {
   return (surah: ISearchAyah) => resolve(humps.camelizeKeys(surah));
 });
 
-export const loadNextAyah = (currentAyah?: AyahShape) => {
+export const loadNextAyah = (currentAyah?: IAyahShape) => {
   return async (dispatch, getState: () => ReduxState) => {
     dispatch(nextAyahAction.request());
     const { verseNumber: ayah, chapterId: surah } =
       currentAyah || getState().ayahs.currentAyah;
     const { nextSurah, nextAyah } = getNextAyah(surah, ayah);
     return fetchSpecificAyah(nextSurah, nextAyah)
-      .then((ayah: AyahShape) => {
+      .then((ayah: IAyahShape) => {
         ayah = humps.camelizeKeys(ayah);
         dispatch(nextAyahAction.success(humps.camelizeKeys(ayah)));
       })
@@ -78,14 +78,14 @@ export const loadNextAyah = (currentAyah?: AyahShape) => {
   };
 };
 
-export const loadPreviousAyah = (currentAyah?: AyahShape) => {
+export const loadPreviousAyah = (currentAyah?: IAyahShape) => {
   return async (dispatch, getState: () => ReduxState) => {
     dispatch(prevAyahAction.request());
     const { verseNumber: ayah, chapterId: surah } =
       currentAyah || getState().ayahs.currentAyah;
     const { prevSurah, prevAyah } = getPrevAyah(surah, ayah);
     return fetchSpecificAyah(prevSurah, prevAyah)
-      .then((ayah: AyahShape) => {
+      .then((ayah: IAyahShape) => {
         ayah = humps.camelizeKeys(ayah);
         dispatch(prevAyahAction.success(humps.camelizeKeys(ayah)));
       })

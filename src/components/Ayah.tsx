@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 import KEYS from '../locale/keys';
-import AyahShape from '../shapes/AyahShape';
+import IAyahShape from '../shapes/IAyahShape';
 import WordShape from '../shapes/WordShape';
 import { WORD_TYPES } from '../types';
 import T from './T';
@@ -15,7 +15,7 @@ import * as shareIcon from '../../public/share-icon.png';
 import { withCookies } from 'react-cookie';
 
 interface IProps {
-  ayah: AyahShape;
+  ayah: IAyahShape;
   isFetchingAyah: boolean;
 }
 

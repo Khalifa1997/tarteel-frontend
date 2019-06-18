@@ -13,7 +13,7 @@ import styled from 'styled-components';
 import { connect } from 'react-redux';
 import { fetchRandomAyah } from '../api/ayahs';
 import KEYS from '../locale/keys';
-import AyahShape from '../shapes/AyahShape';
+import IAyahShape from '../shapes/IAyahShape';
 import { setAyah, toggleFetchingCurrentAyah } from '../store/actions/ayahs';
 import ReduxState, { IProfile } from '../types/GlobalState';
 import T from './T';
@@ -25,7 +25,7 @@ interface IOwnProps {
 }
 
 interface IDispatchProps {
-  setAyah(ayah: AyahShape): void;
+  setAyah(ayah: IAyahShape): void;
   toggleFetchingCurrentAyah(): void;
 }
 
@@ -119,7 +119,7 @@ class NavMenu extends React.Component<IProps, IState> {
   };
   public handleRandomAyah = () => {
     this.props.toggleFetchingCurrentAyah();
-    fetchRandomAyah().then((ayah: AyahShape) => {
+    fetchRandomAyah().then((ayah: IAyahShape) => {
       this.props.setAyah(ayah);
       this.props.toggleFetchingCurrentAyah();
     });
@@ -313,7 +313,7 @@ const mapStateToProps = (state: ReduxState): IStateProps => {
 
 const mapDispatchToProps = (dispatch): IDispatchProps => {
   return {
-    setAyah: (ayah: AyahShape) => {
+    setAyah: (ayah: IAyahShape) => {
       dispatch(setAyah(ayah));
     },
     toggleFetchingCurrentAyah: () => {

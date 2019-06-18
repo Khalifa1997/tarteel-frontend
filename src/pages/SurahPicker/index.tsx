@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 import { Helmet } from 'react-helmet';
-import Icon from 'react-icons-kit';
-import { arrowLeft } from 'react-icons-kit/feather/arrowLeft';
 import { InjectedIntl, injectIntl } from 'react-intl';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
@@ -11,7 +9,7 @@ import surahs from '../../api/surahs';
 import Navbar from '../../components/Navbar';
 import T from '../../components/T';
 import KEYS from '../../locale/keys';
-import AyahShape from '../../shapes/AyahShape';
+import IAyahShape from '../../shapes/IAyahShape';
 import ReduxState from '../../types/GlobalState';
 import { Container } from './styles';
 
@@ -21,7 +19,7 @@ interface IOwnProps {
 }
 
 interface IStateProps {
-  currentAyah: AyahShape;
+  currentAyah: IAyahShape;
 }
 
 interface ISearchSurah {

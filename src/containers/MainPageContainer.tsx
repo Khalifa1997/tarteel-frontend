@@ -5,7 +5,7 @@ import { ActionType } from 'typesafe-actions';
 
 import { fetchRandomAyah } from '../api/ayahs';
 import Main from '../pages/MainPage';
-import AyahShape from '../shapes/AyahShape';
+import IAyahShape from '../shapes/IAyahShape';
 import {
   loadNextAyah,
   loadNextQueue,
@@ -16,15 +16,15 @@ import {
 import ReduxState, { IRouter, IStatus } from '../types/GlobalState';
 
 interface IDispatchProps {
-  setAyah(ayah: AyahShape): ActionType<typeof setAyah>;
-  loadPreviousAyah(ayah?: AyahShape): void;
-  loadNextAyah(ayah?: AyahShape): void;
+  setAyah(ayah: IAyahShape): ActionType<typeof setAyah>;
+  loadPreviousAyah(ayah?: IAyahShape): void;
+  loadNextAyah(ayah?: IAyahShape): void;
   loadNextQueue(): void;
   loadPrevQueue(): void;
 }
 
 interface IStateProps {
-  currentAyah: AyahShape;
+  currentAyah: IAyahShape;
   isFetchingCurrentAyah: boolean;
   passedOnBoarding: boolean;
   status: IStatus;
@@ -35,13 +35,13 @@ const mapDispatchToProps = (
   dispatch: Dispatch<ActionType<typeof setAyah>>
 ): IDispatchProps => {
   return {
-    setAyah: (ayah: AyahShape) => {
+    setAyah: (ayah: IAyahShape) => {
       return dispatch(setAyah(ayah));
     },
-    loadNextAyah: (ayah?: AyahShape) => {
+    loadNextAyah: (ayah?: IAyahShape) => {
       return dispatch(loadNextAyah(ayah));
     },
-    loadPreviousAyah: (ayah?: AyahShape) => {
+    loadPreviousAyah: (ayah?: IAyahShape) => {
       return dispatch(loadPreviousAyah(ayah));
     },
     loadNextQueue: () => {
@@ -75,7 +75,7 @@ export const MainPageContainer = {
     if (lastAyah) {
       return Promise.resolve(store.dispatch(setAyah(lastAyah)));
     }
-    return fetchRandomAyah(req).then((ayah: AyahShape) => {
+    return fetchRandomAyah(req).then((ayah: IAyahShape) => {
       return store.dispatch(setAyah(ayah));
     });
   },

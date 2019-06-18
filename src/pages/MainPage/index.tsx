@@ -8,7 +8,7 @@ import Footer from '../../components/Footer';
 import Navbar from '../../components/Navbar';
 import { IStatus } from '../../types/GlobalState';
 import KEYS from '../../locale/keys';
-import AyahShape from '../../shapes/AyahShape';
+import IAyahShape from '../../shapes/IAyahShape';
 import { Container } from './styles';
 import config from '../../../config';
 import surahs from '../../api/surahs';
@@ -18,15 +18,15 @@ import { setAyah } from '../../store/actions/ayahs';
 import { ActionType } from 'typesafe-actions';
 
 interface IDispatchProps {
-  setAyah(ayah: AyahShape): ActionType<typeof setAyah>;
-  loadPreviousAyah(ayah?: AyahShape): void;
-  loadNextAyah(ayah?: AyahShape): void;
+  setAyah(ayah: IAyahShape): ActionType<typeof setAyah>;
+  loadPreviousAyah(ayah?: IAyahShape): void;
+  loadNextAyah(ayah?: IAyahShape): void;
   loadNextQueue(): void;
   loadPrevQueue(): void;
 }
 
 interface IOwnProps {
-  currentAyah: AyahShape;
+  currentAyah: IAyahShape;
   isFetchingCurrentAyah: boolean;
   passedOnBoarding: boolean;
   status: IStatus;
@@ -91,11 +91,11 @@ class Main extends React.Component<IProps, never> {
     const { surah, ayah } = this.props.match.params;
     if (surah && ayah) {
       if (isCorrectAyah(surah, ayah)) {
-        return fetchSpecificAyah(surah, ayah).then(
-          async (fetchedAyah: AyahShape) => {
+        return fetchSpecificAyah(surah, ayah)
+          .then(async (fetchedAyah: IAyahShape) => {
             await this.props.setAyah(fetchedAyah);
             await this.loadQueue();
-          }
+          },
         );
       } else {
         return this.history.push('/ayah_not_found');
@@ -106,14 +106,10 @@ class Main extends React.Component<IProps, never> {
       }
       this.props.cookies.set('lastAyah', this.props.currentAyah, { path: '/' });
     } else {
-      this.fetchRandomAyah();
+      fetchRandomAyah()
+        .then((ayah: IAyahShape) => this.props.setAyah(ayah));
     }
   }
-  public fetchRandomAyah = () => {
-    fetchRandomAyah().then((ayah: AyahShape) => {
-      this.props.setAyah(ayah);
-    });
-  };
   public render() {
     const OGComponent = this.getOGComponent();
     return (

@@ -4,21 +4,21 @@ import { getApiURL } from '../client/utils/apiUtils';
 const API_URL: string = getApiURL();
 
 export const fetchRandomAyah = (req?: any) => {
-  const options: any = __SERVER__
+  const options: object = __SERVER__
     ? backendRequestOptions(req)
     : {
         credentials: 'include',
       };
   return fetch(`${API_URL}/v1/quran/ayah/random/`, options)
-    .then((res: any) =>res.json())
+    .then(res =>res.json())
 };
 
 export const fetchSpecificAyah = (surah: number, ayah: number) => {
-  const options: any = {
+  const options: object = {
     credentials: 'include',
   };
   return fetch(`${API_URL}/v1/quran/${surah}/${ayah}/`, options)
-    .then((res: any) => res.json())
+    .then(res => res.json())
 };
 
 /** Upload the recording file after each recitation. */

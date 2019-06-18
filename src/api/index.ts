@@ -32,7 +32,7 @@ export const submitDemographics = (data: IDemographics) => {
 
 export const fetchAboutData = () => {
   /** Load the about page data from the backend. */
-  const options = {
+  const options: object = {
     credentials: 'include',
   };
   return fetch(`${API_URL}/v1/about/?format=json`, options)
@@ -41,7 +41,7 @@ export const fetchAboutData = () => {
 
 export const fetchProfileData = (sessionId: string) => {
   /** Get the profile data for a specific session id/user. */
-  const options = {
+  const options: object = {
     credentials: 'include',
     mode: 'cors',
   };
@@ -50,7 +50,8 @@ export const fetchProfileData = (sessionId: string) => {
 };
 
 export const fetchSessionData = (req?: any) => {
-  const options = __SERVER__
+  /** Get the user stats based on their session ID. */
+  const options: object = __SERVER__
     ? backendRequestOptions(req)
     : {
         credentials: 'include',
@@ -60,7 +61,8 @@ export const fetchSessionData = (req?: any) => {
 };
 
 export const getDatasetRecordings = (req?: any) => {
-  const options = __SERVER__
+  /** Download page request for CSV and random audio files. */
+  const options: object = __SERVER__
     ? backendRequestOptions(req)
     : {
         credentials: 'include',

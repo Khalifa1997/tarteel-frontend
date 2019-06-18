@@ -1,10 +1,10 @@
-import AyahShape from '../shapes/AyahShape';
+import IAyahShape from '../shapes/IAyahShape';
 
 interface ReduxState {
   ayahs: {
-    currentAyah: AyahShape;
-    prevAyah: AyahShape[];
-    nextAyah: AyahShape[];
+    currentAyah: IAyahShape;
+    prevAyah: IAyahShape[];
+    nextAyah: IAyahShape[];
     isFetchingCurrentAyah: boolean;
     currentSurah: ISearchSurah;
   };
@@ -50,9 +50,9 @@ export interface IDemographics {
 }
 
 interface IEvaluator {
-  currentAyah: AyahShape;
-  nextAyah: AyahShape;
-  previousAyah: AyahShape;
+  currentAyah: IAyahShape;
+  nextAyah: IAyahShape;
+  previousAyah: IAyahShape;
 }
 
 export interface ISearchAyah {

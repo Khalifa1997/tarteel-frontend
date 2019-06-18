@@ -1,7 +1,7 @@
 import TranslationShape from './TranslationShape';
 import WordShape from './WordShape';
 
-interface AyahShape {
+interface IAyahShape {
   verseNumber: number;
   chapterId: number;
   words: WordShape[];
@@ -14,4 +14,4 @@ interface AyahShape {
   [key: string]: any;
 }
 
-export default AyahShape;
+export default IAyahShape;

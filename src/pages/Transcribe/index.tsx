@@ -10,6 +10,7 @@ import { stop } from 'react-icons-kit/fa/stop';
 import { injectIntl, InjectedIntl } from 'react-intl';
 
 import AudioStreamer from '../../helpers/AudioStreamer';
+import Ayah from '../../components/Ayah';
 import RecordingButton from '../../components/RecordingButton';
 import Navbar from '../../components/Navbar';
 import { Container } from './styles';
@@ -27,6 +28,7 @@ import Fullscreen from 'react-full-screen';
 import LogoImage from '../../../public/logo-3x.png';
 import io from "socket.io-client";
 import Socket = SocketIOClient.Socket;
+import IAyahShape from "../../shapes/IAyahShape";
 
 interface IOwnProps {
   history: History;
@@ -42,6 +44,16 @@ interface IState {
   showErrorMessage: boolean;
   errorMessage: JSX.Element;
   fullScreen: boolean;
+  currentAyah: IAyahShape;
+  previousAyahs: IAyahShape[];
+  ayahFound: boolean;
+  // TODO: Update to remove these
+  surahNumber: number;
+  surahName: string;
+  ayahNumber: number;
+  ayahText: string;
+  secondaryText: string;
+  tertiaryText: string;
 }
 
 interface IStateProps {
@@ -59,50 +71,52 @@ class Transcribe extends React.Component<IProps, IState> {
   AudioStreamer: any;
   socket: Socket;
 
-  state = {
-    isRecording: false,
-    partialQuery: '',
-    query: '',
-    isLoading: false,
-    showErrorMessage: false,
-    errorMessage: '',
-    fullScreen: false,
-    // todo: replace placeholders
-    surahNumber: 42,
-    surahName: 'Al-Tawbah',
-    ayahNumber: 108,
-    ayahText: 'Lorem ipsum',
-    secondaryText:
-      "Take, [O, Muhammad], from their wealth a charity by which you purify them and cause them increase, and invoke [ Allah 's blessings] upon them. Indeed, your invocations are reassurance for them. And Allah is Hearing and Knowing.",
-    tertiaryText: null, // text for the optional third paragraph
-  };
+  constructor(props: IProps) {
+    super(props);
+    this.state = {
+      isRecording: false,
+      partialQuery: '',
+      query: '',
+      isLoading: false,
+      showErrorMessage: false,
+      errorMessage: React.createElement("div"),
+      fullScreen: false,
+      currentAyah: undefined,
+      previousAyahs: [],
+      ayahFound: false,
 
+      // todo: replace placeholders
+      surahNumber: 42,
+      surahName: 'Al-Tawbah',
+      ayahNumber: 108,
+      ayahText: 'Lorem ipsum',
+      secondaryText:
+        "Take, [O, Muhammad], from their wealth a charity by which you purify them and cause them increase, and invoke [ Allah 's blessings] upon them. Indeed, your invocations are reassurance for them. And Allah is Hearing and Knowing.",
+      tertiaryText: '', // text for the optional third paragraph
+    };
+  }
 
   showErrorMessage = (message: JSX.Element) => {
+    /** Activate the modal displaying the error message. */
     this.setState({
       showErrorMessage: true,
       errorMessage: message,
     });
   };
-  
-  handleRecordingError = (e: string) => {
-    /** Print the recording error. TODO: Activate modal */
-    console.log(e);
+
+  toggleFullscreen = () => {
+    this.setState({
+      fullScreen: !this.state.fullScreen,
+    });
   };
 
-  handleData = (data: any) => {
-    let interimTranscript = '';
-    for (let i = data.resultIndex; i < data.results.length; ++i) {
-      // TODO: Is this necessary for transcribe? Set state here
-      if (data.results[i].isFinal) {
-        interimTranscript = this.state.query + ' ' + data.results[i][0].transcript;
-      } else {
-        interimTranscript += data.results[i][0].transcript;
-      }
-    }
-    this.setState({
-      partialQuery: interimTranscript,
-    });
+  upgradeRequired = () => {
+    this.props.setUnableToRecord();
+  };
+
+  handleRecordingError = (e: JSX.Element) => {
+    /** Print the recording error. TODO: Activate modal */
+    return e;
   };
 
   handleStartRecording = () => {
@@ -110,7 +124,7 @@ class Transcribe extends React.Component<IProps, IState> {
       query: '',
       isRecording: true,
     });
-    this.AudioStreamer.initRecording(this.handleData, this.handleRecordingError);
+    this.AudioStreamer.initRecording(this.handleResult, this.handleRecordingError);
   };
 
   handleStopRecording = () => {
@@ -163,18 +177,46 @@ class Transcribe extends React.Component<IProps, IState> {
       );
     }
   };
-  upgradeRequired = () => {
-    this.props.setUnableToRecord();
-  };
+
   handleOGImage = () => {
     const locale = this.props.cookies.get('currentLocale') || 'en';
     return `/public/og/recognition_${locale}.png`;
   };
-  toggleFullscreen = () => {
-    this.setState({
-      fullScreen: !this.state.fullScreen,
-    });
+
+  handleMatchFound = (index: number) => {
+    /** Update the displayed sentence with the max number of words found. */
+    this.setState({ayahFound: true});
+    let sentence: string = '';
+    for (let i: number = 0; i < index; i++ ) {
+      sentence += ' ' + this.state.currentAyah.words[i].textMadani;
+    }
+    this.setState({partialQuery: sentence})
   };
+
+  handleAyahFound = (ayah: IAyahShape) => {
+    this.setState({currentAyah: ayah});
+  };
+
+  handleResult = (result: any) => {
+    /**
+     * Updates the state of the string displayed on the page as data comes in from the GCloud backend.
+     * Only displays if no ayah is found.
+     * @param data - Any type (JSON Response from Google).
+     */
+    if (!this.state.ayahFound) {
+      let interimTranscript = '';
+      for (let i = result.resultIndex; i < result.results.length; ++i) {
+        // TODO: Is this necessary for transcribe? Set state here
+        if (result.results[i].isFinal) {
+          interimTranscript = this.state.query + ' ' + result.results[i][0].transcript;
+        } else {
+          interimTranscript += result.results[i][0].transcript;
+        }
+      }
+      this.setState({partialQuery: interimTranscript});
+    }
+  };
+
   componentDidMount() {
     /** Setup sockets and audio streamer. */
     this.setState({
@@ -188,12 +230,12 @@ class Transcribe extends React.Component<IProps, IState> {
 
     const speechServerURL = config('voiceServerURL');
     this.socket = io(speechServerURL);
-    // Partial/Final Transcripts from Google (TODO)
-    this.socket.on('speechResult', this.handleResults);
-    // Returns, surah/ayah number with word (TODO)
-    this.socket.on('ayahFound', this.ayahFound);
-    // Update the state of read ayahs (TODO)
-    this.socket.on('matchFound', this.updateAyah);
+    // Partial/Final Transcripts from Google
+    this.socket.on('speechResult', this.handleResult);
+    // Returns, surah/ayah number with word
+    this.socket.on('ayahFound', this.handleAyahFound);
+    // Update the state of read ayahs
+    this.socket.on('matchFound', this.handleMatchFound);
     this.socket.on('streamError', this.handleRecognitionError);
     this.socket.on('endStream', this.handleStopRecording);
 
@@ -206,6 +248,15 @@ class Transcribe extends React.Component<IProps, IState> {
   componentWillUnmount() {
     this.handleStopRecording();
   }
+
+  renderFinishedAyahs = () => {
+    const elementList: JSX.Element[] = [];
+    this.state.previousAyahs.forEach( (currAyah: IAyahShape, index: number) => {
+      elementList.push(<Ayah ayah={currAyah} key={index} />)
+    });
+    return elementList;
+  };
+
   render() {
     const classnames = classNames({
       recording: this.state.isRecording,
@@ -221,6 +272,8 @@ class Transcribe extends React.Component<IProps, IState> {
           <meta name={'twitter:image'} content={this.handleOGImage()} />
         </Helmet>
         <Navbar />
+
+        {/* Show error message modal. */}
         {this.state.showErrorMessage && (
           <RecordingError
             message={this.state.errorMessage}
@@ -229,6 +282,8 @@ class Transcribe extends React.Component<IProps, IState> {
             }}
           />
         )}
+
+        {/* Display errors if system can't record. */}
         {!this.props.canRecord ? (
           <h3 className={'not-supported'}>
             <T id={KEYS.AYAH_RECOGNITION_UPDATE_REQUIRED} />
@@ -246,12 +301,18 @@ class Transcribe extends React.Component<IProps, IState> {
                   alt="Tarteel-logo"
                 />
               </div>
-              <div className="ayah-info">
-                <span className="surah-name">Surah {this.state.surahName}</span>{' '}
-                <span className="ayah-number">
-                  Ayah {this.state.ayahNumber}
-                </span>
-              </div>
+
+                {this.state.ayahFound ? (
+                  <div className="ayah-info">
+                    <span className="surah-name">Surah {this.state.currentAyah.chapterId} </span>
+                    <span className="ayah-number">Ayah {this.state.currentAyah.verseNumber} </span>
+                  </div>
+                ) : (
+                  <div className="ayah-info">
+                    Waiting for input...
+                  </div>
+                )}
+
               <div className="icons-container">
                 <img
                   className="icon fullscreen-icon"
@@ -261,6 +322,8 @@ class Transcribe extends React.Component<IProps, IState> {
                 <img className="icon " src={settingsIcon} />
               </div>
             </div>
+            {/* TODO: Change renderFinishedAyahs to loop through state */}
+            <div className="finished-ayahs">{this.renderFinishedAyahs()}</div>
             <div className="ayah-display">{this.state.ayahText}</div>
             <div className="transalations-display">
               {this.state.secondaryText}

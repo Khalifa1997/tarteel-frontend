@@ -44,15 +44,18 @@ type IProps = IOwnProps & IDispatchProps;
 class Recognition extends React.Component<IProps, IState> {
   AudioStreamer: any;
   socket: any;
-
-  state = {
-    isRecording: false,
-    partialQuery: '',
-    query: '',
-    isLoading: false,
-    showErrorMessage: false,
-    errorMessage: '',
-  };
+  // TODO: is `query` used?
+  constructor(props: IProps) {
+    super(props);
+    this.state = {
+      isRecording: false,
+      partialQuery: '',
+      query: '',
+      isLoading: false,
+      showErrorMessage: false,
+      errorMessage: React.createElement("div"),
+    };
+  }
   handleRecordingButton = () => {
     if (this.state.isLoading) {
       return;
@@ -62,7 +65,7 @@ class Recognition extends React.Component<IProps, IState> {
       this.handleStartRecording();
     }
   };
-  handleRecordingError = e => {
+  handleRecordingError = (e: JSX.Element) => {
     this.setState({
       showErrorMessage: true,
     });
@@ -80,7 +83,7 @@ class Recognition extends React.Component<IProps, IState> {
       this.handleRecordingError,
     );
   };
-  handleResults = results => {
+  handleResults = (results: any) => {
     if (results.matches.length) {
       this.handleStopRecording();
       this.props.setRecognitionResults(results);
@@ -98,7 +101,7 @@ class Recognition extends React.Component<IProps, IState> {
     });
     this.AudioStreamer.stopRecording();
   };
-  handleData = data => {
+  handleData = (data: any) => {
     let interimTranscript = '';
     if (data.results[0].isFinal) {
       this.handleSearch();
@@ -200,7 +203,7 @@ class Recognition extends React.Component<IProps, IState> {
   }
 }
 
-const mapDispatchToProps = (dispatch): IDispatchProps => {
+const mapDispatchToProps = (dispatch: any): IDispatchProps => {
   return {
     setRecognitionResults: (result: any) => {
       return dispatch(setRecognitionResults(result));
@@ -212,7 +215,7 @@ export default injectIntl(
   withCookies(
     connect(
       null,
-      mapDispatchToProps
-    )(Recognition)
-  )
+      mapDispatchToProps,
+    )(Recognition),
+  ),
 );

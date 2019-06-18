@@ -20,7 +20,7 @@ import { getNextAyah, getPrevAyah } from '../helpers/ayahs';
 import { getBlob, startRecording, stopRecording } from '../helpers/recorder';
 import KEYS from '../locale/keys';
 import { ModalContent } from '../pages/Evaluator/styles';
-import AyahShape from '../shapes/AyahShape';
+import IAyahShape from '../shapes/IAyahShape';
 import {
   loadNextAyah,
   loadNextQueue,
@@ -62,13 +62,13 @@ interface IDispatchPros {
   toggleDoneRecording(): void;
   increaseRecitedAyahs(): void;
   setPassedOnBoarding(): void;
-  setAyah(ayah: AyahShape): void;
-  loadNextAyah(ayah?: AyahShape): void;
-  loadPreviousAyah(ayah?: AyahShape): void;
+  setAyah(ayah: IAyahShape): void;
+  loadNextAyah(ayah?: IAyahShape): void;
+  loadPreviousAyah(ayah?: IAyahShape): void;
   shiftNextAyah(): void;
   shiftPrevAyah(): void;
-  unShiftNextAyah(ayah: AyahShape): void;
-  unShiftPrevAyah(ayah: AyahShape): void;
+  unShiftNextAyah(ayah: IAyahShape): void;
+  unShiftPrevAyah(ayah: IAyahShape): void;
   popPrevAyah(): void;
   popNextAyah(): void;
   loadNextQueue(): void;
@@ -78,9 +78,9 @@ interface IDispatchPros {
 interface IStateProps {
   status: IStatus;
   profile: IProfile;
-  currentAyah: AyahShape;
-  nextAyah: AyahShape[];
-  prevAyah: AyahShape[];
+  currentAyah: IAyahShape;
+  nextAyah: IAyahShape[];
+  prevAyah: IAyahShape[];
   router: ReduxState['router'];
 }
 
@@ -233,7 +233,7 @@ class Footer extends React.Component<IProps, IState> {
     this.setState({ showModal: false });
   };
   public fetchRandomAyah = () => {
-    fetchRandomAyah().then((ayah: AyahShape) => {
+    fetchRandomAyah().then((ayah: IAyahShape) => {
       this.props.setAyah(ayah);
     });
   };
@@ -457,25 +457,25 @@ const mapDispatchToProps = (dispatch): IDispatchPros => {
     setPassedOnBoarding: () => {
       dispatch(setPassedOnBoarding());
     },
-    setAyah: (ayah: AyahShape) => {
+    setAyah: (ayah: IAyahShape) => {
       return dispatch(setAyah(ayah));
     },
-    loadNextAyah: (ayah?: AyahShape) => {
+    loadNextAyah: (ayah?: IAyahShape) => {
       return dispatch(loadNextAyah(ayah));
     },
     shiftNextAyah: () => {
       dispatch(shiftNextAyah());
     },
-    loadPreviousAyah: (ayah?: AyahShape) => {
+    loadPreviousAyah: (ayah?: IAyahShape) => {
       return dispatch(loadPreviousAyah(ayah));
     },
     shiftPrevAyah: () => {
       return dispatch(shiftPrevAyah());
     },
-    unShiftNextAyah: (ayah: AyahShape) => {
+    unShiftNextAyah: (ayah: IAyahShape) => {
       return dispatch(unShiftNextAyah(ayah));
     },
-    unShiftPrevAyah: (ayah: AyahShape) => {
+    unShiftPrevAyah: (ayah: IAyahShape) => {
       return dispatch(unShiftPrevAyah(ayah));
     },
     popNextAyah: () => {

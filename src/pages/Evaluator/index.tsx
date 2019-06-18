@@ -27,7 +27,7 @@ import Modal from '../../components/Modal';
 import Navbar from '../../components/Navbar';
 import { commaFormatter } from '../../helpers/utils';
 import { createAudioMeter } from '../../helpers/volume-meter';
-import AyahShape from '../../shapes/AyahShape';
+import IAyahShape from '../../shapes/IAyahShape';
 import WordShape from '../../shapes/WordShape';
 import {
   setAyah,
@@ -49,16 +49,16 @@ interface IOwnProps {
 }
 
 interface IDispatchProps {
-  setAyah(ayah: AyahShape): ActionType<typeof setAyah>;
-  setNextAyah(ayah: AyahShape): ActionType<typeof setNextAyah>;
-  setPreviousAyah(ayah: AyahShape): ActionType<typeof setPreviousAyah>;
+  setAyah(ayah: IAyahShape): ActionType<typeof setAyah>;
+  setNextAyah(ayah: IAyahShape): ActionType<typeof setNextAyah>;
+  setPreviousAyah(ayah: IAyahShape): ActionType<typeof setPreviousAyah>;
   increaseEvaluatedAyahs(): ActionType<typeof increaseEvaluatedAyahs>;
 }
 
 interface IStateProps {
-  currentAyah: AyahShape;
-  nextAyah: AyahShape;
-  previousAyah: AyahShape;
+  currentAyah: IAyahShape;
+  nextAyah: IAyahShape;
+  previousAyah: IAyahShape;
   profile: IProfile;
 }
 
@@ -97,7 +97,7 @@ class Evaluator extends React.Component<IProps, IState> {
       this.props.setPreviousAyah(this.props.currentAyah);
       return this.props.setAyah(this.props.nextAyah);
     } else {
-      return fetchEvaluatorAyah().then((ayah: AyahShape) => {
+      return fetchEvaluatorAyah().then((ayah: IAyahShape) => {
         return this.props.setAyah(ayah);
       });
     }
@@ -119,7 +119,7 @@ class Evaluator extends React.Component<IProps, IState> {
         }
       });
   };
-  handleUpcomingAyah = async (fetchedAyah: AyahShape) => {
+  handleUpcomingAyah = async (fetchedAyah: IAyahShape) => {
     fetchedAyah = humps.camelizeKeys(fetchedAyah);
     await this.props.setNextAyah(fetchedAyah);
     this.preloadAudio(fetchedAyah.audioUrl);
@@ -211,7 +211,7 @@ class Evaluator extends React.Component<IProps, IState> {
     this.setState({
       isLoading: true,
     });
-    fetchEvaluatorAyah().then(async (ayah: AyahShape) => {
+    fetchEvaluatorAyah().then(async (ayah: IAyahShape) => {
       await this.props.setAyah(ayah);
       this.initializeAudioPlayer();
       this.loadNextAyah();

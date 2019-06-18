@@ -15,7 +15,7 @@ import { fetchSpecificAyah, fetchSurah } from '../../api/ayahs';
 import Navbar from '../../components/Navbar';
 import T from '../../components/T';
 import KEYS from '../../locale/keys';
-import AyahShape from '../../shapes/AyahShape';
+import IAyahShape from '../../shapes/IAyahShape';
 import {
   clearNextAyah,
   clearPrevAyah,
@@ -43,11 +43,11 @@ interface IOwnProps {
 }
 
 interface IDispatchProps {
-  setAyah(ayah: AyahShape): void;
+  setAyah(ayah: IAyahShape): void;
   setSurah(surah: ISearchSurah): void;
   toggleFetchingCurrentAyah(): void;
-  loadNextAyah(ayah?: AyahShape): void;
-  loadPreviousAyah(ayah?: AyahShape): void;
+  loadNextAyah(ayah?: IAyahShape): void;
+  loadPreviousAyah(ayah?: IAyahShape): void;
   loadNextQueue(): void;
   loadPrevQueue(): void;
   clearNextAyah(): void;
@@ -55,7 +55,7 @@ interface IDispatchProps {
 }
 
 interface IStateProps {
-  currentAyah: AyahShape;
+  currentAyah: IAyahShape;
   currentSurah: ISearchSurah;
 }
 
@@ -91,7 +91,7 @@ class AyahPicker extends Component<IProps, IState> {
     if (this.props.currentAyah.verseNumber !== ayahNum) {
       this.props.toggleFetchingCurrentAyah();
       fetchSpecificAyah(this.props.match.params.num, ayahNum).then(
-        async (ayah: AyahShape) => {
+        async (ayah: IAyahShape) => {
           await this.props.setAyah(ayah);
           await this.props.clearNextAyah();
           await this.props.clearPrevAyah();
@@ -193,7 +193,7 @@ const mapStateToProps = (state: ReduxState): IStateProps => {
 
 const mapDispatchToProps = (dispatch): IDispatchProps => {
   return {
-    setAyah: (ayah: AyahShape) => {
+    setAyah: (ayah: IAyahShape) => {
       return dispatch(setAyah(ayah));
     },
     toggleFetchingCurrentAyah: () => {
@@ -202,10 +202,10 @@ const mapDispatchToProps = (dispatch): IDispatchProps => {
     setSurah: (surah: ISearchSurah) => {
       dispatch(setSurah(surah));
     },
-    loadNextAyah: (ayah?: AyahShape) => {
+    loadNextAyah: (ayah?: IAyahShape) => {
       return dispatch(loadNextAyah(ayah));
     },
-    loadPreviousAyah: (ayah?: AyahShape) => {
+    loadPreviousAyah: (ayah?: IAyahShape) => {
       return dispatch(loadPreviousAyah(ayah));
     },
     loadNextQueue: () => {
