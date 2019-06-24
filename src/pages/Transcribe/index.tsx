@@ -29,6 +29,7 @@ import LogoImage from '../../../public/logo-3x.png';
 import io from "socket.io-client";
 import Socket = SocketIOClient.Socket;
 import IAyahShape from "../../shapes/IAyahShape";
+import {LOAD_NEXT_AYAH_STARTED} from "../../types/actions";
 
 interface IOwnProps {
   history: History;
@@ -63,6 +64,11 @@ interface IStateProps {
 interface IDispatchProps {
   setRecognitionResults(result: any): void;
   setUnableToRecord(): void;
+}
+
+interface ISpeechResult {
+  text: string,
+  isFinal: boolean
 }
 
 type IProps = IOwnProps & IDispatchProps & IStateProps;
@@ -183,11 +189,11 @@ class Transcribe extends React.Component<IProps, IState> {
     return `/public/og/recognition_${locale}.png`;
   };
 
-  handleMatchFound = (index: number) => {
+  handleMatchFound = (surahNumber: number, ayahNumber: number, wordCount: number) => {
     /** Update the displayed sentence with the max number of words found. */
     this.setState({ayahFound: true});
     let sentence: string = '';
-    for (let i: number = 0; i < index; i++ ) {
+    for (let i: number = 0; i < wordCount; i++ ) {
       sentence += ' ' + this.state.currentAyah.words[i].textMadani;
     }
     this.setState({partialQuery: sentence})
@@ -197,22 +203,14 @@ class Transcribe extends React.Component<IProps, IState> {
     this.setState({currentAyah: ayah});
   };
 
-  handleResult = (result: any) => {
+  handleResult = (result: ISpeechResult) => {
     /**
      * Updates the state of the string displayed on the page as data comes in from the GCloud backend.
      * Only displays if no ayah is found.
      * @param data - Any type (JSON Response from Google).
      */
     if (!this.state.ayahFound) {
-      let interimTranscript = '';
-      for (let i = result.resultIndex; i < result.results.length; ++i) {
-        // TODO: Is this necessary for transcribe? Set state here
-        if (result.results[i].isFinal) {
-          interimTranscript = this.state.query + ' ' + result.results[i][0].transcript;
-        } else {
-          interimTranscript += result.results[i][0].transcript;
-        }
-      }
+      const interimTranscript = this.state.partialQuery + ' ' + result.text;
       this.setState({partialQuery: interimTranscript});
     }
   };
@@ -228,7 +226,9 @@ class Transcribe extends React.Component<IProps, IState> {
       this.upgradeRequired();
     }
 
-    const speechServerURL = config('voiceServerURL');
+    // TODO: Update speech server URL
+    // const speechServerURL = config('voiceServerURL');
+    const speechServerURL = 'localhost:5000';
     this.socket = io(speechServerURL);
     // Partial/Final Transcripts from Google
     this.socket.on('speechResult', this.handleResult);
@@ -250,11 +250,9 @@ class Transcribe extends React.Component<IProps, IState> {
   }
 
   renderFinishedAyahs = () => {
-    const elementList: JSX.Element[] = [];
-    this.state.previousAyahs.forEach( (currAyah: IAyahShape, index: number) => {
-      elementList.push(<Ayah ayah={currAyah} key={index} />)
+    return this.state.previousAyahs.map((currAyah: IAyahShape, index: number) => {
+      return <Ayah ayah={currAyah} isFetchingAyah={false} key={index} />
     });
-    return elementList;
   };
 
   render() {
@@ -302,7 +300,7 @@ class Transcribe extends React.Component<IProps, IState> {
                 />
               </div>
 
-                {this.state.ayahFound ? (
+                {this.state.currentAyah ? (
                   <div className="ayah-info">
                     <span className="surah-name">Surah {this.state.currentAyah.chapterId} </span>
                     <span className="ayah-number">Ayah {this.state.currentAyah.verseNumber} </span>
@@ -322,9 +320,10 @@ class Transcribe extends React.Component<IProps, IState> {
                 <img className="icon " src={settingsIcon} />
               </div>
             </div>
-            {/* TODO: Change renderFinishedAyahs to loop through state */}
+
             <div className="finished-ayahs">{this.renderFinishedAyahs()}</div>
-            <div className="ayah-display">{this.state.ayahText}</div>
+            <div className="ayah-display">{this.state.partialQuery}</div>
+
             <div className="transalations-display">
               {this.state.secondaryText}
             </div>
