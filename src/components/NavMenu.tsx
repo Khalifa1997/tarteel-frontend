@@ -18,6 +18,7 @@ import { setAyah, toggleFetchingCurrentAyah } from '../store/actions/ayahs';
 import theme from '../theme';
 import ReduxState, { IProfile } from '../types/GlobalState';
 import T from './T';
+import Dropdown from './Dropdown';
 
 interface IOwnProps {
   location: Location;
@@ -37,74 +38,15 @@ interface IState {
   showDropdown: boolean;
 }
 
-interface ILink {
+export interface ILink {
   textID: KEYS;
   href: string;
   onClick?(): void;
-  busy: boolean;
-  badgeText: string;
+  busy?: boolean;
+  badgeText?: string;
 }
 
 type IProps = IDispatchProps & IStateProps & IOwnProps;
-
-const linksFactory: (props: any) => { [key: string]: ILink } = props => {
-  return {
-    mobile: {
-      textID: KEYS.MOBILE_APP_LINK_TEXT,
-      href: '/mobile',
-    },
-    profile: {
-      textID: KEYS.PROFILE_LINK_TEXT,
-      href: `/profile/${props.profile.sessionId}`,
-    },
-    evaluator: {
-      textID: KEYS.EVALUATE_AYAHS,
-      href: '/evaluator',
-    },
-    home: {
-      textID: KEYS.HOME_WORD,
-      href: '/',
-    },
-    contribute: {
-      textID: KEYS.CONTRIBUTE_WORD,
-      href: '/contribute',
-    },
-    randomAyah: {
-      textID: KEYS.RANDOM_AYAH_LINK_TEXT,
-      href: '',
-      onClick: props.randomAyah,
-    },
-    about: {
-      textID: KEYS.ABOUT_LINK_TEXT,
-      href: '/about',
-    },
-    demographics: {
-      textID: KEYS.DEMOGRAPHIC_INFO_LINK_TEXT,
-      href: '/demographics',
-      busy: props.profile.askForDemographics,
-    },
-    subscribe: {
-      textID: KEYS.SUBSCRIBE_BUTTON_TEXT,
-      href: '/subscribe',
-    },
-    dataset: {
-      textID: KEYS.TARTEEL_DATASET_LINK_TEXT,
-      href: '/dataset',
-    },
-    contact: {
-      textID: KEYS.CONTACT_US,
-      href: '/contact',
-    },
-    partners: {
-      textID: KEYS.PARTNERS_LINK_TEXT,
-      href: '/partners',
-    },
-    donate: {
-      textID: KEYS.DONATE_LINK_TEXT,
-      href: '/donate',
-    },
-  };
-};
 
 class NavMenu extends React.Component<IProps, IState> {
   public state = {
@@ -131,6 +73,7 @@ class NavMenu extends React.Component<IProps, IState> {
       badge: item.badgeText,
       [className]: className,
     });
+
     return (
       <LinkContainer key={index}>
         <Link
@@ -151,7 +94,8 @@ class NavMenu extends React.Component<IProps, IState> {
       </LinkContainer>
     );
   };
-  public render() {
+
+  public render(props: any) {
     const isHome = this.props.location.pathname === '/';
     let navbarLinks = [
       'home',
@@ -165,12 +109,70 @@ class NavMenu extends React.Component<IProps, IState> {
       'dataset',
       'contact',
     ];
-    const links = linksFactory({
+    /* const links = linksFactory({
       profile: this.props.profile,
-    });
+    }); */
+    console.log(this.props);
     const currentLocale = this.props.cookies.get('currentLocale') || 'en';
     const urlLocale = currentLocale === 'en' ? 'ar' : 'en';
+    const dropDownList: Array<ILink> = [
+      {
+        textID: KEYS.HOME_WORD,
+        href: '/',
+      },
+      {
+        textID: KEYS.ABOUT_LINK_TEXT,
+        href: '/about',
+      },
+      {
+        textID: KEYS.EVALUATE_AYAHS,
+        href: '/evaluator',
+      },
+      {
+        textID: KEYS.PROFILE_LINK_TEXT,
+        href: `/profile/${this.props.profile.sessionId}`,
+      },
+      {
+        textID: KEYS.CONTRIBUTE_WORD,
+        href: '/contribute',
+      },
+      {
+        textID: KEYS.MOBILE_APP_LINK_TEXT,
+        href: '/mobile',
+      },
+      {
+        textID: KEYS.PARTNERS_LINK_TEXT,
+        href: '/partners',
+      },
 
+      {
+        textID: KEYS.DONATE_LINK_TEXT,
+        href: '/donate',
+      },
+      /* {
+        textID: KEYS.RANDOM_AYAH_LINK_TEXT,
+        href: '',
+        onClick: this.props.profile.randomAyah,
+      }, */
+
+      /* {
+        textID: KEYS.DEMOGRAPHIC_INFO_LINK_TEXT,
+        href: '/demographics',
+        busy: this.props.profile.askForDemographics,
+      }, */
+      /* {
+        textID: KEYS.SUBSCRIBE_BUTTON_TEXT,
+        href: '/subscribe',
+      }, */
+      {
+        textID: KEYS.TARTEEL_DATASET_LINK_TEXT,
+        href: '/dataset',
+      },
+      {
+        textID: KEYS.CONTACT_US,
+        href: '/contact',
+      },
+    ];
     return (
       <Container>
         <a href={`?lang=${urlLocale}`}>
@@ -192,11 +194,26 @@ class NavMenu extends React.Component<IProps, IState> {
               }}
             >
               <div className="list">
-                {Object.keys(pick(links, navbarLinks)).map(
-                  (key: string, i: number) => {
-                    return this.renderItem(links[key], i, 'list-item');
-                  }
-                )}
+                {dropDownList.map((item, index) => {
+                  const classNames = classnames({
+                    active: item.href === this.props.location.pathname,
+                    busy: item.busy,
+                    badge: item.badgeText,
+                  });
+                  return (
+                    <Dropdown
+                      href={item.href}
+                      onClick={item.onClick}
+                      passedDownStyles={classNames}
+                      key={index}
+                    >
+                      <span className={'badge-text'}>{item.badgeText}</span>
+                      <div className="text">
+                        <T id={item.textID} />
+                      </div>
+                    </Dropdown>
+                  );
+                })}
               </div>
             </OutsideClickHandler>
           </div>
