@@ -26,6 +26,12 @@ const Dropdown = ({ children, href, onClick, passedDownStyles }: IProps) => {
           }
         }}
         className={passedDownStyles}
+        style={{
+          lineHeight: '35px',
+          transition: 'background 200ms',
+          margin: '0px',
+          fontSize: '14px',
+        }}
       >
         {children}
       </Link>
